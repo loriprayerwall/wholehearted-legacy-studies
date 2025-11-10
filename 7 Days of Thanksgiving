@@ -1,0 +1,761 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Seven Days of Thanksgiving Gratitude</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&amp;family=Montserrat:wght@300;400;500&amp;family=Dancing+Script:wght@400;500;600&amp;display=swap" rel="stylesheet">
+  <style>
+    body {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Montserrat', sans-serif;
+      background: linear-gradient(135deg, #f4e4d7 0%, #e8d5c4 100%);
+      min-height: 100%;
+      overflow-x: hidden;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 40px 20px;
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 60px;
+      padding: 80px 40px;
+      background: #faf6f1;
+      border: 3px solid #c17a3a;
+      box-shadow: 0 20px 60px rgba(193, 122, 58, 0.2);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .header h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 64px;
+      color: #c17a3a;
+      margin: 0 0 20px 0;
+      font-weight: 400;
+      letter-spacing: 1px;
+      line-height: 1.2;
+    }
+
+    .header p {
+      font-size: 18px;
+      color: #8b5a2b;
+      margin: 0;
+      font-weight: 300;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+    }
+
+    .navigation {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 50px;
+      flex-wrap: wrap;
+    }
+
+    .nav-btn {
+      padding: 16px 32px;
+      background: #faf6f1;
+      color: #8b5a2b;
+      border: 2px solid #d4a574;
+      cursor: pointer;
+      font-size: 13px;
+      font-family: 'Montserrat', sans-serif;
+      transition: all 0.3s ease;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      font-weight: 500;
+      box-shadow: 0 4px 15px rgba(139, 90, 43, 0.15);
+    }
+
+    .nav-btn:hover {
+      border-color: #c17a3a;
+      color: #c17a3a;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(193, 122, 58, 0.3);
+    }
+
+    .nav-btn.active {
+      background: #f4e4d7;
+      border-color: #c17a3a;
+      color: #c17a3a;
+      box-shadow: 0 8px 25px rgba(193, 122, 58, 0.4);
+    }
+
+    .day-content {
+      display: none;
+      background: #faf6f1;
+      padding: 0;
+      margin-bottom: 40px;
+      box-shadow: 0 20px 60px rgba(139, 90, 43, 0.15);
+      overflow: hidden;
+    }
+
+    .day-content.active {
+      display: block;
+      animation: fadeIn 0.5s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .day-hero {
+      height: 400px;
+      background: linear-gradient(135deg, #e8d5c4 0%, #d4a574 100%);
+      background-size: cover;
+      background-position: center;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+
+    .day-hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(255, 255, 255, 0.3);
+    }
+
+    .day-hero-content {
+      position: relative;
+      z-index: 1;
+      color: #6b3e2e;
+      padding: 40px;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .day-number {
+      font-size: 14px;
+      font-weight: 500;
+      margin-bottom: 15px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #c17a3a;
+    }
+
+    .day-theme {
+      font-family: 'Dancing Script', cursive;
+      font-size: 56px;
+      margin: 0;
+      font-weight: 500;
+      letter-spacing: 1px;
+      color: #6b3e2e;
+      text-align: center;
+    }
+
+    .day-body {
+      padding: 80px;
+    }
+
+    .scripture-box {
+      background: #f4e4d7;
+      padding: 60px;
+      margin: 0 0 60px 0;
+      border: 3px solid #d4a574;
+      position: relative;
+    }
+
+    .scripture-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 28px;
+      line-height: 1.8;
+      color: #6b3e2e;
+      font-style: italic;
+      margin: 0 0 25px 0;
+      font-weight: 400;
+    }
+
+    .scripture-ref {
+      text-align: right;
+      font-size: 14px;
+      color: #c17a3a;
+      font-weight: 500;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .bible-link {
+      display: inline-block;
+      margin-top: 15px;
+      color: #c17a3a;
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      border: 2px solid #c17a3a;
+      padding: 8px 16px;
+      transition: all 0.3s ease;
+    }
+
+    .bible-link:hover {
+      background: #c17a3a;
+      color: #faf6f1;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 15px rgba(193, 122, 58, 0.3);
+    }
+
+    .devotional-text {
+      font-size: 18px;
+      line-height: 1.9;
+      color: #6b3e2e;
+      margin: 0 0 60px 0;
+      font-weight: 400;
+      max-width: 900px;
+    }
+
+    .devotional-text p {
+      margin-bottom: 30px;
+    }
+
+    .journal-section {
+      margin-top: 60px;
+      padding-top: 60px;
+      border-top: 1px solid #d4a574;
+    }
+
+    .journal-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 36px;
+      color: #c17a3a;
+      margin-bottom: 40px;
+      font-weight: 400;
+      letter-spacing: 1px;
+    }
+
+    .journal-prompts {
+      background: #f9ede3;
+      padding: 40px;
+      margin-bottom: 30px;
+      border-left: 4px solid #c17a3a;
+    }
+
+    .journal-prompts h4 {
+      color: #c17a3a;
+      font-size: 16px;
+      margin-top: 0;
+      margin-bottom: 25px;
+      font-weight: 500;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .journal-prompts ul {
+      margin: 0;
+      padding-left: 25px;
+    }
+
+    .journal-prompts li {
+      color: #6b3e2e;
+      font-size: 16px;
+      line-height: 1.9;
+      margin-bottom: 15px;
+      font-weight: 400;
+    }
+
+    .journal-area {
+      width: 100%;
+      min-height: 300px;
+      padding: 30px;
+      border: 2px solid #d4a574;
+      background: #faf6f1;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 16px;
+      line-height: 1.9;
+      resize: vertical;
+      color: #6b3e2e;
+      font-weight: 400;
+      transition: all 0.3s ease;
+    }
+
+    .journal-area:focus {
+      outline: none;
+      border-color: #c17a3a;
+      box-shadow: 0 0 20px rgba(193, 122, 58, 0.2);
+    }
+
+    .journal-area::placeholder {
+      color: #c17a3a;
+      font-style: italic;
+    }
+
+    .journal-note {
+      font-size: 13px;
+      color: #8b5a2b;
+      font-style: italic;
+      margin-top: 15px;
+      text-align: center;
+    }
+
+    .journal-controls {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      margin-top: 15px;
+      gap: 20px;
+    }
+
+    .copy-btn {
+      padding: 12px 24px;
+      background: #c17a3a;
+      color: #faf6f1;
+      border: none;
+      cursor: pointer;
+      font-size: 13px;
+      font-family: 'Montserrat', sans-serif;
+      transition: all 0.3s ease;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      font-weight: 500;
+      box-shadow: 0 4px 15px rgba(193, 122, 58, 0.3);
+    }
+
+    .copy-btn:hover {
+      background: #d4834f;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(193, 122, 58, 0.4);
+    }
+
+    .copy-btn:active {
+      transform: translateY(0);
+    }
+
+    .copy-feedback {
+      font-size: 13px;
+      color: #c17a3a;
+      font-style: italic;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .copy-feedback.show {
+      opacity: 1;
+    }
+
+    @media (max-width: 1024px) {
+      .day-body {
+        padding: 60px 40px;
+      }
+
+      .scripture-box {
+        padding: 40px;
+      }
+
+      .day-hero {
+        height: 350px;
+      }
+
+      .day-theme {
+        font-size: 48px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        padding: 30px 15px;
+      }
+
+      .header {
+        padding: 60px 30px;
+        margin-bottom: 40px;
+      }
+
+      .header h1 {
+        font-size: 42px;
+      }
+
+      .header p {
+        font-size: 14px;
+        letter-spacing: 2px;
+      }
+
+      .day-body {
+        padding: 40px 25px;
+      }
+
+      .day-hero {
+        height: 300px;
+      }
+
+      .day-theme {
+        font-size: 36px;
+      }
+
+      .scripture-text {
+        font-size: 22px;
+      }
+
+      .scripture-box {
+        padding: 30px 25px;
+      }
+
+      .devotional-text {
+        font-size: 16px;
+      }
+
+      .nav-btn {
+        padding: 14px 24px;
+        font-size: 11px;
+      }
+
+      .journal-prompts {
+        padding: 30px 25px;
+      }
+    }
+  </style>
+  <style>@view-transition { navigation: auto; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+  <script src="/_sdk/element_sdk.js" type="text/javascript"></script>
+  <script src="https://cdn.tailwindcss.com" type="text/javascript"></script>
+ </head>
+ <body>
+  <div class="container">
+   <header class="header">
+    <h1>Seven Days of Thanksgiving</h1>
+    <p>A Gratitude Devotional Journey</p>
+   </header>
+   <nav class="navigation" id="navigation"></nav>
+   <main>
+    <article id="day1" class="day-content active">
+     <div class="day-hero">
+      <div class="day-hero-content">
+       <div class="day-number">
+        Day 1
+       </div>
+       <h2 class="day-theme">Grateful for God's Provision</h2>
+      </div>
+     </div>
+     <div class="day-body">
+      <div class="scripture-box">
+       <p class="scripture-text">"O give thanks unto the LORD; for he is good: for his mercy endureth for ever."</p>
+       <p class="scripture-ref">— Psalm 107:1, King James Version (KJV)</p><a href="https://www.biblegateway.com/passage/?search=Psalm+107:1&amp;version=KJV" target="_blank" rel="noopener noreferrer" class="bible-link">Read Full Chapter →</a>
+      </div>
+      <div class="devotional-text">
+       <p>As we begin this seven-day journey of thanksgiving, we start with the foundation of all gratitude: God's faithful provision. From the rising of the sun to its setting, the Lord provides for His children with unwavering love and care.</p>
+       <p>Consider the harvest—how God brings forth fruit from the earth, sustaining us with daily bread. Yet His provision extends far beyond physical needs. He provides wisdom when we lack understanding, peace in times of trouble, and strength when we are weary.</p>
+       <p>Today, let us open our eyes to see the countless ways God has provided for us. From the breath in our lungs to the relationships that enrich our lives, every good gift comes from above. As we cultivate a heart of thanksgiving, we recognize that His mercy truly endures forever.</p>
+      </div>
+      <section class="journal-section">
+       <h3 class="journal-title">Journal &amp; Reflect</h3>
+       <div class="journal-prompts">
+        <h4>Reflection Prompts:</h4>
+        <ul>
+         <li>What are three ways God has provided for you this week?</li>
+         <li>How has God's provision surprised you recently?</li>
+         <li>What needs are you trusting God to provide for today?</li>
+        </ul>
+       </div><textarea class="journal-area" id="journal-day1" placeholder="Write your thoughts and prayers here..." aria-label="Journal entry for Day 1"></textarea>
+       <div class="journal-controls"><button class="copy-btn" onclick="copyJournal('day1', this)">Copy Full Journal to Clipboard</button>
+       </div>
+       <p class="journal-note">📝 Note: Your journal entries are private and temporary. They will not be saved when you leave this page. Consider copying your reflections to a personal journal or notes app if you'd like to keep them.</p>
+       <p class="copy-feedback" id="feedback-day1"></p>
+      </section>
+     </div>
+    </article>
+    <article id="day2" class="day-content">
+     <div class="day-hero">
+      <div class="day-hero-content">
+       <div class="day-number">
+        Day 2
+       </div>
+       <h2 class="day-theme">Grateful for Relationships</h2>
+      </div>
+     </div>
+     <div class="day-body">
+      <div class="scripture-box">
+       <p class="scripture-text">"A friend loveth at all times, and a brother is born for adversity."</p>
+       <p class="scripture-ref">— Proverbs 17:17, King James Version (KJV)</p><a href="https://www.biblegateway.com/passage/?search=Proverbs+17:17&amp;version=KJV" target="_blank" rel="noopener noreferrer" class="bible-link">Read Full Chapter →</a>
+      </div>
+      <div class="devotional-text">
+       <p>God, in His infinite wisdom, created us for community. We were never meant to walk this journey alone. The relationships He has woven into our lives are precious gifts—each one a reflection of His love and care for us.</p>
+       <p>Think of those who have stood by you in times of trial, who have celebrated your victories, and who have spoken truth into your life. These are not mere coincidences but divine appointments orchestrated by a loving Father who knows our need for companionship.</p>
+       <p>Today, let us give thanks for family members who have shaped us, friends who have encouraged us, and even acquaintances who have touched our lives in meaningful ways. May we also be mindful to be the kind of friend and family member that reflects Christ's love to others.</p>
+      </div>
+      <section class="journal-section">
+       <h3 class="journal-title">Journal &amp; Reflect</h3>
+       <div class="journal-prompts">
+        <h4>Reflection Prompts:</h4>
+        <ul>
+         <li>Who are three people you're grateful for and why?</li>
+         <li>How has God used relationships to grow your faith?</li>
+         <li>What can you do today to show gratitude to someone in your life?</li>
+        </ul>
+       </div><textarea class="journal-area" id="journal-day2" placeholder="Write your thoughts and prayers here..." aria-label="Journal entry for Day 2"></textarea>
+       <div class="journal-controls"><button class="copy-btn" onclick="copyJournal('day2', this)">Copy Full Journal to Clipboard</button>
+       </div>
+       <p class="journal-note">📝 Note: Your journal entries are private and temporary. They will not be saved when you leave this page. Consider copying your reflections to a personal journal or notes app if you'd like to keep them.</p>
+       <p class="copy-feedback" id="feedback-day2"></p>
+      </section>
+     </div>
+    </article>
+    <article id="day3" class="day-content">
+     <div class="day-hero">
+      <div class="day-hero-content">
+       <div class="day-number">
+        Day 3
+       </div>
+       <h2 class="day-theme">Grateful for Trials &amp; Growth</h2>
+      </div>
+     </div>
+     <div class="day-body">
+      <div class="scripture-box">
+       <p class="scripture-text">"My brethren, count it all joy when ye fall into divers temptations; Knowing this, that the trying of your faith worketh patience."</p>
+       <p class="scripture-ref">— James 1:2-3, King James Version (KJV)</p><a href="https://www.biblegateway.com/passage/?search=James+1:2-3&amp;version=KJV" target="_blank" rel="noopener noreferrer" class="bible-link">Read Full Chapter →</a>
+      </div>
+      <div class="devotional-text">
+       <p>It may seem counterintuitive to give thanks for trials, yet Scripture calls us to this very practice. Like a tree that grows stronger through storms, our faith deepens through adversity. The challenges we face are not punishments but opportunities for spiritual growth.</p>
+       <p>When we look back on difficult seasons, we often see how God was working all things together for our good. The patience we've developed, the character we've built, and the deeper dependence on God we've cultivated—these are the fruits of trials endured with faith.</p>
+       <p>Today, let us thank God not only for the blessings that bring immediate joy but also for the trials that have shaped us into who we are. In every storm, He is refining us, making us more like Christ, and preparing us for greater purposes.</p>
+      </div>
+      <section class="journal-section">
+       <h3 class="journal-title">Journal &amp; Reflect</h3>
+       <div class="journal-prompts">
+        <h4>Reflection Prompts:</h4>
+        <ul>
+         <li>What trial have you faced that ultimately strengthened your faith?</li>
+         <li>How have you seen God's faithfulness in difficult times?</li>
+         <li>What is God teaching you through your current challenges?</li>
+        </ul>
+       </div><textarea class="journal-area" id="journal-day3" placeholder="Write your thoughts and prayers here..." aria-label="Journal entry for Day 3"></textarea>
+       <div class="journal-controls"><button class="copy-btn" onclick="copyJournal('day3', this)">Copy Full Journal to Clipboard</button>
+       </div>
+       <p class="journal-note">📝 Note: Your journal entries are private and temporary. They will not be saved when you leave this page. Consider copying your reflections to a personal journal or notes app if you'd like to keep them.</p>
+       <p class="copy-feedback" id="feedback-day3"></p>
+      </section>
+     </div>
+    </article>
+    <article id="day4" class="day-content">
+     <div class="day-hero">
+      <div class="day-hero-content">
+       <div class="day-number">
+        Day 4
+       </div>
+       <h2 class="day-theme">Grateful for Salvation</h2>
+      </div>
+     </div>
+     <div class="day-body">
+      <div class="scripture-box">
+       <p class="scripture-text">"For God so loved the world, that he gave his only begotten Son, that whosoever believeth in him should not perish, but have everlasting life."</p>
+       <p class="scripture-ref">— John 3:16, King James Version (KJV)</p><a href="https://www.biblegateway.com/passage/?search=John+3:16&amp;version=KJV" target="_blank" rel="noopener noreferrer" class="bible-link">Read Full Chapter →</a>
+      </div>
+      <div class="devotional-text">
+       <p>Of all the gifts we could give thanks for, none compares to the gift of salvation through Jesus Christ. Before we knew Him, we were lost in darkness, separated from God by our sin. But in His great mercy, God made a way for us to be reconciled to Him.</p>
+       <p>The cross stands as the ultimate expression of God's love—a love so profound that He sacrificed His only Son for our redemption. Through Christ's death and resurrection, we have been forgiven, justified, and adopted into God's family. We are no longer slaves to sin but children of the Most High God.</p>
+       <p>Today, let us pause and reflect on the magnitude of this gift. Salvation is not something we earned or deserved; it is pure grace. May our hearts overflow with thanksgiving for the precious blood of Jesus that has washed us clean and given us eternal hope.</p>
+      </div>
+      <section class="journal-section">
+       <h3 class="journal-title">Journal &amp; Reflect</h3>
+       <div class="journal-prompts">
+        <h4>Reflection Prompts:</h4>
+        <ul>
+         <li>What does salvation mean to you personally?</li>
+         <li>How has knowing Christ changed your life?</li>
+         <li>Who can you share the hope of salvation with today?</li>
+        </ul>
+       </div><textarea class="journal-area" id="journal-day4" placeholder="Write your thoughts and prayers here..." aria-label="Journal entry for Day 4"></textarea>
+       <div class="journal-controls"><button class="copy-btn" onclick="copyJournal('day4', this)">Copy Full Journal to Clipboard</button>
+       </div>
+       <p class="journal-note">📝 Note: Your journal entries are private and temporary. They will not be saved when you leave this page. Consider copying your reflections to a personal journal or notes app if you'd like to keep them.</p>
+       <p class="copy-feedback" id="feedback-day4"></p>
+      </section>
+     </div>
+    </article>
+    <article id="day5" class="day-content">
+     <div class="day-hero">
+      <div class="day-hero-content">
+       <div class="day-number">
+        Day 5
+       </div>
+       <h2 class="day-theme">Grateful for Peace</h2>
+      </div>
+     </div>
+     <div class="day-body">
+      <div class="scripture-box">
+       <p class="scripture-text">"Peace I leave with you, my peace I give unto you: not as the world giveth, give I unto you. Let not your heart be troubled, neither let it be afraid."</p>
+       <p class="scripture-ref">— John 14:27, King James Version (KJV)</p><a href="https://www.biblegateway.com/passage/?search=John+14:27&amp;version=KJV" target="_blank" rel="noopener noreferrer" class="bible-link">Read Full Chapter →</a>
+      </div>
+      <div class="devotional-text">
+       <p>In a world filled with chaos and uncertainty, the peace of God stands as an anchor for our souls. This is not a peace dependent on circumstances or the absence of problems. Rather, it is a supernatural peace that transcends understanding—a peace that can calm the storm within even when storms rage without.</p>
+       <p>Jesus promised to leave us His peace, a peace unlike anything the world can offer. When we abide in Him, we find rest for our weary souls. His presence brings comfort in sorrow, courage in fear, and hope in despair. This peace guards our hearts and minds, keeping us steady when everything around us shakes.</p>
+       <p>Today, let us give thanks for the peace that comes from knowing we are held in the hands of a sovereign God. No matter what we face, we can rest in the assurance that He is in control, He is good, and He will never leave us nor forsake us.</p>
+      </div>
+      <section class="journal-section">
+       <h3 class="journal-title">Journal &amp; Reflect</h3>
+       <div class="journal-prompts">
+        <h4>Reflection Prompts:</h4>
+        <ul>
+         <li>When have you experienced God's peace in a difficult situation?</li>
+         <li>What anxieties can you surrender to God today?</li>
+         <li>How can you cultivate more peace in your daily life?</li>
+        </ul>
+       </div><textarea class="journal-area" id="journal-day5" placeholder="Write your thoughts and prayers here..." aria-label="Journal entry for Day 5"></textarea>
+       <div class="journal-controls"><button class="copy-btn" onclick="copyJournal('day5', this)">Copy Full Journal to Clipboard</button>
+       </div>
+       <p class="journal-note">📝 Note: Your journal entries are private and temporary. They will not be saved when you leave this page. Consider copying your reflections to a personal journal or notes app if you'd like to keep them.</p>
+       <p class="copy-feedback" id="feedback-day5"></p>
+      </section>
+     </div>
+    </article>
+    <article id="day6" class="day-content">
+     <div class="day-hero">
+      <div class="day-hero-content">
+       <div class="day-number">
+        Day 6
+       </div>
+       <h2 class="day-theme">Grateful for Purpose</h2>
+      </div>
+     </div>
+     <div class="day-body">
+      <div class="scripture-box">
+       <p class="scripture-text">"For we are his workmanship, created in Christ Jesus unto good works, which God hath before ordained that we should walk in them."</p>
+       <p class="scripture-ref">— Ephesians 2:10, King James Version (KJV)</p><a href="https://www.biblegateway.com/passage/?search=Ephesians+2:10&amp;version=KJV" target="_blank" rel="noopener noreferrer" class="bible-link">Read Full Chapter →</a>
+      </div>
+      <div class="devotional-text">
+       <p>Each of us has been created with divine purpose. Before the foundation of the world, God had a plan for your life—a unique calling that only you can fulfill. You are not an accident or an afterthought; you are God's masterpiece, crafted with intention and love.</p>
+       <p>Our purpose is not found in worldly success or achievements but in fulfilling the good works God has prepared for us. Whether you serve in grand ways or quiet moments, whether your influence reaches many or few, your obedience matters to the Kingdom. Every act of love, every word of encouragement, every prayer offered—these are threads in the tapestry God is weaving.</p>
+       <p>Today, let us give thanks that our lives have meaning and purpose. We are not wandering aimlessly but walking a path ordained by our Creator. May we embrace our calling with joy, knowing that in serving Him, we find our truest fulfillment.</p>
+      </div>
+      <section class="journal-section">
+       <h3 class="journal-title">Journal &amp; Reflect</h3>
+       <div class="journal-prompts">
+        <h4>Reflection Prompts:</h4>
+        <ul>
+         <li>What unique gifts and talents has God given you?</li>
+         <li>How is God calling you to serve Him right now?</li>
+         <li>What steps can you take to walk more fully in your purpose?</li>
+        </ul>
+       </div><textarea class="journal-area" id="journal-day6" placeholder="Write your thoughts and prayers here..." aria-label="Journal entry for Day 6"></textarea>
+       <div class="journal-controls"><button class="copy-btn" onclick="copyJournal('day6', this)">Copy Full Journal to Clipboard</button>
+       </div>
+       <p class="journal-note">📝 Note: Your journal entries are private and temporary. They will not be saved when you leave this page. Consider copying your reflections to a personal journal or notes app if you'd like to keep them.</p>
+       <p class="copy-feedback" id="feedback-day6"></p>
+      </section>
+     </div>
+    </article>
+    <article id="day7" class="day-content">
+     <div class="day-hero">
+      <div class="day-hero-content">
+       <div class="day-number">
+        Day 7
+       </div>
+       <h2 class="day-theme">Grateful for Hope</h2>
+      </div>
+     </div>
+     <div class="day-body">
+      <div class="scripture-box">
+       <p class="scripture-text">"Now the God of hope fill you with all joy and peace in believing, that ye may abound in hope, through the power of the Holy Ghost."</p>
+       <p class="scripture-ref">— Romans 15:13, King James Version (KJV)</p><a href="https://www.biblegateway.com/passage/?search=Romans+15:13&amp;version=KJV" target="_blank" rel="noopener noreferrer" class="bible-link">Read Full Chapter →</a>
+      </div>
+      <div class="devotional-text">
+       <p>As we conclude this seven-day journey, we arrive at perhaps the most sustaining gift of all: hope. Biblical hope is not wishful thinking or blind optimism. It is a confident expectation rooted in the character and promises of God. It is the anchor that holds us steady when waves of doubt and despair threaten to overwhelm us.</p>
+       <p>Our hope is built on nothing less than Jesus Christ and His righteousness. Because He lives, we can face tomorrow. Because He conquered death, we have the promise of eternal life. Because He is faithful, we can trust that every promise in His Word will come to pass. This hope does not disappoint, for it is grounded in the unchanging nature of our God.</p>
+       <p>Today and every day, let us give thanks for the living hope we have in Christ. No matter what darkness surrounds us, His light shines brighter. No matter what challenges we face, His grace is sufficient. May we abound in hope through the power of the Holy Spirit, and may our lives be a testimony to the hope that is within us.</p>
+      </div>
+      <section class="journal-section">
+       <h3 class="journal-title">Journal &amp; Reflect</h3>
+       <div class="journal-prompts">
+        <h4>Reflection Prompts:</h4>
+        <ul>
+         <li>What promises of God give you the most hope?</li>
+         <li>How has your hope in Christ sustained you through difficult times?</li>
+         <li>As you complete this devotional, what are you most grateful for?</li>
+        </ul>
+       </div><textarea class="journal-area" id="journal-day7" placeholder="Write your thoughts and prayers here..." aria-label="Journal entry for Day 7"></textarea>
+       <div class="journal-controls"><button class="copy-btn" onclick="copyJournal('day7', this)">Copy Full Journal to Clipboard</button>
+       </div>
+       <p class="journal-note">📝 Note: Your journal entries are private and temporary. They will not be saved when you leave this page. Consider copying your reflections to a personal journal or notes app if you'd like to keep them.</p>
+       <p class="copy-feedback" id="feedback-day7"></p>
+      </section>
+     </div>
+    </article>
+   </main>
+  </div>
+  <script>
+    function copyJournal(dayId, button) {
+      const dayContent = document.getElementById(dayId);
+      const dayNumber = dayContent.querySelector('.day-number').textContent;
+      const dayTheme = dayContent.querySelector('.day-theme').textContent;
+      const scripture = dayContent.querySelector('.scripture-text').textContent;
+      const scriptureRef = dayContent.querySelector('.scripture-ref').textContent;
+
+      const prompts = dayContent.querySelectorAll('.journal-prompts li');
+      let promptsText = '\nReflection Prompts:\n';
+      prompts.forEach(prompt => {
+        promptsText += '• ' + prompt.textContent + '\n';
+      });
+
+      const textarea = dayContent.querySelector('.journal-area');
+      const journalText = textarea.value;
+
+      const fullText = `${dayNumber}: ${dayTheme}\n\n${scripture}\n${scriptureRef}\n${promptsText}\nMy Journal Entry:\n${journalText || '(No entry written yet)'}`;
+
+      navigator.clipboard.writeText(fullText).then(() => {
+        button.textContent = 'Copied!';
+        button.style.background = '#8b5a2b';
+
+        setTimeout(() => {
+          button.textContent = 'Copy Full Journal to Clipboard';
+          button.style.background = '#c17a3a';
+        }, 2000);
+      }).catch(err => {
+        button.textContent = 'Failed to copy';
+        button.style.background = '#8b5a2b';
+        setTimeout(() => {
+          button.textContent = 'Copy Full Journal to Clipboard';
+          button.style.background = '#c17a3a';
+        }, 2000);
+      });
+    }
+
+    const days = ['day1', 'day2', 'day3', 'day4', 'day5', 'day6', 'day7'];
+
+    const navigation = document.getElementById('navigation');
+    days.forEach((day, index) => {
+      const btn = document.createElement('button');
+      btn.className = 'nav-btn';
+      if (index === 0) btn.classList.add('active');
+      btn.textContent = `Day ${index + 1}`;
+      btn.onclick = () => showDay(day, btn);
+      navigation.appendChild(btn);
+    });
+
+    function showDay(dayId, clickedBtn) {
+      document.querySelectorAll('.day-content').forEach(content => {
+        content.classList.remove('active');
+      });
+      document.querySelectorAll('.nav-btn').forEach(btn => {
+        btn.classList.remove('active');
+      });
+
+      document.getElementById(dayId).classList.add('active');
+      clickedBtn.classList.add('active');
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'99c281a28127250d',t:'MTc2Mjc0NTc5NS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
