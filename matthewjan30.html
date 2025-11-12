@@ -1,0 +1,1219 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Matthew Study - January</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Georgia', serif;
+      background: linear-gradient(135deg, #2c1810 0%, #4a2c1f 50%, #6b4423 100%);
+      color: #f5e6d3;
+      min-height: 100%;
+      overflow-x: hidden;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 40px 20px;
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 50px;
+      padding: 30px;
+      background: rgba(139, 90, 43, 0.2);
+      border-radius: 20px;
+      border: 2px solid #d4af37;
+    }
+
+    .header h1 {
+      font-size: 48px;
+      margin: 0 0 15px 0;
+      color: #d4af37;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+      font-weight: normal;
+      letter-spacing: 2px;
+    }
+
+    .header p {
+      font-size: 20px;
+      margin: 0;
+      color: #f5e6d3;
+      font-style: italic;
+    }
+
+    .progress-section {
+      background: rgba(139, 90, 43, 0.3);
+      padding: 25px;
+      border-radius: 15px;
+      margin-bottom: 40px;
+      border: 1px solid #8b5a2b;
+    }
+
+    .progress-bar {
+      width: 100%;
+      height: 30px;
+      background: rgba(44, 24, 16, 0.5);
+      border-radius: 15px;
+      overflow: hidden;
+      margin-bottom: 15px;
+      border: 2px solid #d4af37;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #d4af37 0%, #f4e4c1 100%);
+      transition: width 0.5s ease;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      padding-right: 10px;
+      font-weight: bold;
+      color: #2c1810;
+      width: 0%;
+    }
+
+    .progress-text {
+      text-align: center;
+      font-size: 18px;
+      color: #d4af37;
+    }
+
+    .days-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 25px;
+      margin-bottom: 40px;
+    }
+
+    .day-card {
+      background: linear-gradient(135deg, rgba(139, 90, 43, 0.4) 0%, rgba(107, 68, 35, 0.4) 100%);
+      border-radius: 15px;
+      padding: 25px;
+      border: 2px solid #8b5a2b;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .day-card:hover {
+      transform: translateY(-5px);
+      border-color: #d4af37;
+      box-shadow: 0 10px 30px rgba(212, 175, 55, 0.3);
+    }
+
+    .day-card.completed {
+      border-color: #d4af37;
+      background: linear-gradient(135deg, rgba(212, 175, 55, 0.3) 0%, rgba(139, 90, 43, 0.3) 100%);
+    }
+
+    .day-number {
+      font-size: 16px;
+      color: #d4af37;
+      font-weight: bold;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .check-icon {
+      color: #d4af37;
+      font-size: 20px;
+    }
+
+    .verse-reference {
+      font-size: 20px;
+      font-weight: bold;
+      color: #f5e6d3;
+      margin-bottom: 15px;
+    }
+
+    .verse-preview {
+      font-size: 15px;
+      line-height: 1.6;
+      color: #e6d7c3;
+      font-style: italic;
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      z-index: 10000;
+      overflow-y: auto;
+      padding: 20px;
+    }
+
+    .modal.active {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal-content {
+      background: linear-gradient(135deg, #2c1810 0%, #4a2c1f 100%);
+      border-radius: 20px;
+      padding: 40px;
+      max-width: 900px;
+      width: 100%;
+      border: 3px solid #d4af37;
+      position: relative;
+      max-height: 90%;
+      overflow-y: auto;
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      font-size: 30px;
+      color: #d4af37;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 0;
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      transition: background 0.3s ease;
+    }
+
+    .close-btn:hover {
+      background: rgba(212, 175, 55, 0.2);
+    }
+
+    .modal-header {
+      margin-bottom: 30px;
+      padding-bottom: 20px;
+      border-bottom: 2px solid #8b5a2b;
+    }
+
+    .modal-day-number {
+      font-size: 18px;
+      color: #d4af37;
+      margin-bottom: 10px;
+    }
+
+    .modal-verse-ref {
+      font-size: 28px;
+      color: #f5e6d3;
+      margin-bottom: 20px;
+      font-weight: bold;
+    }
+
+    .verse-card {
+      background: rgba(139, 90, 43, 0.3);
+      padding: 30px;
+      border-radius: 15px;
+      border: 2px solid #d4af37;
+      margin-bottom: 30px;
+    }
+
+    .verse-text {
+      font-size: 20px;
+      line-height: 1.8;
+      color: #f5e6d3;
+      font-style: italic;
+      margin-bottom: 20px;
+    }
+
+    .context-section {
+      background: rgba(107, 68, 35, 0.3);
+      padding: 20px;
+      border-radius: 12px;
+      margin-bottom: 20px;
+      border-left: 4px solid #d4af37;
+    }
+
+    .context-title {
+      font-size: 16px;
+      color: #d4af37;
+      font-weight: bold;
+      margin-bottom: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .context-text {
+      font-size: 16px;
+      line-height: 1.7;
+      color: #f5e6d3;
+    }
+
+    .theme-box {
+      background: linear-gradient(135deg, rgba(212, 175, 55, 0.2) 0%, rgba(139, 90, 43, 0.2) 100%);
+      padding: 20px;
+      border-radius: 12px;
+      margin-bottom: 20px;
+      border: 2px solid #d4af37;
+      text-align: center;
+    }
+
+    .theme-label {
+      font-size: 14px;
+      color: #d4af37;
+      font-weight: bold;
+      margin-bottom: 8px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .theme-text {
+      font-size: 18px;
+      line-height: 1.6;
+      color: #f5e6d3;
+      font-weight: bold;
+    }
+
+    .prayer-box {
+      background: rgba(139, 90, 43, 0.2);
+      padding: 20px;
+      border-radius: 12px;
+      margin-bottom: 20px;
+      border-left: 4px solid #d4af37;
+    }
+
+    .prayer-icon {
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+
+    .youversion-link {
+      display: inline-block;
+      background: #d4af37;
+      color: #2c1810;
+      padding: 12px 25px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: all 0.3s ease;
+      font-size: 16px;
+    }
+
+    .youversion-link:hover {
+      background: #f4e4c1;
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(212, 175, 55, 0.4);
+    }
+
+    .reflection-section {
+      margin-top: 30px;
+    }
+
+    .section-title {
+      font-size: 24px;
+      color: #d4af37;
+      margin-bottom: 20px;
+      font-weight: bold;
+    }
+
+    .questions-list {
+      background: rgba(139, 90, 43, 0.2);
+      padding: 25px;
+      border-radius: 12px;
+      border: 1px solid #8b5a2b;
+      margin-bottom: 25px;
+    }
+
+    .question {
+      font-size: 17px;
+      line-height: 1.7;
+      color: #f5e6d3;
+      margin-bottom: 20px;
+      padding-left: 25px;
+      position: relative;
+    }
+
+    .question:before {
+      content: "•";
+      position: absolute;
+      left: 0;
+      color: #d4af37;
+      font-size: 24px;
+    }
+
+    .question:last-child {
+      margin-bottom: 0;
+    }
+
+    .deeper-section {
+      background: rgba(44, 24, 16, 0.5);
+      padding: 25px;
+      border-radius: 12px;
+      border: 2px solid #8b5a2b;
+      margin-bottom: 25px;
+    }
+
+    .deeper-title {
+      font-size: 20px;
+      color: #d4af37;
+      margin-bottom: 15px;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .deeper-icon {
+      font-size: 24px;
+    }
+
+    .deeper-text {
+      font-size: 16px;
+      line-height: 1.8;
+      color: #e6d7c3;
+    }
+
+    .notes-area {
+      width: 100%;
+      min-height: 150px;
+      background: rgba(44, 24, 16, 0.5);
+      border: 2px solid #8b5a2b;
+      border-radius: 12px;
+      padding: 15px;
+      color: #f5e6d3;
+      font-size: 16px;
+      font-family: 'Georgia', serif;
+      resize: vertical;
+      margin-bottom: 20px;
+    }
+
+    .notes-area:focus {
+      outline: none;
+      border-color: #d4af37;
+    }
+
+    .action-buttons {
+      display: flex;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 14px 28px;
+      border-radius: 8px;
+      border: none;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-family: 'Georgia', serif;
+    }
+
+    .btn-primary {
+      background: #d4af37;
+      color: #2c1810;
+    }
+
+    .btn-primary:hover {
+      background: #f4e4c1;
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(212, 175, 55, 0.4);
+    }
+
+    .btn-primary:disabled {
+      background: #8b5a2b;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+
+    .btn-secondary {
+      background: rgba(139, 90, 43, 0.5);
+      color: #f5e6d3;
+      border: 2px solid #8b5a2b;
+    }
+
+    .btn-secondary:hover {
+      background: rgba(139, 90, 43, 0.7);
+      border-color: #d4af37;
+    }
+
+    .save-note {
+      color: #d4af37;
+      font-size: 14px;
+      margin-bottom: 15px;
+      font-style: italic;
+    }
+
+    @media (max-width: 768px) {
+      .header h1 {
+        font-size: 32px;
+      }
+
+      .header p {
+        font-size: 16px;
+      }
+
+      .days-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .modal-content {
+        padding: 25px;
+      }
+
+      .modal-verse-ref {
+        font-size: 22px;
+      }
+
+      .verse-text {
+        font-size: 18px;
+      }
+    }
+  </style>
+  <style>@view-transition { navigation: auto; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+  <script src="/_sdk/element_sdk.js" type="text/javascript"></script>
+  <script src="https://cdn.tailwindcss.com" type="text/javascript"></script>
+ </head>
+ <body>
+  <div class="container">
+   <div class="header">
+    <h1>Matthew Study - January</h1>
+    <p>Chapters 1-13: The King and His Kingdom</p>
+   </div>
+   <div class="progress-section">
+    <div class="progress-bar">
+     <div class="progress-fill" id="progress-fill">
+      0%
+     </div>
+    </div>
+    <div class="progress-text" id="progress-text">
+     0 of 30 days completed
+    </div>
+   </div>
+   <div class="days-grid" id="days-grid"></div>
+  </div>
+  <div class="modal" id="study-modal">
+   <div class="modal-content"><button class="close-btn" id="close-modal">×</button>
+    <div class="modal-header">
+     <div class="modal-day-number" id="modal-day-number"></div>
+     <div class="modal-verse-ref" id="modal-verse-ref"></div>
+    </div>
+    <div class="verse-card">
+     <div class="verse-text" id="verse-text"></div><a href="#" target="_blank" rel="noopener noreferrer" class="youversion-link" id="youversion-link">Read Full Passage on YouVersion</a>
+    </div>
+    <div class="context-section">
+     <div class="context-title">
+      📖 Historical Context
+     </div>
+     <div class="context-text" id="context-text"></div>
+    </div>
+    <div class="theme-box">
+     <div class="theme-label">
+      Key Theme
+     </div>
+     <div class="theme-text" id="theme-text"></div>
+    </div>
+    <div class="prayer-box">
+     <div class="prayer-icon">
+      🙏
+     </div>
+     <div class="context-title">
+      Prayer Prompt
+     </div>
+     <div class="context-text" id="prayer-text"></div>
+    </div>
+    <div class="reflection-section">
+     <div class="section-title">
+      Reflection Questions
+     </div>
+     <div class="questions-list" id="questions-list"></div>
+     <div class="deeper-section">
+      <div class="deeper-title"><span class="deeper-icon">🔍</span> <span>Digging Deeper</span>
+      </div>
+      <div class="deeper-text" id="deeper-text"></div>
+     </div>
+     <div class="section-title" style="margin-top: 30px;">
+      Your Notes
+     </div>
+     <p class="save-note">Your notes are saved in your browser. Use "Copy Full Journal" to backup your notes.</p><textarea class="notes-area" id="notes-area" placeholder="Write your reflections, insights, and prayers here..."></textarea>
+     <div class="action-buttons"><button class="btn btn-primary" id="complete-btn">Mark as Complete</button> <button class="btn btn-primary" id="copy-journal-btn">Copy Full Journal</button> <button class="btn btn-secondary" id="cancel-btn">Close</button>
+     </div>
+    </div>
+   </div>
+  </div>
+  <script>
+    const matthewStudy = [
+      {
+        day: 1,
+        reference: "Matthew 1:1-17 (KJV)",
+        verse: "The book of the generation of Jesus Christ, the son of David, the son of Abraham.",
+        youversion: "https://www.bible.com/bible/1/MAT.1.1-17.KJV",
+        context: "Matthew writes primarily to a Jewish audience, proving Jesus is the promised Messiah. Genealogies were crucial in Jewish culture to establish legitimacy and fulfill prophecy. This genealogy traces Jesus through the royal line of David and back to Abraham, the father of the Jewish nation.",
+        theme: "Jesus is the fulfillment of God's covenant promises to Abraham and David, the rightful King of Israel.",
+        prayer: "Thank God for His faithfulness across generations. Ask Him to help you see how Jesus fulfills all of God's promises.",
+        questions: [
+          "Why does Matthew begin with a genealogy? What does this tell us about Jesus' identity and mission?",
+          "How does the inclusion of women like Tamar, Rahab, Ruth, and Bathsheba challenge cultural expectations?",
+          "What does it mean that Jesus is called 'son of David' and 'son of Abraham'? How does this fulfill Old Testament promises?"
+        ],
+        deeper: "The Greek word 'genesis' (generation) echoes Genesis 1:1, suggesting Jesus brings a new creation. Notice the genealogy is structured in three sets of 14 generations—14 is twice 7 (the number of completion), and the numerical value of David's name in Hebrew equals 14. Matthew is showing divine design in history leading to Jesus."
+      },
+      {
+        day: 2,
+        reference: "Matthew 1:18-25 (KJV)",
+        verse: "And she shall bring forth a son, and thou shalt call his name JESUS: for he shall save his people from their sins.",
+        youversion: "https://www.bible.com/bible/1/MAT.1.18-25.KJV",
+        context: "In Jewish culture, betrothal was legally binding like marriage, but the couple didn't live together yet. Joseph's discovery of Mary's pregnancy could have led to her public disgrace or even death by stoning. His decision to divorce her quietly shows remarkable compassion.",
+        theme: "Jesus' name reveals His mission: He is God's salvation, come to rescue His people from sin.",
+        prayer: "Praise Jesus for being our Savior. Ask God to help you trust His plans even when they don't make sense, like Joseph did.",
+        questions: [
+          "What does Joseph's obedience teach us about faith and trust in God's plan?",
+          "How does the name 'Jesus' (meaning 'the Lord saves') define His mission?",
+          "What does 'Emmanuel' (God with us) reveal about the nature of Jesus and God's relationship with humanity?"
+        ],
+        deeper: "The name 'Jesus' (Yeshua in Hebrew) means 'Yahweh saves' or 'the Lord is salvation.' It's the same name as Joshua in the Old Testament, who led Israel into the Promised Land. Just as Joshua brought physical deliverance, Jesus brings spiritual deliverance. 'Emmanuel' fulfills Isaiah 7:14 and reveals the incarnation—God Himself dwelling with humanity."
+      },
+      {
+        day: 3,
+        reference: "Matthew 2:1-12 (KJV)",
+        verse: "Saying, Where is he that is born King of the Jews? for we have seen his star in the east, and are come to worship him.",
+        youversion: "https://www.bible.com/bible/1/MAT.2.1-12.KJV",
+        context: "The Magi were likely Persian astrologers or wise men who studied the stars. Their journey from the East (possibly Babylon or Persia) would have taken months. Herod the Great, known for his paranoia and cruelty, had already killed several of his own family members to protect his throne.",
+        theme: "The Gentiles recognize and worship Jesus as King, while the Jewish leaders reject Him—a pattern that continues throughout Matthew.",
+        prayer: "Thank God that Jesus came for all nations. Ask Him to give you a heart that seeks Jesus with the same dedication as the Magi.",
+        questions: [
+          "Why did the Magi, Gentiles from the East, recognize Jesus as king while Herod and Jerusalem were troubled?",
+          "What does the Magi's journey and worship teach us about seeking Jesus?",
+          "How does Herod's response to Jesus' birth foreshadow the rejection Jesus will face?"
+        ],
+        deeper: "The 'star' has been debated for centuries. Some suggest a conjunction of planets (Jupiter and Saturn aligned in 7-6 BC), a comet, or a supernatural phenomenon. The gifts—gold (for a king), frankincense (for a priest), and myrrh (for burial)—prophetically point to Jesus' identity and mission. Notice the Magi 'worshipped' Jesus, using the Greek word 'proskuneo,' which means to bow down in reverence—worship reserved for deity."
+      },
+      {
+        day: 4,
+        reference: "Matthew 2:13-23 (KJV)",
+        verse: "Out of Egypt have I called my son.",
+        youversion: "https://www.bible.com/bible/1/MAT.2.13-23.KJV",
+        context: "Egypt was a traditional place of refuge for Jews fleeing danger (see 1 Kings 11:40). Herod's massacre of children in Bethlehem, while not recorded in secular history, fits his brutal character—he killed his own wife and sons. Nazareth was a small, insignificant town, despised by many Jews.",
+        theme: "Jesus relives Israel's history, succeeding where Israel failed. He is the true Son called out of Egypt.",
+        prayer: "Pray for those who suffer unjustly. Thank God that He protects His purposes even through difficult circumstances.",
+        questions: [
+          "How does Jesus' flight to Egypt parallel Israel's history? What does this reveal about Jesus as the true Israel?",
+          "Why does God allow the massacre of the innocents? How do we reconcile God's sovereignty with human evil?",
+          "What does it mean that Jesus was called a Nazarene? How does this fulfill prophecy?"
+        ],
+        deeper: "Matthew quotes Hosea 11:1, originally about Israel's exodus from Egypt, and applies it to Jesus. This is called 'typology'—Jesus fulfills the pattern of Israel's story. Where Israel grumbled and rebelled in the wilderness, Jesus will obey perfectly. The 'Nazarene' prophecy isn't a direct Old Testament quote but may refer to Isaiah 11:1, where 'netzer' (branch) sounds like 'Nazareth,' or it may reflect the general prophetic theme that the Messiah would be despised and rejected."
+      },
+      {
+        day: 5,
+        reference: "Matthew 3:1-12 (KJV)",
+        verse: "Repent ye: for the kingdom of heaven is at hand.",
+        youversion: "https://www.bible.com/bible/1/MAT.3.1-12.KJV",
+        context: "John the Baptist appears after 400 years of prophetic silence. His clothing (camel's hair and leather belt) and diet (locusts and wild honey) echo Elijah's appearance (2 Kings 1:8). The wilderness of Judea was a harsh, desolate region near the Dead Sea, symbolizing spiritual barrenness.",
+        theme: "True repentance requires a complete change of heart and life, not just religious heritage or ritual.",
+        prayer: "Ask God to search your heart and reveal areas where you need to repent. Pray for the courage to produce fruit worthy of repentance.",
+        questions: [
+          "What does John the Baptist mean by 'repent'? How is repentance more than just feeling sorry?",
+          "Why does John criticize the Pharisees and Sadducees so harshly? What does 'bring forth therefore fruits meet for repentance' mean?",
+          "How does John's baptism with water differ from Jesus' baptism with the Holy Ghost and fire?"
+        ],
+        deeper: "The Greek word 'metanoia' (repent) means 'to change one's mind' or 'to turn around.' It's not just feeling bad about sin, but a complete reorientation of life. John's baptism was for repentance, but Jesus' baptism with the 'Holy Ghost and fire' refers to both the empowering presence of the Spirit (Acts 2) and the purifying judgment of God. The 'fire' is both refining (for believers) and consuming (for the unrepentant)."
+      },
+      {
+        day: 6,
+        reference: "Matthew 3:13-17 (KJV)",
+        verse: "This is my beloved Son, in whom I am well pleased.",
+        youversion: "https://www.bible.com/bible/1/MAT.3.13-17.KJV",
+        context: "The Jordan River was the boundary Israel crossed to enter the Promised Land under Joshua. John's baptism took place near where Israel entered Canaan, symbolizing a new beginning. Jesus' baptism marks the beginning of His public ministry at about age 30, the age when priests began their service.",
+        theme: "Jesus identifies with sinful humanity through baptism, inaugurating His mission to save His people.",
+        prayer: "Thank God for sending Jesus to identify with us completely. Praise the Father, Son, and Holy Spirit for working together in our salvation.",
+        questions: [
+          "Why does Jesus insist on being baptized if He has no sin to repent of?",
+          "What does the Trinity reveal about God's nature in this passage (Father's voice, Son being baptized, Spirit descending)?",
+          "How does God's declaration 'This is my beloved Son' affirm Jesus' identity and mission?"
+        ],
+        deeper: "Jesus' baptism 'fulfills all righteousness'—He fully obeys God's will and identifies with sinners He came to save. This is the clearest Trinitarian moment in the Gospels: the Son is baptized, the Spirit descends 'like a dove' (symbolizing peace and purity), and the Father speaks. God's words echo Psalm 2:7 (royal coronation) and Isaiah 42:1 (the suffering servant), combining Jesus' roles as King and Servant."
+      },
+      {
+        day: 7,
+        reference: "Matthew 4:1-11 (KJV)",
+        verse: "Man shall not live by bread alone, but by every word that proceedeth out of the mouth of God.",
+        youversion: "https://www.bible.com/bible/1/MAT.4.1-11.KJV",
+        context: "Immediately after His baptism, the Spirit leads Jesus into the wilderness—the same wilderness where Israel wandered for 40 years. Jesus fasts for 40 days, echoing Moses' 40 days on Mount Sinai. The wilderness was believed to be inhabited by demons, making it a fitting place for spiritual warfare.",
+        theme: "Jesus succeeds where Israel failed, perfectly obeying God's Word and resisting temptation through Scripture.",
+        prayer: "Ask God to help you resist temptation by knowing and applying His Word. Pray for strength to trust God's provision and timing.",
+        questions: [
+          "How does Jesus' temptation in the wilderness parallel Israel's 40 years in the desert? Where Israel failed, how does Jesus succeed?",
+          "What strategy does Jesus use to resist temptation? How can we apply this in our own spiritual battles?",
+          "How do the three temptations attack Jesus' identity, mission, and worship? What does this teach us about Satan's tactics?"
+        ],
+        deeper: "Each of Jesus' responses comes from Deuteronomy 6-8, Israel's wilderness experience. Satan tempts Jesus to (1) doubt God's provision (turn stones to bread), (2) test God's protection (jump from the temple), and (3) worship Satan for worldly power (all kingdoms). Notice Satan even quotes Scripture (Psalm 91:11-12) but misapplies it—showing we must know Scripture in context. Jesus' victory reverses Adam's failure in the garden and Israel's failure in the wilderness."
+      },
+      {
+        day: 8,
+        reference: "Matthew 4:12-25 (KJV)",
+        verse: "Repent: for the kingdom of heaven is at hand.",
+        youversion: "https://www.bible.com/bible/1/MAT.4.12-25.KJV",
+        context: "Galilee was a region looked down upon by religious Jews in Jerusalem—it was rural, mixed with Gentiles, and considered spiritually dark. Capernaum became Jesus' ministry headquarters. The phrase 'Galilee of the Gentiles' (Isaiah 9:1-2) shows God's light shining in unexpected places.",
+        theme: "Jesus brings light to those in darkness, calling ordinary people to follow Him and participate in His kingdom mission.",
+        prayer: "Thank Jesus for calling you to follow Him. Ask God to make you a 'fisher of men' who brings others to Christ.",
+        questions: [
+          "Why does Jesus begin His ministry in Galilee, a region looked down upon by religious leaders?",
+          "What does it mean to be 'fishers of men'? How does this redefine the disciples' purpose?",
+          "How does Jesus' ministry of teaching, preaching, and healing demonstrate the arrival of God's kingdom?"
+        ],
+        deeper: "The call to 'follow me' was radical—disciples typically chose their rabbi, but Jesus chooses His disciples. 'Fishers of men' uses their occupation as a metaphor: just as they caught fish for physical sustenance, they'll now 'catch' people for eternal life. Notice the three-fold ministry: teaching (instruction), preaching (proclamation), and healing (demonstration). Jesus' words and works together prove the kingdom has arrived."
+      },
+      {
+        day: 9,
+        reference: "Matthew 5:1-12 (KJV)",
+        verse: "Blessed are the poor in spirit: for theirs is the kingdom of heaven.",
+        youversion: "https://www.bible.com/bible/1/MAT.5.1-12.KJV",
+        context: "The Sermon on the Mount (chapters 5-7) is Jesus' most famous teaching, delivered on a hillside near Capernaum. This echoes Moses receiving the Law on Mount Sinai—Jesus is the new Moses, giving the true interpretation of God's Law. The 'Beatitudes' (from Latin 'beatus' meaning blessed) open this sermon.",
+        theme: "God's kingdom values are upside-down from the world's—the humble, merciful, and persecuted are truly blessed.",
+        prayer: "Ask God to transform your values to match His kingdom. Pray for a heart that hungers for righteousness and shows mercy to others.",
+        questions: [
+          "How do the Beatitudes challenge worldly definitions of happiness and success?",
+          "What does it mean to be 'poor in spirit' or to 'hunger and thirst after righteousness'?",
+          "How do the Beatitudes describe the character of those who belong to God's kingdom?"
+        ],
+        deeper: "'Blessed' (Greek 'makarios') means more than happy—it's a deep, lasting joy and divine favor. 'Poor in spirit' doesn't mean low self-esteem, but recognizing our spiritual bankruptcy before God. Each Beatitude has a present reality ('theirs IS the kingdom') and a future promise ('they SHALL be comforted'). Notice the progression: it starts with recognizing our need (poor in spirit) and ends with persecution for righteousness—the natural result of living out these values in a fallen world."
+      },
+      {
+        day: 10,
+        reference: "Matthew 5:13-20 (KJV)",
+        verse: "Ye are the light of the world. A city that is set on an hill cannot be hid.",
+        youversion: "https://www.bible.com/bible/1/MAT.5.13-20.KJV",
+        context: "Salt in the ancient world was used for preservation, flavoring, and purification. It was so valuable that Roman soldiers were sometimes paid in salt (hence 'salary'). A city on a hill likely refers to towns built on hilltops for defense, visible for miles around—possibly Jesus pointed to a nearby hillside town as He spoke.",
+        theme: "Disciples are called to influence the world through godly character and good works, fulfilling the true intent of God's Law.",
+        prayer: "Ask God to make you salt and light in your community. Pray for opportunities to let your light shine through good works that point others to God.",
+        questions: [
+          "What does it mean to be 'salt' and 'light' in the world? How do these metaphors describe our mission?",
+          "How does Jesus fulfill the Law and the Prophets rather than abolish them?",
+          "What does Jesus mean when He says our righteousness must exceed that of the scribes and Pharisees?"
+        ],
+        deeper: "Salt that loses its saltiness (becomes contaminated or diluted) is worthless—it can't be made salty again. This warns against compromising our distinctive Christian character. Jesus doesn't abolish the Law but 'fulfills' it—He completes its purpose and reveals its true meaning. The scribes and Pharisees had external righteousness (rule-keeping), but Jesus demands internal righteousness (heart transformation). One 'jot' (yod, the smallest Hebrew letter) and 'tittle' (a tiny stroke distinguishing similar letters) emphasizes God's Word is completely trustworthy down to the smallest detail."
+      },
+      {
+        day: 11,
+        reference: "Matthew 5:21-26 (KJV)",
+        verse: "But I say unto you, That whosoever is angry with his brother without a cause shall be in danger of the judgment.",
+        youversion: "https://www.bible.com/bible/1/MAT.5.21-26.KJV",
+        context: "Jesus begins a series of six 'You have heard... but I say' statements, contrasting superficial law-keeping with heart obedience. The religious leaders focused on external actions, but Jesus addresses internal attitudes. The terms 'Raca' (empty-headed) and 'fool' (morally worthless) were serious insults in Jewish culture.",
+        theme: "God cares about our hearts, not just our actions. Anger and contempt are the roots of murder.",
+        prayer: "Ask God to reveal any anger, bitterness, or unforgiveness in your heart. Pray for the courage to reconcile with anyone you've wronged or who has wronged you.",
+        questions: [
+          "How does Jesus deepen the commandment against murder by addressing anger and contempt?",
+          "Why does Jesus prioritize reconciliation even over worship?",
+          "What does this passage teach about the heart attitudes behind our actions?"
+        ],
+        deeper: "Jesus isn't adding to the Law but revealing its true intent—God has always cared about the heart (see 1 Samuel 16:7). The progression from anger to insults to murder shows how sin escalates. The phrase 'without a cause' (in some manuscripts) doesn't excuse all anger—righteous anger against sin is appropriate (see Jesus cleansing the temple). But nursing grudges and harboring contempt violates the spirit of 'thou shalt not kill.' Reconciliation must come before worship because broken relationships hinder our relationship with God (see 1 John 4:20)."
+      },
+      {
+        day: 12,
+        reference: "Matthew 5:27-32 (KJV)",
+        verse: "But I say unto you, That whosoever looketh on a woman to lust after her hath committed adultery with her already in his heart.",
+        youversion: "https://www.bible.com/bible/1/MAT.5.27-32.KJV",
+        context: "In Jesus' culture, adultery was defined narrowly as physical sexual relations with another man's wife. Men could divorce their wives for almost any reason (the school of Hillel taught divorce was permissible for burning dinner). Jesus radically elevates the standard and protects women from casual divorce.",
+        theme: "Sexual purity begins in the heart and mind. God's design for marriage is sacred and permanent.",
+        prayer: "Pray for purity in your thoughts and eyes. Ask God to help you honor His design for sexuality and marriage.",
+        questions: [
+          "How does Jesus' teaching on lust challenge our culture's view of sexuality?",
+          "What does Jesus mean by 'if thy right eye offend thee, pluck it out'? Is He speaking literally?",
+          "How does this passage emphasize the importance of purity in thought, not just action?"
+        ],
+        deeper: "Jesus isn't condemning natural attraction but intentional, sustained lustful desire ('looketh... to lust'). The Greek word 'epithumeo' means to covet or desire to possess. The hyperbolic language about plucking out eyes and cutting off hands isn't literal—it emphasizes the seriousness of sin and the need for radical action to avoid temptation. Better to lose a body part than lose your soul. The exception clause for divorce ('fornication'—Greek 'porneia') likely refers to sexual immorality that breaks the marriage covenant, though scholars debate its exact meaning."
+      },
+      {
+        day: 13,
+        reference: "Matthew 5:33-48 (KJV)",
+        verse: "But I say unto you, Love your enemies, bless them that curse you, do good to them that hate you, and pray for them which despitefully use you, and persecute you.",
+        youversion: "https://www.bible.com/bible/1/MAT.5.33-48.KJV",
+        context: "The 'eye for eye' principle (lex talionis) was meant to limit revenge, not encourage it—punishment should fit the crime. Roman soldiers could legally force civilians to carry their gear for one mile. The command to love enemies was revolutionary—most ancient ethics taught loving friends and hating enemies.",
+        theme: "Kingdom citizens reflect God's character by loving enemies and going beyond what's required, not seeking revenge.",
+        prayer: "Ask God to help you love those who hurt you. Pray for your enemies by name, asking God to bless them and draw them to Himself.",
+        questions: [
+          "What does it mean to 'turn the other cheek' and 'go the extra mile'? How do these actions subvert power dynamics?",
+          "How is loving our enemies a reflection of God's character?",
+          "What does it mean to 'be ye therefore perfect, even as your Father which is in heaven is perfect'?"
+        ],
+        deeper: "Jesus isn't teaching passivity but creative non-violent resistance. Turning the right cheek (after being struck on the right) means offering the other side, forcing the aggressor to use a backhand (an insult) or treat you as an equal. Going the second mile transforms forced labor into voluntary service, disarming oppression with generosity. Loving enemies doesn't mean approving their actions but seeking their good and praying for their redemption. 'Perfect' (Greek 'teleios') means complete, mature, or whole—reflecting God's character in loving both the just and unjust (v. 45)."
+      },
+      {
+        day: 14,
+        reference: "Matthew 6:1-4 (KJV)",
+        verse: "But when thou doest alms, let not thy left hand know what thy right hand doeth.",
+        youversion: "https://www.bible.com/bible/1/MAT.6.1-4.KJV",
+        context: "Giving to the poor (alms) was a central Jewish practice, one of three pillars of righteousness along with prayer and fasting. Some Pharisees would literally sound trumpets when giving to draw attention. The 'synagogues and streets' were public places where religious displays would be most visible.",
+        theme: "True righteousness is done for God's eyes alone, not for human applause or recognition.",
+        prayer: "Ask God to purify your motives in giving and serving. Pray for a heart that seeks His approval above human recognition.",
+        questions: [
+          "Why does Jesus warn against practicing righteousness to be seen by others?",
+          "How can we give generously without seeking recognition or reward?",
+          "What does it mean that 'thy Father which seeth in secret himself shall reward thee openly'?"
+        ],
+        deeper: "The phrase 'they have their reward' uses a Greek commercial term ('apecho') meaning 'paid in full'—like a receipt. If you give for human praise, that praise is all you'll get. God's reward isn't necessarily material or immediate, but eternal and far greater. The hyperbolic 'let not thy left hand know what thy right hand doeth' means give so naturally and humbly that you don't even congratulate yourself. This isn't about secrecy for its own sake, but about pure motives—doing good because it's right, not for recognition."
+      },
+      {
+        day: 15,
+        reference: "Matthew 6:5-15 (KJV)",
+        verse: "After this manner therefore pray ye: Our Father which art in heaven, Hallowed be thy name.",
+        youversion: "https://www.bible.com/bible/1/MAT.6.5-15.KJV",
+        context: "Jewish prayer times were 9 AM, noon, and 3 PM. Some Pharisees would time their travel to be in public places at prayer time to be seen praying. 'Vain repetitions' likely refers to pagan prayers that used magical formulas or endless repetition to manipulate the gods. The Lord's Prayer is a model, not a mantra.",
+        theme: "Prayer is intimate conversation with our Father, focused on His glory and kingdom, not a performance or formula.",
+        prayer: "Use the Lord's Prayer as a guide for your own prayer time. Pray through each petition slowly and personally.",
+        questions: [
+          "What does the Lord's Prayer teach us about the priorities and structure of prayer?",
+          "How does addressing God as 'Our Father' shape our understanding of prayer and relationship with God?",
+          "Why does Jesus emphasize forgiveness in prayer? How does our forgiveness of others relate to God's forgiveness of us?"
+        ],
+        deeper: "The prayer has six petitions: three focused on God (Your name, Your kingdom, Your will) and three on our needs (daily bread, forgiveness, deliverance). This order matters—God's glory comes first. 'Hallowed' means to treat as holy or sacred. 'Daily bread' (Greek 'epiousios') is a rare word, possibly meaning 'bread for today' or 'bread for tomorrow'—either way, it teaches daily dependence on God. The forgiveness section (vv. 14-15) doesn't mean we earn forgiveness by forgiving, but that unforgiveness reveals we haven't truly grasped God's forgiveness of us."
+      },
+      {
+        day: 16,
+        reference: "Matthew 6:16-24 (KJV)",
+        verse: "No man can serve two masters... Ye cannot serve God and mammon.",
+        youversion: "https://www.bible.com/bible/1/MAT.6.16-24.KJV",
+        context: "Fasting was practiced regularly by devout Jews, especially on the Day of Atonement. Some Pharisees fasted twice a week (Monday and Thursday) and made their fasting obvious by not washing or grooming. 'Mammon' is an Aramaic word for wealth or material possessions, sometimes personified as a false god.",
+        theme: "Our hearts can only have one master. We must choose between serving God or being enslaved to wealth.",
+        prayer: "Ask God to reveal any idols in your life, especially related to money or possessions. Pray for a single-minded devotion to Him.",
+        questions: [
+          "What is the purpose of fasting, and how should it be practiced?",
+          "What does it mean to lay up treasures in heaven rather than on earth?",
+          "How does money compete with God for our allegiance? What does it look like to serve God rather than mammon?"
+        ],
+        deeper: "Fasting isn't about earning God's favor but focusing on Him by setting aside physical needs. The 'single eye' (v. 22) refers to a generous, focused eye—in Hebrew thought, a 'good eye' meant generosity while an 'evil eye' meant stinginess. If your spiritual vision is clear (focused on God), your whole life will be full of light. The two masters metaphor shows divided loyalty is impossible—you'll love one and hate the other. Money isn't evil, but loving money (making it your master) is idolatry. Where your treasure is reveals where your heart truly is."
+      },
+      {
+        day: 17,
+        reference: "Matthew 6:25-34 (KJV)",
+        verse: "But seek ye first the kingdom of God, and his righteousness; and all these things shall be added unto you.",
+        youversion: "https://www.bible.com/bible/1/MAT.6.25-34.KJV",
+        context: "In an agricultural society without modern conveniences, daily survival was a constant concern. Birds don't plant or harvest, yet God feeds them. Lilies (likely wild anemones) were common wildflowers that bloomed briefly and were then used as fuel for ovens. Solomon's wealth and splendor were legendary (1 Kings 10).",
+        theme: "Worry reveals misplaced trust. God knows our needs and will provide when we prioritize His kingdom.",
+        prayer: "Confess any areas of worry or anxiety to God. Ask Him to help you trust His provision and seek His kingdom first.",
+        questions: [
+          "What does Jesus teach about worry and anxiety? How does worry reflect a lack of trust in God?",
+          "How do the examples of birds and lilies illustrate God's care for us?",
+          "What does it mean to 'seek ye first the kingdom of God'? How does this reorder our priorities?"
+        ],
+        deeper: "The Greek word 'merimnao' (worry/anxious) means to be divided or distracted. Worry divides our focus and reveals we're trusting ourselves rather than God. Jesus uses a 'lesser to greater' argument: if God cares for birds and flowers (which are temporary), how much more will He care for you (made in His image and eternal)? 'Seek first' doesn't mean ignore practical needs, but prioritize God's kingdom and righteousness—then trust Him with the results. 'Sufficient unto the day is the evil thereof' means each day has enough challenges without borrowing tomorrow's troubles."
+      },
+      {
+        day: 18,
+        reference: "Matthew 7:1-12 (KJV)",
+        verse: "Therefore all things whatsoever ye would that men should do to you, do ye even so to them: for this is the law and the prophets.",
+        youversion: "https://www.bible.com/bible/1/MAT.7.1-12.KJV",
+        context: "The 'mote' (speck) and 'beam' (log) create a humorous, exaggerated image—someone with a log in their eye trying to remove a speck from another's eye. 'Dogs' and 'swine' were unclean animals in Jewish culture, representing those who reject and trample on sacred things. The Golden Rule appears in various forms across cultures, but Jesus states it positively.",
+        theme: "We must examine ourselves before judging others, and treat others as we want to be treated—this summarizes God's Law.",
+        prayer: "Ask God to help you see your own faults clearly. Pray for wisdom to discern truth while showing grace to others.",
+        questions: [
+          "What is the difference between judging others and discerning right from wrong?",
+          "How does the image of the mote and the beam challenge our tendency toward hypocrisy?",
+          "How does the Golden Rule summarize the Law and the Prophets? What does this reveal about God's heart?"
+        ],
+        deeper: "Jesus isn't forbidding all judgment (He commands discernment in v. 6 and 15-20), but hypocritical, self-righteous judgment. The Greek word 'krino' can mean condemn or evaluate—context determines which. We must judge our own sin first (remove the beam) before helping others with theirs (remove the speck). The Golden Rule isn't just 'don't harm others' (negative) but 'actively do good to others' (positive). This proactive love fulfills the Law's intent—love God and love others (22:37-40). Treating others as you want to be treated requires empathy, humility, and selflessness."
+      },
+      {
+        day: 19,
+        reference: "Matthew 7:13-29 (KJV)",
+        verse: "Therefore whosoever heareth these sayings of mine, and doeth them, I will liken him unto a wise man, which built his house upon a rock.",
+        youversion: "https://www.bible.com/bible/1/MAT.7.13-29.KJV",
+        context: "The narrow gate and wide gate likely refer to actual city gates—narrow gates required single-file entry and were easier to defend. In Palestine, wise builders dug down to bedrock before building, while foolish builders built on sand for convenience. The rainy season brought flash floods that tested every foundation.",
+        theme: "True discipleship requires choosing the difficult path, bearing good fruit, and obeying Jesus' words—not just hearing them.",
+        prayer: "Ask God to help you choose the narrow way even when it's difficult. Pray for the strength to obey His Word, not just hear it.",
+        questions: [
+          "What does Jesus mean by the strait gate and the wide gate? What makes the narrow way difficult?",
+          "How can we recognize false prophets? What does 'by their fruits ye shall know them' mean?",
+          "What is the difference between hearing Jesus' words and doing them? How does obedience demonstrate true faith?"
+        ],
+        deeper: "The 'narrow gate' isn't about earning salvation through works, but about the exclusive way of salvation through Christ alone (John 14:6). It's narrow because it requires repentance, self-denial, and following Jesus—most people reject this. False prophets look like sheep but are 'ravening wolves'—they appear religious but lead people away from truth. 'Fruit' refers to character and conduct, not just miracles or success. The two builders hear the same words—the difference is obedience. The rock represents Jesus and His words; the sand represents any other foundation. When storms come (trials, judgment), only obedience to Christ will stand."
+      },
+      {
+        day: 20,
+        reference: "Matthew 8:1-17 (KJV)",
+        verse: "Lord, if thou wilt, thou canst make me clean.",
+        youversion: "https://www.bible.com/bible/1/MAT.8.1-17.KJV",
+        context: "Lepers were considered ceremonially unclean and had to live outside the community, shouting 'Unclean!' if anyone approached (Leviticus 13-14). Touching a leper made you unclean. Centurions were Roman officers commanding 100 soldiers—this centurion's faith is remarkable given the Jewish-Roman tension. Peter's house in Capernaum became Jesus' ministry base.",
+        theme: "Jesus has authority over disease, demonstrating His power and willingness to heal both Jews and Gentiles.",
+        prayer: "Thank Jesus for His compassion and power to heal. Pray for faith like the centurion's—trusting Jesus' word alone.",
+        questions: [
+          "What does Jesus' willingness to touch the leper reveal about His compassion and power?",
+          "How does the centurion's faith challenge our understanding of authority and belief?",
+          "How do Jesus' healings fulfill Isaiah's prophecy and demonstrate the arrival of God's kingdom?"
+        ],
+        deeper: "Jesus touching the leper was shocking—He could have healed with a word, but He chose to touch the untouchable, showing compassion and breaking social barriers. The centurion understands authority: just as his soldiers obey his word, sickness and demons must obey Jesus' word. His faith surpasses that of Israel, foreshadowing Gentile inclusion in God's kingdom. Matthew quotes Isaiah 53:4 to show Jesus is the suffering servant who bears our sicknesses—His healing ministry points to His ultimate healing through the cross."
+      },
+      {
+        day: 21,
+        reference: "Matthew 8:18-34 (KJV)",
+        verse: "The foxes have holes, and the birds of the air have nests; but the Son of man hath not where to lay his head.",
+        youversion: "https://www.bible.com/bible/1/MAT.8.18-34.KJV",
+        context: "The Sea of Galilee is 700 feet below sea level, surrounded by hills. Sudden violent storms are common when cool air from the hills meets warm air over the water. The region of the Gergesenes (or Gadarenes) was Gentile territory, explaining the presence of pigs (unclean animals for Jews). Tombs were often caves where demoniacs lived.",
+        theme: "Following Jesus requires sacrifice. He has authority over nature and demons, proving He is Lord of all creation.",
+        prayer: "Ask God to help you count the cost of following Jesus. Thank Him that no storm or spiritual force is beyond His control.",
+        questions: [
+          "What does Jesus' response about having nowhere to lay His head teach about the cost of discipleship?",
+          "How does Jesus' calming of the storm reveal His identity and authority?",
+          "What does the demons' recognition of Jesus as 'Son of God' tell us about spiritual realities?"
+        ],
+        deeper: "'Son of man' is Jesus' favorite self-designation, from Daniel 7:13-14, referring to the Messiah who receives an eternal kingdom. Jesus warns that following Him means leaving comfort and security. The disciples' question 'What manner of man is this?' echoes Psalm 107:23-30, where only God calms storms—they're beginning to realize Jesus is divine. The demons recognize Jesus immediately and know their ultimate fate ('torment us before the time'). Their destruction of the pigs demonstrates their destructive nature and Jesus' power over the spiritual realm."
+      },
+      {
+        day: 22,
+        reference: "Matthew 9:1-17 (KJV)",
+        verse: "But that ye may know that the Son of man hath power on earth to forgive sins.",
+        youversion: "https://www.bible.com/bible/1/MAT.9.1-17.KJV",
+        context: "Capernaum was Jesus' adopted hometown. Paralysis was sometimes seen as divine punishment for sin (though Jesus rejects this simplistic view in John 9:3). Tax collectors worked for Rome, collecting taxes from fellow Jews—they were hated as traitors and sinners. Fasting was a sign of mourning or repentance; feasting was for celebration.",
+        theme: "Jesus has authority to forgive sins and calls sinners to repentance. He brings new wine that requires new wineskins.",
+        prayer: "Thank Jesus for forgiving your sins. Ask Him to help you see others as He does—with compassion and a call to repentance.",
+        questions: [
+          "Why do the scribes consider Jesus' claim to forgive sins blasphemous? What does this reveal about Jesus' identity?",
+          "What does Jesus mean when He says, 'I am not come to call the righteous, but sinners to repentance'?",
+          "How does the parable of new wine in old bottles illustrate the newness of Jesus' message?"
+        ],
+        deeper: "Only God can forgive sins (Isaiah 43:25), so Jesus' claim is either blasphemy or proof of His deity. He proves His authority to forgive (invisible) by healing (visible). Jesus' association with 'sinners' scandalized the Pharisees, but He came to seek and save the lost (Luke 19:10). The 'righteous' He didn't come to call are those who think they don't need a savior. The new wine/wineskin parable shows Jesus' message can't be contained in old religious structures—the gospel requires new hearts, not just reformed behavior. New wine expands as it ferments, bursting old, brittle wineskins."
+      },
+      {
+        day: 23,
+        reference: "Matthew 9:18-38 (KJV)",
+        verse: "The harvest truly is plenteous, but the labourers are few; Pray ye therefore the Lord of the harvest, that he will send forth labourers into his harvest.",
+        youversion: "https://www.bible.com/bible/1/MAT.9.18-38.KJV",
+        context: "A synagogue ruler was a respected community leader responsible for worship services. Touching a dead body made you ceremonially unclean for seven days. The woman's bleeding made her perpetually unclean, unable to worship or have normal social contact. Flute players were hired mourners at funerals. Sheep without a shepherd was an Old Testament image for Israel without godly leadership (Numbers 27:17, 1 Kings 22:17).",
+        theme: "Jesus has power over disease and death. He has compassion for the lost and calls workers to join His harvest.",
+        prayer: "Thank Jesus for His healing power. Ask God to give you His compassion for the lost and to send workers into His harvest field.",
+        questions: [
+          "What does the woman's faith in touching Jesus' garment teach us about approaching Jesus?",
+          "How does Jesus' compassion for the multitudes shape His ministry? What does it mean that they were 'as sheep having no shepherd'?",
+          "What is our role in the harvest? How should we respond to Jesus' call for laborers?"
+        ],
+        deeper: "The woman's 12-year bleeding represents chronic suffering and social isolation. Her faith ('If I may but touch his garment') shows she believes Jesus' power extends even to His clothes. The girl's death and resurrection foreshadow Jesus' own death and resurrection. Jesus calls her death 'sleep'—for believers, death is temporary. The harvest metaphor shows the urgency of evangelism—the fields are ready, but workers are few. We must pray for laborers (including ourselves) and recognize that people are spiritually lost and harassed without the Good Shepherd."
+      },
+      {
+        day: 24,
+        reference: "Matthew 10:1-23 (KJV)",
+        verse: "Freely ye have received, freely give.",
+        youversion: "https://www.bible.com/bible/1/MAT.10.1-23.KJV",
+        context: "This is Jesus' missionary discourse, preparing the twelve for their first mission. The twelve apostles ('sent ones') represent the twelve tribes of Israel—Jesus is reconstituting God's people. The instructions for travel (no money, extra clothes, or staff) show radical dependence on God's provision. Shaking dust off feet was a Jewish practice when leaving Gentile territory, symbolizing judgment.",
+        theme: "Jesus sends His disciples with His authority to proclaim the kingdom, warning them of persecution but promising God's presence.",
+        prayer: "Ask God for boldness to share the gospel. Pray for persecuted Christians around the world who face opposition for their faith.",
+        questions: [
+          "What authority and instructions does Jesus give the twelve disciples? How does this prepare them for ministry?",
+          "What does Jesus mean by 'freely ye have received, freely give'? How should this shape our approach to ministry?",
+          "How does Jesus prepare His disciples for persecution? What comfort and warning does He provide?"
+        ],
+        deeper: "Jesus gives the disciples His own authority ('exousia') over unclean spirits and sickness—they're His representatives. 'Freely ye have received, freely give' means grace can't be earned or sold; we minister from overflow, not for profit. The mission is urgent ('the kingdom of heaven is at hand') and focused on 'the lost sheep of the house of Israel' (this mission is specifically to Jews; the Gentile mission comes later). Persecution is inevitable for those who represent Christ—they'll face the same rejection He faces. But God's care extends even to sparrows, so disciples need not fear."
+      },
+      {
+        day: 25,
+        reference: "Matthew 10:24-42 (KJV)",
+        verse: "Are not two sparrows sold for a farthing? and one of them shall not fall on the ground without your Father.",
+        youversion: "https://www.bible.com/bible/1/MAT.10.24-42.KJV",
+        context: "A farthing (assarion) was a small Roman copper coin worth about 1/16 of a denarius (a day's wage). Sparrows were the cheapest birds sold for food—two for a farthing, yet God cares about each one. 'Confessing Christ' in the first century often meant social ostracism, loss of employment, or death. Family division over Christ was common as some believed and others rejected Him.",
+        theme: "Fear God, not man. Confessing Christ may cost us earthly relationships, but brings eternal reward.",
+        prayer: "Ask God for courage to confess Christ publicly. Pray for those who face family rejection because of their faith in Jesus.",
+        questions: [
+          "What does Jesus teach about fear? How does God's care for sparrows illustrate His care for us?",
+          "What does it mean to confess Jesus before men? What are the consequences of denying Him?",
+          "How does Jesus redefine family loyalty and priorities in following Him?"
+        ],
+        deeper: "Jesus addresses three fears: fear of persecution (vv. 26-31), fear of rejection (vv. 32-33), and fear of family division (vv. 34-39). God's care for sparrows (worthless by human standards) shows His intimate knowledge and care for His children—even our hairs are numbered. 'Confessing' Christ means publicly acknowledging Him as Lord, not just private belief. Jesus doesn't bring peace by compromising truth, but division as people respond differently to Him. 'Taking up the cross' meant walking to your execution—Jesus calls for total surrender, even unto death. Losing your life for Christ means finding true life."
+      },
+      {
+        day: 26,
+        reference: "Matthew 11:1-19 (KJV)",
+        verse: "Art thou he that should come, or do we look for another?",
+        youversion: "https://www.bible.com/bible/1/MAT.11.1-19.KJV",
+        context: "John the Baptist is now imprisoned by Herod Antipas (see 14:3-4). John expected the Messiah to bring immediate judgment (3:10-12), but Jesus' ministry focused on mercy and healing. This created doubt for John. The 'kingdom of heaven suffereth violence' is a difficult phrase, possibly referring to the kingdom being forcefully advanced or violently opposed.",
+        theme: "Jesus is the Messiah, but He doesn't fit human expectations. He brings blessing to those who don't stumble over Him.",
+        prayer: "Thank God that Jesus came to heal and save. Ask Him to help you trust His timing and methods, even when they don't match your expectations.",
+        questions: [
+          "Why does John the Baptist question whether Jesus is the Messiah? How does Jesus respond?",
+          "What does Jesus mean when He says the kingdom of heaven suffereth violence?",
+          "How do the religious leaders' rejection of both John and Jesus reveal their hardness of heart?"
+        ],
+        deeper: "John's question isn't loss of faith but confusion—Jesus' ministry doesn't match his expectations of judgment. Jesus points to Isaiah 35:5-6 and 61:1, showing He fulfills Messianic prophecy through healing and preaching good news. 'Blessed is he, whosoever shall not be offended in me' addresses those who stumble over Jesus not meeting their expectations. John is the greatest prophet because he introduced the Messiah, yet the least in the kingdom is greater because they experience the fullness of Christ's work. The religious leaders rejected both John (too ascetic) and Jesus (too social)—proving they'll reject God's messengers no matter what."
+      },
+      {
+        day: 27,
+        reference: "Matthew 11:20-30 (KJV)",
+        verse: "Take my yoke upon you, and learn of me; for I am meek and lowly in heart: and ye shall find rest unto your souls.",
+        youversion: "https://www.bible.com/bible/1/MAT.11.20-30.KJV",
+        context: "Chorazin, Bethsaida, and Capernaum were Galilean cities where Jesus performed most of His miracles. Tyre and Sidon were pagan Phoenician cities known for wickedness. Sodom was destroyed by God for its sin (Genesis 19). Jesus' 'woes' pronounce judgment on cities that witnessed His works but didn't repent. A yoke was a wooden frame joining two animals (usually oxen) for plowing.",
+        theme: "Privilege brings responsibility. Those who reject Jesus despite witnessing His works face greater judgment. But Jesus offers rest to the weary.",
+        prayer: "Thank Jesus for revealing the Father to you. Ask Him to help you take His yoke and find rest in Him.",
+        questions: [
+          "Why does Jesus upbraid the cities where He performed miracles? What does this teach about accountability?",
+          "What does it mean that God has hid these things from the wise and revealed them unto babes?",
+          "How is Jesus' yoke easy and His burden light? What rest does He offer?"
+        ],
+        deeper: "Greater revelation brings greater responsibility—these cities saw Jesus' miracles but didn't repent, so their judgment will be worse than pagan cities. God reveals truth to the humble ('babes') while hiding it from the proud ('wise and prudent'). This isn't arbitrary but reflects the heart's receptivity. Jesus' invitation to the 'weary and heavy laden' addresses those burdened by sin, legalism, or life's struggles. His 'yoke' (discipleship) is easy not because it's effortless, but because He carries it with us and transforms our hearts. The Pharisees' yoke was heavy (23:4); Jesus' yoke brings rest because it's powered by grace, not human effort."
+      },
+      {
+        day: 28,
+        reference: "Matthew 12:1-21 (KJV)",
+        verse: "For the Son of man is Lord even of the sabbath day.",
+        youversion: "https://www.bible.com/bible/1/MAT.12.1-21.KJV",
+        context: "The Pharisees had created 39 categories of work forbidden on the Sabbath, including harvesting (plucking grain) and healing (unless life-threatening). David eating the showbread (1 Samuel 21:1-6) was technically illegal but justified by necessity. Priests worked on the Sabbath offering sacrifices (Numbers 28:9-10). The Pharisees valued ritual over mercy.",
+        theme: "Jesus is Lord of the Sabbath. God desires mercy, not sacrifice. Jesus fulfills Isaiah's prophecy as the gentle servant.",
+        prayer: "Thank Jesus for being Lord of the Sabbath and giving us true rest. Ask God to help you value mercy over ritual.",
+        questions: [
+          "How does Jesus redefine the Sabbath? What does 'I will have mercy, and not sacrifice' mean?",
+          "Why do the Pharisees plot to destroy Jesus after He heals on the Sabbath?",
+          "How does Jesus fulfill Isaiah's prophecy of the servant who brings judgment unto the Gentiles?"
+        ],
+        deeper: "Jesus uses three arguments: (1) David's example shows human need supersedes ceremonial law, (2) priests 'work' on the Sabbath, proving some work is acceptable, (3) 'one greater than the temple' (Jesus Himself) has authority over Sabbath regulations. 'I will have mercy, and not sacrifice' (Hosea 6:6) means God values compassion over ritual. The Sabbath was made for man's benefit (Mark 2:27), not as a burden. Jesus' healing on the Sabbath shows the kingdom brings restoration, not restriction. Isaiah 42:1-4 describes the Messiah as gentle ('bruised reed... smoking flax'), bringing justice to Gentiles—Jesus fulfills this perfectly."
+      },
+      {
+        day: 29,
+        reference: "Matthew 12:22-37 (KJV)",
+        verse: "He that is not with me is against me; and he that gathereth not with me scattereth abroad.",
+        youversion: "https://www.bible.com/bible/1/MAT.12.22-37.KJV",
+        context: "Beelzebub (or Beelzebul) means 'lord of the flies' or 'lord of the dwelling,' a name for Satan. The Pharisees attribute Jesus' exorcisms to demonic power because they can't deny the miracles. Blasphemy against the Holy Spirit is the unforgivable sin—a debated topic throughout church history. Words reveal the heart's condition.",
+        theme: "Jesus casts out demons by God's Spirit, proving the kingdom has come. Blasphemy against the Spirit is unforgivable.",
+        prayer: "Thank God for the Holy Spirit's work in your life. Ask Him to guard your heart and tongue from evil speech.",
+        questions: [
+          "What is the blasphemy against the Holy Ghost? Why is it unforgivable?",
+          "How does Jesus respond to the accusation that He casts out devils by Beelzebub?",
+          "What does Jesus teach about the importance of our words? How do our words reveal our hearts?"
+        ],
+        deeper: "Jesus' logic: if Satan casts out Satan, his kingdom is divided and will fall. But if Jesus casts out demons by God's Spirit, 'the kingdom of God is come unto you'—His miracles prove the kingdom has arrived. Blasphemy against the Holy Spirit likely means persistent, willful rejection of the Spirit's testimony about Jesus, attributing God's work to Satan. It's unforgivable not because God won't forgive, but because the person has hardened their heart beyond repentance. Words matter because they reveal what's in the heart ('out of the abundance of the heart the mouth speaketh'). We'll give account for 'every idle word'—careless, worthless speech reveals a careless heart."
+      },
+      {
+        day: 30,
+        reference: "Matthew 12:38-50 (KJV)",
+        verse: "For whosoever shall do the will of my Father which is in heaven, the same is my brother, and sister, and mother.",
+        youversion: "https://www.bible.com/bible/1/MAT.12.38-50.KJV",
+        context: "The scribes and Pharisees constantly demanded signs despite witnessing Jesus' miracles. Jonah was in the fish's belly three days (Jonah 1:17), prefiguring Jesus' death and resurrection. The Queen of Sheba traveled far to hear Solomon's wisdom (1 Kings 10). Nineveh repented at Jonah's preaching (Jonah 3). An unclean spirit returning with seven others illustrates incomplete reformation.",
+        theme: "Jesus is greater than Jonah and Solomon. True family is defined by obedience to God, not just blood relations.",
+        prayer: "Ask God to help you do His will faithfully. Pray for a heart that truly repents and is filled with His Spirit.",
+        questions: [
+          "Why does Jesus refuse to give the scribes and Pharisees a sign? What is the sign of Jonas?",
+          "What does the parable of the unclean spirit returning teach about spiritual transformation?",
+          "How does Jesus redefine family? What does it mean to do the will of the Father?"
+        ],
+        deeper: "Jesus calls them an 'evil and adulterous generation' (spiritually unfaithful to God). The only sign they'll receive is the sign of Jonah—Jesus' resurrection after three days in the tomb. Gentiles (Nineveh, Queen of Sheba) responded to lesser messengers (Jonah, Solomon), but Israel rejects one greater than both. The unclean spirit parable warns against mere moral reformation without true regeneration—cleaning up your life without being filled with God's Spirit leaves you vulnerable to worse spiritual bondage. Jesus' true family isn't defined by physical descent but by spiritual obedience—those who do God's will are His brothers, sisters, and mother."
+      }
+    ];
+
+    // LocalStorage functions
+    function getCompletedDays() {
+      const stored = localStorage.getItem('matthewJanuary_completed');
+      return stored ? JSON.parse(stored) : [];
+    }
+
+    function saveCompletedDay(dayNumber, notes) {
+      const completed = getCompletedDays();
+      const existing = completed.find(d => d.day === dayNumber);
+
+      if (existing) {
+        existing.notes = notes;
+        existing.date = new Date().toISOString();
+      } else {
+        completed.push({
+          day: dayNumber,
+          notes: notes,
+          date: new Date().toISOString()
+        });
+      }
+
+      localStorage.setItem('matthewJanuary_completed', JSON.stringify(completed));
+    }
+
+    function getNotes(dayNumber) {
+      const completed = getCompletedDays();
+      const day = completed.find(d => d.day === dayNumber);
+      return day ? day.notes : '';
+    }
+
+    function isDayCompleted(dayNumber) {
+      const completed = getCompletedDays();
+      return completed.some(d => d.day === dayNumber);
+    }
+
+    let currentDay = null;
+
+    function renderDaysGrid() {
+      const grid = document.getElementById('days-grid');
+      grid.innerHTML = '';
+
+      matthewStudy.forEach(study => {
+        const card = document.createElement('div');
+        const isCompleted = isDayCompleted(study.day);
+
+        card.className = `day-card ${isCompleted ? 'completed' : ''}`;
+
+        const dayNumberDiv = document.createElement('div');
+        dayNumberDiv.className = 'day-number';
+        dayNumberDiv.innerHTML = `
+          Day ${study.day}
+          ${isCompleted ? '<span class="check-icon">✓</span>' : ''}
+        `;
+
+        const verseRef = document.createElement('div');
+        verseRef.className = 'verse-reference';
+        verseRef.textContent = study.reference;
+
+        const versePreview = document.createElement('div');
+        versePreview.className = 'verse-preview';
+        versePreview.textContent = study.verse;
+
+        card.appendChild(dayNumberDiv);
+        card.appendChild(verseRef);
+        card.appendChild(versePreview);
+
+        card.addEventListener('click', () => openStudyModal(study));
+
+        grid.appendChild(card);
+      });
+    }
+
+    function updateProgress() {
+      const completed = getCompletedDays().length;
+      const percentage = Math.round((completed / 30) * 100);
+
+      const progressFill = document.getElementById('progress-fill');
+      const progressText = document.getElementById('progress-text');
+
+      progressFill.style.width = `${percentage}%`;
+      progressFill.textContent = `${percentage}%`;
+      progressText.textContent = `${completed} of 30 days completed`;
+    }
+
+    function openStudyModal(study) {
+      currentDay = study;
+      const modal = document.getElementById('study-modal');
+
+      document.getElementById('modal-day-number').textContent = `Day ${study.day}`;
+      document.getElementById('modal-verse-ref').textContent = study.reference;
+      document.getElementById('verse-text').textContent = study.verse;
+      document.getElementById('youversion-link').href = study.youversion;
+      document.getElementById('context-text').textContent = study.context;
+      document.getElementById('theme-text').textContent = study.theme;
+      document.getElementById('prayer-text').textContent = study.prayer;
+      document.getElementById('deeper-text').textContent = study.deeper;
+
+      const questionsList = document.getElementById('questions-list');
+      questionsList.innerHTML = '';
+      study.questions.forEach(question => {
+        const questionDiv = document.createElement('div');
+        questionDiv.className = 'question';
+        questionDiv.textContent = question;
+        questionsList.appendChild(questionDiv);
+      });
+
+      const notesArea = document.getElementById('notes-area');
+      notesArea.value = getNotes(study.day);
+
+      const completeBtn = document.getElementById('complete-btn');
+      if (isDayCompleted(study.day)) {
+        completeBtn.textContent = 'Completed ✓';
+        completeBtn.disabled = true;
+      } else {
+        completeBtn.textContent = 'Mark as Complete';
+        completeBtn.disabled = false;
+      }
+
+      modal.classList.add('active');
+    }
+
+    function closeModal() {
+      document.getElementById('study-modal').classList.remove('active');
+      currentDay = null;
+    }
+
+    function markComplete() {
+      if (!currentDay) return;
+
+      const notes = document.getElementById('notes-area').value;
+      saveCompletedDay(currentDay.day, notes);
+
+      const completeBtn = document.getElementById('complete-btn');
+      completeBtn.textContent = 'Completed ✓';
+      completeBtn.disabled = true;
+
+      renderDaysGrid();
+      updateProgress();
+    }
+
+    function copyFullJournal() {
+      if (!currentDay) return;
+
+      const notes = document.getElementById('notes-area').value;
+      const study = matthewStudy.find(s => s.day === currentDay.day);
+
+      let journalText = `DAY ${study.day} - ${study.reference}\n\n`;
+      journalText += `SCRIPTURE:\n${study.verse}\n\n`;
+      journalText += `HISTORICAL CONTEXT:\n${study.context}\n\n`;
+      journalText += `KEY THEME:\n${study.theme}\n\n`;
+      journalText += `PRAYER PROMPT:\n${study.prayer}\n\n`;
+      journalText += `REFLECTION QUESTIONS:\n`;
+      study.questions.forEach((q, i) => {
+        journalText += `${i + 1}. ${q}\n`;
+      });
+      journalText += `\nDIGGING DEEPER:\n${study.deeper}\n\n`;
+      journalText += `MY NOTES:\n${notes || '(No notes yet)'}`;
+
+      navigator.clipboard.writeText(journalText).then(() => {
+        const copyBtn = document.getElementById('copy-journal-btn');
+        const originalText = copyBtn.textContent;
+        copyBtn.textContent = 'Copied! ✓';
+        copyBtn.style.background = '#4CAF50';
+        setTimeout(() => {
+          copyBtn.textContent = originalText;
+          copyBtn.style.background = '';
+        }, 2000);
+      }).catch(() => {
+        const textarea = document.createElement('textarea');
+        textarea.value = journalText;
+        document.body.appendChild(textarea);
+        textarea.select();
+        try {
+          document.execCommand('copy');
+          const copyBtn = document.getElementById('copy-journal-btn');
+          const originalText = copyBtn.textContent;
+          copyBtn.textContent = 'Copied! ✓';
+          copyBtn.style.background = '#4CAF50';
+          setTimeout(() => {
+            copyBtn.textContent = originalText;
+            copyBtn.style.background = '';
+          }, 2000);
+        } catch (err) {
+          const errorMsg = document.createElement('div');
+          errorMsg.textContent = 'Failed to copy. Please try again.';
+          errorMsg.style.color = '#ff6b6b';
+          errorMsg.style.marginTop = '10px';
+          document.querySelector('.action-buttons').appendChild(errorMsg);
+          setTimeout(() => errorMsg.remove(), 3000);
+        }
+        document.body.removeChild(textarea);
+      });
+    }
+
+    document.getElementById('close-modal').addEventListener('click', closeModal);
+    document.getElementById('cancel-btn').addEventListener('click', closeModal);
+    document.getElementById('complete-btn').addEventListener('click', markComplete);
+    document.getElementById('copy-journal-btn').addEventListener('click', copyFullJournal);
+
+    document.getElementById('study-modal').addEventListener('click', (e) => {
+      if (e.target.id === 'study-modal') {
+        closeModal();
+      }
+    });
+
+    // Initialize
+    renderDaysGrid();
+    updateProgress();
+  </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'99d2afc2921b9e5c',t:'MTc2MjkxNTQ1Ni4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
