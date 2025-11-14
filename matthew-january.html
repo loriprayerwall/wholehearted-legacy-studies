@@ -8,7 +8,7 @@
 /* ---------------------------------------------------------
 WHOLEHEARTED LEGACY — MATTHEW STUDY (PART 1: JANUARY)
 BRONZE THEME • LORI'S EXACT LAYOUT PRESERVED
-DAYS 1–30 • MATTHEW 1–13 ONLY • EVEN VERSE SPLITS
+DAYS 1–31 • MATTHEW 1–13 ONLY • EVEN VERSE SPLITS + Reflection
 ----------------------------------------------------------*/
 
 /* Page Background */
@@ -27,9 +27,7 @@ body {
   padding: 25px 20px;
 }
 
-/* -----------------------------------------
-HEADER CARD — EXACT ORIGINAL STYLE
-------------------------------------------*/
+/* HEADER CARD — EXACT ORIGINAL STYLE */
 .header-card {
   background: #fdfcf9;
   border-radius: 14px;
@@ -72,9 +70,7 @@ HEADER CARD — EXACT ORIGINAL STYLE
   color: #5a4332;
 }
 
-/* ------------------------------------------
-DAY CARD GRID (ONE COLUMN — OPTION B)
--------------------------------------------*/
+/* DAY CARD GRID (ONE COLUMN — OPTION B) */
 .day-grid {
   display: grid;
   grid-template-columns: 1fr;
@@ -109,9 +105,7 @@ DAY CARD GRID (ONE COLUMN — OPTION B)
   margin-bottom: 10px;
 }
 
-/* ----------------------------------------------------------
-MODAL — EXACT STYLE FROM YOUR SCREENSHOT
------------------------------------------------------------*/
+/* MODAL — EXACT STYLE */
 .modal-overlay {
   display: none;
   position: fixed;
@@ -119,7 +113,7 @@ MODAL — EXACT STYLE FROM YOUR SCREENSHOT
   background: rgba(0,0,0,0.55);
   backdrop-filter: blur(4px);
   z-index: 999;
-  overflow-y: auto;   /* Mobile: allow scrolling */
+  overflow-y: auto; /* Mobile: allow scrolling */
 }
 .modal-box {
   background: #fdfcf9;
@@ -130,9 +124,8 @@ MODAL — EXACT STYLE FROM YOUR SCREENSHOT
   box-shadow: 0 8px 30px rgba(0,0,0,0.35);
   position: relative;
   animation: fadeIn 0.35s ease-out;
-
-  max-height: 80vh;   /* Mobile: keep within viewport */
-  overflow-y: auto;   /* Mobile: scroll inside modal */
+  max-height: 80vh; /* Mobile: keep within viewport */
+  overflow-y: auto; /* Mobile: scroll inside modal */
 }
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(15px); }
@@ -223,12 +216,11 @@ MODAL — EXACT STYLE FROM YOUR SCREENSHOT
   <!-- HEADER CARD -->
   <div class="header-card">
     <div class="header-title">Matthew Study — January</div>
-    <div class="header-sub">Matthew Chapters 1–13 • 30 Days • KJV</div>
-    <!-- Progress -->
+    <div class="header-sub">Matthew Chapters 1–13 • 31 Days • KJV</div>
     <div class="progress-wrapper">
       <div class="progress-bar" id="progressBar"></div>
     </div>
-    <div class="progress-text" id="progressText">0 of 30 days completed</div>
+    <div class="progress-text" id="progressText">0 of 31 days completed</div>
   </div>
 
   <!-- DAY GRID -->
@@ -413,6 +405,12 @@ MODAL — EXACT STYLE FROM YOUR SCREENSHOT
       <div class="day-ref">Matthew 13:53–58 (KJV)</div>
       <div>Jesus rejected at Nazareth</div>
     </div>
+    <!-- DAY 31 (Reflection & Review) -->
+    <div class="day-card" onclick="openModal(31)">
+      <div class="day-label">Day 31</div>
+      <div class="day-ref">Reflection & Review</div>
+      <div>Pause, reflect, and prepare for February</div>
+    </div>
   </div>
 </div>
 
@@ -426,7 +424,7 @@ MODAL — EXACT STYLE FROM YOUR SCREENSHOT
 
 <script>
 /* ---------------------------------------------------------
-MATTHEW JANUARY STUDY — DAYS 1–30 (MATTHEW 1–13)
+MATTHEW JANUARY STUDY — DAYS 1–31 (MATTHEW 1–13 + Reflection)
 EVEN VERSE SPLITS • KJV • FULL DEVOTIONAL DATA
 ----------------------------------------------------------*/
 
@@ -460,7 +458,21 @@ const studyDays = {
 27:{title:"Day 27 — Matthew 13:1–23 (KJV)",link:"https://www.bible.com/bible/1/MAT.13.KJV",verse:"“He that hath ears to hear, let him hear.” — Matthew 13:9",context:"Jesus teaches the Parable of the Sower.",theme:"Fruitfulness requires a receptive heart.",prayer:"Soften my heart, Lord, to Your Word.",reflection:["Which soil describes your heart today?","What chokes growth?","How can you nurture good soil?"],deeper:"The hundredfold harvest represents supernatural growth."},
 28:{title:"Day 28 — Matthew 13:24–43 (KJV)",link:"https://www.bible.com/bible/1/MAT.13.KJV",verse:"“The field is the world…” — Matthew 13:38",context:"Parables of wheat & tares, mustard seed, and leaven.",theme:"God’s kingdom grows quietly but powerfully.",prayer:"Help me trust Your timing, Lord.",reflection:["Why allow wheat and weeds to grow together?","What does the mustard seed symbolize?","How is the kingdom growing in your life?"],deeper:"The harvest points to God’s patient and perfect judgment."},
 29:{title:"Day 29 — Matthew 13:44–52 (KJV)",link:"https://www.bible.com/bible/1/MAT.13.KJV",verse:"“Like treasure hid in a field…” — Matthew 13:44",context:"Parables of treasure, pearl, and the net.",theme:"The kingdom is worth everything.",prayer:"Lord, help me treasure You above all.",reflection:["What does the treasure represent to you?","How valuable is the kingdom?","What does the net teach about final judgment?"],deeper:"Joy fuels sacrifice—kingdom gain far exceeds loss."},
-30:{title:"Day 30 — Matthew 13:53–58 (KJV)",link:"https://www.bible.com/bible/1/MAT.13.KJV",verse:"“A prophet is not without honour…” — Matthew 13:57",context:"Jesus is rejected in His hometown.",theme:"Familiarity can blind us to God’s work.",prayer:"Jesus, give me eyes to see You clearly.",reflection:["Why did Nazareth reject Jesus?","Where might familiarity dull your faith?","How can you honor Jesus today?"],deeper:"Unbelief limits what we receive from God—not His power, but our openness."}
+30:{title:"Day 30 — Matthew 13:53–58 (KJV)",link:"https://www.bible.com/bible/1/MAT.13.KJV",verse:"“A prophet is not without honour…” — Matthew 13:57",context:"Jesus is rejected in His hometown.",theme:"Familiarity can blind us to God’s work.",prayer:"Jesus, give me eyes to see You clearly.",reflection:["Why did Nazareth reject Jesus?","Where might familiarity dull your faith?","How can you honor Jesus today?"],deeper:"Unbelief limits what we receive from God—not His power, but our openness."},
+31:{
+  title:"Day 31 — Reflection & Review",
+  link:"https://www.bible.com/bible/1/MAT.1.KJV",
+  verse:"“Blessed are they that hear the word of God, and keep it.” — Luke 11:28",
+  context:"January’s study walked through Matthew 1–13, showing Jesus’ lineage, baptism, teaching, miracles, and rejection at Nazareth.",
+  theme:"Reflection deepens discipleship — we grow by remembering and applying what we’ve learned.",
+  prayer:"Lord, thank You for the journey through Matthew so far. Help me carry these truths into daily life.",
+  reflection:[
+    "Which day’s passage impacted you most this month?",
+    "Where have you seen God’s faithfulness in your own story?",
+    "How will you prepare your heart for February’s study (Matthew 14–28)?"
+  ],
+  deeper:"This bonus day is a chance to pause, journal, and pray over what God has shown you before continuing."
+}
 }; // END STUDY DAYS OBJECT
 
 let currentDay = null;
@@ -508,9 +520,7 @@ function openModal(day) {
 
   // Load notes if saved earlier
   const saved = localStorage.getItem(`matthewNotes_${day}`);
-  if (saved) {
-    document.getElementById("notesBox").value = saved;
-  }
+  if (saved) document.getElementById("notesBox").value = saved;
 
   // Show modal
   document.getElementById("modalOverlay").style.display = "block";
@@ -531,17 +541,17 @@ function saveNotes() {
   alert("Notes saved!");
 }
 
-/* Progress Tracking */
+/* Progress Tracking — updated to 31 days */
 function updateProgress() {
   let completed = 0;
-  for (let i = 1; i <= 30; i++) {
+  for (let i = 1; i <= 31; i++) {
     if (localStorage.getItem(`matthewNotes_${i}`)) {
       completed++;
     }
   }
-  const percent = Math.round((completed / 30) * 100);
+  const percent = Math.round((completed / 31) * 100);
   document.getElementById("progressBar").style.width = percent + "%";
-  document.getElementById("progressText").innerText = `${completed} of 30 days completed`;
+  document.getElementById("progressText").innerText = `${completed} of 31 days completed`;
 }
 
 /* Initialize progress on page load */
