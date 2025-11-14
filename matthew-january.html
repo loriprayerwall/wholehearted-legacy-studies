@@ -1118,3 +1118,214 @@ const matthewStudy = [
     "Gentiles responded to Jonah and Solomon, yet Israel rejected One far greater—Jesus Himself."
 },
   
+   // LocalStorage functions
+    function getCompletedDays() {
+      const stored = localStorage.getItem('matthewJanuary_completed');
+      return stored ? JSON.parse(stored) : [];
+    }
+
+    function saveCompletedDay(dayNumber, notes) {
+      const completed = getCompletedDays();
+      const existing = completed.find(d => d.day === dayNumber);
+
+      if (existing) {
+        existing.notes = notes;
+        existing.date = new Date().toISOString();
+      } else {
+        completed.push({
+          day: dayNumber,
+          notes: notes,
+          date: new Date().toISOString()
+        });
+      }
+
+      localStorage.setItem('matthewJanuary_completed', JSON.stringify(completed));
+    }
+
+    function getNotes(dayNumber) {
+      const completed = getCompletedDays();
+      const day = completed.find(d => d.day === dayNumber);
+      return day ? day.notes : '';
+    }
+
+    function isDayCompleted(dayNumber) {
+      const completed = getCompletedDays();
+      return completed.some(d => d.day === dayNumber);
+    }
+
+    let currentDay = null;
+
+    function renderDaysGrid() {
+      const grid = document.getElementById('days-grid');
+      grid.innerHTML = '';
+
+      matthewStudy.forEach(study => {
+        const card = document.createElement('div');
+        const isCompleted = isDayCompleted(study.day);
+
+        card.className = `day-card ${isCompleted ? 'completed' : ''}`;
+
+        const dayNumberDiv = document.createElement('div');
+        dayNumberDiv.className = 'day-number';
+        dayNumberDiv.innerHTML = `
+          Day ${study.day}
+          ${isCompleted ? '<span class="check-icon">✓</span>' : ''}
+        `;
+
+        const verseRef = document.createElement('div');
+        verseRef.className = 'verse-reference';
+        verseRef.textContent = study.reference;
+
+        const versePreview = document.createElement('div');
+        versePreview.className = 'verse-preview';
+        versePreview.textContent = study.verse;
+
+        card.appendChild(dayNumberDiv);
+        card.appendChild(verseRef);
+        card.appendChild(versePreview);
+
+        card.addEventListener('click', () => openStudyModal(study));
+
+        grid.appendChild(card);
+      });
+    }
+
+    function updateProgress() {
+      const completed = getCompletedDays().length;
+      const percentage = Math.round((completed / 30) * 100);
+
+      const progressFill = document.getElementById('progress-fill');
+      const progressText = document.getElementById('progress-text');
+
+      progressFill.style.width = `${percentage}%`;
+      progressFill.textContent = `${percentage}%`;
+      progressText.textContent = `${completed} of 30 days completed`;
+    }
+
+    function openStudyModal(study) {
+      currentDay = study;
+      const modal = document.getElementById('study-modal');
+
+      document.getElementById('modal-day-number').textContent = `Day ${study.day}`;
+      document.getElementById('modal-verse-ref').textContent = study.reference;
+      document.getElementById('verse-text').textContent = study.verse;
+      document.getElementById('youversion-link').href = study.youversion;
+      document.getElementById('context-text').textContent = study.context;
+      document.getElementById('theme-text').textContent = study.theme;
+      document.getElementById('prayer-text').textContent = study.prayer;
+      document.getElementById('deeper-text').textContent = study.deeper;
+
+      const questionsList = document.getElementById('questions-list');
+      questionsList.innerHTML = '';
+      study.questions.forEach(question => {
+        const questionDiv = document.createElement('div');
+        questionDiv.className = 'question';
+        questionDiv.textContent = question;
+        questionsList.appendChild(questionDiv);
+      });
+
+      const notesArea = document.getElementById('notes-area');
+      notesArea.value = getNotes(study.day);
+
+      const completeBtn = document.getElementById('complete-btn');
+      if (isDayCompleted(study.day)) {
+        completeBtn.textContent = 'Completed ✓';
+        completeBtn.disabled = true;
+      } else {
+        completeBtn.textContent = 'Mark as Complete';
+        completeBtn.disabled = false;
+      }
+
+      modal.classList.add('active');
+    }
+
+    function closeModal() {
+      document.getElementById('study-modal').classList.remove('active');
+      currentDay = null;
+    }
+
+    function markComplete() {
+      if (!currentDay) return;
+
+      const notes = document.getElementById('notes-area').value;
+      saveCompletedDay(currentDay.day, notes);
+
+      const completeBtn = document.getElementById('complete-btn');
+      completeBtn.textContent = 'Completed ✓';
+      completeBtn.disabled = true;
+
+      renderDaysGrid();
+      updateProgress();
+    }
+
+    function copyFullJournal() {
+      if (!currentDay) return;
+
+      const notes = document.getElementById('notes-area').value;
+      const study = matthewStudy.find(s => s.day === currentDay.day);
+
+      let journalText = `DAY ${study.day} - ${study.reference}\n\n`;
+      journalText += `SCRIPTURE:\n${study.verse}\n\n`;
+      journalText += `HISTORICAL CONTEXT:\n${study.context}\n\n`;
+      journalText += `KEY THEME:\n${study.theme}\n\n`;
+      journalText += `PRAYER PROMPT:\n${study.prayer}\n\n`;
+      journalText += `REFLECTION QUESTIONS:\n`;
+      study.questions.forEach((q, i) => {
+        journalText += `${i + 1}. ${q}\n`;
+      });
+      journalText += `\nDIGGING DEEPER:\n${study.deeper}\n\n`;
+      journalText += `MY NOTES:\n${notes || '(No notes yet)'}`;
+
+      navigator.clipboard.writeText(journalText).then(() => {
+        const copyBtn = document.getElementById('copy-journal-btn');
+        const originalText = copyBtn.textContent;
+        copyBtn.textContent = 'Copied! ✓';
+        copyBtn.style.background = '#4CAF50';
+        setTimeout(() => {
+          copyBtn.textContent = originalText;
+          copyBtn.style.background = '';
+        }, 2000);
+      }).catch(() => {
+        const textarea = document.createElement('textarea');
+        textarea.value = journalText;
+        document.body.appendChild(textarea);
+        textarea.select();
+        try {
+          document.execCommand('copy');
+          const copyBtn = document.getElementById('copy-journal-btn');
+          const originalText = copyBtn.textContent;
+          copyBtn.textContent = 'Copied! ✓';
+          copyBtn.style.background = '#4CAF50';
+          setTimeout(() => {
+            copyBtn.textContent = originalText;
+            copyBtn.style.background = '';
+          }, 2000);
+        } catch (err) {
+          const errorMsg = document.createElement('div');
+          errorMsg.textContent = 'Failed to copy. Please try again.';
+          errorMsg.style.color = '#ff6b6b';
+          errorMsg.style.marginTop = '10px';
+          document.querySelector('.action-buttons').appendChild(errorMsg);
+          setTimeout(() => errorMsg.remove(), 3000);
+        }
+        document.body.removeChild(textarea);
+      });
+    }
+
+    document.getElementById('close-modal').addEventListener('click', closeModal);
+    document.getElementById('cancel-btn').addEventListener('click', closeModal);
+    document.getElementById('complete-btn').addEventListener('click', markComplete);
+    document.getElementById('copy-journal-btn').addEventListener('click', copyFullJournal);
+
+    document.getElementById('study-modal').addEventListener('click', (e) => {
+      if (e.target.id === 'study-modal') {
+        closeModal();
+      }
+    });
+
+    // Initialize
+    renderDaysGrid();
+    updateProgress();
+  </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'99d2afc2921b9e5c',t:'MTc2MjkxNTQ1Ni4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
