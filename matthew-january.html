@@ -6,1326 +6,814 @@
 <title>Matthew Study — January</title>
 
 <style>
-/* ------------------------------------------------------
+
+/* ---------------------------------------------------------
    WHOLEHEARTED LEGACY — MATTHEW STUDY (JANUARY)
-   Bronze Gradient • Card Grid • Modal System
-   CLEAN GITHUB VERSION — NO CANVA / NO CLOUDFLARE
--------------------------------------------------------*/
+   FULL PAGE STYLING • BRONZE THEME • EXACT SCREENSHOT MATCH
+----------------------------------------------------------*/
 
-/* GLOBAL COLORS */
-:root {
-  --whl-bg1: #4a3328;   /* deep bronze-brown */
-  --whl-bg2: #6b4b3c;   /* warm bronze */
-  --whl-bg3: #f9f7f4;   /* soft cream */
-
-  --whl-card: #fffaf3;
-  --whl-ink: #3f2f22;
-  --whl-accent: #c9a46b;
-  --whl-gold: #c9a46b;
-  --whl-cream: #fdfaf5;
-
-  --whl-radius: 14px;
-  --whl-font: Georgia, serif;
-}
-
-/* PAGE BACKGROUND */
+/* Page Background */
 body {
-  margin: 0;
-  font-family: var(--whl-font);
-  background: linear-gradient(180deg, var(--whl-bg1), var(--whl-bg2) 50%, var(--whl-bg3) 100%);
-  background-attachment: fixed;
-  color: var(--whl-ink);
-  padding-bottom: 60px;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(180deg, #4b2f25, #7d5c4e 40%, #e8d6c3 95%);
+    font-family: Georgia, serif;
+    color: #3e2a1f;
 }
 
-/* MAIN CONTAINER */
-.container {
-  max-width: 900px;
-  margin: 80px auto;
-  background: var(--whl-cream);
-  padding: 40px;
-  border-radius: var(--whl-radius);
-  box-shadow: 0 10px 35px rgba(0,0,0,0.2);
+/* Main container */
+.study-container {
+    max-width: 900px;
+    margin: 50px auto;
+    padding: 25px 20px;
 }
 
-/* HEADER */
-.header {
-  text-align: center;
-  margin-bottom: 30px;
+/* -----------------------------------------
+   HEADER CARD — EXACTLY LIKE YOUR SCREENSHOT
+------------------------------------------*/
+
+.header-card {
+    background: #fdfcf9;
+    border-radius: 14px;
+    padding: 45px 35px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.25);
+    text-align: center;
+    margin-bottom: 45px;
 }
 
-.header h1 {
-  font-size: 34px;
-  margin: 0;
-  color: var(--whl-ink);
+.header-title {
+    font-size: 34px;
+    margin-bottom: 10px;
+    color: #3e2a1f;
+    font-weight: bold;
 }
 
-.header p {
-  font-size: 18px;
-  margin-top: 5px;
-  opacity: 0.85;
+.header-sub {
+    font-size: 20px;
+    color: #6a4c3a;
+    margin-top: 5px;
+    margin-bottom: 25px;
 }
 
-/* PROGRESS BAR */
-.progress-section {
-  margin: 30px 0;
+/* Progress Bar */
+.progress-wrapper {
+    width: 100%;
+    background: #e5d4c5;
+    border-radius: 20px;
+    overflow: hidden;
+    height: 18px;
+    margin: 25px auto 18px;
 }
 
 .progress-bar {
-  background: #e0d6c8;
-  border-radius: 30px;
-  height: 26px;
-  overflow: hidden;
-}
-
-.progress-fill {
-  height: 100%;
-  width: 0%;
-  background: var(--whl-gold);
-  color: white;
-  text-align: center;
-  font-size: 14px;
-  line-height: 26px;
-  transition: width 0.5s ease;
+    height: 18px;
+    width: 0%;
+    background: #c9a46b;
+    transition: width 0.6s ease;
 }
 
 .progress-text {
-  margin-top: 8px;
-  font-size: 15px;
-  text-align: center;
+    font-size: 15px;
+    margin-top: 12px;
+    color: #5a4332;
 }
 
-/* DAY CARDS GRID */
-.days-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 22px;
-  margin-top: 25px;
+/* ----------------------------------------------------
+   DAY CARD GRID — EXACT MATCH TO YOUR SCREENSHOT STYLE
+-----------------------------------------------------*/
+
+.day-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 26px;
+    margin-bottom: 50px;
 }
 
+/* Bronze highlight cards */
 .day-card {
-  background: var(--whl-card);
-  border-radius: var(--whl-radius);
-  padding: 22px;
-  cursor: pointer;
-  box-shadow: 0 4px 14px rgba(0,0,0,0.12);
-  transition: 0.25s;
+    background: #7d5c4e;
+    border: 2px solid #c9a46b;
+    padding: 22px 20px;
+    border-radius: 14px;
+    color: #fdfcf9;
+    cursor: pointer;
+    transition: 0.25s ease;
+    box-shadow: 0 5px 18px rgba(0,0,0,0.28);
 }
 
 .day-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 22px rgba(0,0,0,0.18);
+    background: #6b4b3c;
+    transform: translateY(-4px);
+    box-shadow: 0 7px 22px rgba(0,0,0,0.35);
 }
 
-.day-card.completed {
-  border-left: 6px solid #4CAF50;
+.day-label {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 6px;
 }
 
-.day-number {
-  font-size: 20px;
-  font-weight: bold;
+.day-ref {
+    font-size: 15px;
+    opacity: 0.95;
+    margin-bottom: 10px;
 }
 
-.check-icon {
-  color: #4CAF50;
-  margin-left: 8px;
+/* ----------------------------------------------------------
+   MODAL — EXACT SAME STYLE AS YOUR “DAY 1 / DAY 2” SCREENSHOTS
+-----------------------------------------------------------*/
+
+.modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.55);
+    backdrop-filter: blur(4px);
+    z-index: 999;
 }
 
-.verse-reference {
-  margin-top: 8px;
-  font-size: 15px;
-  opacity: 0.85;
+.modal-box {
+    background: #fdfcf9;
+    padding: 35px;
+    border-radius: 16px;
+    max-width: 780px;
+    margin: 60px auto;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.35);
+    position: relative;
+    animation: fadeIn 0.35s ease-out;
 }
 
-.verse-preview {
-  margin-top: 12px;
-  font-style: italic;
-  font-size: 14px;
-  opacity: 0.9;
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(15px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
-/* MODAL OVERLAY */
-.modal {
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.55);
-  display: none;
-  z-index: 50;
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
+/* Modal Close Button */
+.close-modal {
+    position: absolute;
+    top: 14px;
+    right: 22px;
+    font-size: 28px;
+    cursor: pointer;
+    color: #6a4c3a;
 }
 
-.modal.active {
-  display: flex;
+/* Verse block */
+.verse-box {
+    background: #fff7d9;
+    border-left: 5px solid #c9a46b;
+    padding: 16px 18px;
+    border-radius: 6px;
+    margin: 18px 0;
+    line-height: 1.6;
+    font-style: italic;
 }
 
-/* MODAL CONTENT */
-.modal-content {
-  background: var(--whl-cream);
-  max-width: 750px;
-  width: 100%;
-  border-radius: var(--whl-radius);
-  max-height: 90vh;
-  overflow-y: auto;
-  padding: 30px;
-  box-shadow: 0 10px 35px rgba(0,0,0,0.25);
-  position: relative;
+.section-title {
+    font-weight: bold;
+    font-size: 19px;
+    color: #3e2a1f;
+    margin-top: 25px;
 }
 
-/* CLOSE BUTTON */
-.close-btn {
-  position: absolute;
-  top: 18px;
-  right: 18px;
-  background: #00000015;
-  border: none;
-  font-size: 28px;
-  border-radius: 50%;
-  width: 42px;
-  height: 42px;
-  cursor: pointer;
+/* Notes Box */
+.notes-box {
+    width: 100%;
+    height: 150px;
+    margin-top: 12px;
+    padding: 12px;
+    border-radius: 10px;
+    border: 2px solid #d8c3b0;
+    font-family: Georgia, serif;
+    font-size: 15px;
 }
 
-/* MODAL HEADER */
-.modal-header {
-  margin-bottom: 22px;
+/* Buttons */
+.button-row {
+    margin-top: 22px;
+    display: flex;
+    gap: 12px;
 }
 
-.modal-day-number {
-  font-size: 26px;
-  font-weight: bold;
-  color: var(--whl-ink);
+.modal-btn {
+    padding: 12px 20px;
+    background: #7d5c4e;
+    border: none;
+    border-radius: 8px;
+    color: #fdfcf9;
+    cursor: pointer;
+    transition: 0.25s;
+    font-size: 15px;
 }
 
-.modal-title {
-  font-size: 20px;
-  margin-top: 6px;
+.modal-btn:hover {
+    background: #6b4b3c;
+    transform: translateY(-2px);
 }
 
-.modal-verse-ref {
-  font-size: 15px;
-  margin-top: 4px;
-  opacity: 0.85;
-}
-
-/* VERSE CARD */
-.verse-card {
-  background: var(--whl-bg3);
-  padding: 18px;
-  border-left: 4px solid var(--whl-gold);
-  border-radius: 8px;
-  margin-bottom: 22px;
-}
-
+/* “Read on YouVersion” */
 .youversion-link {
-  display: inline-block;
-  margin-top: 10px;
-  color: var(--whl-accent);
-  font-weight: bold;
-  text-decoration: none;
+    display: inline-block;
+    margin-top: 10px;
+    margin-bottom: 16px;
+    padding: 10px 16px;
+    background: #c9a46b;
+    color: #fff;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: 0.25s;
 }
 
-/* SECTION TITLES */
-.section-title,
-.context-title {
-  font-size: 18px;
-  margin-top: 25px;
-  margin-bottom: 10px;
-  font-weight: bold;
+.youversion-link:hover {
+    background: #b58f5d;
 }
 
-/* NOTES */
-.notes-area {
-  width: 100%;
-  height: 140px;
-  border-radius: 8px;
-  padding: 14px;
-  margin-top: 10px;
-  font-family: var(--whl-font);
-  border: 1px solid #d8caba;
+/* Mobile Styles */
+@media (max-width: 768px) {
+    .day-grid {
+        grid-template-columns: 1fr;
+    }
+    .modal-box {
+        margin: 25px;
+        padding: 25px;
+    }
 }
 
-.save-note {
-  margin-top: 5px;
-  font-size: 13px;
-  opacity: 0.7;
-}
-
-/* ACTION BUTTONS */
-.action-buttons {
-  display: flex;
-  gap: 12px;
-  margin-top: 25px;
-}
-
-.btn {
-  flex: 1;
-  padding: 14px;
-  border-radius: 8px;
-  border: none;
-  cursor: pointer;
-  font-family: var(--whl-font);
-  font-size: 15px;
-}
-
-.btn-primary {
-  background: var(--whl-gold);
-  color: white;
-}
-
-.btn-secondary {
-  background: #e8e2d8;
-}
-
-/* MOBILE */
-@media(max-width: 768px) {
-  .days-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .modal-content {
-    max-height: 85vh;
-  }
-}
 </style>
 </head>
 
 <body>
 
-<div class="container">
-  <div class="header">
-    <h1>Matthew Study — January</h1>
-    <p>Chapters 1–13 • A Journey With Jesus the King</p>
-  </div>
+<div class="study-container">
 
-  <div class="progress-section">
-    <div class="progress-bar">
-      <div class="progress-fill" id="progress-fill">0%</div>
+    <!-- HEADER CARD -->
+    <div class="header-card">
+        <div class="header-title">Matthew Study — January</div>
+        <div class="header-sub">Chapters 1–13 • The King and His Kingdom</div>
+
+        <!-- Progress -->
+        <div class="progress-wrapper">
+            <div class="progress-bar" id="progressBar"></div>
+        </div>
+        <div class="progress-text" id="progressText">0 of 30 days completed</div>
     </div>
-    <div class="progress-text" id="progress-text">0 of 30 days completed</div>
-  </div>
 
-  <div class="days-grid" id="days-grid"></div>
+    <!-- DAY GRID (BLOCK 2 WILL ATTACH HERE) -->
+    <div class="day-grid">
+       <!-- DAY 1 -->
+        <div class="day-card" onclick="openModal(1)">
+            <div class="day-label">Day 1</div>
+            <div class="day-ref">Matthew 1:1–17 (KJV)</div>
+            <div>“The book of the generation of Jesus Christ…”</div>
+        </div>
+
+        <!-- DAY 2 -->
+        <div class="day-card" onclick="openModal(2)">
+            <div class="day-label">Day 2</div>
+            <div class="day-ref">Matthew 1:18–25 (KJV)</div>
+            <div>“That which is conceived in her is of the Holy Ghost.”</div>
+        </div>
+
+        <!-- DAY 3 -->
+        <div class="day-card" onclick="openModal(3)">
+            <div class="day-label">Day 3</div>
+            <div class="day-ref">Matthew 2:1–12 (KJV)</div>
+            <div>“We have seen his star in the east…”</div>
+        </div>
+
+        <!-- DAY 4 -->
+        <div class="day-card" onclick="openModal(4)">
+            <div class="day-label">Day 4</div>
+            <div class="day-ref">Matthew 2:13–23 (KJV)</div>
+            <div>“Out of Egypt have I called my son.”</div>
+        </div>
+
+        <!-- DAY 5 -->
+        <div class="day-card" onclick="openModal(5)">
+            <div class="day-label">Day 5</div>
+            <div class="day-ref">Matthew 3:1–12 (KJV)</div>
+            <div>“Prepare ye the way of the Lord…”</div>
+        </div>
+
+        <!-- DAY 6 -->
+        <div class="day-card" onclick="openModal(6)">
+            <div class="day-label">Day 6</div>
+            <div class="day-ref">Matthew 3:13–17 (KJV)</div>
+            <div>“This is my beloved Son…”</div>
+        </div>
+
+        <!-- DAY 7 -->
+        <div class="day-card" onclick="openModal(7)">
+            <div class="day-label">Day 7</div>
+            <div class="day-ref">Matthew 4:1–11 (KJV)</div>
+            <div>“Man shall not live by bread alone…”</div>
+        </div>
+
+        <!-- DAY 8 -->
+        <div class="day-card" onclick="openModal(8)">
+            <div class="day-label">Day 8</div>
+            <div class="day-ref">Matthew 4:12–25 (KJV)</div>
+            <div>“Follow me, and I will make you fishers of men.”</div>
+        </div>
+
+        <!-- DAY 9 -->
+        <div class="day-card" onclick="openModal(9)">
+            <div class="day-label">Day 9</div>
+            <div class="day-ref">Matthew 5:1–16 (KJV)</div>
+            <div>“Blessed are the poor in spirit…”</div>
+        </div>
+
+        <!-- DAY 10 -->
+        <div class="day-card" onclick="openModal(10)">
+            <div class="day-label">Day 10</div>
+            <div class="day-ref">Matthew 5:17–32 (KJV)</div>
+            <div>“Think not that I am come to destroy the law…”</div>
+        </div>
+
+</div> <!-- END OF DAY GRID -->
+
+<!-- ---------------------------------------------------------
+     MODALS FOR DAYS 1–10
+---------------------------------------------------------->
+
+<!-- MODAL OVERLAY -->
+<div id="modalOverlay" class="modal-overlay">
+    <div id="modalBox" class="modal-box">
+        <span class="close-modal" onclick="closeModal()">&times;</span>
+        <div id="modalContent"></div>
+    </div>
 </div>
 
-<!-- MODAL -->
-<div class="modal" id="study-modal">
-  <div class="modal-content">
-    <button class="close-btn" id="close-modal">×</button>
-
-    <div class="modal-header">
-      <div class="modal-day-number" id="modal-day-number"></div>
-      <div class="modal-verse-ref" id="modal-verse-ref"></div>
-      <div class="modal-title" id="modal-title"></div>
-    </div>
-
-    <div class="verse-card">
-      <div class="verse-text" id="verse-text"></div>
-      <a id="youversion-link" target="_blank" rel="noopener noreferrer" class="youversion-link">
-        Read full chapter on YouVersion →
-      </a>
-    </div>
-
-    <div class="context-section">
-      <div class="context-title">📖 Historical Context</div>
-      <div id="context-text"></div>
-    </div>
-
-    <div class="theme-box">
-      <div class="section-title">Key Theme</div>
-      <div id="theme-text"></div>
-    </div>
-
-    <div class="prayer-box">
-      <div class="section-title">Prayer Prompt</div>
-      <div id="prayer-text"></div>
-    </div>
-
-    <div class="reflection-section">
-      <div class="section-title">Reflection Questions</div>
-      <div id="questions-list"></div>
-    </div>
-
-    <div class="deeper-section">
-      <div class="section-title">Digging Deeper</div>
-      <div id="deeper-text"></div>
-    </div>
-
-    <div class="section-title" style="margin-top: 30px;">Your Notes</div>
-    <p class="save-note">Your notes save automatically.</p>
-    <textarea class="notes-area" id="notes-area"></textarea>
-
-    <div class="action-buttons">
-      <button class="btn btn-primary" id="complete-btn">Mark as Complete</button>
-      <button class="btn btn-primary" id="copy-journal-btn">Copy Journal</button>
-      <button class="btn btn-secondary" id="cancel-btn">Close</button>
-    </div>
-
-  </div>
-</div>
 <script>
-/* ------------------------------------------------------
-   MATTHEW STUDY — JANUARY (DAYS 1–30)
-   DAYS 1–10 BELOW
--------------------------------------------------------*/
+/* ---------------------------------------------------------
+   JANUARY STUDY — FULL DATA FOR DAYS 1–10
+----------------------------------------------------------*/
 
-const matthewStudy = [
+const studyDays = {
 
-/* -------------------------
-   DAY 1 — Matthew 1:1–17
---------------------------*/
-{
-  day: 1,
-  reference: "Matthew 1:1–17",
-  title: "The Genealogy of the Messiah",
-  verse: "“The book of the generation of Jesus Christ, the son of David, the son of Abraham.” — Matthew 1:1 (KJV)",
-  youversion: "https://www.bible.com/bible/1/MAT.1.KJV",
-  context:
-    "Matthew opens his Gospel by tracing Jesus’ family line from Abraham through David, showing that He is the promised Messiah. Each generation reveals God’s faithfulness in preserving the line through both kings and ordinary people.",
-  theme:
-    "God’s promises are trustworthy—Jesus is the fulfillment of the covenant made with Abraham and David.",
-  prayer:
-    "Lord, thank You for fulfilling every promise, even over long generations. Help me trust Your timing in my life.",
-  questions: [
-    "Why does Matthew begin with a genealogy?",
-    "What does this list reveal about God’s faithfulness?",
-    "How does knowing Jesus’ lineage strengthen your faith?"
-  ],
-  deeper:
-    "Notice the inclusion of women (Tamar, Rahab, Ruth, Bathsheba). Matthew highlights that God works through unexpected people and broken stories to bring redemption."
+1: {
+    reference: "Matthew 1:1–17",
+    verse: "“The book of the generation of Jesus Christ, the son of David, the son of Abraham.” — Matthew 1:1",
+    youversion: "https://www.bible.com/bible/1/MAT.1.KJV",
+    context: `Matthew opens with the genealogy of Jesus, proving He is the promised Messiah from both Abraham’s line and King David’s royal line.`,
+    theme: "Jesus is the fulfillment of God's long-awaited promise.",
+    prayer: "Lord, thank You for faithfully keeping every promise. Strengthen my trust in Your perfect timing.",
+    reflection: [
+        "What does Jesus’ genealogy teach you about God’s faithfulness?",
+        "Why is it important that Jesus came through David’s royal line?",
+        "Where in your life do you need to trust God’s timing?"
+    ],
+    deeper: `This genealogy is structured in three sets of 14 generations—showing intentional design and God’s guiding hand over centuries.`,
 },
 
-/* -------------------------
-   DAY 2 — Matthew 1:18–25
---------------------------*/
-{
-  day: 2,
-  reference: "Matthew 1:18–25",
-  title: "The Birth of Jesus Christ",
-  verse:
-    "“Behold, a virgin shall be with child… and they shall call his name Emmanuel.” — Matthew 1:23 (KJV)",
-  youversion: "https://www.bible.com/bible/1/MAT.1.KJV",
-  context:
-    "Joseph discovers Mary is pregnant. Instead of shaming her, he plans to quietly end the engagement. God intervenes, revealing that the child is conceived by the Holy Spirit.",
-  theme:
-    "Jesus is Emmanuel—God with us. His birth was divinely planned and miraculously fulfilled.",
-  prayer:
-    "Father, thank You that You are with me in every circumstance, just as You were with Joseph and Mary.",
-  questions: [
-    "How does Joseph model obedience and compassion?",
-    "What does 'God with us' mean to you personally?",
-    "Where do you need to trust God’s plan in this season?"
-  ],
-  deeper:
-    "Joseph’s obedience set the stage for Jesus’ early life. His willingness to listen to God shaped the destiny of the Holy Family."
+2: {
+    reference: "Matthew 1:18–25",
+    verse: "“That which is conceived in her is of the Holy Ghost.” — Matthew 1:20",
+    youversion: "https://www.bible.com/bible/1/MAT.1.KJV",
+    context: `Joseph learns that Mary’s pregnancy is a miracle of the Holy Spirit. He obeys God despite confusion and social cost.`,
+    theme: "Obedience often requires courage and faith.",
+    prayer: "Father, like Joseph, help me obey even when I don’t understand.",
+    reflection: [
+        "How does Joseph’s response challenge your understanding of obedience?",
+        "Why is Jesus’ virgin birth important?",
+        "Where is God asking you to trust Him right now?"
+    ],
+    deeper: `The name “Emmanuel” means “God with us”—the heart of the Gospel.`,
 },
 
-/* -------------------------
-   DAY 3 — Matthew 2:1–12
---------------------------*/
-{
-  day: 3,
-  reference: "Matthew 2:1–12",
-  title: "The Visit of the Wise Men",
-  verse:
-    "“We have seen his star in the east, and are come to worship him.” — Matthew 2:2 (KJV)",
-  youversion: "https://www.bible.com/bible/1/MAT.2.KJV",
-  context:
-    "Magi from the east follow a divine sign—a star announcing the birth of the King of the Jews. Herod is threatened, but the Magi continue seeking Jesus.",
-  theme:
-    "Those who truly seek Jesus will find Him—He reveals Himself to hearts that humbly pursue Him.",
-  prayer:
-    "Lord, give me the heart of the wise men—eager to seek You, worship You, and offer You my best.",
-  questions: [
-    "What does their journey teach you about persistence?",
-    "What gift can you offer Jesus today (time, worship, obedience)?",
-    "Why do you think the star appeared to Gentile seekers?"
-  ],
-  deeper:
-    "The Magi’s gifts (gold, frankincense, myrrh) symbolized kingship, deity, and sacrificial death—pointing to Jesus’ full identity."
+3: {
+    reference: "Matthew 2:1–12",
+    verse: "“We have seen his star in the east, and are come to worship him.” — Matthew 2:2",
+    youversion: "https://www.bible.com/bible/1/MAT.2.KJV",
+    context: `Wise men travel far seeking Jesus, following a divine sign. Herod reacts with fear, revealing a contrast between worship and hostility.`,
+    theme: "Those who truly seek Jesus find Him.",
+    prayer: "Lord, help me pursue You with the same devotion as the wise men.",
+    reflection: [
+        "What does the journey of the wise men teach you about seeking Jesus?",
+        "How does Herod’s reaction reveal the human heart?",
+        "What gifts can you bring Jesus today?"
+    ],
+    deeper: `The star may have been a supernatural event rather than an astronomical one—God guiding personally.`,
 },
 
-/* -------------------------
-   DAY 4 — Matthew 2:13–23
---------------------------*/
-{
-  day: 4,
-  reference: "Matthew 2:13–23",
-  title: "The Flight to Egypt",
-  verse:
-    "“Arise… flee into Egypt.” — Matthew 2:13 (KJV)",
-  youversion: "https://www.bible.com/bible/1/MAT.2.KJV",
-  context:
-    "Warned in a dream, Joseph takes Mary and Jesus to Egypt to escape Herod’s violence. God protects His Son and fulfills prophecy: “Out of Egypt have I called my son.”",
-  theme:
-    "God leads, protects, and guides—often through unexpected routes.",
-  prayer:
-    "Jesus, guide my steps even when Your path feels unfamiliar. Protect my heart from fear as I follow You.",
-  questions: [
-    "What stands out to you about Joseph’s obedience?",
-    "How has God redirected your path for your protection?",
-    "What does this passage reveal about spiritual warfare in Jesus’ infancy?"
-  ],
-  deeper:
-    "This mirrors Israel’s exodus—Jesus is the true and greater Israel who obeys where the nation failed."
+4: {
+    reference: "Matthew 2:13–23",
+    verse: "“Out of Egypt have I called my son.” — Matthew 2:15",
+    youversion: "https://www.bible.com/bible/1/MAT.2.KJV",
+    context: `Joseph is warned to flee to Egypt. Herod kills infants in Bethlehem. God protects Jesus and fulfills prophecy.`,
+    theme: "God protects His purpose and His people.",
+    prayer: "Lord, help me trust Your leading, even when the path is unexpected.",
+    reflection: [
+        "How does God guide Joseph throughout this chapter?",
+        "What does fulfilled prophecy show about God’s sovereignty?",
+        "Where do you need to rest in God's protection?"
+    ],
+    deeper: `Matthew connects Jesus to Israel’s story—Jesus is the true Son who succeeds where Israel failed.`,
 },
 
-/* -------------------------
-   DAY 5 — Matthew 3:1–12
---------------------------*/
-{
-  day: 5,
-  reference: "Matthew 3:1–12",
-  title: "Prepare the Way of the Lord",
-  verse:
-    "“Repent ye: for the kingdom of heaven is at hand.” — Matthew 3:2 (KJV)",
-  youversion: "https://www.bible.com/bible/1/MAT.3.KJV",
-  context:
-    "John the Baptist appears in the wilderness, calling Israel to repentance and preparing their hearts for the Messiah.",
-  theme:
-    "Repentance is the doorway to renewal. The heart must be prepared to receive Christ.",
-  prayer:
-    "Lord, search my heart and remove anything that hinders me from walking closely with You.",
-  questions: [
-    "What does repentance truly mean to you?",
-    "Why was John’s message necessary before Jesus began His ministry?",
-    "What areas of your life need spiritual renewal?"
-  ],
-  deeper:
-    "John fulfills Isaiah 40:3—he is the voice crying in the wilderness, preparing the way for Jesus."
+5: {
+    reference: "Matthew 3:1–12",
+    verse: "“Prepare ye the way of the Lord.” — Matthew 3:3",
+    youversion: "https://www.bible.com/bible/1/MAT.3.KJV",
+    context: `John the Baptist preaches repentance and prepares hearts for the Messiah.`,
+    theme: "Repentance prepares the heart to receive Jesus.",
+    prayer: "Father, cleanse my heart and prepare me to follow You.",
+    reflection: [
+        "What does repentance mean in your life?",
+        "Why was John’s message necessary before Jesus’ ministry?",
+        "What areas need spiritual ‘preparing’ in your life?"
+    ],
+    deeper: `John fulfills Isaiah 40:3, identifying Jesus as the Lord whose arrival was foretold.`,
 },
 
-/* -------------------------
-   DAY 6 — Matthew 3:13–17
---------------------------*/
-{
-  day: 6,
-  reference: "Matthew 3:13–17",
-  title: "The Baptism of Jesus",
-  verse:
-    "“This is my beloved Son, in whom I am well pleased.” — Matthew 3:17 (KJV)",
-  youversion: "https://www.bible.com/bible/1/MAT.3.KJV",
-  context:
-    "Jesus comes to be baptized as an example of humility and obedience, marking the beginning of His public ministry.",
-  theme:
-    "Jesus identifies with humanity and models obedience to the Father.",
-  prayer:
-    "Father, thank You for calling me Your beloved. Help me live in a way that pleases You.",
-  questions: [
-    "Why was Jesus baptized even though He was without sin?",
-    "What does God’s affirmation reveal about Jesus’ identity?",
-    "How can you follow Jesus’ example of humility?"
-  ],
-  deeper:
-    "The Trinity appears here—Father speaking, Son baptized, Spirit descending like a dove."
+6: {
+    reference: "Matthew 3:13–17",
+    verse: "“This is my beloved Son, in whom I am well pleased.” — Matthew 3:17",
+    youversion: "https://www.bible.com/bible/1/MAT.3.KJV",
+    context: `Jesus is baptized, revealing the Trinity—Father, Son, and Spirit.`,
+    theme: "Jesus’ baptism reveals His divine identity and mission.",
+    prayer: "Lord, help me walk in the identity You have given me.",
+    reflection: [
+        "Why did Jesus choose to be baptized?",
+        "How does this moment reveal the Trinity?",
+        "What does God’s approval mean for you personally?"
+    ],
+    deeper: `This is one of the clearest New Testament moments where Father, Son, and Spirit appear together.`,
 },
 
-/* -------------------------
-   DAY 7 — Matthew 4:1–11
---------------------------*/
-{
-  day: 7,
-  reference: "Matthew 4:1–11",
-  title: "The Temptation of Jesus",
-  verse:
-    "“It is written…” — Matthew 4:4 (KJV)",
-  youversion: "https://www.bible.com/bible/1/MAT.4.KJV",
-  context:
-    "Jesus is led into the wilderness and tempted by the devil. He overcomes every temptation through Scripture.",
-  theme:
-    "God’s Word is our greatest weapon against temptation.",
-  prayer:
-    "Lord, strengthen me to resist the enemy. Help me respond to every temptation with Your truth.",
-  questions: [
-    "Which of the three temptations stands out to you?",
-    "Why is Scripture so important in spiritual battles?",
-    "How can you guard your heart more intentionally?"
-  ],
-  deeper:
-    "Where Israel failed in the wilderness, Jesus triumphs—showing He is the true obedient Son."
+7: {
+    reference: "Matthew 4:1–11",
+    verse: "“Man shall not live by bread alone…” — Matthew 4:4",
+    youversion: "https://www.bible.com/bible/1/MAT.4.KJV",
+    context: `Jesus is tempted by Satan, proving His righteousness and authority.`,
+    theme: "Scripture is our defense in spiritual battles.",
+    prayer: "Jesus, strengthen me with Your Word when I face temptation.",
+    reflection: [
+        "How does Jesus respond to temptation?",
+        "What does this reveal about spiritual warfare?",
+        "Which Scripture could help you in your own struggles?"
+    ],
+    deeper: `Jesus succeeds in the wilderness where Israel failed—showing He is the true obedient Son.`,
 },
 
-/* -------------------------
-   DAY 8 — Matthew 4:12–25
---------------------------*/
-{
-  day: 8,
-  reference: "Matthew 4:12–25",
-  title: "The Calling of the Disciples",
-  verse:
-    "“Follow me, and I will make you fishers of men.” — Matthew 4:19 (KJV)",
-  youversion: "https://www.bible.com/bible/1/MAT.4.KJV",
-  context:
-    "Jesus begins His ministry in Galilee, calling His first disciples to follow Him and proclaim the kingdom.",
-  theme:
-    "Discipleship requires surrender—following Jesus with a willing heart.",
-  prayer:
-    "Jesus, lead me. Teach me to follow You with obedience and joy.",
-  questions: [
-    "What does Jesus’ call mean for your life today?",
-    "Why did the disciples leave everything immediately?",
-    "What is Jesus calling you to trust Him with?"
-  ],
-  deeper:
-    "Jesus’ early ministry centered on teaching, preaching, and healing—revealing the compassionate heart of the Messiah."
+8: {
+    reference: "Matthew 4:12–25",
+    verse: "“Follow me, and I will make you fishers of men.” — Matthew 4:19",
+    youversion: "https://www.bible.com/bible/1/MAT.4.KJV",
+    context: `Jesus begins His public ministry and calls His first disciples.`,
+    theme: "Following Jesus transforms our purpose.",
+    prayer: "Lord, help me follow You wholeheartedly wherever You lead.",
+    reflection: [
+        "What does it mean to follow Jesus today?",
+        "How did the disciples respond?",
+        "Where is Jesus calling you to trust Him?"
+    ],
+    deeper: `Jesus' ministry begins in Galilee, fulfilling prophecy that light has come to a darkened land.`,
 },
 
-/* -------------------------
-   DAY 9 — Matthew 5:1–12
---------------------------*/
-{
-  day: 9,
-  reference: "Matthew 5:1–12",
-  title: "The Beatitudes",
-  verse:
-    "“Blessed are the poor in spirit: for theirs is the kingdom of heaven.” — Matthew 5:3 (KJV)",
-  youversion: "https://www.bible.com/bible/1/MAT.5.KJV",
-  context:
-    "Jesus opens the Sermon on the Mount with blessings for those who embody humility, mercy, righteousness, and purity.",
-  theme:
-    "True blessing comes through humility and wholehearted devotion to God.",
-  prayer:
-    "Lord, shape my heart to reflect the character of Christ found in these Beatitudes.",
-  questions: [
-    "Which Beatitude speaks to your heart the most today?",
-    "How does Jesus redefine what it means to be blessed?",
-    "In what ways can you pursue deeper righteousness?"
-  ],
-  deeper:
-    "The Beatitudes describe the character of citizens of the Kingdom—not what we earn, but what God forms in us."
+9: {
+    reference: "Matthew 5:1–16",
+    verse: "“Blessed are the poor in spirit…” — Matthew 5:3",
+    youversion: "https://www.bible.com/bible/1/MAT.5.KJV",
+    context: `Jesus begins the Sermon on the Mount with the Beatitudes.`,
+    theme: "The blessed life is found in humility and dependence on God.",
+    prayer: "Lord, shape my heart to reflect Your kingdom values.",
+    reflection: [
+        "Which Beatitude speaks to you most right now?",
+        "How do these values differ from the world’s values?",
+        "How can you be salt and light today?"
+    ],
+    deeper: `The Beatitudes describe a life shaped by God’s kingdom, not human achievement.`,
 },
 
-/* -------------------------
-   DAY 10 — Matthew 5:13–20
---------------------------*/
-{
-  day: 10,
-  reference: "Matthew 5:13–20",
-  title: "Salt, Light, and Fulfillment",
-  verse:
-    "“Ye are the light of the world.” — Matthew 5:14 (KJV)",
-  youversion: "https://www.bible.com/bible/1/MAT.5.KJV",
-  context:
-    "Jesus calls His followers to be salt and light—expressions of God’s presence in the world. He also affirms that He fulfills the Old Testament law.",
-  theme:
-    "Believers are called to reflect Christ’s light and uphold God’s truth with grace.",
-  prayer:
-    "Jesus, empower me to be salt and light in every place You send me.",
-  questions: [
-    "What does it mean to be 'salt' spiritually?",
-    "Where can you shine Christ’s light this week?",
-    "Why does Jesus say He fulfills the law rather than abolishing it?"
-  ],
-  dee/* -------------------------
-   DAY 11 — Matthew 5:21–26
---------------------------*/
-{
-  day: 11,
-  reference: "Matthew 5:21–26",
-  title: "Reconciliation & the Heart",
-  verse:
-    "“First be reconciled to thy brother…” — Matthew 5:24 (KJV)",
-  youversion: "https://www.bible.com/bible/1/MAT.5.KJV",
-  context:
-    "Jesus shifts the focus from outward obedience to the condition of the heart. Anger, contempt, and bitterness are spiritual dangers that block communion with God.",
-  theme:
-    "Reconciliation matters deeply to God—relationships reflect the condition of our heart.",
-  prayer:
-    "Lord, soften my heart and help me pursue peace with those around me.",
-  questions: [
-    "Why does Jesus place urgency on reconciliation?",
-    "What relationship needs prayer or healing today?",
-    "How does anger affect your spiritual life?"
-  ],
-  deeper:
-    "Jesus elevates the law by showing that inner attitudes carry the same weight as outward actions."
+10: {
+    reference: "Matthew 5:17–32",
+    verse: "“Think not that I am come to destroy the law…” — Matthew 5:17",
+    youversion: "https://www.bible.com/bible/1/MAT.5.KJV",
+    context: `Jesus fulfills the Law and deepens its meaning, addressing anger, purity, and faithfulness.`,
+    theme: "Jesus fulfills and transforms the heart behind the Law.",
+    prayer: "Lord, purify my heart and align my desires with Your truth.",
+    reflection: [
+        "How does Jesus fulfill the Law?",
+        "Why does Jesus focus on the heart, not just actions?",
+        "Where do you need to seek reconciliation or purity?"
+    ],
+    deeper: `Jesus teaches that righteousness is internal, not merely external.`,
 },
 
-/* -------------------------
-   DAY 12 — Matthew 5:27–32
---------------------------*/
-{
-  day: 12,
-  reference: "Matthew 5:27–32",
-  title: "Purity of Heart",
-  verse:
-    "“But I say unto you, That whosoever looketh on a woman to lust after her hath committed adultery with her already in his heart.” — Matthew 5:28 (KJV)",
-  youversion: "https://www.bible.com/bible/1/MAT.5.KJV",
-  context:
-    "Jesus teaches that purity begins inwardly. The call to holiness is not only about avoiding outward sin but guarding the heart.",
-  theme:
-    "True purity is spiritual and internal—it begins with the mind and affections.",
-  prayer:
-    "Father, help me guard my heart and mind, and keep my thoughts aligned with Your will.",
-  questions: [
-    "What does this passage teach about the heart?",
-    "How can you guard your thoughts more intentionally?",
-    "How does Jesus redefine purity?"
-  ],
-  deeper:
-    "Jesus’ strong language about removing causes of sin emphasizes the seriousness of spiritual purity."
+}; // END DAYS 1–10 DATA
+   /* ---------------------------------------------------------
+   JANUARY STUDY — FULL DATA FOR DAYS 11–20
+----------------------------------------------------------*/
+
+Object.assign(studyDays, {
+
+11: {
+    reference: "Matthew 5:33–48",
+    verse: "“Love your enemies, bless them that curse you…” — Matthew 5:44",
+    youversion: "https://www.bible.com/bible/1/MAT.5.KJV",
+    context: `Jesus teaches about loving enemies, keeping vows, and going the extra mile. His standard is radical love rooted in God’s character.`,
+    theme: "True discipleship is marked by supernatural love.",
+    prayer: "Lord Jesus, help me love others the way You love me—especially when it’s hard.",
+    reflection: [
+        "Which teaching in this passage challenges you most?",
+        "How does Jesus redefine love?",
+        "Where can you show grace to someone difficult?"
+    ],
+    deeper: `“Be ye therefore perfect” refers to spiritual maturity—reflecting the heart of God in how we treat others.`,
 },
 
-/* -------------------------
-   DAY 13 — Matthew 5:33–48
---------------------------*/
-{
-  day: 13,
-  reference: "Matthew 5:33–48",
-  title: "Love Without Limits",
-  verse:
-    "“Love your enemies…” — Matthew 5:44 (KJV)",
-  youversion: "https://www.bible.com/bible/1/MAT.5.KJV",
-  context:
-    "Jesus contrasts worldly standards of justice with the radical love of the Kingdom—calling His followers to integrity, mercy, and self-sacrificial love.",
-  theme:
-    "Kingdom love extends even to enemies—it reflects the heart of God.",
-  prayer:
-    "Lord, teach me to love others the way You love me, especially when it’s difficult.",
-  questions: [
-    "Why is loving enemies such a powerful witness?",
-    "Which of Jesus’ teachings here challenges you the most?",
-    "How does this redefine what it means to follow Christ?"
-  ],
-  deeper:
-    "This section mirrors God’s mercy—He loves even those who oppose Him, offering grace instead of retaliation."
+12: {
+    reference: "Matthew 6:1–18",
+    verse: "“But thou, when thou prayest, enter into thy closet…” — Matthew 6:6",
+    youversion: "https://www.bible.com/bible/1/MAT.6.KJV",
+    context: `Jesus teaches about giving, fasting, and prayer—including the Lord’s Prayer. God values sincerity, not performance.`,
+    theme: "God rewards what is done in secret, from the heart.",
+    prayer: "Father, purify my motives and draw me closer to You in private devotion.",
+    reflection: [
+        "Why does Jesus emphasize secret devotion?",
+        "How does the Lord’s Prayer shape your own prayers?",
+        "Where do you need to quiet your heart before God?"
+    ],
+    deeper: `Jesus’ pattern of prayer centers on worship, surrender, provision, forgiveness, and holiness.`,
 },
 
-/* -------------------------
-   DAY 14 — Matthew 6:1–8
---------------------------*/
-{
-  day: 14,
-  reference: "Matthew 6:1–8",
-  title: "Seeking God in Secret",
-  verse:
-    "“Thy Father which seeth in secret shall reward thee openly.” — Matthew 6:4 (KJV)",
-  youversion: "https://www.bible.com/bible/1/MAT.6.KJV",
-  context:
-    "Jesus warns against doing righteous acts for human praise. True devotion flows from a heart that seeks God alone.",
-  theme:
-    "God values genuine, quiet devotion—not outward show.",
-  prayer:
-    "Lord, purify my motives. Help me live for Your approval, not the approval of people.",
-  questions: [
-    "Why does secret devotion matter to God?",
-    "Where do you struggle with seeking approval?",
-    "What spiritual habit can you practice privately this week?"
-  ],
-  deeper:
-    "In the Kingdom, the unseen life with God matters more than public display."
+13: {
+    reference: "Matthew 6:19–34",
+    verse: "“Seek ye first the kingdom of God…” — Matthew 6:33",
+    youversion: "https://www.bible.com/bible/1/MAT.6.KJV",
+    context: `Jesus teaches about treasures in heaven, a generous eye, and trust in God instead of anxiety.`,
+    theme: "Lasting peace is found when God’s kingdom comes first.",
+    prayer: "Lord, shift my focus from worry to trust. Teach me to seek You above all.",
+    reflection: [
+        "What does storing treasure in heaven mean for you today?",
+        "How does worry affect your faith?",
+        "What would seeking first the kingdom look like in practice?"
+    ],
+    deeper: `“Take no thought” means “Do not be consumed with anxious worry” — not neglecting responsibility.`,
 },
 
-/* -------------------------
-   DAY 15 — Matthew 6:9–15
---------------------------*/
-{
-  day: 15,
-  reference: "Matthew 6:9–15",
-  title: "The Lord’s Prayer",
-  verse:
-    "“After this manner therefore pray ye…” — Matthew 6:9 (KJV)",
-  youversion: "https://www.bible.com/bible/1/MAT.6.KJV",
-  context:
-    "Jesus teaches His disciples how to pray—with reverence, trust, dependence, and forgiveness.",
-  theme:
-    "Prayer shapes our relationship with God and aligns our heart with His kingdom.",
-  prayer:
-    "Father, let my prayers be simple, sincere, and full of trust in Your goodness.",
-  questions: [
-    "Which part of the Lord’s Prayer speaks to you today?",
-    "How does this prayer shape your priorities?",
-    "Why is forgiveness emphasized so strongly?"
-  ],
-  deeper:
-    "The Lord’s Prayer is a framework: worship, surrender, provision, forgiveness, and protection."
+14: {
+    reference: "Matthew 7:1–14",
+    verse: "“Ask, and it shall be given you…” — Matthew 7:7",
+    youversion: "https://www.bible.com/bible/1/MAT.7.KJV",
+    context: `Jesus teaches about judgment, asking in faith, treating others with love, and choosing the narrow way.`,
+    theme: "Following Jesus means choosing the narrow path of obedience and faith.",
+    prayer: "Jesus, help me walk in humility and choose Your way daily.",
+    reflection: [
+        "What is the danger of hypocritical judgment?",
+        "How does God respond when we ask with faith?",
+        "Why is the narrow way difficult yet worth it?"
+    ],
+    deeper: `The narrow gate reflects surrender, while the broad path represents self-rule.`,
 },
 
-/* -------------------------
-   DAY 16 — Matthew 6:16–24
---------------------------*/
-{
-  day: 16,
-  reference: "Matthew 6:16–24",
-  title: "Fasting • Treasure • Devotion",
-  verse:
-    "“Where your treasure is, there will your heart be also.” — Matthew 6:21 (KJV)",
-  youversion: "https://www.bible.com/bible/1/MAT.6.KJV",
-  context:
-    "Jesus teaches about fasting with sincerity, storing treasure in heaven, and living with undivided loyalty.",
-  theme:
-    "A kingdom heart pursues eternal treasure and wholehearted devotion to God.",
-  prayer:
-    "Lord, reveal where my heart is divided and draw me into deeper devotion to You.",
-  questions: [
-    "What treasures are you pursuing?",
-    "How does fasting refocus the heart?",
-    "Why can no one serve two masters?"
-  ],
-  deeper:
-    "Jesus presses His followers to examine where their hearts truly rest—earth or eternity."
+15: {
+    reference: "Matthew 7:15–29",
+    verse: "“By their fruits ye shall know them.” — Matthew 7:20",
+    youversion: "https://www.bible.com/bible/1/MAT.7.KJV",
+    context: `Jesus warns against false prophets, teaches about true discipleship, and ends with the parable of the wise builder.`,
+    theme: "True faith produces visible fruit of obedience.",
+    prayer: "Lord, root my life in Your Word so I may stand firm in every storm.",
+    reflection: [
+        "What does good fruit look like in your life?",
+        "Why is obedience the foundation of true discipleship?",
+        "How can you build your life on the solid rock?"
+    ],
+    deeper: `The “rock” is not just knowing Jesus’ words but actively doing them.`,
 },
 
-/* -------------------------
-   DAY 17 — Matthew 6:25–34
---------------------------*/
-{
-  day: 17,
-  reference: "Matthew 6:25–34",
-  title: "Do Not Worry",
-  verse:
-    "“Seek ye first the kingdom of God…” — Matthew 6:33 (KJV)",
-  youversion: "https://www.bible.com/bible/1/MAT.6.KJV",
-  context:
-    "Jesus calls His followers away from anxiety and into trust—God cares for our daily needs.",
-  theme:
-    "Worry dissolves when we trust God’s care and seek His kingdom first.",
-  prayer:
-    "Father, replace my worries with confidence in Your perfect care for me.",
-  questions: [
-    "What do you worry about most?",
-    "How does creation reflect God’s care?",
-    "What does seeking God’s kingdom first look like for you?"
-  ],
-  deeper:
-    "Jesus isn’t dismissing needs—He invites us to trust the Father who knows and provides."
+16: {
+    reference: "Matthew 8:1–17",
+    verse: "“I will; be thou clean.” — Matthew 8:3",
+    youversion: "https://www.bible.com/bible/1/MAT.8.KJV",
+    context: `Jesus heals a leper, a centurion’s servant, and Peter’s mother-in-law—revealing His compassion and authority.`,
+    theme: "Jesus has authority over sickness—and compassion for the hurting.",
+    prayer: "Jesus, touch the hurting places in my heart and life with Your healing grace.",
+    reflection: [
+        "What stands out about the leper’s faith?",
+        "Why did Jesus praise the centurion?",
+        "Where do you need Jesus’ healing today?"
+    ],
+    deeper: `Matthew emphasizes both Jesus’ kingship and His compassion—power and tenderness together.`,
 },
 
-/* -------------------------
-   DAY 18 — Matthew 7:1–12
---------------------------*/
-{
-  day: 18,
-  reference: "Matthew 7:1–12",
-  title: "Judging, Asking, and the Golden Rule",
-  verse:
-    "“For with what measure ye mete, it shall be measured to you again.” — Matthew 7:2 (KJV)",
-  youversion: "https://www.bible.com/bible/1/MAT.7.KJV",
-  context:
-    "Jesus warns against hypocritical judgment, encourages persistent prayer, and sums up the law through the Golden Rule.",
-  theme:
-    "Compassion, humility, and love reflect the heart of God.",
-  prayer:
-    "Lord, help me judge with humility, pray with persistence, and treat others the way You treat me.",
-  questions: [
-    "What does hypocrisy look like in judgment?",
-    "How does the Golden Rule capture God’s heart?",
-    "Where can you extend compassion this week?"
-  ],
-  deeper:
-    "Studying the 'measure for measure' principle reveals God's desire for mercy over harsh judgment."
+17: {
+    reference: "Matthew 8:18–34",
+    verse: "“What manner of man is this, that even the winds and the sea obey him!” — Matthew 8:27",
+    youversion: "https://www.bible.com/bible/1/MAT.8.KJV",
+    context: `Jesus calms a storm and frees men oppressed by demons, showing authority over nature and the spiritual realm.`,
+    theme: "Jesus’ authority extends over every fear we face.",
+    prayer: "Lord, speak peace over the storms in my heart and life.",
+    reflection: [
+        "What storm in your life needs Jesus’ peace?",
+        "How do the disciples respond to fear?",
+        "Why do demons recognize Jesus immediately?"
+    ],
+    deeper: `The storm incident reveals both Jesus’ humanity (sleeping from exhaustion) and His divinity (commanding creation).`,
 },
 
-/* -------------------------
-   DAY 19 — Matthew 7:13–29
---------------------------*/
-{
-  day: 19,
-  reference: "Matthew 7:13–29",
-  title: "The Narrow Way & Wise Builder",
-  verse:
-    "“Enter ye in at the strait gate…” — Matthew 7:13 (KJV)",
-  youversion: "https://www.bible.com/bible/1/MAT.7.KJV",
-  context:
-    "Jesus concludes the Sermon on the Mount by contrasting the narrow gate with the broad path, true vs. false prophets, and wise vs. foolish builders.",
-  theme:
-    "Following Jesus requires intentional choice, discernment, and obedience.",
-  prayer:
-    "Jesus, guide me through the narrow path and help me build my life upon Your Word.",
-  questions: [
-    "What does the narrow path mean to you personally?",
-    "How do we discern false teachings?",
-    "What does building on the rock look like in daily life?"
-  ],
-  deeper:
-    "Jesus’ final warning underscores the necessity of obedience—not just hearing but doing His words."
+18: {
+    reference: "Matthew 9:1–17",
+    verse: "“The Son of man hath power on earth to forgive sins.” — Matthew 9:6",
+    youversion: "https://www.bible.com/bible/1/MAT.9.KJV",
+    context: `Jesus forgives and heals a paralytic, calls Matthew, and teaches about new wine and new ways.`,
+    theme: "Jesus brings new life that cannot fit into old systems.",
+    prayer: "Lord, make my heart a new wineskin—soft, surrendered, and ready for Your work.",
+    reflection: [
+        "Why did Jesus forgive the paralytic first?",
+        "How does Matthew’s calling display grace?",
+        "What does new wine represent in your life?"
+    ],
+    deeper: `The wineskins picture hearts—rigid hearts cannot hold new life.`,
 },
 
-/* -------------------------
-   DAY 20 — Matthew 8:1–17
---------------------------*/
-{
-  day: 20,
-  reference: "Matthew 8:1–17",
-  title: "Jesus Heals the Sick",
-  verse:
-    "“He touched him…” — Matthew 8:3 (KJV)",
-  youversion: "https://www.bible.com/bible/1/MAT.8.KJV",
-  context:
-    "Matthew presents a series of miracles revealing Jesus’ authority—He heals a leper, a centurion’s servant, and Peter’s mother-in-law.",
-  theme:
-    "Jesus carries healing, compassion, and divine authority.",
-  prayer:
-    "Lord, touch the places in my life that need Your healing—physically, emotionally, spiritually.",
-  questions: [
-    "What does Jesus’ compassion reveal about His character?",
-    "Why is the centurion’s faith so remarkable?",
-    "Where do you need Jesus’ healing touch today?"
-  ],
-  deeper:
-    "Matthew emphasizes fulfilled prophecy—Jesus bears our sicknesses and carries our pains (Isaiah 53)."
-},per:
-    "Salt symbolizes preservation and purity. Light represents revelation—Jesus shining through His people."
-},
-  /* -------------------------
-   DAY 21 — Matthew 8:18–34
---------------------------*/
-{
-  day: 21,
-  reference: "Matthew 8:18–34",
-  title: "Cost of Following Jesus",
-  verse:
-    "“The Son of man hath not where to lay his head.” — Matthew 8:20 (KJV)",
-  youversion: "https://www.bible.com/bible/1/MAT.8.KJV",
-  context:
-    "Jesus calls His followers to count the cost of discipleship. He calms a violent storm and casts out demons, displaying authority over nature and the spiritual realm.",
-  theme:
-    "Following Jesus costs comfort, but reveals His unmatched authority.",
-  prayer:
-    "Lord, help me follow You fully—even when it costs comfort or control.",
-  questions: [
-    "What does this passage teach about the cost of discipleship?",
-    "How does Jesus' authority over storms strengthen your faith?",
-    "Why do demons recognize Jesus immediately?"
-  ],
-  deeper:
-    "The demon-possessed men knew Jesus as the Son of God and feared the appointed time of judgment—showing spiritual realities beyond human sight."
+19: {
+    reference: "Matthew 9:18–38",
+    verse: "“Daughter, be of good comfort; thy faith hath made thee whole.” — Matthew 9:22",
+    youversion: "https://www.bible.com/bible/1/MAT.9.KJV",
+    context: `Jesus raises a girl, heals a woman, restores sight, casts out demons, and is moved with compassion for the crowds.`,
+    theme: "Jesus sees the hurting and moves with compassion.",
+    prayer: "Lord, give me Your eyes for those who are weary and hurting.",
+    reflection: [
+        "Which miracle speaks to you most today?",
+        "How does Jesus respond to human pain?",
+        "How can you show compassion this week?"
+    ],
+    deeper: `Jesus’ compassion is not pity—it is deeply felt love that moves Him to act.`,
 },
 
-/* -------------------------
-   DAY 22 — Matthew 9:1–17
---------------------------*/
-{
-  day: 22,
-  reference: "Matthew 9:1–17",
-  title: "Power to Forgive",
-  verse:
-    "“The Son of man hath power on earth to forgive sins.” — Matthew 9:6 (KJV)",
-  youversion: "https://www.bible.com/bible/1/MAT.9.KJV",
-  context:
-    "Jesus heals a paralyzed man to prove His authority to forgive. He calls Matthew, eats with sinners, and teaches about new wine and new wineskins.",
-  theme:
-    "Jesus forgives, restores, and brings new life that cannot fit into old patterns.",
-  prayer:
-    "Thank You, Jesus, that You forgive my sins and make all things new.",
-  questions: [
-    "Why did Jesus heal the paralytic before addressing his physical need?",
-    "How does Matthew’s calling display grace?",
-    "What does the wineskin metaphor teach about following Jesus?"
-  ],
-  deeper:
-    "The paralyzed man’s healing is a visible sign of an invisible miracle—Jesus’ authority to forgive."
+20: {
+    reference: "Matthew 10:1–23",
+    verse: "“Freely ye have received, freely give.” — Matthew 10:8",
+    youversion: "https://www.bible.com/bible/1/MAT.10.KJV",
+    context: `Jesus sends the twelve disciples with authority to heal and preach, preparing them for spiritual resistance.`,
+    theme: "When God sends you, He equips you.",
+    prayer: "Father, strengthen my courage to step into the calling You’ve placed on my life.",
+    reflection: [
+        "What have you freely received from God?",
+        "What challenges did Jesus warn the disciples about?",
+        "Where is God calling you to step forward in faith?"
+    ],
+    deeper: `The disciples carry Jesus’ authority—not their own—showing ministry is partnership with Him.`,
 },
 
-/* -------------------------
-   DAY 23 — Matthew 9:18–38
---------------------------*/
-{
-  day: 23,
-  reference: "Matthew 9:18–38",
-  title: "Compassion of the Shepherd",
-  verse:
-    "“The harvest truly is plenteous, but the labourers are few.” — Matthew 9:37 (KJV)",
-  youversion: "https://www.bible.com/bible/1/MAT.9.KJV",
-  context:
-    "Jesus raises a girl from the dead, heals a bleeding woman, restores sight, casts out demons, and sees crowds like sheep without a shepherd.",
-  theme:
-    "Jesus sees the hurt, meets needs, and calls workers into His harvest.",
-  prayer:
-    "Lord, give me Your compassion for the lost and hurting.",
-  questions: [
-    "Which miracle stands out most to you and why?",
-    "How does Jesus’ compassion challenge your own?",
-    "How can you be a laborer in God’s harvest?"
-  ],
-  deeper:
-    "This passage reveals Jesus' heart—the Good Shepherd moved by deep compassion (Greek: splagchnizomai)."
+}); // END DAYS 11–20 DATA
+   /* ---------------------------------------------------------
+   JANUARY STUDY — FULL DATA FOR DAYS 21–30
+----------------------------------------------------------*/
+
+Object.assign(studyDays, {
+
+21: {
+    reference: "Matthew 10:24–42",
+    verse: "“Are not two sparrows sold for a farthing? … Fear ye not therefore…” — Matthew 10:29–31",
+    youversion: "https://www.bible.com/bible/1/MAT.10.KJV",
+    context: `Jesus teaches about fear, loyalty, and the cost of discipleship. He reminds believers of the Father’s intimate care.`,
+    theme: "Following Jesus costs us something—but we are never forgotten by God.",
+    prayer: "Lord, make me bold. Strengthen my heart so I will not fear people, but trust You completely.",
+    reflection: [
+        "Which fear does Jesus confront most directly?",
+        "How does God’s care for sparrows reassure you?",
+        "What does it mean to take up your cross daily?"
+    ],
+    deeper: `The Father’s knowledge is so complete He counts every hair—this is sovereignty wrapped in tenderness.`,
 },
 
-/* -------------------------
-   DAY 24 — Matthew 10:1–23
---------------------------*/
-{
-  day: 24,
-  reference: "Matthew 10:1–23",
-  title: "Sent Out With Authority",
-  verse:
-    "“Freely ye have received, freely give.” — Matthew 10:8 (KJV)",
-  youversion: "https://www.bible.com/bible/1/MAT.10.KJV",
-  context:
-    "Jesus sends the twelve to preach, heal, and cast out demons. He prepares them for rejection and persecution, yet assures them of God’s presence.",
-  theme:
-    "God equips those He sends, even when the path is difficult.",
-  prayer:
-    "Father, give me boldness and compassion as I share Your truth.",
-  questions: [
-    "What does it mean to freely give?",
-    "How does Jesus prepare the disciples for persecution?",
-    "Where is God calling you to step out in courage?"
-  ],
-  deeper:
-    "The disciples carry Jesus’ authority—not their own—showing that ministry is partnership with Him."
+22: {
+    reference: "Matthew 11:1–19",
+    verse: "“Blessed is he, whosoever shall not be offended in me.” — Matthew 11:6",
+    youversion: "https://www.bible.com/bible/1/MAT.11.KJV",
+    context: `John the Baptist wrestles with doubt in prison. Jesus affirms John but warns against stumbling over God’s unexpected ways.`,
+    theme: "Faith trusts Jesus even when His ways don’t look like we expect.",
+    prayer: "Jesus, steady my heart when I don’t understand Your timing or Your plans.",
+    reflection: [
+        "Why was John struggling with doubt?",
+        "What miracles does Jesus point to as evidence?",
+        "Where do you need to trust God’s timing today?"
+    ],
+    deeper: `Jesus praises John publicly while answering his private doubts—showing gentleness in the face of human struggle.`,
 },
 
-/* -------------------------
-   DAY 25 — Matthew 10:24–42
---------------------------*/
-{
-  day: 25,
-  reference: "Matthew 10:24–42",
-  title: "Fear Not—You Are Known",
-  verse:
-    "“The very hairs of your head are all numbered.” — Matthew 10:30 (KJV)",
-  youversion: "https://www.bible.com/bible/1/MAT.10.KJV",
-  context:
-    "Jesus teaches about fear, confession, division, and the cost of following Him. He reminds believers that they are deeply known and cared for.",
-  theme:
-    "God’s perfect knowledge removes fear and strengthens courage.",
-  prayer:
-    "Lord, help me fear You above all and trust Your care over my life.",
-  questions: [
-    "Why does Jesus talk about sparrows and hairs?",
-    "What does it mean to confess Christ?",
-    "How has following Jesus cost you something—and blessed you something?"
-  ],
-  deeper:
-    "God’s intimate care is shown through sparrows—creatures of little value—yet fully seen by Him."
+23: {
+    reference: "Matthew 11:20–30",
+    verse: "“Come unto me, all ye that labour and are heavy laden…” — Matthew 11:28",
+    youversion: "https://www.bible.com/bible/1/MAT.11.KJV",
+    context: `Jesus rebukes unrepentant cities, then offers deep soul rest to the weary. The contrast highlights grace after warning.`,
+    theme: "True rest comes from surrendering to Jesus’ gentle leadership.",
+    prayer: "Lord, I lay my burdens down. Teach me to rest in Your heart instead of striving.",
+    reflection: [
+        "What burdens are you carrying today?",
+        "What does Jesus mean by taking His yoke?",
+        "Where do you sense God inviting you into rest?"
+    ],
+    deeper: `Jesus’ “easy” yoke refers to a perfectly fitted tool—He gives grace for exactly what He calls you to carry.`,
 },
 
-/* -------------------------
-   DAY 26 — Matthew 11:1–19
---------------------------*/
-{
-  day: 26,
-  reference: "Matthew 11:1–19",
-  title: "Blessed When Not Offended",
-  verse:
-    "“Blessed is he, whosoever shall not be offended in me.” — Matthew 11:6 (KJV)",
-  youversion: "https://www.bible.com/bible/1/MAT.11.KJV",
-  context:
-    "John the Baptist questions Jesus from prison. Jesus affirms His works as the signs of the Messiah and rebukes those who reject Him.",
-  theme:
-    "God’s ways may confuse us, but trusting Him brings blessing.",
-  prayer:
-    "Jesus, when I don’t understand Your ways, help me trust Your heart.",
-  questions: [
-    "Why did John question Jesus?",
-    "How does Jesus respond to doubt with grace?",
-    "What expectations do you need to surrender to God?"
-  ],
-  deeper:
-    "Jesus quotes Isaiah’s Messianic signs—healing, deliverance, and good news—to affirm His identity."
+24: {
+    reference: "Matthew 12:1–21",
+    verse: "“I will have mercy, and not sacrifice.” — Matthew 12:7",
+    youversion: "https://www.bible.com/bible/1/MAT.12.KJV",
+    context: `Jesus corrects the Pharisees’ view of the Sabbath, heals a man, and fulfills Isaiah’s prophecy of the gentle Servant.`,
+    theme: "Mercy is at the heart of God—and the heart of Sabbath rest.",
+    prayer: "Lord, soften my heart. Help me value mercy above rule-keeping or ritual.",
+    reflection: [
+        "What does mercy look like in your relationships?",
+        "How does Jesus redefine the Sabbath?",
+        "Where do you see Jesus as the gentle Servant?"
+    ],
+    deeper: `Jesus is “greater than the temple,” declaring Himself the ultimate source of rest, healing, and mercy.`,
 },
 
-/* -------------------------
-   DAY 27 — Matthew 11:20–30
---------------------------*/
-{
-  day: 27,
-  reference: "Matthew 11:20–30",
-  title: "Come & Find Rest",
-  verse:
-    "“Come unto me… and I will give you rest.” — Matthew 11:28 (KJV)",
-  youversion: "https://www.bible.com/bible/1/MAT.11.KJV",
-  context:
-    "Jesus warns unrepentant cities, then issues one of the most beloved invitations to the weary: rest in Him.",
-  theme:
-    "True rest is found only in Jesus—not in effort, success, or self.",
-  prayer:
-    "Lord Jesus, I give You my weariness. Teach me to rest in You.",
-  questions: [
-    "Where do you need Jesus’ rest today?",
-    "How does Jesus describe His heart in this passage?",
-    "What burdens do you need to release?"
-  ],
-  deeper:
-    "Jesus calls Himself “meek and lowly in heart,” revealing the gentleness of God toward His children."
+25: {
+    reference: "Matthew 12:22–37",
+    verse: "“A tree is known by his fruit.” — Matthew 12:33",
+    youversion: "https://www.bible.com/bible/1/MAT.12.KJV",
+    context: `Jesus exposes the Pharisees’ hardened hearts and teaches about spiritual fruit, speech, and blasphemy against the Spirit.`,
+    theme: "Our words reveal the condition of our hearts.",
+    prayer: "Holy Spirit, purify my words and cleanse anything in me that resists Your work.",
+    reflection: [
+        "Why were the Pharisees’ accusations so serious?",
+        "How do your words reveal your heart?",
+        "What fruit is the Spirit growing in you now?"
+    ],
+    deeper: `Blasphemy of the Spirit is persistent rejection of His witness about Jesus—not a single moment but a hardened posture.`,
 },
 
-/* -------------------------
-   DAY 28 — Matthew 12:1–21
---------------------------*/
-{
-  day: 28,
-  reference: "Matthew 12:1–21",
-  title: "Lord of the Sabbath",
-  verse:
-    "“For the Son of man is Lord even of the sabbath day.” — Matthew 12:8 (KJV)",
-  youversion: "https://www.bible.com/bible/1/MAT.12.KJV",
-  context:
-    "Religious leaders accuse Jesus of breaking Sabbath laws. Jesus reveals that mercy outweighs ritual and that He is Lord of the Sabbath.",
-  theme:
-    "Jesus brings rest, mercy, and freedom—not burdensome religion.",
-  prayer:
-    "Jesus, show me how to rest in Your mercy instead of striving.",
-  questions: [
-    "What does Jesus teach about mercy here?",
-    "Why did the Pharisees oppose Him?",
-    "How does Jesus fulfill Isaiah’s prophecy of the gentle servant?"
-  ],
-  deeper:
-    "Isaiah 42’s prophecy shows the Messiah will not crush the weak but gently restore them."
+26: {
+    reference: "Matthew 12:38–50",
+    verse: "“For whosoever shall do the will of my Father… the same is my brother, and sister, and mother.” — Matthew 12:50",
+    youversion: "https://www.bible.com/bible/1/MAT.12.KJV",
+    context: `The Pharisees demand a sign, but Jesus offers the sign of Jonah. He teaches about true family rooted in obedience.`,
+    theme: "Jesus defines family by faith, not lineage.",
+    prayer: "Lord, make me someone who does Your will with joy and trust.",
+    reflection: [
+        "What is the sign of Jonah pointing to?",
+        "How does Jesus describe true spiritual family?",
+        "What does obedience look like today?"
+    ],
+    deeper: `Jesus warns that spiritual emptiness invites deeper bondage unless filled with God’s presence.`,
 },
 
-/* -------------------------
-   DAY 29 — Matthew 12:22–37
---------------------------*/
-{
-  day: 29,
-  reference: "Matthew 12:22–37",
-  title: "A Kingdom Divided",
-  verse:
-    "“A good man out of the good treasure of the heart bringeth forth good things.” — Matthew 12:35 (KJV)",
-  youversion: "https://www.bible.com/bible/1/MAT.12.KJV",
-  context:
-    "Pharisees accuse Jesus of casting out demons by Satan’s power. Jesus explains that a divided kingdom cannot stand and warns about careless words.",
-  theme:
-    "Our words reveal the true condition of our heart.",
-  prayer:
-    "Holy Spirit, purify my heart so my words honor and reflect Jesus.",
-  questions: [
-    "Why is the Pharisees’ accusation so dangerous?",
-    "How do words reveal the heart?",
-    "What does it mean to store good treasure within?"
-  ],
-  deeper:
-    "Blasphemy against the Spirit is willful rejection of the Spirit’s testimony of Christ—not accidental sin."
+27: {
+    reference: "Matthew 13:1–23",
+    verse: "“He that hath ears to hear, let him hear.” — Matthew 13:9",
+    youversion: "https://www.bible.com/bible/1/MAT.13.KJV",
+    context: `Jesus teaches the Parable of the Sower, explaining different heart responses to the Word.`,
+    theme: "Fruitfulness comes from a heart soft and open to God.",
+    prayer: "Lord, break up any hardened soil in my heart and plant Your Word deeply in me.",
+    reflection: [
+        "Which soil type do you relate to today?",
+        "What chokes or withers your spiritual growth?",
+        "How can you nurture a fruitful heart?"
+    ],
+    deeper: `The “hundredfold” harvest is miraculous—revealing supernatural growth when the heart welcomes truth.`,
 },
 
-/* -------------------------
-   DAY 30 — Matthew 12:38–50
---------------------------*/
-{
-  day: 30,
-  reference: "Matthew 12:38–50",
-  title: "Greater Than Jonah",
-  verse:
-    "“Whosoever shall do the will of my Father… the same is my brother, and sister, and mother.” — Matthew 12:50 (KJV)",
-  youversion: "https://www.bible.com/bible/1/MAT.12.KJV",
-  context:
-    "Religious leaders demand a sign. Jesus points to the sign of Jonah—His resurrection—and redefines true family as those who obey God.",
-  theme:
-    "Obedience to God reveals true belonging in His family.",
-  prayer:
-    "Father, help me not only hear Your will but walk in it daily.",
-  questions: [
-    "Why did Jesus refuse to give another sign?",
-    "What does the sign of Jonah point to?",
-    "How does Jesus define true spiritual family?"
-  ],
-  deeper:
-    "Gentiles responded to Jonah and Solomon, yet Israel rejected One far greater—Jesus Himself."
+28: {
+    reference: "Matthew 13:24–43",
+    verse: "“The field is the world…” — Matthew 13:38",
+    youversion: "https://www.bible.com/bible/1/MAT.13.KJV",
+    context: `Jesus shares the parables of the Wheat & Tares, Mustard Seed, and Leaven—kingdom truths about growth and judgment.`,
+    theme: "God’s kingdom grows quietly and powerfully, even amid spiritual opposition.",
+    prayer: "Father, strengthen my faith when I cannot yet see the full harvest.",
+    reflection: [
+        "Why does God allow wheat and weeds to grow together for now?",
+        "What does the mustard seed reveal about small beginnings?",
+        "How is the kingdom like leaven in your own life?"
+    ],
+    deeper: `The harvest imagery points to final judgment—God’s timing is patient, purposeful, and perfect.`,
 },
-  
-   // LocalStorage functions
-    function getCompletedDays() {
-      const stored = localStorage.getItem('matthewJanuary_completed');
-      return stored ? JSON.parse(stored) : [];
-    }
 
-    function saveCompletedDay(dayNumber, notes) {
-      const completed = getCompletedDays();
-      const existing = completed.find(d => d.day === dayNumber);
+29: {
+    reference: "Matthew 13:44–58",
+    verse: "“The kingdom of heaven is like unto treasure hid in a field…” — Matthew 13:44",
+    youversion: "https://www.bible.com/bible/1/MAT.13.KJV",
+    context: `Jesus teaches about hidden treasure, a pearl of great price, a fishing net, and the prophet without honor.`,
+    theme: "The kingdom is worth everything—we gain far more than we give up.",
+    prayer: "Jesus, help me treasure You above everything else in this world.",
+    reflection: [
+        "What does the hidden treasure represent to you?",
+        "How valuable is the kingdom in your life?",
+        "Why did Jesus’ hometown struggle with unbelief?"
+    ],
+    deeper: `The joy of finding the treasure fuels sacrifice—this is not loss but incomparable gain.`,
+},
 
-      if (existing) {
-        existing.notes = notes;
-        existing.date = new Date().toISOString();
-      } else {
-        completed.push({
-          day: dayNumber,
-          notes: notes,
-          date: new Date().toISOString()
-        });
-      }
+30: {
+    reference: "Matthew 14:1–21",
+    verse: "“They need not depart; give ye them to eat.” — Matthew 14:16",
+    youversion: "https://www.bible.com/bible/1/MAT.14.KJV",
+    context: `Jesus feeds five thousand after the death of John the Baptist. Grief meets compassion; scarcity meets divine abundance.`,
+    theme: "Jesus multiplies what we place in His hands.",
+    prayer: "Lord, take what little I have and use it for Your glory. Multiply it beyond anything I can imagine.",
+    reflection: [
+        "Where do you feel you ‘don’t have enough’?",
+        "What does Jesus’ compassion reveal about His heart?",
+        "How can you offer your loaves and fishes to Him?"
+    ],
+    deeper: `Jesus first blesses, then breaks, then multiplies—this is the pattern of kingdom abundance.`,
+},
 
-      localStorage.setItem('matthewJanuary_completed', JSON.stringify(completed));
-    }
-
-    function getNotes(dayNumber) {
-      const completed = getCompletedDays();
-      const day = completed.find(d => d.day === dayNumber);
-      return day ? day.notes : '';
-    }
-
-    function isDayCompleted(dayNumber) {
-      const completed = getCompletedDays();
-      return completed.some(d => d.day === dayNumber);
-    }
-
-    let currentDay = null;
-
-    function renderDaysGrid() {
-      const grid = document.getElementById('days-grid');
-      grid.innerHTML = '';
-
-      matthewStudy.forEach(study => {
-        const card = document.createElement('div');
-        const isCompleted = isDayCompleted(study.day);
-
-        card.className = `day-card ${isCompleted ? 'completed' : ''}`;
-
-        const dayNumberDiv = document.createElement('div');
-        dayNumberDiv.className = 'day-number';
-        dayNumberDiv.innerHTML = `
-          Day ${study.day}
-          ${isCompleted ? '<span class="check-icon">✓</span>' : ''}
-        `;
-
-        const verseRef = document.createElement('div');
-        verseRef.className = 'verse-reference';
-        verseRef.textContent = study.reference;
-
-        const versePreview = document.createElement('div');
-        versePreview.className = 'verse-preview';
-        versePreview.textContent = study.verse;
-
-        card.appendChild(dayNumberDiv);
-        card.appendChild(verseRef);
-        card.appendChild(versePreview);
-
-        card.addEventListener('click', () => openStudyModal(study));
-
-        grid.appendChild(card);
-      });
-    }
-
-    function updateProgress() {
-      const completed = getCompletedDays().length;
-      const percentage = Math.round((completed / 30) * 100);
-
-      const progressFill = document.getElementById('progress-fill');
-      const progressText = document.getElementById('progress-text');
-
-      progressFill.style.width = `${percentage}%`;
-      progressFill.textContent = `${percentage}%`;
-      progressText.textContent = `${completed} of 30 days completed`;
-    }
-
-    function openStudyModal(study) {
-      currentDay = study;
-      const modal = document.getElementById('study-modal');
-
-      document.getElementById('modal-day-number').textContent = `Day ${study.day}`;
-      document.getElementById('modal-verse-ref').textContent = study.reference;
-      document.getElementById('verse-text').textContent = study.verse;
-      document.getElementById('youversion-link').href = study.youversion;
-      document.getElementById('context-text').textContent = study.context;
-      document.getElementById('theme-text').textContent = study.theme;
-      document.getElementById('prayer-text').textContent = study.prayer;
-      document.getElementById('deeper-text').textContent = study.deeper;
-
-      const questionsList = document.getElementById('questions-list');
-      questionsList.innerHTML = '';
-      study.questions.forEach(question => {
-        const questionDiv = document.createElement('div');
-        questionDiv.className = 'question';
-        questionDiv.textContent = question;
-        questionsList.appendChild(questionDiv);
-      });
-
-      const notesArea = document.getElementById('notes-area');
-      notesArea.value = getNotes(study.day);
-
-      const completeBtn = document.getElementById('complete-btn');
-      if (isDayCompleted(study.day)) {
-        completeBtn.textContent = 'Completed ✓';
-        completeBtn.disabled = true;
-      } else {
-        completeBtn.textContent = 'Mark as Complete';
-        completeBtn.disabled = false;
-      }
-
-      modal.classList.add('active');
-    }
-
-    function closeModal() {
-      document.getElementById('study-modal').classList.remove('active');
-      currentDay = null;
-    }
-
-    function markComplete() {
-      if (!currentDay) return;
-
-      const notes = document.getElementById('notes-area').value;
-      saveCompletedDay(currentDay.day, notes);
-
-      const completeBtn = document.getElementById('complete-btn');
-      completeBtn.textContent = 'Completed ✓';
-      completeBtn.disabled = true;
-
-      renderDaysGrid();
-      updateProgress();
-    }
-
-    function copyFullJournal() {
-      if (!currentDay) return;
-
-      const notes = document.getElementById('notes-area').value;
-      const study = matthewStudy.find(s => s.day === currentDay.day);
-
-      let journalText = `DAY ${study.day} - ${study.reference}\n\n`;
-      journalText += `SCRIPTURE:\n${study.verse}\n\n`;
-      journalText += `HISTORICAL CONTEXT:\n${study.context}\n\n`;
-      journalText += `KEY THEME:\n${study.theme}\n\n`;
-      journalText += `PRAYER PROMPT:\n${study.prayer}\n\n`;
-      journalText += `REFLECTION QUESTIONS:\n`;
-      study.questions.forEach((q, i) => {
-        journalText += `${i + 1}. ${q}\n`;
-      });
-      journalText += `\nDIGGING DEEPER:\n${study.deeper}\n\n`;
-      journalText += `MY NOTES:\n${notes || '(No notes yet)'}`;
-
-      navigator.clipboard.writeText(journalText).then(() => {
-        const copyBtn = document.getElementById('copy-journal-btn');
-        const originalText = copyBtn.textContent;
-        copyBtn.textContent = 'Copied! ✓';
-        copyBtn.style.background = '#4CAF50';
-        setTimeout(() => {
-          copyBtn.textContent = originalText;
-          copyBtn.style.background = '';
-        }, 2000);
-      }).catch(() => {
-        const textarea = document.createElement('textarea');
-        textarea.value = journalText;
-        document.body.appendChild(textarea);
-        textarea.select();
-        try {
-          document.execCommand('copy');
-          const copyBtn = document.getElementById('copy-journal-btn');
-          const originalText = copyBtn.textContent;
-          copyBtn.textContent = 'Copied! ✓';
-          copyBtn.style.background = '#4CAF50';
-          setTimeout(() => {
-            copyBtn.textContent = originalText;
-            copyBtn.style.background = '';
-          }, 2000);
-        } catch (err) {
-          const errorMsg = document.createElement('div');
-          errorMsg.textContent = 'Failed to copy. Please try again.';
-          errorMsg.style.color = '#ff6b6b';
-          errorMsg.style.marginTop = '10px';
-          document.querySelector('.action-buttons').appendChild(errorMsg);
-          setTimeout(() => errorMsg.remove(), 3000);
-        }
-        document.body.removeChild(textarea);
-      });
-    }
-
-    document.getElementById('close-modal').addEventListener('click', closeModal);
-    document.getElementById('cancel-btn').addEventListener('click', closeModal);
-    document.getElementById('complete-btn').addEventListener('click', markComplete);
-    document.getElementById('copy-journal-btn').addEventListener('click', copyFullJournal);
-
-    document.getElementById('study-modal').addEventListener('click', (e) => {
-      if (e.target.id === 'study-modal') {
-        closeModal();
-      }
-    });
-
-    // Initialize
-    renderDaysGrid();
-    updateProgress();
-  </script>
- <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'99d2afc2921b9e5c',t:'MTc2MjkxNTQ1Ni4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
-</html>
+}); // END OF DAYS 21–30 DATA
+   
