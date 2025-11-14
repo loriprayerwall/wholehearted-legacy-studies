@@ -27,7 +27,9 @@ body {
   padding: 25px 20px;
 }
 
-/* HEADER CARD */
+/* -----------------------------------------
+HEADER CARD — EXACT ORIGINAL STYLE
+------------------------------------------*/
 .header-card {
   background: #fdfcf9;
   border-radius: 14px;
@@ -70,13 +72,17 @@ body {
   color: #5a4332;
 }
 
-/* DAY CARD GRID */
+/* ------------------------------------------
+DAY CARD GRID (ONE COLUMN — OPTION B)
+-------------------------------------------*/
 .day-grid {
   display: grid;
   grid-template-columns: 1fr;
   gap: 26px;
   margin-bottom: 50px;
 }
+
+/* Bronze highlight cards */
 .day-card {
   background: #7d5c4e;
   border: 2px solid #c9a46b;
@@ -103,7 +109,9 @@ body {
   margin-bottom: 10px;
 }
 
-/* MODAL */
+/* ----------------------------------------------------------
+MODAL — EXACT STYLE FROM YOUR SCREENSHOT
+-----------------------------------------------------------*/
 .modal-overlay {
   display: none;
   position: fixed;
@@ -111,7 +119,7 @@ body {
   background: rgba(0,0,0,0.55);
   backdrop-filter: blur(4px);
   z-index: 999;
-  overflow-y: auto;   /* ✅ allow scrolling on mobile */
+  overflow-y: auto;   /* Mobile: allow scrolling */
 }
 .modal-box {
   background: #fdfcf9;
@@ -123,13 +131,15 @@ body {
   position: relative;
   animation: fadeIn 0.35s ease-out;
 
-  max-height: 80vh;   /* ✅ keep within viewport */
-  overflow-y: auto;   /* ✅ scroll inside modal */
+  max-height: 80vh;   /* Mobile: keep within viewport */
+  overflow-y: auto;   /* Mobile: scroll inside modal */
 }
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(15px); }
   to { opacity: 1; transform: translateY(0); }
 }
+
+/* Close Modal */
 .close-modal {
   position: absolute;
   top: 14px;
@@ -138,6 +148,8 @@ body {
   cursor: pointer;
   color: #6a4c3a;
 }
+
+/* Verse block */
 .verse-box {
   background: #fff7d9;
   border-left: 5px solid #c9a46b;
@@ -147,12 +159,16 @@ body {
   line-height: 1.6;
   font-style: italic;
 }
+
+/* Section titles */
 .section-title {
   font-weight: bold;
   font-size: 19px;
   color: #3e2a1f;
   margin-top: 25px;
 }
+
+/* Notes Box */
 .notes-box {
   width: 100%;
   height: 150px;
@@ -163,6 +179,8 @@ body {
   font-family: Georgia, serif;
   font-size: 15px;
 }
+
+/* Buttons */
 .button-row {
   margin-top: 22px;
   display: flex;
@@ -182,6 +200,8 @@ body {
   background: #6b4b3c;
   transform: translateY(-2px);
 }
+
+/* YouVersion Button */
 .youversion-link {
   display: inline-block;
   margin-top: 10px;
@@ -204,6 +224,7 @@ body {
   <div class="header-card">
     <div class="header-title">Matthew Study — January</div>
     <div class="header-sub">Matthew Chapters 1–13 • 30 Days • KJV</div>
+    <!-- Progress -->
     <div class="progress-wrapper">
       <div class="progress-bar" id="progressBar"></div>
     </div>
@@ -212,14 +233,186 @@ body {
 
   <!-- DAY GRID -->
   <div class="day-grid">
-    <!-- All 30 day cards exactly as you had them -->
-    <!-- Example -->
+    <!-- DAY 1 -->
     <div class="day-card" onclick="openModal(1)">
       <div class="day-label">Day 1</div>
       <div class="day-ref">Matthew 1:1–17 (KJV)</div>
       <div>The genealogy of Jesus Christ</div>
     </div>
-    <!-- … repeat through Day 30 … -->
+    <!-- DAY 2 -->
+    <div class="day-card" onclick="openModal(2)">
+      <div class="day-label">Day 2</div>
+      <div class="day-ref">Matthew 1:18–25 (KJV)</div>
+      <div>The birth of Jesus Christ</div>
+    </div>
+    <!-- DAY 3 -->
+    <div class="day-card" onclick="openModal(3)">
+      <div class="day-label">Day 3</div>
+      <div class="day-ref">Matthew 2:1–12 (KJV)</div>
+      <div>The wise men seek Jesus</div>
+    </div>
+    <!-- DAY 4 -->
+    <div class="day-card" onclick="openModal(4)">
+      <div class="day-label">Day 4</div>
+      <div class="day-ref">Matthew 2:13–23 (KJV)</div>
+      <div>Flight into Egypt & return to Nazareth</div>
+    </div>
+    <!-- DAY 5 -->
+    <div class="day-card" onclick="openModal(5)">
+      <div class="day-label">Day 5</div>
+      <div class="day-ref">Matthew 3:1–12 (KJV)</div>
+      <div>John the Baptist prepares the way</div>
+    </div>
+    <!-- DAY 6 -->
+    <div class="day-card" onclick="openModal(6)">
+      <div class="day-label">Day 6</div>
+      <div class="day-ref">Matthew 3:13–17 (KJV)</div>
+      <div>The baptism of Jesus</div>
+    </div>
+    <!-- DAY 7 -->
+    <div class="day-card" onclick="openModal(7)">
+      <div class="day-label">Day 7</div>
+      <div class="day-ref">Matthew 4:1–11 (KJV)</div>
+      <div>The temptation of Jesus</div>
+    </div>
+    <!-- DAY 8 -->
+    <div class="day-card" onclick="openModal(8)">
+      <div class="day-label">Day 8</div>
+      <div class="day-ref">Matthew 4:12–25 (KJV)</div>
+      <div>The beginning of Jesus’ ministry</div>
+    </div>
+    <!-- DAY 9 -->
+    <div class="day-card" onclick="openModal(9)">
+      <div class="day-label">Day 9</div>
+      <div class="day-ref">Matthew 5:1–16 (KJV)</div>
+      <div>The Beatitudes</div>
+    </div>
+    <!-- DAY 10 -->
+    <div class="day-card" onclick="openModal(10)">
+      <div class="day-label">Day 10</div>
+      <div class="day-ref">Matthew 5:17–32 (KJV)</div>
+      <div>Jesus fulfills the law</div>
+    </div>
+    <!-- DAY 11 -->
+    <div class="day-card" onclick="openModal(11)">
+      <div class="day-label">Day 11</div>
+      <div class="day-ref">Matthew 5:33–48 (KJV)</div>
+      <div>Love your enemies</div>
+    </div>
+    <!-- DAY 12 -->
+    <div class="day-card" onclick="openModal(12)">
+      <div class="day-label">Day 12</div>
+      <div class="day-ref">Matthew 6:1–18 (KJV)</div>
+      <div>Prayer, fasting, sincerity</div>
+    </div>
+    <!-- DAY 13 -->
+    <div class="day-card" onclick="openModal(13)">
+      <div class="day-label">Day 13</div>
+      <div class="day-ref">Matthew 6:19–34 (KJV)</div>
+      <div>Seek first the kingdom</div>
+    </div>
+    <!-- DAY 14 -->
+    <div class="day-card" onclick="openModal(14)">
+      <div class="day-label">Day 14</div>
+      <div class="day-ref">Matthew 7:1–14 (KJV)</div>
+      <div>Ask, seek, knock</div>
+    </div>
+    <!-- DAY 15 -->
+    <div class="day-card" onclick="openModal(15)">
+      <div class="day-label">Day 15</div>
+      <div class="day-ref">Matthew 7:15–29 (KJV)</div>
+      <div>Wise & foolish builders</div>
+    </div>
+    <!-- DAY 16 -->
+    <div class="day-card" onclick="openModal(16)">
+      <div class="day-label">Day 16</div>
+      <div class="day-ref">Matthew 8:1–17 (KJV)</div>
+      <div>Jesus heals many</div>
+    </div>
+    <!-- DAY 17 -->
+    <div class="day-card" onclick="openModal(17)">
+      <div class="day-label">Day 17</div>
+      <div class="day-ref">Matthew 8:18–34 (KJV)</div>
+      <div>Jesus calms the storm</div>
+    </div>
+    <!-- DAY 18 -->
+    <div class="day-card" onclick="openModal(18)">
+      <div class="day-label">Day 18</div>
+      <div class="day-ref">Matthew 9:1–17 (KJV)</div>
+      <div>New wine in new wineskins</div>
+    </div>
+    <!-- DAY 19 -->
+    <div class="day-card" onclick="openModal(19)">
+      <div class="day-label">Day 19</div>
+      <div class="day-ref">Matthew 9:18–38 (KJV)</div>
+      <div>Compassion of Jesus</div>
+    </div>
+    <!-- DAY 20 -->
+    <div class="day-card" onclick="openModal(20)">
+      <div class="day-label">Day 20</div>
+      <div class="day-ref">Matthew 10:1–23 (KJV)</div>
+      <div>Jesus sends the 12</div>
+    </div>
+    <!-- DAY 21 -->
+    <div class="day-card" onclick="openModal(21)">
+      <div class="day-label">Day 21</div>
+      <div class="day-ref">Matthew 10:24–42 (KJV)</div>
+      <div>Fear not — God sees you</div>
+    </div>
+    <!-- DAY 22 -->
+    <div class="day-card" onclick="openModal(22)">
+      <div class="day-label">Day 22</div>
+      <div class="day-ref">Matthew 11:1–19 (KJV)</div>
+      <div>Blessed is he who is not offended in Christ</div>
+    </div>
+    <!-- DAY 23 -->
+    <div class="day-card" onclick="openModal(23)">
+      <div class="day-label">Day 23</div>
+      <div class="day-ref">Matthew 11:20–30 (KJV)</div>
+      <div>Come unto Me, I will give you rest</div>
+    </div>
+    <!-- DAY 24 -->
+    <div class="day-card" onclick="openModal(24)">
+      <div class="day-label">Day 24</div>
+      <div class="day-ref">Matthew 12:1–21 (KJV)</div>
+      <div>I desire mercy, not sacrifice</div>
+    </div>
+    <!-- DAY 25 -->
+    <div class="day-card" onclick="openModal(25)">
+      <div class="day-label">Day 25</div>
+      <div class="day-ref">Matthew 12:22–37 (KJV)</div>
+      <div>A tree is known by its fruit</div>
+    </div>
+    <!-- DAY 26 -->
+    <div class="day-card" onclick="openModal(26)">
+      <div class="day-label">Day 26</div>
+      <div class="day-ref">Matthew 12:38–50 (KJV)</div>
+      <div>Who is My family?</div>
+    </div>
+    <!-- DAY 27 -->
+    <div class="day-card" onclick="openModal(27)">
+      <div class="day-label">Day 27</div>
+      <div class="day-ref">Matthew 13:1–23 (KJV)</div>
+      <div>The Parable of the Sower</div>
+    </div>
+    <!-- DAY 28 -->
+    <div class="day-card" onclick="openModal(28)">
+      <div class="day-label">Day 28</div>
+      <div class="day-ref">Matthew 13:24–43 (KJV)</div>
+      <div>Wheat & tares, mustard seed</div>
+    </div>
+    <!-- DAY 29 -->
+    <div class="day-card" onclick="openModal(29)">
+      <div class="day-label">Day 29</div>
+      <div class="day-ref">Matthew 13:44–52 (KJV)</div>
+      <div>Treasure, pearl, net</div>
+    </div>
+    <!-- DAY 30 -->
+    <div class="day-card" onclick="openModal(30)">
+      <div class="day-label">Day 30</div>
+      <div class="day-ref">Matthew 13:53–58 (KJV)</div>
+      <div>Jesus rejected at Nazareth</div>
+    </div>
   </div>
 </div>
 
@@ -237,8 +430,38 @@ MATTHEW JANUARY STUDY — DAYS 1–30 (MATTHEW 1–13)
 EVEN VERSE SPLITS • KJV • FULL DEVOTIONAL DATA
 ----------------------------------------------------------*/
 
-/* ✅ Your full studyDays object goes here (all 30 entries as before) */
-const studyDays = { /* … full 30 day data … */ };
+const studyDays = {
+1:{title:"Day 1 — Matthew 1:1–17 (KJV)",link:"https://www.bible.com/bible/1/MAT.1.KJV",verse:"“The book of the generation of Jesus Christ…” — Matthew 1:1",context:"Matthew begins by establishing Jesus’ royal lineage through Abraham and David, proving He is the promised Messiah.",theme:"Jesus is the fulfillment of God's covenant promises.",prayer:"Lord, thank You for orchestrating history with purpose. Help me trust that You are at work in my story too.",reflection:["What does Jesus’ genealogy reveal about God’s faithfulness?","Which names stand out to you and why?","Where do you see God’s planning in your life?"],deeper:"Matthew’s 3 sets of 14 generations reveal God’s intentional design—even across centuries."},
+2:{title:"Day 2 — Matthew 1:18–25 (KJV)",link:"https://www.bible.com/bible/1/MAT.1.KJV",verse:"“That which is conceived in her is of the Holy Ghost.” — Matthew 1:20",context:"Joseph learns Mary is miraculously carrying the Messiah and obeys God despite fear and uncertainty.",theme:"Obedience often requires courage and trust.",prayer:"Father, give me a heart that obeys even when I don't understand everything.",reflection:["How does Joseph model godly obedience?","Why is the virgin birth important to the Gospel?","Where is God asking you to trust Him?"],deeper:"Jesus’ title ‘Emmanuel’ means ‘God with us’—the heart of the entire Gospel story."},
+3:{title:"Day 3 — Matthew 2:1–12 (KJV)",link:"https://www.bible.com/bible/1/MAT.2.KJV",verse:"“We have seen his star in the east…” — Matthew 2:2",context:"Wise men seek the newborn King while Herod reacts in fear and hostility.",theme:"Those who truly seek Jesus find Him.",prayer:"Lord, give me the heart of a seeker—ready to worship You wholeheartedly.",reflection:["What do the wise men teach you about pursuit of Jesus?","How does Herod represent resistance to God?","What gifts can you bring Jesus today?"],deeper:"Their journey fulfilled prophecy and declared Jesus’ kingship to the world."},
+4:{title:"Day 4 — Matthew 2:13–23 (KJV)",link:"https://www.bible.com/bible/1/MAT.2.KJV",verse:"“Out of Egypt have I called my son.” — Matthew 2:15",context:"Joseph obeys God’s warning, protecting Jesus during Herod’s violent decree.",theme:"God protects His purposes and His people.",prayer:"Lord, give me ears to hear Your warnings and courage to obey Your leading.",reflection:["How does God guide Joseph in this passage?","What does fulfilled prophecy show about God’s sovereignty?","Where do you need to rest in God’s protection?"],deeper:"This chapter parallels Israel’s story, showing Jesus as the true and faithful Son."},
+5:{title:"Day 5 — Matthew 3:1–12 (KJV)",link:"https://www.bible.com/bible/1/MAT.3.KJV",verse:"“Prepare ye the way of the Lord.” — Matthew 3:3",context:"John the Baptist calls people to repentance in preparation for the Messiah.",theme:"Repentance prepares our hearts for Jesus.",prayer:"Cleanse my heart, Lord, and prepare me for what You want to do in my life.",reflection:["How would you define repentance?","Why was John’s ministry necessary?","What areas need spiritual preparing in your life?"],deeper:"John fulfills Isaiah’s prophecy—a voice crying in the wilderness."},
+6:{title:"Day 6 — Matthew 3:13–17 (KJV)",link:"https://www.bible.com/bible/1/MAT.3.KJV",verse:"“This is my beloved Son…” — Matthew 3:17",context:"Jesus is baptized, marking the inauguration of His ministry and revealing the Trinity.",theme:"Jesus’ identity is affirmed by the Father.",prayer:"Father, help me walk in the identity You’ve given me through Christ.",reflection:["Why was Jesus baptized?","How does this passage reveal the Trinity?","How does God’s approval speak to you personally?"],deeper:"This moment unites Father, Son, and Spirit in one scene."},
+7:{title:"Day 7 — Matthew 4:1–11 (KJV)",link:"https://www.bible.com/bible/1/MAT.4.KJV",verse:"“Man shall not live by bread alone…” — Matthew 4:4",context:"Jesus resists Satan’s temptations using Scripture.",theme:"God’s Word is our weapon in spiritual battles.",prayer:"Strengthen me with Your Word when I face temptation.",reflection:["How did Jesus respond to temptation?","What does this teach about spiritual warfare?","What Scripture helps you during challenges?"],deeper:"Jesus triumphs where Adam and Israel failed—showing He is the true Redeemer."},
+8:{title:"Day 8 — Matthew 4:12–25 (KJV)",link:"https://www.bible.com/bible/1/MAT.4.KJV",verse:"“Follow me…” — Matthew 4:19",context:"Jesus calls His first disciples and begins His Galilean ministry.",theme:"Following Jesus transforms our purpose.",prayer:"Jesus, help me follow You with my whole heart.",reflection:["How did the disciples respond to Jesus’ call?","Where is God calling you to follow Him?","What does being a disciple mean today?"],deeper:"Jesus fulfills prophecy by being a light in Galilee."},
+9:{title:"Day 9 — Matthew 5:1–16 (KJV)",link:"https://www.bible.com/bible/1/MAT.5.KJV",verse:"“Blessed are the poor in spirit…” — Matthew 5:3",context:"Jesus opens the Sermon on the Mount with the Beatitudes.",theme:"Blessing comes through humility and dependence on God.",prayer:"Lord, shape my heart to reflect Your kingdom values.",reflection:["Which Beatitude speaks to you most?","How do these blessings differ from worldly values?","How can you be salt and light today?"],deeper:"The Beatitudes describe the heart of a kingdom disciple."},
+10:{title:"Day 10 — Matthew 5:17–32 (KJV)",link:"https://www.bible.com/bible/1/MAT.5.KJV",verse:"“Think not that I am come to destroy the law…” — Matthew 5:17",context:"Jesus deepens the Law’s meaning, emphasizing heart obedience.",theme:"Righteousness begins in the heart.",prayer:"Purify my motives, Lord, and align my heart with Your truth.",reflection:["How does Jesus fulfill the Law?","Why does He focus on heart motives?","Where is reconciliation needed in your life?"],deeper:"Jesus calls believers to surpass external religion with inner transformation."},
+11:{title:"Day 11 — Matthew 5:33–48 (KJV)",link:"https://www.bible.com/bible/1/MAT.5.KJV",verse:"“Love your enemies…” — Matthew 5:44",context:"Jesus teaches radical love that reflects God’s nature.",theme:"True discipleship includes loving the unlovable.",prayer:"Help me love like You love, Jesus.",reflection:["Which teaching challenges you most?","How does enemy-love reflect God?","Where can you show grace today?"],deeper:"‘Perfect’ means mature—fully reflecting God’s heart."},
+12:{title:"Day 12 — Matthew 6:1–18 (KJV)",link:"https://www.bible.com/bible/1/MAT.6.KJV",verse:"“When thou prayest…” — Matthew 6:6",context:"Jesus teaches about giving, praying, and fasting in secret.",theme:"God values sincerity over performance.",prayer:"Purify my motives, Lord.",reflection:["Why does Jesus emphasize secrecy?","How does the Lord’s Prayer guide your prayers?","Where do you need quiet with God?"],deeper:"Private devotion strengthens authentic faith."},
+13:{title:"Day 13 — Matthew 6:19–34 (KJV)",link:"https://www.bible.com/bible/1/MAT.6.KJV",verse:"“Seek ye first the kingdom of God…” — Matthew 6:33",context:"Jesus teaches about treasure, worry, and trust.",theme:"True peace comes from trusting God’s care.",prayer:"Lord, shift my focus from worry to faith.",reflection:["What treasures are you pursuing?","How does worry impact your faith?","What would seeking God first look like today?"],deeper:"Worry is replaced by worship when the kingdom is first."},
+14:{title:"Day 14 — Matthew 7:1–14 (KJV)",link:"https://www.bible.com/bible/1/MAT.7.KJV",verse:"“Ask, and it shall be given you…” — Matthew 7:7",context:"Jesus teaches about judgment, prayer, and the narrow way.",theme:"Disciples choose the narrow path of obedience.",prayer:"Help me choose Your way every day, Lord.",reflection:["How can you judge without hypocrisy?","What does persistent prayer teach?","Why is the narrow way worth it?"],deeper:"The narrow gate leads to life—few choose it, but it is precious."},
+15:{title:"Day 15 — Matthew 7:15–29 (KJV)",link:"https://www.bible.com/bible/1/MAT.7.KJV",verse:"“By their fruits ye shall know them.” — Matthew 7:20",context:"Jesus warns about false prophets and the danger of empty religion.",theme:"True faith produces visible fruit.",prayer:"Root my life in Your truth, Lord.",reflection:["What fruit do you see in your life?","Why is obedience foundational?","How can you build on the solid rock?"],deeper:"The wise builder hears AND does God’s Word."},
+16:{title:"Day 16 — Matthew 8:1–17 (KJV)",link:"https://www.bible.com/bible/1/MAT.8.KJV",verse:"“I will; be thou clean.” — Matthew 8:3",context:"Jesus heals the sick with compassion and authority.",theme:"Jesus is willing and able to heal.",prayer:"Lord, heal the places in my heart that need You.",reflection:["What stands out about the leper?","Why does Jesus praise the centurion?","Where do you long for healing?"],deeper:"Jesus carries our sickness and griefs as Isaiah foretold."},
+17:{title:"Day 17 — Matthew 8:18–34 (KJV)",link:"https://www.bible.com/bible/1/MAT.8.KJV",verse:"“Even the winds and the sea obey him!” — Matthew 8:27",context:"Jesus calms a storm and frees demon-oppressed men.",theme:"Jesus has authority over fear and darkness.",prayer:"Jesus, speak peace to the storms in my life.",reflection:["Where do you need His peace?","Why were the disciples afraid?","What does this reveal about Jesus?"],deeper:"Jesus demonstrates divine power unmatched by creation or demons."},
+18:{title:"Day 18 — Matthew 9:1–17 (KJV)",link:"https://www.bible.com/bible/1/MAT.9.KJV",verse:"“Thy sins be forgiven thee.” — Matthew 9:2",context:"Jesus forgives and heals, calling Matthew and teaching about new wine.",theme:"Jesus brings new life that cannot fit into old patterns.",prayer:"Lord, make me a vessel ready for Your new work.",reflection:["Why does Jesus forgive first?","How does Matthew’s calling inspire you?","What does new wine represent?"],deeper:"The Gospel is incompatible with religious legalism."},
+19:{title:"Day 19 — Matthew 9:18–38 (KJV)",link:"https://www.bible.com/bible/1/MAT.9.KJV",verse:"“Thy faith hath made thee whole.” — Matthew 9:22",context:"Jesus raises a girl, heals a woman, gives sight, and shows compassion.",theme:"Jesus sees the hurting and moves with compassion.",prayer:"Lord, give me Your eyes for those in need.",reflection:["Which miracle speaks most to you?","How does Jesus respond to suffering?","How can you show compassion this week?"],deeper:"Compassion is not pity—it's love in action."},
+20:{title:"Day 20 — Matthew 10:1–23 (KJV)",link:"https://www.bible.com/bible/1/MAT.10.KJV",verse:"“Freely ye have received, freely give.” — Matthew 10:8",context:"Jesus sends His disciples with authority and instruction.",theme:"God equips those He sends.",prayer:"Lord, strengthen me for the calling You’ve placed on my life.",reflection:["What have you received freely from God?","What challenges did Jesus warn about?","Where is God calling you to step out?"],deeper:"Ministry is partnership with Jesus’ authority—not our own."},
+21:{title:"Day 21 — Matthew 10:24–42 (KJV)",link:"https://www.bible.com/bible/1/MAT.10.KJV",verse:"“Fear ye not therefore…” — Matthew 10:31",context:"Jesus teaches about courage, loyalty, and God’s intimate care.",theme:"Discipleship calls for courage and trust.",prayer:"Lord, make me bold and confident in Your care.",reflection:["What fears hold you back?","How does God’s care comfort you?","What does taking up your cross mean?"],deeper:"God counts the hairs on your head—His care is personal and precise."},
+22:{title:"Day 22 — Matthew 11:1–19 (KJV)",link:"https://www.bible.com/bible/1/MAT.11.KJV",verse:"“Blessed is he, whosoever shall not be offended in me.” — Matthew 11:6",context:"John questions Jesus from prison; Jesus affirms him.",theme:"Faith trusts Jesus even when He moves differently than expected.",prayer:"Steady my heart, Lord, when I don’t understand Your ways.",reflection:["Why was John struggling?","What evidence does Jesus point to?","Where is God asking you to trust Him?"],deeper:"Jesus answers doubt with gentle reassurance, not rebuke."},
+23:{title:"Day 23 — Matthew 11:20–30 (KJV)",link:"https://www.bible.com/bible/1/MAT.11.KJV",verse:"“Come unto me… and I will give you rest.” — Matthew 11:28",context:"Jesus warns unrepentant cities then offers rest to the weary.",theme:"True rest is found in surrender to Jesus.",prayer:"Lord, I come to You weary—give me Your rest.",reflection:["What burdens do you need to give Jesus?","What does His yoke represent?","Where is God inviting you into rest?"],deeper:"Jesus’ yoke is ‘easy’ because He carries the weight with us."},
+24:{title:"Day 24 — Matthew 12:1–21 (KJV)",link:"https://www.bible.com/bible/1/MAT.12.KJV",verse:"“I will have mercy, and not sacrifice.” — Matthew 12:7",context:"Jesus clarifies the Sabbath and fulfills Isaiah’s prophecy.",theme:"Mercy is at the heart of God.",prayer:"Lord, help me value mercy over legalism.",reflection:["How does Jesus redefine Sabbath?","Where can you show mercy?","What stands out from Isaiah’s prophecy?"],deeper:"Jesus is the gentle Servant who brings justice with compassion."},
+25:{title:"Day 25 — Matthew 12:22–37 (KJV)",link:"https://www.bible.com/bible/1/MAT.12.KJV",verse:"“A tree is known by his fruit.” — Matthew 12:33",context:"Jesus exposes the Pharisees’ hardened hearts.",theme:"Our words reveal our hearts.",prayer:"Holy Spirit, cleanse my words and my heart.",reflection:["Why were the Pharisees’ accusations serious?","What fruit is growing in your life?","How do words reflect the heart?"],deeper:"Persistent rejection of the Spirit leads to spiritual blindness."},
+26:{title:"Day 26 — Matthew 12:38–50 (KJV)",link:"https://www.bible.com/bible/1/MAT.12.KJV",verse:"“The same is my brother, and sister, and mother.” — Matthew 12:50",context:"Jesus teaches about true spiritual family.",theme:"Family is defined by obedience to God.",prayer:"Lord, help me do Your will joyfully.",reflection:["What is the sign of Jonah?","How does Jesus define family?","Where is obedience needed?"],deeper:"Spiritual emptiness invites greater bondage unless filled with God."},
+27:{title:"Day 27 — Matthew 13:1–23 (KJV)",link:"https://www.bible.com/bible/1/MAT.13.KJV",verse:"“He that hath ears to hear, let him hear.” — Matthew 13:9",context:"Jesus teaches the Parable of the Sower.",theme:"Fruitfulness requires a receptive heart.",prayer:"Soften my heart, Lord, to Your Word.",reflection:["Which soil describes your heart today?","What chokes growth?","How can you nurture good soil?"],deeper:"The hundredfold harvest represents supernatural growth."},
+28:{title:"Day 28 — Matthew 13:24–43 (KJV)",link:"https://www.bible.com/bible/1/MAT.13.KJV",verse:"“The field is the world…” — Matthew 13:38",context:"Parables of wheat & tares, mustard seed, and leaven.",theme:"God’s kingdom grows quietly but powerfully.",prayer:"Help me trust Your timing, Lord.",reflection:["Why allow wheat and weeds to grow together?","What does the mustard seed symbolize?","How is the kingdom growing in your life?"],deeper:"The harvest points to God’s patient and perfect judgment."},
+29:{title:"Day 29 — Matthew 13:44–52 (KJV)",link:"https://www.bible.com/bible/1/MAT.13.KJV",verse:"“Like treasure hid in a field…” — Matthew 13:44",context:"Parables of treasure, pearl, and the net.",theme:"The kingdom is worth everything.",prayer:"Lord, help me treasure You above all.",reflection:["What does the treasure represent to you?","How valuable is the kingdom?","What does the net teach about final judgment?"],deeper:"Joy fuels sacrifice—kingdom gain far exceeds loss."},
+30:{title:"Day 30 — Matthew 13:53–58 (KJV)",link:"https://www.bible.com/bible/1/MAT.13.KJV",verse:"“A prophet is not without honour…” — Matthew 13:57",context:"Jesus is rejected in His hometown.",theme:"Familiarity can blind us to God’s work.",prayer:"Jesus, give me eyes to see You clearly.",reflection:["Why did Nazareth reject Jesus?","Where might familiarity dull your faith?","How can you honor Jesus today?"],deeper:"Unbelief limits what we receive from God—not His power, but our openness."}
+}; // END STUDY DAYS OBJECT
 
 let currentDay = null;
 
@@ -250,11 +473,79 @@ function openModal(day) {
 
   const html = `
     <h2 style="margin-top:0;">${data.title}</h2>
-    <a href="${data.link}" target="_blank" class="youversion-link">Read on YouVersion</a>
+    <a href="${data.link}" target="_blank" class="youversion-link">
+      Read on YouVersion
+    </a>
     <div class="verse-box">${data.verse}</div>
+
     <div class="section-title">Context</div>
     <p>${data.context}</p>
+
     <div class="section-title">Theme</div>
     <p><strong>${data.theme}</strong></p>
+
     <div class="section-title">Prayer</div>
     <p>${data.prayer}</p>
+
+    <div class="section-title">Reflection</div>
+    <ul>
+      ${data.reflection.map(r => `<li>${r}</li>`).join("")}
+    </ul>
+
+    <div class="section-title">Go Deeper</div>
+    <p>${data.deeper}</p>
+
+    <div class="section-title">Your Notes</div>
+    <textarea id="notesBox" class="notes-box" placeholder="Write your thoughts here..."></textarea>
+
+    <div class="button-row">
+      <button class="modal-btn" onclick="saveNotes()">Save Notes</button>
+      <button class="modal-btn" onclick="closeModal()">Close</button>
+    </div>
+  `;
+
+  document.getElementById("modalContent").innerHTML = html;
+
+  // Load notes if saved earlier
+  const saved = localStorage.getItem(`matthewNotes_${day}`);
+  if (saved) {
+    document.getElementById("notesBox").value = saved;
+  }
+
+  // Show modal
+  document.getElementById("modalOverlay").style.display = "block";
+  document.body.style.overflow = "hidden";
+}
+
+/* Close Modal */
+function closeModal() {
+  document.getElementById("modalOverlay").style.display = "none";
+  document.body.style.overflow = "auto";
+}
+
+/* Save Notes */
+function saveNotes() {
+  const notes = document.getElementById("notesBox").value;
+  localStorage.setItem(`matthewNotes_${currentDay}`, notes);
+  updateProgress();
+  alert("Notes saved!");
+}
+
+/* Progress Tracking */
+function updateProgress() {
+  let completed = 0;
+  for (let i = 1; i <= 30; i++) {
+    if (localStorage.getItem(`matthewNotes_${i}`)) {
+      completed++;
+    }
+  }
+  const percent = Math.round((completed / 30) * 100);
+  document.getElementById("progressBar").style.width = percent + "%";
+  document.getElementById("progressText").innerText = `${completed} of 30 days completed`;
+}
+
+/* Initialize progress on page load */
+document.addEventListener("DOMContentLoaded", updateProgress);
+</script>
+</body>
+</html>
