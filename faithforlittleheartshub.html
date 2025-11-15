@@ -4,7 +4,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Faith for Little Hearts Hub</title>
-  <script src="/_sdk/data_sdk.js"></script>
   <script src="/_sdk/element_sdk.js"></script>
   <style>
         body {
@@ -451,6 +450,7 @@
         }
     </style>
   <style>@view-transition { navigation: auto; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
   <script src="https://cdn.tailwindcss.com" type="text/javascript"></script>
  </head>
  <body>
@@ -495,7 +495,7 @@
     <section class="add-section">
      <h3>Add New Resource</h3>
      <div id="limitWarning" class="limit-warning" style="display: none;">
-      You've reached the maximum limit of 999 resources. Please delete some items to add new ones.
+      You've reached the maximum limit of 100 resources. Please delete some items to add new ones.
      </div>
      <form id="resourceForm">
       <div class="form-group"><label for="title">Resource Title</label> <input type="text" id="title" name="title" required placeholder="e.g., Noah's Ark Story">
@@ -515,18 +515,11 @@
       <h2 class="resources-title">Faith-Building Treasures</h2>
       <div style="display: flex; align-items: center;">
        <div class="resource-count" id="resourceCount">
-        0 Resources
+        2 Resources
        </div><button class="admin-toggle" onclick="toggleAdminMode()" id="adminToggle">Admin</button>
       </div>
      </div>
-     <div id="resourcesGrid" class="resources-grid">
-      <div class="empty-state">
-       <div class="empty-state-icon">
-        📚
-       </div>
-       <h3>No resources yet</h3>
-       <p>Our collection of faith-building treasures is being prepared for you. Check back soon for wonderful Bible studies and activities!</p>
-      </div>
+     <div id="resourcesGrid" class="resources-grid"><!-- Resources will be loaded here -->
      </div>
     </section>
    </div>
@@ -548,14 +541,29 @@
             font_family: "Segoe UI"
         };
 
-        const dataHandler = {
-            onDataChanged(data) {
-                currentResources = data;
-                updateResourceCount();
-                renderResources();
-                updateLimitWarning();
+        // Built-in resources that always appear
+        const builtInResources = [
+            {
+                id: "builtin-1",
+                title: "🌈 Faith for Little Hearts: 66-Book Bible Carousel",
+                type: "Bible Study",
+                age_group: "All Ages",
+                description: "Explore all 66 books of the Bible through a colorful, kid-friendly carousel designed to spark wonder and deepen faith! Each book features a joyful icon, simple story summary, memory verse, fun fact, and hands-on activities to help children connect with God's Word in meaningful ways. Whether you're marching around Jericho or planting seeds from Genesis, this interactive experience brings Scripture to life—one book at a time.",
+                resource_url: "https://www.wholeheartedlegacy.org/faith-for-little-hearts-bible-stories",
+                created_at: "2024-01-01T00:00:00.000Z",
+                isBuiltIn: true
+            },
+            {
+                id: "builtin-2",
+                title: "🌟 Meet the Heroes of the Bible",
+                type: "Bible Study",
+                age_group: "All Ages",
+                description: "The Bible is full of amazing people who trusted God, showed courage, and helped others! From brave queens and wise kings to curious kids and faithful friends, each character has a special story that teaches us how to live with love, kindness, and faith. Get ready to meet God's helpers—like Noah who built a big boat, Esther who saved her people, and David who faced a giant with just a sling and a prayer. Their adventures will inspire your heart and help you grow closer to God every day!",
+                resource_url: "https://www.wholeheartedlegacy.org/faith-for-little-hearts",
+                created_at: "2024-01-01T00:00:00.000Z",
+                isBuiltIn: true
             }
-        };
+        ];
 
         async function onConfigChange(config) {
             const mainTitle = document.getElementById('mainTitle');
@@ -576,35 +584,45 @@
                         get: () => config.background_color || "#F5E6D3",
                         set: (value) => {
                             config.background_color = value;
-                            window.elementSdk.setConfig({ background_color: value });
+                            if (window.elementSdk) {
+                                window.elementSdk.setConfig({ background_color: value });
+                            }
                         }
                     },
                     {
                         get: () => config.card_color || "#FAF7F2",
                         set: (value) => {
                             config.card_color = value;
-                            window.elementSdk.setConfig({ card_color: value });
+                            if (window.elementSdk) {
+                                window.elementSdk.setConfig({ card_color: value });
+                            }
                         }
                     },
                     {
                         get: () => config.text_color || "#5D4E37",
                         set: (value) => {
                             config.text_color = value;
-                            window.elementSdk.setConfig({ text_color: value });
+                            if (window.elementSdk) {
+                                window.elementSdk.setConfig({ text_color: value });
+                            }
                         }
                     },
                     {
                         get: () => config.primary_color || "#8B4513",
                         set: (value) => {
                             config.primary_color = value;
-                            window.elementSdk.setConfig({ primary_color: value });
+                            if (window.elementSdk) {
+                                window.elementSdk.setConfig({ primary_color: value });
+                            }
                         }
                     },
                     {
                         get: () => config.accent_color || "#A0522D",
                         set: (value) => {
                             config.accent_color = value;
-                            window.elementSdk.setConfig({ accent_color: value });
+                            if (window.elementSdk) {
+                                window.elementSdk.setConfig({ accent_color: value });
+                            }
                         }
                     }
                 ],
@@ -613,14 +631,18 @@
                     get: () => config.font_family || "Segoe UI",
                     set: (value) => {
                         config.font_family = value;
-                        window.elementSdk.setConfig({ font_family: value });
+                        if (window.elementSdk) {
+                            window.elementSdk.setConfig({ font_family: value });
+                        }
                     }
                 },
                 fontSizeable: {
                     get: () => config.font_size || 16,
                     set: (value) => {
                         config.font_size = value;
-                        window.elementSdk.setConfig({ font_size: value });
+                        if (window.elementSdk) {
+                            window.elementSdk.setConfig({ font_size: value });
+                        }
                     }
                 }
             };
@@ -635,6 +657,36 @@
             ]);
         }
 
+        function loadResources() {
+            // Load built-in resources
+            currentResources = [...builtInResources];
+            
+            // Load additional resources from localStorage
+            try {
+                const stored = localStorage.getItem('faithResources');
+                if (stored) {
+                    const additionalResources = JSON.parse(stored);
+                    currentResources = [...currentResources, ...additionalResources];
+                }
+            } catch (error) {
+                console.error('Error loading resources from localStorage:', error);
+            }
+            
+            updateResourceCount();
+            renderResources();
+            updateLimitWarning();
+        }
+
+        function saveResources() {
+            try {
+                // Only save user-added resources (not built-in ones)
+                const userResources = currentResources.filter(r => !r.isBuiltIn);
+                localStorage.setItem('faithResources', JSON.stringify(userResources));
+            } catch (error) {
+                console.error('Error saving resources to localStorage:', error);
+            }
+        }
+
         function updateResourceCount() {
             const countElement = document.getElementById('resourceCount');
             const count = currentResources.length;
@@ -645,7 +697,7 @@
             const warningElement = document.getElementById('limitWarning');
             const addBtn = document.getElementById('addBtn');
             
-            if (currentResources.length >= 999) {
+            if (currentResources.length >= 100) {
                 warningElement.style.display = 'block';
                 addBtn.disabled = true;
             } else {
@@ -674,7 +726,7 @@
 
             grid.innerHTML = sortedResources.map(resource => `
                 <div class="resource-card">
-                    <button class="delete-btn" onclick="deleteResource('${resource.__backendId}')">×</button>
+                    ${!resource.isBuiltIn ? `<button class="delete-btn" onclick="deleteResource('${resource.id}')">×</button>` : ''}
                     <div class="resource-header">
                         <h3 class="resource-title">${escapeHtml(resource.title)}</h3>
                         <span class="resource-type">${escapeHtml(resource.type)}</span>
@@ -687,14 +739,12 @@
             `).join('');
         }
 
-        async function deleteResource(backendId) {
-            const resource = currentResources.find(r => r.__backendId === backendId);
-            if (!resource) return;
-
-            const result = await window.dataSdk.delete(resource);
-            if (!result.isOk) {
-                console.error('Failed to delete resource:', result.error);
-            }
+        function deleteResource(resourceId) {
+            currentResources = currentResources.filter(r => r.id !== resourceId);
+            saveResources();
+            updateResourceCount();
+            renderResources();
+            updateLimitWarning();
         }
 
         function formatDate(dateString) {
@@ -858,16 +908,16 @@
                 addBtnText.style.display = 'none';
                 addBtnLoading.style.display = 'inline-block';
             } else {
-                addBtn.disabled = currentResources.length >= 999;
+                addBtn.disabled = currentResources.length >= 100;
                 addBtnText.style.display = 'inline';
                 addBtnLoading.style.display = 'none';
             }
         }
 
-        document.getElementById('resourceForm').addEventListener('submit', async (e) => {
+        document.getElementById('resourceForm').addEventListener('submit', (e) => {
             e.preventDefault();
             
-            if (currentResources.length >= 999) {
+            if (currentResources.length >= 100) {
                 return;
             }
 
@@ -881,18 +931,18 @@
                 age_group: formData.get('ageGroup'),
                 description: formData.get('description') || '',
                 resource_url: formData.get('resourceUrl') || '',
-                created_at: new Date().toISOString()
+                created_at: new Date().toISOString(),
+                isBuiltIn: false
             };
 
-            const result = await window.dataSdk.create(resourceData);
+            currentResources.push(resourceData);
+            saveResources();
+            updateResourceCount();
+            renderResources();
+            updateLimitWarning();
             
             setLoading(false);
-
-            if (result.isOk) {
-                e.target.reset();
-            } else {
-                console.error('Failed to add resource:', result.error);
-            }
+            e.target.reset();
         });
 
         async function initializeApp() {
@@ -906,57 +956,16 @@
                     });
                 }
 
-                if (window.dataSdk) {
-                    const result = await window.dataSdk.init(dataHandler);
-                    if (!result.isOk) {
-                        console.error('Failed to initialize data SDK:', result.error);
-                    } else {
-                        // Add initial resources if database is empty
-                        await addInitialResources();
-                    }
-                }
+                // Load and display resources
+                loadResources();
             } catch (error) {
                 console.error('Failed to initialize app:', error);
-            }
-        }
-
-        async function addInitialResources() {
-            // Add resources every time to ensure they appear
-            const initialResources = [
-                {
-                    id: generateId(),
-                    title: "🌈 Faith for Little Hearts: 66-Book Bible Carousel",
-                    type: "Bible Study",
-                    age_group: "All Ages",
-                    description: "Explore all 66 books of the Bible through a colorful, kid-friendly carousel designed to spark wonder and deepen faith! Each book features a joyful icon, simple story summary, memory verse, fun fact, and hands-on activities to help children connect with God's Word in meaningful ways. Whether you're marching around Jericho or planting seeds from Genesis, this interactive experience brings Scripture to life—one book at a time.",
-                    resource_url: "https://www.wholeheartedlegacy.org/faith-for-little-hearts-bible-stories",
-                    created_at: new Date().toISOString()
-                },
-                {
-                    id: generateId(),
-                    title: "🌟 Meet the Heroes of the Bible",
-                    type: "Bible Study",
-                    age_group: "All Ages",
-                    description: "The Bible is full of amazing people who trusted God, showed courage, and helped others! From brave queens and wise kings to curious kids and faithful friends, each character has a special story that teaches us how to live with love, kindness, and faith. Get ready to meet God's helpers—like Noah who built a big boat, Esther who saved her people, and David who faced a giant with just a sling and a prayer. Their adventures will inspire your heart and help you grow closer to God every day!",
-                    resource_url: "https://www.wholeheartedlegacy.org/faith-for-little-hearts",
-                    created_at: new Date().toISOString()
-                }
-            ];
-
-            // Check if these specific resources already exist to avoid duplicates
-            const existingTitles = currentResources.map(r => r.title);
-            
-            for (const resource of initialResources) {
-                if (!existingTitles.includes(resource.title)) {
-                    const result = await window.dataSdk.create(resource);
-                    if (!result.isOk) {
-                        console.error('Failed to add initial resource:', result.error);
-                    }
-                }
+                // Still load resources even if SDK fails
+                loadResources();
             }
         }
 
         initializeApp();
     </script>
- <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'99f1e428d7b0ebeb',t:'MTc2MzI0MjY2MS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'99f1f956b482176d',t:'MTc2MzI0MzUyOC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
