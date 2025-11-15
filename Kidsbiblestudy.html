@@ -1,0 +1,2161 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Faith for Little Hearts Bible Carousel</title>
+  <script src="/_sdk/element_sdk.js"></script>
+  <style>
+        body {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            background: linear-gradient(to bottom, #87CEEB 0%, #B0E0E6 30%, #98FB98 100%);
+            background-image: 
+                radial-gradient(circle at 20% 20%, rgba(255,255,255,0.8) 15px, transparent 15px),
+                radial-gradient(circle at 80% 40%, rgba(255,255,255,0.6) 20px, transparent 20px),
+                radial-gradient(circle at 40% 70%, rgba(255,255,255,0.7) 18px, transparent 18px);
+            min-height: 100%;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            min-height: 100%;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .main-title {
+            font-size: 2.5rem;
+            background: linear-gradient(45deg, #FF6B6B, #4ECDC4, #45B7D1, #96CEB4, #FFEAA7, #DDA0DD);
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: rainbow 3s ease-in-out infinite;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+            margin: 0;
+            font-weight: bold;
+            letter-spacing: 2px;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: #2E8B57;
+            margin: 10px 0 0 0;
+            text-shadow: 1px 1px 2px rgba(255,255,255,0.8);
+        }
+
+        .controls {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .search-container {
+            position: relative;
+            flex: 1;
+            max-width: 300px;
+            min-width: 200px;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 12px 40px 12px 15px;
+            border: 3px solid #FFD700;
+            border-radius: 25px;
+            font-size: 16px;
+            font-family: inherit;
+            background: white;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: #FF69B4;
+            transform: scale(1.02);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+        }
+
+        .search-icon {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #FFD700;
+            font-size: 18px;
+        }
+
+        .filter-buttons {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 10px 18px;
+            border: none;
+            border-radius: 25px;
+            background: linear-gradient(45deg, #FF69B4, #FF1493);
+            color: white;
+            font-family: inherit;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        .filter-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+        }
+
+        .filter-btn.active {
+            background: linear-gradient(45deg, #4A90E2, #357ABD);
+            transform: scale(1.1);
+        }
+
+        .carousel-container {
+            position: relative;
+            background: white;
+            border-radius: 25px;
+            padding: 30px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+            border: 4px solid #FFD700;
+        }
+
+        .carousel-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .book-counter {
+            font-size: 1.2rem;
+            color: #2E8B57;
+            font-weight: bold;
+        }
+
+        .carousel-controls {
+            display: flex;
+            gap: 10px;
+        }
+
+        .control-btn {
+            width: 45px;
+            height: 45px;
+            border: none;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #FFD700, #FFA500);
+            color: #333;
+            font-size: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            border: 3px solid white;
+        }
+
+        .control-btn:hover {
+            transform: scale(1.15);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+        }
+
+        .control-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .book-display {
+            text-align: center;
+            padding: 30px;
+            background: linear-gradient(135deg, #FFF8DC 0%, #F0F8FF 50%, #F5FFFA 100%);
+            border-radius: 20px;
+            border: 3px solid #87CEEB;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .book-number {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: linear-gradient(45deg, #FF69B4, #FF1493);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 16px;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.2);
+            border: 3px solid white;
+        }
+
+        .book-icon {
+            font-size: 5rem;
+            margin-bottom: 20px;
+            animation: bounce 2.5s ease-in-out infinite;
+            filter: drop-shadow(3px 3px 6px rgba(0,0,0,0.2));
+        }
+
+        .book-title {
+            font-size: 2.5rem;
+            background: linear-gradient(45deg, #FF6B6B, #4ECDC4, #45B7D1, #96CEB4, #FFEAA7, #DDA0DD);
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: rainbow 3s ease-in-out infinite;
+            margin-bottom: 15px;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+
+        .book-testament {
+            font-size: 1.1rem;
+            color: #2E8B57;
+            margin-bottom: 20px;
+            font-style: italic;
+            font-weight: bold;
+        }
+
+        .book-description {
+            font-size: 1.2rem;
+            color: #444;
+            margin-bottom: 25px;
+            line-height: 1.5;
+            background: rgba(255,255,255,0.7);
+            padding: 15px;
+            border-radius: 15px;
+            border: 2px solid #E6E6FA;
+        }
+
+        .memory-verse {
+            background: linear-gradient(135deg, #E6E6FA 0%, #F0F8FF 100%);
+            padding: 15px;
+            border-radius: 15px;
+            margin-bottom: 25px;
+            border: 3px solid #DDA0DD;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+        }
+
+        .verse-text {
+            font-style: italic;
+            color: #4A4A4A;
+            margin-bottom: 8px;
+            font-size: 1.1rem;
+            line-height: 1.4;
+        }
+
+        .verse-reference {
+            font-weight: bold;
+            color: #4A90E2;
+            font-size: 0.95rem;
+        }
+
+        .book-actions {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .action-btn {
+            padding: 15px 25px;
+            border: none;
+            border-radius: 25px;
+            font-family: inherit;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 5px 10px rgba(0,0,0,0.2);
+            font-size: 16px;
+            border: 3px solid white;
+            color: white;
+        }
+
+        .story-btn {
+            background: linear-gradient(45deg, #32CD32, #228B22);
+        }
+
+        .verse-btn {
+            background: linear-gradient(45deg, #4A90E2, #357ABD);
+        }
+
+        .coloring-btn {
+            background: linear-gradient(45deg, #FF69B4, #FF1493);
+        }
+
+        .details-btn {
+            background: linear-gradient(45deg, #FFD700, #FFA500);
+            color: #333;
+        }
+
+        .action-btn:hover {
+            transform: translateY(-4px) scale(1.05);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+        }
+
+        .dots-container {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 25px;
+            flex-wrap: wrap;
+        }
+
+        .dot {
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            background: #ddd;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .dot.active {
+            background: linear-gradient(45deg, #4A90E2, #357ABD);
+            transform: scale(1.4);
+        }
+
+        .dot:hover {
+            background: #FFD700;
+            transform: scale(1.2);
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 40px;
+            color: #666;
+            font-size: 1.2rem;
+        }
+
+        .no-results-icon {
+            font-size: 4rem;
+            margin-bottom: 15px;
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+        }
+
+        .modal-content {
+            background: linear-gradient(135deg, #FFF8DC 0%, #F0F8FF 50%, #F5FFFA 100%);
+            margin: 5% auto;
+            padding: 30px;
+            border-radius: 25px;
+            width: 90%;
+            max-width: 600px;
+            max-height: 80%;
+            overflow-y: auto;
+            position: relative;
+            border: 4px solid #FFD700;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+
+        .close {
+            color: white;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            position: absolute;
+            right: 20px;
+            top: 20px;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #FF69B4;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .close:hover {
+            background: #FF1493;
+            transform: scale(1.1);
+        }
+
+        .modal-book-icon {
+            font-size: 6rem;
+            text-align: center;
+            margin-bottom: 20px;
+            animation: bounce 2s ease-in-out infinite;
+        }
+
+        .modal-book-title {
+            font-size: 3rem;
+            background: linear-gradient(45deg, #FF6B6B, #4ECDC4, #45B7D1, #96CEB4, #FFEAA7, #DDA0DD);
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: rainbow 3s ease-in-out infinite;
+            text-align: center;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .modal-testament {
+            text-align: center;
+            color: #2E8B57;
+            font-size: 1.2rem;
+            margin-bottom: 25px;
+            font-weight: bold;
+        }
+
+        .activity-section {
+            background: rgba(255,255,255,0.8);
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            border: 2px solid #E6E6FA;
+        }
+
+        .activity-title {
+            color: #4A90E2;
+            font-size: 1.3rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .activity-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .activity-list li {
+            padding: 8px 0;
+            border-bottom: 1px solid #E6E6FA;
+            color: #555;
+        }
+
+        .activity-list li:before {
+            content: "🌟 ";
+            margin-right: 8px;
+        }
+
+        @keyframes rainbow {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-15px);
+            }
+            60% {
+                transform: translateY(-8px);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+
+            .main-title {
+                font-size: 2rem;
+            }
+
+            .controls {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .search-container {
+                max-width: none;
+            }
+
+            .filter-buttons {
+                justify-content: center;
+            }
+
+            .carousel-container {
+                padding: 20px;
+            }
+
+            .book-title {
+                font-size: 2rem;
+            }
+
+            .book-actions {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .action-btn {
+                width: 100%;
+                max-width: 250px;
+                justify-content: center;
+            }
+
+            .modal-content {
+                margin: 10% auto;
+                width: 95%;
+                padding: 20px;
+            }
+
+            .modal-book-title {
+                font-size: 2.2rem;
+            }
+        }
+    </style>
+  <style>@view-transition { navigation: auto; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+  <script src="https://cdn.tailwindcss.com" type="text/javascript"></script>
+ </head>
+ <body>
+  <div class="container">
+   <header class="header">
+    <h1 class="main-title" id="mainTitle">Faith for Little Hearts</h1>
+    <p class="subtitle" id="subtitle">Discover God's Amazing Stories</p>
+   </header>
+   <div class="controls">
+    <div class="search-container"><input type="text" class="search-input" id="searchInput" placeholder="Search for a Bible book..."> <span class="search-icon">🔍</span>
+    </div>
+    <div class="filter-buttons"><button class="filter-btn active" data-testament="all">All Books</button> <button class="filter-btn" data-testament="old">Old Testament</button> <button class="filter-btn" data-testament="new">New Testament</button>
+    </div>
+   </div>
+   <div class="carousel-container">
+    <div class="carousel-header">
+     <div class="book-counter" id="bookCounter">
+      Book 1 of 66
+     </div>
+     <div class="carousel-controls"><button class="control-btn" id="prevBtn" title="Previous">⬅️</button> <button class="control-btn" id="nextBtn" title="Next">➡️</button>
+     </div>
+    </div>
+    <div class="book-display" id="bookDisplay"><!-- Current book will be displayed here -->
+    </div>
+    <div class="dots-container" id="dotsContainer"><!-- Dots will be inserted here -->
+    </div>
+   </div>
+  </div><!-- Modal for book details -->
+  <div id="bookModal" class="modal">
+   <div class="modal-content"><span class="close" id="closeModal">×</span>
+    <div id="modalContent"><!-- Modal content will be inserted here -->
+    </div>
+   </div>
+  </div>
+  <script>
+        // Bible books data - All 66 books
+        const bibleBooks = [
+            // Old Testament
+            { 
+                name: "Genesis", 
+                testament: "old", 
+                icon: "🌟", 
+                description: "God made the world and everything in it. He made the sun, moon, animals, and people. We learn that God loves His creation and cares for us.",
+                verse: "Genesis 1:1", 
+                verseText: "In the beginning God created the heavens and the earth.",
+                youVersionLink: "https://www.bible.com/bible/1359/GEN.1.ERV",
+                memoryTip: "Remember: God made EVERYTHING! Point to the sky, ground, and yourself when you say this verse.",
+                funFact: "Did you know God created over 1 million different kinds of animals? He loves variety and creativity!",
+                story: "This is where everything begins! God speaks and creates light, sky, land, plants, animals, and people. Adam and Eve live in a beautiful garden, but they make a bad choice. God still loves them and promises to help.",
+                activities: [
+                    "Draw your favorite animal that God created",
+                    "Make a creation book with 7 days",
+                    "Plant seeds and watch them grow",
+                    "Act out the creation story with friends"
+                ],
+                coloringPage: "Creation scene with sun, moon, stars, trees, animals, and Adam & Eve in the Garden of Eden"
+            },
+            { 
+                name: "Exodus", 
+                testament: "old", 
+                icon: "🌊", 
+                description: "Moses leads God's people out of Egypt with amazing miracles! God parts the Red Sea and gives them the Ten Commandments.",
+                verse: "Exodus 14:14", 
+                verseText: "The Lord will fight for you; you need only to be still.",
+                youVersionLink: "https://www.bible.com/bible/1359/EXO.14.ERV",
+                memoryTip: "Stand still like a soldier and remember: God fights for you! You don't have to worry.",
+                funFact: "The Red Sea was probably 200 feet deep where Moses crossed! That's like a 20-story building underwater!",
+                story: "God's people are slaves in Egypt, but God chooses Moses to lead them to freedom. God sends plagues to convince Pharaoh to let them go. When they reach the Red Sea, God parts the water so they can walk through safely!",
+                activities: [
+                    "Make a Moses basket from reeds",
+                    "Act out crossing the Red Sea",
+                    "Learn the Ten Commandments song",
+                    "Create a burning bush craft"
+                ],
+                coloringPage: "Moses parting the Red Sea with Israelites walking through on dry ground"
+            },
+            { 
+                name: "Leviticus", 
+                testament: "old", 
+                icon: "⛪", 
+                description: "God teaches His people how to worship Him and live holy lives! He shows them how to be clean and pure.",
+                verse: "Leviticus 19:18", 
+                verseText: "Love your neighbor as yourself.",
+                youVersionLink: "https://www.bible.com/bible/1359/LEV.19.ERV",
+                memoryTip: "Give yourself a hug, then hug a friend! Love others just like you love yourself.",
+                funFact: "Jesus said this verse from Leviticus is one of the most important commandments ever!",
+                story: "God gives His people special rules about how to worship Him and treat each other. He wants them to be holy and set apart. These rules help them live good lives and stay close to God.",
+                activities: [
+                    "Make a tabernacle model",
+                    "Practice acts of kindness",
+                    "Learn about clean and unclean animals",
+                    "Create a priest's outfit"
+                ],
+                coloringPage: "The tabernacle with priests offering sacrifices and people worshipping"
+            },
+            { 
+                name: "Numbers", 
+                testament: "old", 
+                icon: "🏕️", 
+                description: "God's people journey through the wilderness for 40 years! God takes care of them every step of the way.",
+                verse: "Numbers 6:24", 
+                verseText: "The Lord bless you and keep you.",
+                youVersionLink: "https://www.bible.com/bible/1359/NUM.6.ERV",
+                memoryTip: "This is God's special blessing! Hold your hands over someone and say it like a prayer.",
+                funFact: "This blessing is over 3,000 years old and people still use it today in churches around the world!",
+                story: "God's people travel through the desert to the Promised Land. Sometimes they complain and disobey, so the journey takes 40 years. But God never leaves them - He gives them food, water, and protection.",
+                activities: [
+                    "Make a wilderness survival kit",
+                    "Count stars like Abraham did",
+                    "Create a cloud and fire pillar",
+                    "Practice the priestly blessing"
+                ],
+                coloringPage: "Israelites camping in the wilderness with the tabernacle in the center and God's cloud above"
+            },
+            { 
+                name: "Deuteronomy", 
+                testament: "old", 
+                icon: "📜", 
+                description: "Moses reminds God's people of His wonderful promises! He tells them to remember God's love and obey His commands.",
+                verse: "Deuteronomy 6:5", 
+                verseText: "Love the Lord your God with all your heart.",
+                youVersionLink: "https://www.bible.com/bible/1359/DEU.6.ERV",
+                memoryTip: "Put your hand on your heart and say 'ALL my heart!' This means love God with everything inside you.",
+                funFact: "Jewish families still say this prayer called the 'Shema' every morning and evening!",
+                story: "Before Moses dies, he gives the people one last speech. He reminds them of all the amazing things God has done and tells them to always remember to love and obey God when they enter the Promised Land.",
+                activities: [
+                    "Make a memory stone pile",
+                    "Write God's commands on your heart",
+                    "Create a Promised Land map",
+                    "Practice the Shema prayer"
+                ],
+                coloringPage: "Moses speaking to the Israelites with the Promised Land visible in the distance"
+            },
+            { 
+                name: "Joshua", 
+                testament: "old", 
+                icon: "🏰", 
+                description: "Brave Joshua leads God's people into the Promised Land! The walls of Jericho fall down when they march around the city.",
+                verse: "Joshua 1:9", 
+                verseText: "Be strong and courageous! Do not be afraid.",
+                youVersionLink: "https://www.bible.com/bible/1359/JOS.1.ERV",
+                memoryTip: "Stand up tall like a superhero and flex your muscles! God makes you strong and brave!",
+                funFact: "The walls of Jericho were so thick that houses were built on top of them!",
+                story: "Joshua becomes the new leader after Moses. God helps him lead the people across the Jordan River and into the Promised Land. When they march around Jericho and shout, the walls fall down flat!",
+                activities: [
+                    "March around chairs like Jericho",
+                    "Make trumpets from paper tubes",
+                    "Cross a 'Jordan River' obstacle course",
+                    "Build walls with blocks and knock them down"
+                ],
+                coloringPage: "Joshua and the Israelites marching around Jericho with trumpets as the walls fall down"
+            },
+            { 
+                name: "Judges", 
+                testament: "old", 
+                icon: "⚖️", 
+                description: "God raises up heroes to save His people! Brave judges like Deborah, Gideon, and Samson help when enemies attack.",
+                verse: "Judges 16:28", 
+                verseText: "Sovereign Lord, remember me.",
+                youVersionLink: "https://www.bible.com/bible/1359/JDG.16.ERV",
+                memoryTip: "Put your hands together in prayer like Samson and remember God hears us when we call!",
+                funFact: "Samson was so strong he could kill a lion with his bare hands and carry away city gates!",
+                story: "After Joshua dies, the people sometimes forget about God and get into trouble. But when they cry out for help, God sends special leaders called judges to rescue them and bring them back to Him.",
+                activities: [
+                    "Act out Gideon's fleece test",
+                    "Make Samson's long hair with yarn",
+                    "Practice being brave like Deborah",
+                    "Create judge superhero costumes"
+                ],
+                coloringPage: "Samson pushing down the pillars of the temple with his great strength"
+            },
+            { 
+                name: "Ruth", 
+                testament: "old", 
+                icon: "💕", 
+                description: "A beautiful story of love, loyalty, and God's kindness! Ruth stays with Naomi and finds a new family with Boaz.",
+                verse: "Ruth 1:16", 
+                verseText: "Where you go I will go, and where you stay I will stay.",
+                youVersionLink: "https://www.bible.com/bible/1359/RUT.1.ERV",
+                memoryTip: "Hold hands with someone and walk together - that's what loyalty looks like!",
+                funFact: "Ruth is one of only two books in the Bible named after women (the other is Esther)!",
+                story: "When Naomi's husband and sons die, her daughter-in-law Ruth chooses to stay with her instead of going back to her own family. God blesses Ruth's loyalty by giving her a new husband, Boaz, and a baby son.",
+                activities: [
+                    "Gather grain like Ruth did",
+                    "Practice acts of loyalty and kindness",
+                    "Make a family tree",
+                    "Share food with someone in need"
+                ],
+                coloringPage: "Ruth gleaning grain in Boaz's field with Naomi watching nearby"
+            },
+            { 
+                name: "1 Samuel", 
+                testament: "old", 
+                icon: "👑", 
+                description: "Young Samuel hears God's voice and anoints King David! God chooses a shepherd boy to be the future king.",
+                verse: "1 Samuel 16:7", 
+                verseText: "The Lord looks at the heart.",
+                youVersionLink: "https://www.bible.com/bible/1359/1SA.16.ERV",
+                memoryTip: "Point to your heart and remember - God sees what's inside, not just the outside!",
+                funFact: "David was the youngest of 8 brothers, but God chose him to be king because of his heart!",
+                story: "Samuel grows up serving God in the temple. When the people want a king, God first gives them Saul, but then chooses young David, a shepherd boy, to be the next king because David loves God with all his heart.",
+                activities: [
+                    "Practice listening for God's voice",
+                    "Make a shepherd's staff",
+                    "Act out David fighting Goliath",
+                    "Create a crown for King David"
+                ],
+                coloringPage: "Young David with his sling facing the giant Goliath on the battlefield"
+            },
+            { 
+                name: "2 Samuel", 
+                testament: "old", 
+                icon: "🎵", 
+                description: "King David writes beautiful songs and rules God's people! He makes Jerusalem the capital city and brings the ark there.",
+                verse: "2 Samuel 22:31", 
+                verseText: "As for God, his way is perfect.",
+                youVersionLink: "https://www.bible.com/bible/1359/2SA.22.ERV",
+                memoryTip: "Draw a perfect circle and remember - God's way is always perfect, even when we don't understand!",
+                funFact: "David wrote over 70 of the psalms in the Bible - he was a king AND a songwriter!",
+                story: "David becomes king and makes Jerusalem his capital city. He writes many psalms (songs) to praise God. Even though David makes some mistakes, he always comes back to God and asks for forgiveness.",
+                activities: [
+                    "Write your own psalm to God",
+                    "Make musical instruments",
+                    "Dance like David did",
+                    "Build a model of Jerusalem"
+                ],
+                coloringPage: "King David playing his harp and singing praises to God in Jerusalem"
+            },
+            { 
+                name: "1 Kings", 
+                testament: "old", 
+                icon: "🏛️", 
+                description: "Wise King Solomon builds God's beautiful temple! He asks God for wisdom and becomes the wisest man who ever lived.",
+                verse: "1 Kings 3:9", 
+                verseText: "Give your servant a discerning heart.",
+                youVersionLink: "https://www.bible.com/bible/1359/1KI.3.ERV",
+                memoryTip: "Point to your head and ask God for wisdom to make good choices every day!",
+                funFact: "Solomon's temple took 7 years to build and was covered in gold - it was the most beautiful building ever!",
+                story: "Solomon becomes king after David and asks God for wisdom instead of riches. God is so pleased that He gives Solomon both wisdom and riches! Solomon builds a magnificent temple for God in Jerusalem.",
+                activities: [
+                    "Build a temple with blocks",
+                    "Practice making wise choices",
+                    "Solve puzzles like Solomon",
+                    "Make golden decorations"
+                ],
+                coloringPage: "Solomon's magnificent temple with priests and people bringing offerings"
+            },
+            { 
+                name: "2 Kings", 
+                testament: "old", 
+                icon: "🔥", 
+                description: "Elijah and Elisha do amazing miracles for God! Fire comes down from heaven and the dead come back to life.",
+                verse: "2 Kings 6:16", 
+                verseText: "Those who are with us are more than those who are with them.",
+                youVersionLink: "https://www.bible.com/bible/1359/2KI.6.ERV",
+                memoryTip: "Look around and remember - God's angels are everywhere protecting us, even when we can't see them!",
+                funFact: "Elisha did twice as many miracles as Elijah - he asked for a double portion of God's spirit!",
+                story: "The prophets Elijah and Elisha show God's power through amazing miracles. Elijah calls down fire from heaven and goes to heaven in a whirlwind. Elisha heals people and helps those in need.",
+                activities: [
+                    "Act out Elijah's chariot of fire",
+                    "Make a widow's jar that never empties",
+                    "Practice helping people in need",
+                    "Create fire effects with tissue paper"
+                ],
+                coloringPage: "Elijah being taken up to heaven in a fiery chariot with horses"
+            },
+            { 
+                name: "1 Chronicles", 
+                testament: "old", 
+                icon: "📚", 
+                description: "The wonderful history of God's chosen people! It tells about David's family and how they served God.",
+                verse: "1 Chronicles 16:34", 
+                verseText: "Give thanks to the Lord, for he is good.",
+                youVersionLink: "https://www.bible.com/bible/1359/1CH.16.ERV",
+                memoryTip: "Clap your hands and say 'Thank you God!' - His love lasts forever!",
+                funFact: "This book has the longest family tree in the Bible - 9 whole chapters of names!",
+                story: "This book retells the story of God's people, focusing on the good kings who followed God. It shows how important it is to worship God and remember all the good things He has done for us.",
+                activities: [
+                    "Make a family history book",
+                    "Practice giving thanks to God",
+                    "Learn about your ancestors",
+                    "Create a gratitude journal"
+                ],
+                coloringPage: "Families worshipping together in the temple with musical instruments"
+            },
+            { 
+                name: "2 Chronicles", 
+                testament: "old", 
+                icon: "🏗️", 
+                description: "Kings and people learn to follow God's ways! Some kings do good and some do bad, but God is always faithful.",
+                verse: "2 Chronicles 7:14", 
+                verseText: "If my people will humble themselves and pray...",
+                youVersionLink: "https://www.bible.com/bible/1359/2CH.7.ERV",
+                memoryTip: "Bow your head humbly and pray - God promises to hear and heal!",
+                funFact: "This book tells about 20 different kings - some good, some bad, but God loved them all!",
+                story: "This book continues the story of the kings of Judah. It shows how the kingdom is blessed when the kings follow God, but faces trouble when they turn away. God always welcomes His people back when they repent.",
+                activities: [
+                    "Make crowns for good and bad kings",
+                    "Practice praying for leaders",
+                    "Act out temple repairs",
+                    "Create a kingdom timeline"
+                ],
+                coloringPage: "King Josiah reading God's law to all the people in the temple courtyard"
+            },
+            { 
+                name: "Ezra", 
+                testament: "old", 
+                icon: "🔨", 
+                description: "God's people return home and rebuild His temple! After being away for 70 years, they come back to Jerusalem.",
+                verse: "Ezra 7:10", 
+                verseText: "Ezra had devoted himself to the study of the Law.",
+                youVersionLink: "https://www.bible.com/bible/1359/EZR.7.ERV",
+                memoryTip: "Open a book and read it carefully like Ezra - studying God's word makes us wise!",
+                funFact: "The people were away from home for exactly 70 years, just like God said through Jeremiah!",
+                story: "After many years in Babylon, God's people are finally allowed to go home to Jerusalem. Ezra the priest leads them in rebuilding God's temple and teaches them to follow God's laws again.",
+                activities: [
+                    "Build with blocks like rebuilding the temple",
+                    "Pack for a long journey home",
+                    "Read God's word like Ezra",
+                    "Celebrate homecoming"
+                ],
+                coloringPage: "Ezra reading from the scroll of God's law to the returned exiles"
+            },
+            { 
+                name: "Nehemiah", 
+                testament: "old", 
+                icon: "🧱", 
+                description: "Nehemiah leads the people to rebuild Jerusalem's walls! Even when enemies try to stop them, they keep working.",
+                verse: "Nehemiah 8:10", 
+                verseText: "The joy of the Lord is your strength.",
+                youVersionLink: "https://www.bible.com/bible/1359/NEH.8.ERV",
+                memoryTip: "Smile big and flex your muscles - God's joy makes us strong to do hard things!",
+                funFact: "They rebuilt the entire wall around Jerusalem in just 52 days - that's less than 2 months!",
+                story: "Nehemiah hears that Jerusalem's walls are broken down and feels very sad. He asks the king if he can go help rebuild them. Despite opposition from enemies, the people work together and finish the walls in just 52 days!",
+                activities: [
+                    "Build walls with blocks or cardboard",
+                    "Work together on a team project",
+                    "Practice not giving up when things are hard",
+                    "Celebrate finishing a big job"
+                ],
+                coloringPage: "Nehemiah and the people rebuilding the walls of Jerusalem with tools in hand"
+            },
+            { 
+                name: "Esther", 
+                testament: "old", 
+                icon: "👸", 
+                description: "Brave Queen Esther saves God's people from danger! She risks her life to protect her people from the evil Haman.",
+                verse: "Esther 4:14", 
+                verseText: "Perhaps you were born for such a time as this.",
+                youVersionLink: "https://www.bible.com/bible/1359/EST.4.ERV",
+                memoryTip: "Stand up tall like a brave queen - God made you for special purposes!",
+                funFact: "Esther is one of only two books in the Bible that never mentions God's name, but His protection is everywhere!",
+                story: "Esther becomes queen of Persia but keeps her Jewish identity secret. When evil Haman plans to kill all the Jewish people, Esther bravely speaks to the king and saves her people, even though it could cost her life.",
+                activities: [
+                    "Make royal crowns and robes",
+                    "Practice being brave like Esther",
+                    "Act out the Purim story",
+                    "Make noise makers to celebrate"
+                ],
+                coloringPage: "Queen Esther in her royal robes approaching the king's throne to save her people"
+            },
+            { 
+                name: "Job", 
+                testament: "old", 
+                icon: "💪", 
+                description: "Job learns to trust God even when life is hard! Even when he loses everything, he still believes God is good.",
+                verse: "Job 19:25", 
+                verseText: "I know that my redeemer lives.",
+                youVersionLink: "https://www.bible.com/bible/1359/JOB.19.ERV",
+                memoryTip: "Put your hand on your heart and say 'I KNOW!' - even when things are hard, we know Jesus lives!",
+                funFact: "Job is probably the oldest book in the Bible - it might have been written before Moses wrote Genesis!",
+                story: "Job is a good man who loves God, but Satan is allowed to test him. Job loses his family, his wealth, and his health, but he never stops trusting God. In the end, God blesses Job even more than before.",
+                activities: [
+                    "Practice trusting God when things are hard",
+                    "Help someone who is sad or hurting",
+                    "Make a list of things to be thankful for",
+                    "Act out being patient"
+                ],
+                coloringPage: "Job sitting with his friends, looking up to heaven with faith despite his troubles"
+            },
+            { 
+                name: "Psalms", 
+                testament: "old", 
+                icon: "🎶", 
+                description: "Beautiful songs and prayers to God from David and others! These songs help us praise God and talk to Him.",
+                verse: "Psalm 23:1", 
+                verseText: "The Lord is my shepherd, I lack nothing.",
+                youVersionLink: "https://www.bible.com/bible/1359/PSA.23.ERV",
+                memoryTip: "Pretend to be a sheep following your shepherd - God takes care of you like a shepherd cares for sheep!",
+                funFact: "There are 150 psalms in the Bible - that's like having 150 different songs to sing to God!",
+                story: "The Psalms are like a songbook for God's people. David wrote many of them, along with other people. Some are happy songs of praise, some are sad prayers for help, and some teach us about God's love and care.",
+                activities: [
+                    "Write your own psalm to God",
+                    "Sing praise songs",
+                    "Make musical instruments",
+                    "Memorize Psalm 23"
+                ],
+                coloringPage: "A shepherd with sheep in green pastures beside still waters under a starry sky"
+            },
+            { 
+                name: "Proverbs", 
+                testament: "old", 
+                icon: "🦉", 
+                description: "Wise sayings from Solomon to help us make good choices! These short lessons teach us how to live wisely.",
+                verse: "Proverbs 3:5", 
+                verseText: "Trust in the Lord with all your heart.",
+                youVersionLink: "https://www.bible.com/bible/1359/PRO.3.ERV",
+                memoryTip: "Put both hands on your heart and lean forward - trust God with ALL your heart, not just part of it!",
+                funFact: "There are 31 chapters in Proverbs - you could read one chapter each day of the month!",
+                story: "King Solomon wrote most of these wise sayings to teach people how to make good choices. They cover topics like friendship, honesty, hard work, and treating others kindly. Wisdom begins with respecting God.",
+                activities: [
+                    "Practice making wise choices",
+                    "Learn about being a good friend",
+                    "Make a wisdom poster",
+                    "Act out different proverbs"
+                ],
+                coloringPage: "An owl sitting on a tree branch with scrolls of wisdom hanging nearby"
+            },
+            { 
+                name: "Ecclesiastes", 
+                testament: "old", 
+                icon: "⏰", 
+                description: "Solomon teaches us what really matters in life! He shows us that only God can make us truly happy.",
+                verse: "Ecclesiastes 3:1", 
+                verseText: "To every thing there is a season.",
+                youVersionLink: "https://www.bible.com/bible/1359/ECC.3.ERV",
+                memoryTip: "Clap your hands to the rhythm: 'A time to plant, a time to grow, a time for everything, don't you know!'",
+                funFact: "The famous song 'Turn! Turn! Turn!' by The Byrds uses words straight from Ecclesiastes 3!",
+                story: "Solomon, the wisest man who ever lived, tried everything to find happiness - money, parties, building projects. But he learned that only God can give us real joy and meaning in life.",
+                activities: [
+                    "Make a seasons wheel",
+                    "Talk about what makes you truly happy",
+                    "Practice being content with what you have",
+                    "Learn about different times and seasons"
+                ],
+                coloringPage: "A clock surrounded by symbols of different seasons and activities"
+            },
+            { 
+                name: "Song of Songs", 
+                testament: "old", 
+                icon: "🌹", 
+                description: "A beautiful poem about love and friendship! It shows us how much God loves His people.",
+                verse: "Song of Songs 2:12", 
+                verseText: "Flowers appear on the earth; the season of singing has come.",
+                youVersionLink: "https://www.bible.com/bible/1359/SNG.2.ERV",
+                memoryTip: "Smell a flower and sing a happy song - spring is here and it's time to celebrate!",
+                funFact: "This book never mentions God's name, but it's all about the kind of love God has for us!",
+                story: "This is a beautiful love poem that celebrates the gift of love and marriage. It also reminds us of how much God loves His people - like a bridegroom loves his bride.",
+                activities: [
+                    "Make flower bouquets",
+                    "Write poems about God's love",
+                    "Sing songs about spring and new life",
+                    "Practice showing love to family"
+                ],
+                coloringPage: "A beautiful garden with roses, lilies, and other flowers in full bloom"
+            },
+            { 
+                name: "Isaiah", 
+                testament: "old", 
+                icon: "🕊️", 
+                description: "Isaiah tells about the coming Savior, Jesus! He prophesies that a virgin will have a baby who will save the world.",
+                verse: "Isaiah 9:6", 
+                verseText: "For to us a child is born, to us a son is given.",
+                youVersionLink: "https://www.bible.com/bible/1359/ISA.9.ERV",
+                memoryTip: "Hold a baby doll and remember - God gave us Jesus as the best gift ever!",
+                funFact: "Isaiah wrote about Jesus 700 years before Jesus was born!",
+                story: "Isaiah is a prophet who tells God's people about their future. He warns them about disobeying God, but also gives them hope by telling them about the coming Messiah who will save them from their sins.",
+                activities: [
+                    "Act out the Christmas story from Isaiah",
+                    "Make peace doves",
+                    "Practice being God's messenger",
+                    "Learn about Jesus as the Prince of Peace"
+                ],
+                coloringPage: "Isaiah the prophet pointing toward a bright star with a baby in a manger scene"
+            },
+            { 
+                name: "Jeremiah", 
+                testament: "old", 
+                icon: "💧", 
+                description: "God calls Jeremiah to be His messenger to the people! Even when it's hard, Jeremiah keeps telling people God's truth.",
+                verse: "Jeremiah 29:11", 
+                verseText: "For I know the plans I have for you, declares the Lord.",
+                youVersionLink: "https://www.bible.com/bible/1359/JER.29.ERV",
+                memoryTip: "Point up to God and remember - He has good plans for your life!",
+                funFact: "Jeremiah is called the 'weeping prophet' because he cried for God's people!",
+                story: "Jeremiah becomes a prophet when he's still young. God gives him difficult messages to share with people who don't want to listen. But Jeremiah is faithful and keeps speaking God's words, even when people reject him.",
+                activities: [
+                    "Practice being brave when telling the truth",
+                    "Make a potter's clay pot",
+                    "Write encouraging messages",
+                    "Learn about God's good plans"
+                ],
+                coloringPage: "Jeremiah the prophet speaking to the people with tears in his eyes but determination in his heart"
+            },
+            { 
+                name: "Lamentations", 
+                testament: "old", 
+                icon: "😢", 
+                description: "Jeremiah's sad songs that show God still loves us! Even when we're sad, we can trust that God cares.",
+                verse: "Lamentations 3:22", 
+                verseText: "Because of the Lord's great love we are not consumed.",
+                youVersionLink: "https://www.bible.com/bible/1359/LAM.3.ERV",
+                memoryTip: "Hug yourself tight and remember - God's love never fails, even when we're sad!",
+                funFact: "Even in the saddest book of the Bible, there's still hope and God's love!",
+                story: "After Jerusalem is destroyed, Jeremiah writes these sad poems. But even in his sadness, he remembers that God's love never fails and His mercies are new every morning.",
+                activities: [
+                    "Talk about times when you feel sad",
+                    "Practice finding hope in difficult times",
+                    "Make a sunrise craft about new mercies",
+                    "Comfort someone who is sad"
+                ],
+                coloringPage: "Jeremiah sitting by the ruins of Jerusalem but looking up at the sunrise with hope"
+            },
+            { 
+                name: "Ezekiel", 
+                testament: "old", 
+                icon: "👁️", 
+                description: "Ezekiel sees amazing visions from God! He sees wheels within wheels and learns about God's glory.",
+                verse: "Ezekiel 36:26", 
+                verseText: "I will give you a new heart and put a new spirit in you.",
+                youVersionLink: "https://www.bible.com/bible/1359/EZK.36.ERV",
+                memoryTip: "Put your hand on your heart and ask God for a clean heart that loves Him!",
+                funFact: "Ezekiel saw some of the strangest and most amazing visions in the whole Bible!",
+                story: "Ezekiel is a priest and prophet who sees incredible visions from God. He sees God's glory, strange creatures, and wheels within wheels. God shows him that He will give His people new hearts that love Him.",
+                activities: [
+                    "Draw your own vision from God",
+                    "Make spinning wheels craft",
+                    "Act out the valley of dry bones",
+                    "Talk about having a clean heart"
+                ],
+                coloringPage: "Ezekiel's vision of the four living creatures with wheels and God's throne above"
+            },
+            { 
+                name: "Daniel", 
+                testament: "old", 
+                icon: "🦁", 
+                description: "Daniel and his friends stay faithful to God in Babylon! God protects Daniel in the lion's den and his friends in the fiery furnace.",
+                verse: "Daniel 6:23", 
+                verseText: "No wound was found on him, because he had trusted in his God.",
+                youVersionLink: "https://www.bible.com/bible/1359/DAN.6.ERV",
+                memoryTip: "Roar like a lion, then be quiet and gentle - God can make even lions peaceful!",
+                funFact: "Daniel lived to be over 90 years old and served under several different kings!",
+                story: "Daniel and his friends are taken to Babylon as prisoners, but they decide to stay faithful to God no matter what. God protects them from the fiery furnace and the lion's den because of their faith.",
+                activities: [
+                    "Act out Daniel in the lion's den",
+                    "Make paper lions",
+                    "Practice eating healthy food like Daniel",
+                    "Learn about being faithful to God"
+                ],
+                coloringPage: "Daniel praying peacefully in the lion's den with gentle lions lying around him"
+            },
+            { 
+                name: "Hosea", 
+                testament: "old", 
+                icon: "💝", 
+                description: "God shows His amazing love that never gives up! Even when people turn away, God keeps loving them.",
+                verse: "Hosea 11:4", 
+                verseText: "I led them with cords of human kindness, with ties of love.",
+                youVersionLink: "https://www.bible.com/bible/1359/HOS.11.ERV",
+                memoryTip: "Tie a ribbon around your wrist and remember - God's love ties us to Him forever!",
+                funFact: "Hosea's whole life was like a picture story to show God's love for His people!",
+                story: "God tells Hosea to marry a woman who will be unfaithful to show how God's people have been unfaithful to Him. But just like Hosea keeps loving his wife, God keeps loving His people no matter what.",
+                activities: [
+                    "Practice forgiving others",
+                    "Make heart crafts about God's love",
+                    "Talk about second chances",
+                    "Show kindness to someone who hurt you"
+                ],
+                coloringPage: "Hosea welcoming back his wife with open arms, showing God's forgiving love"
+            },
+            { 
+                name: "Joel", 
+                testament: "old", 
+                icon: "🦗", 
+                description: "Joel tells about God's power and coming blessings! After the locusts destroy everything, God promises to restore it all.",
+                verse: "Joel 2:13", 
+                verseText: "Return to the Lord your God, for he is gracious and compassionate.",
+                youVersionLink: "https://www.bible.com/bible/1359/JOL.2.ERV",
+                memoryTip: "Turn around and come back to God - He's always ready to forgive and help!",
+                funFact: "A swarm of locusts can eat everything green in their path - but God can restore it all!",
+                story: "A huge swarm of locusts destroys all the crops in the land. Joel tells the people this happened because they turned away from God, but if they come back to Him, He will bless them again.",
+                activities: [
+                    "Learn about different insects",
+                    "Practice saying sorry to God",
+                    "Make a before and after restoration picture",
+                    "Talk about God's second chances"
+                ],
+                coloringPage: "A field being restored after locust damage, with new green plants growing"
+            },
+            { 
+                name: "Amos", 
+                testament: "old", 
+                icon: "⚡", 
+                description: "Amos speaks God's message about fairness and justice! He tells rich people to help the poor and be kind.",
+                verse: "Amos 5:24", 
+                verseText: "Let justice roll on like a river.",
+                youVersionLink: "https://www.bible.com/bible/1359/AMO.5.ERV",
+                memoryTip: "Make flowing water motions with your hands - justice should flow like a river!",
+                funFact: "Amos was just a simple shepherd, but God used him to speak to kings and rich people!",
+                story: "Amos is a shepherd who becomes a prophet. God sends him to tell the rich people to stop being mean to the poor and to start treating everyone fairly. God wants justice and kindness for all people.",
+                activities: [
+                    "Practice being fair in games",
+                    "Help someone who needs it",
+                    "Share your toys with others",
+                    "Stand up for someone being treated unfairly"
+                ],
+                coloringPage: "Amos the shepherd-prophet speaking boldly to rich people about helping the poor"
+            },
+            { 
+                name: "Obadiah", 
+                testament: "old", 
+                icon: "🏔️", 
+                description: "The shortest book with a big message about God's justice! God protects His people from their enemies.",
+                verse: "Obadiah 1:15", 
+                verseText: "The day of the Lord is near for all nations.",
+                youVersionLink: "https://www.bible.com/bible/1359/OBA.1.ERV",
+                memoryTip: "Even though this book is short, God's message is big and important!",
+                funFact: "This is the shortest book in the Old Testament - only 21 verses!",
+                story: "This is the shortest book in the Old Testament! Obadiah has a message for the nation of Edom, who were mean to God's people. God says He will protect His people and judge those who hurt them.",
+                activities: [
+                    "Learn about being a good neighbor",
+                    "Practice protecting others",
+                    "Make a short book like Obadiah",
+                    "Talk about God's protection"
+                ],
+                coloringPage: "Obadiah standing on a mountain delivering God's message to the nations below"
+            },
+            { 
+                name: "Jonah", 
+                testament: "old", 
+                icon: "🐋", 
+                description: "Jonah learns about God's mercy inside a big fish! God gives second chances to everyone who asks.",
+                verse: "Jonah 2:9", 
+                verseText: "Salvation comes from the Lord.",
+                youVersionLink: "https://www.bible.com/bible/1359/JON.2.ERV",
+                memoryTip: "Pretend to swim like you're inside a big fish, then remember - only God can save us!",
+                funFact: "Jonah is the only prophet who tried to run away from God by sailing across the sea!",
+                story: "God tells Jonah to go to Nineveh, but Jonah runs away on a ship instead. God sends a big storm, and Jonah gets swallowed by a huge fish. After three days, Jonah prays and the fish spits him out. Then Jonah obeys God!",
+                activities: [
+                    "Act out being swallowed by a whale",
+                    "Practice obeying right away",
+                    "Make a big fish craft",
+                    "Talk about second chances"
+                ],
+                coloringPage: "Jonah being spit out by the great fish onto the shore, ready to obey God"
+            },
+            { 
+                name: "Micah", 
+                testament: "old", 
+                icon: "🌄", 
+                description: "Micah tells us how to walk humbly with God! He teaches about justice, mercy, and staying close to God.",
+                verse: "Micah 6:8", 
+                verseText: "Act justly and love mercy and walk humbly with your God.",
+                youVersionLink: "https://www.bible.com/bible/1359/MIC.6.ERV",
+                memoryTip: "Walk in place humbly and remember the three things: be fair, be kind, walk with God!",
+                funFact: "This verse tells us exactly what God wants from us in just one sentence!",
+                story: "Micah is a prophet who tells people what God really wants from them. It's not just about bringing sacrifices to the temple - God wants us to be fair, kind, and humble as we follow Him every day.",
+                activities: [
+                    "Practice being humble",
+                    "Show mercy to others",
+                    "Act justly in your decisions",
+                    "Take a humble walk with God"
+                ],
+                coloringPage: "Micah walking humbly on a mountain path, showing the way to follow God"
+            },
+            { 
+                name: "Nahum", 
+                testament: "old", 
+                icon: "🌪️", 
+                description: "God is slow to anger but great in power! He protects His people from those who hurt them.",
+                verse: "Nahum 1:7", 
+                verseText: "The Lord is good, a refuge in times of trouble.",
+                youVersionLink: "https://www.bible.com/bible/1359/NAH.1.ERV",
+                memoryTip: "Hide under a blanket like a safe refuge and remember - God is our safe place!",
+                funFact: "Nahum's name means 'comfort' - God comforts His people even when judging their enemies!",
+                story: "Nahum brings a message about the city of Nineveh (the same city Jonah visited). This time, the people have become wicked again, and God will judge them. But God is still a safe place for those who trust Him.",
+                activities: [
+                    "Talk about God being our safe place",
+                    "Practice being patient like God",
+                    "Make a fortress craft",
+                    "Learn about God's power and goodness"
+                ],
+                coloringPage: "Nahum proclaiming God's power with storm clouds and a rainbow showing God's protection"
+            },
+            { 
+                name: "Habakkuk", 
+                testament: "old", 
+                icon: "❓", 
+                description: "Habakkuk asks God questions and learns to trust Him! It's okay to ask God 'Why?' when we don't understand.",
+                verse: "Habakkuk 3:19", 
+                verseText: "The Sovereign Lord is my strength.",
+                youVersionLink: "https://www.bible.com/bible/1359/HAB.3.ERV",
+                memoryTip: "Flex your muscles and remember - God gives us strength even when we have questions!",
+                funFact: "Habakkuk shows us it's okay to ask God hard questions when we don't understand!",
+                story: "Habakkuk sees bad things happening and asks God why He allows it. God answers that He has a plan, even when we can't see it. Habakkuk learns to trust God even when he doesn't understand everything.",
+                activities: [
+                    "Practice asking God questions in prayer",
+                    "Talk about trusting God when confused",
+                    "Make a question mark craft",
+                    "Learn about having faith in hard times"
+                ],
+                coloringPage: "Habakkuk looking up at the stars and asking God questions with faith and trust"
+            },
+            { 
+                name: "Zephaniah", 
+                testament: "old", 
+                icon: "🎺", 
+                description: "God promises a day of great joy and singing! He will quiet us with His love and rejoice over us with singing.",
+                verse: "Zephaniah 3:17", 
+                verseText: "The Lord your God is with you, the Mighty Warrior who saves.",
+                youVersionLink: "https://www.bible.com/bible/1359/ZEP.3.ERV",
+                memoryTip: "March like a mighty warrior and remember - God fights for us and saves us!",
+                funFact: "God sings over us with joy - imagine the Creator of the universe singing about you!",
+                story: "Zephaniah warns about a coming day of judgment, but he also shares wonderful news about God's love. God will sing over His people with joy and give them a new heart to serve Him with gladness.",
+                activities: [
+                    "Sing joyful songs to God",
+                    "Practice celebrating God's love",
+                    "Make musical instruments",
+                    "Dance with joy like God does over us"
+                ],
+                coloringPage: "Zephaniah with a trumpet, announcing God's joy with people dancing and celebrating"
+            },
+            { 
+                name: "Haggai", 
+                testament: "old", 
+                icon: "🔨", 
+                description: "Haggai encourages people to rebuild God's temple! He reminds them to put God first in everything they do.",
+                verse: "Haggai 2:4", 
+                verseText: "Be strong, all you people of the land, declares the Lord.",
+                youVersionLink: "https://www.bible.com/bible/1359/HAG.2.ERV",
+                memoryTip: "Hammer with your fist and say 'Be strong!' - God gives us strength to do His work!",
+                funFact: "Haggai's messages were so powerful that the people started rebuilding the temple in just 23 days!",
+                story: "The people have returned from Babylon but have stopped building God's temple. Haggai encourages them to finish the work and reminds them that God will be with them and help them be strong.",
+                activities: [
+                    "Build something together as a team",
+                    "Practice putting God first",
+                    "Make construction tools from cardboard",
+                    "Encourage others to do good work"
+                ],
+                coloringPage: "Haggai encouraging the people as they rebuild the temple with hammers and tools"
+            },
+            { 
+                name: "Zechariah", 
+                testament: "old", 
+                icon: "🌟", 
+                description: "Zechariah sees visions of God's wonderful future! He tells about the coming King who will ride on a donkey.",
+                verse: "Zechariah 4:6", 
+                verseText: "Not by might nor by power, but by my Spirit, says the Lord.",
+                youVersionLink: "https://www.bible.com/bible/1359/ZEC.4.ERV",
+                memoryTip: "Blow gently like the wind and remember - God's Spirit does the work, not our strength!",
+                funFact: "Zechariah predicted that the Messiah would ride on a donkey 500 years before Jesus did it!",
+                story: "Zechariah has amazing visions from God about the future. He sees flying scrolls, golden lampstands, and tells about a coming King who will be humble and ride on a donkey - this is about Jesus!",
+                activities: [
+                    "Draw your own vision from God",
+                    "Make a golden lampstand craft",
+                    "Act out Jesus riding on a donkey",
+                    "Talk about God's Spirit helping us"
+                ],
+                coloringPage: "Zechariah's vision of the golden lampstand with olive trees and flying angels"
+            },
+            { 
+                name: "Malachi", 
+                testament: "old", 
+                icon: "💌", 
+                description: "God's last message in the Old Testament about His love! He promises to send a special messenger before the Messiah comes.",
+                verse: "Malachi 3:6", 
+                verseText: "I the Lord do not change.",
+                youVersionLink: "https://www.bible.com/bible/1359/MAL.3.ERV",
+                memoryTip: "Stand still like a statue and remember - God never changes, He's always the same!",
+                funFact: "After Malachi, God was quiet for 400 years until John the Baptist came!",
+                story: "Malachi brings God's final message in the Old Testament. He reminds the people that God loves them and never changes. He also promises that God will send a special messenger (John the Baptist) before the Messiah comes.",
+                activities: [
+                    "Write a love letter from God",
+                    "Practice being faithful like God",
+                    "Make a messenger craft",
+                    "Talk about things that never change about God"
+                ],
+                coloringPage: "Malachi delivering God's final Old Testament message with a scroll and pointing toward the future"
+            },
+
+            // New Testament
+            { 
+                name: "Matthew", 
+                testament: "new", 
+                icon: "👑", 
+                description: "The story of Jesus, the promised King and Savior! Matthew shows how Jesus fulfilled all the Old Testament promises.",
+                verse: "Matthew 5:16", 
+                verseText: "Let your light shine before others.",
+                youVersionLink: "https://www.bible.com/bible/1359/MAT.5.ERV",
+                memoryTip: "Hold up a flashlight or candle and let your light shine bright for Jesus!",
+                funFact: "Matthew was a tax collector before Jesus called him to be a disciple!",
+                story: "Matthew tells the story of Jesus from His birth to His resurrection. He shows how Jesus is the King that God promised to send. Jesus teaches, heals people, and dies on the cross to save us from our sins.",
+                activities: [
+                    "Act out the Christmas story",
+                    "Practice letting your light shine",
+                    "Learn the Beatitudes",
+                    "Make a crown for King Jesus"
+                ],
+                coloringPage: "Jesus as a king with a crown, teaching the Sermon on the Mount to crowds of people"
+            },
+            { 
+                name: "Mark", 
+                testament: "new", 
+                icon: "🏃", 
+                description: "Fast-paced stories of Jesus' amazing miracles and love! Mark shows Jesus as the powerful Son of God.",
+                verse: "Mark 10:14", 
+                verseText: "Let the little children come to me.",
+                youVersionLink: "https://www.bible.com/bible/1359/MRK.10.ERV",
+                memoryTip: "Run to Jesus with your arms wide open - He loves children and wants us to come to Him!",
+                funFact: "Mark's Gospel is the shortest and most action-packed of all four Gospels!",
+                story: "Mark tells about Jesus' ministry in an exciting, fast-moving way. He focuses on Jesus' miracles and shows how Jesus has power over sickness, storms, and even death. Jesus loves everyone, especially children!",
+                activities: [
+                    "Act out Jesus calming the storm",
+                    "Practice coming to Jesus like children",
+                    "Make a miracle book",
+                    "Run relay races like Mark's fast-paced story"
+                ],
+                coloringPage: "Jesus welcoming children with open arms while His disciples watch with amazement"
+            },
+            { 
+                name: "Luke", 
+                testament: "new", 
+                icon: "👨‍⚕️", 
+                description: "Dr. Luke tells the beautiful story of Jesus' life! He shows how Jesus came to save everyone, including the poor and outcasts.",
+                verse: "Luke 19:10", 
+                verseText: "The Son of Man came to seek and to save the lost.",
+                youVersionLink: "https://www.bible.com/bible/1359/LUK.19.ERV",
+                memoryTip: "Look around like you're searching for someone lost, then celebrate - Jesus came to find and save us!",
+                funFact: "Luke was a doctor and the only non-Jewish person to write a book of the Bible!",
+                story: "Luke was a doctor who carefully researched Jesus' life. He tells beautiful stories like the Good Samaritan and the Prodigal Son. Luke shows how Jesus cares for everyone, especially those who are hurting or left out.",
+                activities: [
+                    "Act out the Good Samaritan story",
+                    "Practice helping people who are hurt",
+                    "Make a doctor's kit like Luke",
+                    "Show kindness to someone who feels left out"
+                ],
+                coloringPage: "Dr. Luke writing his Gospel with Jesus healing the sick in the background"
+            },
+            { 
+                name: "John", 
+                testament: "new", 
+                icon: "❤️", 
+                description: "John shares how much Jesus loves each one of us! He tells us that Jesus is the light of the world and the way to God.",
+                verse: "John 3:16", 
+                verseText: "For God so loved the world that he gave his one and only Son.",
+                youVersionLink: "https://www.bible.com/bible/1359/JHN.3.ERV",
+                memoryTip: "Hug yourself and point to the world - God loves everyone so much He gave us Jesus!",
+                funFact: "John was Jesus' best friend and lived to be almost 100 years old!",
+                story: "John was Jesus' best friend and writes about Jesus' love. He tells us that Jesus is God's Son who came to earth to show us God's love. John wants everyone to believe in Jesus and have eternal life.",
+                activities: [
+                    "Memorize John 3:16",
+                    "Make heart crafts about God's love",
+                    "Practice being a good friend like John",
+                    "Share God's love with others"
+                ],
+                coloringPage: "John the beloved disciple writing his Gospel with a heart and cross symbolizing God's love"
+            },
+            { 
+                name: "Acts", 
+                testament: "new", 
+                icon: "🔥", 
+                description: "The exciting adventures of Jesus' first followers! The Holy Spirit comes and helps them tell everyone about Jesus.",
+                verse: "Acts 1:8", 
+                verseText: "You will be my witnesses to the ends of the earth.",
+                youVersionLink: "https://www.bible.com/bible/1359/ACT.1.ERV",
+                memoryTip: "Point to different places around the world and remember - we can tell everyone about Jesus!",
+                funFact: "The disciples spoke in different languages on Pentecost so everyone could understand about Jesus!",
+                story: "After Jesus goes back to heaven, He sends the Holy Spirit to help His followers. They perform miracles, start churches, and tell people all over the world about Jesus. It's full of exciting adventures!",
+                activities: [
+                    "Act out Pentecost with fire tongues",
+                    "Practice telling others about Jesus",
+                    "Make a missionary journey map",
+                    "Learn about different languages"
+                ],
+                coloringPage: "The disciples on Pentecost with flames above their heads and people from many nations listening"
+            },
+            { 
+                name: "Romans", 
+                testament: "new", 
+                icon: "⚖️", 
+                description: "Paul explains God's amazing gift of salvation! Everyone has sinned, but Jesus died to make us right with God.",
+                verse: "Romans 8:28", 
+                verseText: "God works for the good of those who love him.",
+                youVersionLink: "https://www.bible.com/bible/1359/ROM.8.ERV",
+                memoryTip: "Make a heart with your hands and remember - God works everything for good when we love Him!",
+                funFact: "Romans is like a complete textbook about how to become a Christian and live for God!",
+                story: "Paul writes to the Christians in Rome to explain the good news about Jesus. He teaches that everyone has done wrong things, but God loves us so much that He sent Jesus to take the punishment for our sins.",
+                activities: [
+                    "Learn about God's gift of salvation",
+                    "Practice trusting that God works for good",
+                    "Make a Romans Road craft",
+                    "Talk about how Jesus makes us right with God"
+                ],
+                coloringPage: "Paul writing his letter to Rome with scales of justice and a cross showing God's righteousness"
+            },
+            { 
+                name: "1 Corinthians", 
+                testament: "new", 
+                icon: "💕", 
+                description: "Paul teaches about love and working together! He shows us what real love looks like and how to use our gifts.",
+                verse: "1 Corinthians 13:4", 
+                verseText: "Love is patient, love is kind.",
+                youVersionLink: "https://www.bible.com/bible/1359/1CO.13.ERV",
+                memoryTip: "Wait patiently and then give someone a kind hug - that's what love looks like!",
+                funFact: "The famous 'love chapter' (1 Corinthians 13) is read at many weddings around the world!",
+                story: "The church in Corinth had some problems, so Paul writes to help them. He teaches about love, spiritual gifts, and working together as one body. The famous 'love chapter' (chapter 13) is in this book!",
+                activities: [
+                    "Memorize the love chapter",
+                    "Practice being patient and kind",
+                    "Make a body parts craft about working together",
+                    "Use your gifts to help others"
+                ],
+                coloringPage: "Paul teaching about love with hearts and people of different ages working together in harmony"
+            },
+            { 
+                name: "2 Corinthians", 
+                testament: "new", 
+                icon: "💪", 
+                description: "God's strength helps us when we feel weak! Paul shares how God comforts us and makes us strong.",
+                verse: "2 Corinthians 12:9", 
+                verseText: "My grace is sufficient for you.",
+                youVersionLink: "https://www.bible.com/bible/1359/2CO.12.ERV",
+                memoryTip: "Flex your muscles and remember - God's grace is always enough to help us!",
+                funFact: "Paul had a 'thorn in the flesh' that God didn't take away, but God's grace was enough!",
+                story: "Paul writes another letter to Corinth to defend his ministry and encourage the believers. He shares about his own struggles and how God's strength is made perfect in our weakness. God's grace is always enough!",
+                activities: [
+                    "Talk about times when you felt weak",
+                    "Practice asking God for strength",
+                    "Make a strength training craft",
+                    "Encourage someone who is struggling"
+                ],
+                coloringPage: "Paul showing God's strength in weakness with a strong arm coming from heaven to help"
+            },
+            { 
+                name: "Galatians", 
+                testament: "new", 
+                icon: "🆓", 
+                description: "We are free because of what Jesus did for us! Paul teaches that we don't have to earn God's love - it's a gift.",
+                verse: "Galatians 5:22", 
+                verseText: "The fruit of the Spirit is love, joy, peace...",
+                youVersionLink: "https://www.bible.com/bible/1359/GAL.5.ERV",
+                memoryTip: "Pick pretend fruit and name each one - love, joy, peace, patience, kindness, goodness, faithfulness, gentleness, self-control!",
+                funFact: "The fruit of the Spirit has 9 different qualities that grow in us when we follow Jesus!",
+                story: "Some people were telling the Galatians they had to follow lots of rules to be saved. Paul reminds them that salvation is a free gift from God through faith in Jesus, not by following rules.",
+                activities: [
+                    "Learn about the fruit of the Spirit",
+                    "Practice living in freedom",
+                    "Make a fruit tree craft",
+                    "Talk about gifts vs. earning things"
+                ],
+                coloringPage: "Paul teaching about freedom with broken chains and a tree bearing the fruit of the Spirit"
+            },
+            { 
+                name: "Ephesians", 
+                testament: "new", 
+                icon: "🛡️", 
+                description: "Paul teaches about God's armor and our identity in Christ! We can be strong against the devil's tricks.",
+                verse: "Ephesians 6:11", 
+                verseText: "Put on the full armor of God.",
+                youVersionLink: "https://www.bible.com/bible/1359/EPH.6.ERV",
+                memoryTip: "Pretend to put on armor piece by piece - helmet, breastplate, belt, shoes, shield, sword!",
+                funFact: "God's armor has 6 pieces: truth, righteousness, peace, faith, salvation, and God's word!",
+                story: "Paul writes to the Ephesians about their new life in Christ. He teaches about the church as God's family and tells them to put on God's armor to fight against evil. We are God's beloved children!",
+                activities: [
+                    "Make armor of God crafts",
+                    "Practice using the sword of the Spirit",
+                    "Act out spiritual battles",
+                    "Learn about being God's children"
+                ],
+                coloringPage: "A Christian warrior wearing the full armor of God with sword, shield, and helmet"
+            },
+            { 
+                name: "Philippians", 
+                testament: "new", 
+                icon: "😊", 
+                description: "A joyful letter about being happy in Jesus! Paul writes from prison but is still full of joy and thankfulness.",
+                verse: "Philippians 4:13", 
+                verseText: "I can do all this through him who gives me strength.",
+                youVersionLink: "https://www.bible.com/bible/1359/PHP.4.ERV",
+                memoryTip: "Flex your muscles and smile big - Jesus gives us strength to do anything!",
+                funFact: "Paul wrote this happy letter while he was chained up in prison!",
+                story: "Paul writes this happy letter from prison to thank the Philippians for their help. Even though he's in jail, Paul is joyful because he knows Jesus is with him. He teaches us to rejoice always!",
+                activities: [
+                    "Practice being joyful in hard times",
+                    "Make thank you cards",
+                    "Learn about contentment",
+                    "Sing happy songs like Paul in prison"
+                ],
+                coloringPage: "Paul writing joyfully in prison with rays of light and musical notes showing his happiness in Jesus"
+            },
+            { 
+                name: "Colossians", 
+                testament: "new", 
+                icon: "👑", 
+                description: "Jesus is the King over everything! Paul teaches that Jesus is supreme and we should live for Him in everything we do.",
+                verse: "Colossians 3:23", 
+                verseText: "Whatever you do, work at it with all your heart.",
+                youVersionLink: "https://www.bible.com/bible/1359/COL.3.ERV",
+                memoryTip: "Put your hand on your heart and remember - do everything with all your heart for Jesus!",
+                funFact: "Jesus is the head of the church and the firstborn over all creation!",
+                story: "Paul writes to the Colossians to remind them that Jesus is supreme over everything. Some false teachers were confusing them, but Paul shows that Jesus is all we need. We should live our whole lives for Him!",
+                activities: [
+                    "Make a crown for King Jesus",
+                    "Practice doing everything for Jesus",
+                    "Learn about Jesus being supreme",
+                    "Work hard at everything you do"
+                ],
+                coloringPage: "Jesus as King of kings with a crown, ruling over all creation with love and authority"
+            },
+            { 
+                name: "1 Thessalonians", 
+                testament: "new", 
+                icon: "🌅", 
+                description: "Paul encourages believers to keep following Jesus! He teaches about Jesus coming back and living holy lives.",
+                verse: "1 Thessalonians 5:16", 
+                verseText: "Rejoice always.",
+                youVersionLink: "https://www.bible.com/bible/1359/1TH.5.ERV",
+                memoryTip: "Jump up and down with joy and remember - we can always be happy in Jesus!",
+                funFact: "Paul had to leave Thessalonica quickly, so he wrote this letter to encourage them from far away!",
+                story: "Paul started the church in Thessalonica but had to leave quickly. He writes to encourage them to keep growing in their faith and to teach them about Jesus' second coming. He wants them to live holy lives while they wait.",
+                activities: [
+                    "Practice rejoicing always",
+                    "Learn about Jesus coming back",
+                    "Make a sunrise craft about hope",
+                    "Encourage others in their faith"
+                ],
+                coloringPage: "Paul encouraging the Thessalonians with Jesus coming in the clouds in the background"
+            },
+            { 
+                name: "2 Thessalonians", 
+                testament: "new", 
+                icon: "⏳", 
+                description: "Be patient and keep doing good while waiting for Jesus! Paul corrects wrong ideas about Jesus' return.",
+                verse: "2 Thessalonians 3:3", 
+                verseText: "The Lord is faithful, and he will strengthen you.",
+                youVersionLink: "https://www.bible.com/bible/1359/2TH.3.ERV",
+                memoryTip: "Stand strong like a tree and remember - God is faithful and makes us strong!",
+                funFact: "Some people thought Jesus had already come back, but Paul corrected this misunderstanding!",
+                story: "Some people in Thessalonica thought Jesus had already come back and were confused. Paul writes again to correct their misunderstanding and encourage them to keep working hard and doing good while they wait for Jesus.",
+                activities: [
+                    "Practice being patient",
+                    "Keep doing good work",
+                    "Learn about God's faithfulness",
+                    "Help others while waiting"
+                ],
+                coloringPage: "The Thessalonians working hard and being patient with an hourglass and Jesus in the distance"
+            },
+            { 
+                name: "1 Timothy", 
+                testament: "new", 
+                icon: "👨‍🏫", 
+                description: "Paul gives Timothy advice about leading God's people! He teaches about being a good example and fighting the good fight.",
+                verse: "1 Timothy 4:12", 
+                verseText: "Don't let anyone look down on you because you are young.",
+                youVersionLink: "https://www.bible.com/bible/1359/1TI.4.ERV",
+                memoryTip: "Stand up tall and proud - God can use young people to do great things!",
+                funFact: "Timothy was probably in his 30s when Paul called him 'young' - that was young for a leader back then!",
+                story: "Timothy is a young pastor, and Paul writes to give him advice about leading the church. Paul encourages Timothy not to let people think less of him because he's young, but to be a good example in everything he does.",
+                activities: [
+                    "Practice being a good example",
+                    "Learn about fighting the good fight of faith",
+                    "Encourage young leaders",
+                    "Show that age doesn't matter to God"
+                ],
+                coloringPage: "Young Timothy teaching and leading with Paul's encouraging letter in his hand"
+            },
+            { 
+                name: "2 Timothy", 
+                testament: "new", 
+                icon: "🔥", 
+                description: "Paul's last letter encourages Timothy to be brave! He tells him to fan into flame the gift God gave him.",
+                verse: "2 Timothy 1:7", 
+                verseText: "God gave us a spirit not of fear but of power, love and sound mind.",
+                youVersionLink: "https://www.bible.com/bible/1359/2TI.1.ERV",
+                memoryTip: "Make a strong pose, hug someone, then point to your head - power, love, and sound mind!",
+                funFact: "This was Paul's last letter before he died - his final words of encouragement!",
+                story: "This is Paul's last letter before he dies. He encourages Timothy to be brave and keep preaching about Jesus, even when it's hard. Paul reminds him that God gives us power, love, and wisdom - not fear!",
+                activities: [
+                    "Practice being brave for Jesus",
+                    "Fan a flame craft about spiritual gifts",
+                    "Learn about power, love, and sound mind",
+                    "Encourage others to be courageous"
+                ],
+                coloringPage: "Timothy with a flame representing his spiritual gift, being brave and strong in the Lord"
+            },
+            { 
+                name: "Titus", 
+                testament: "new", 
+                icon: "🌟", 
+                description: "Instructions for living a life that honors God! Paul teaches Titus how to help people grow in their faith.",
+                verse: "Titus 3:5", 
+                verseText: "He saved us through the washing of rebirth and renewal.",
+                youVersionLink: "https://www.bible.com/bible/1359/TIT.3.ERV",
+                memoryTip: "Pretend to wash your hands and remember - God washes us clean and makes us new!",
+                funFact: "Titus was leading churches on the island of Crete, which was known for having difficult people!",
+                story: "Paul writes to Titus, who is leading churches on the island of Crete. He gives practical advice about how Christians should live and treat each other. Good works should flow from our salvation, not earn it.",
+                activities: [
+                    "Practice doing good works",
+                    "Learn about living for God's glory",
+                    "Help others grow in faith",
+                    "Show God's kindness to everyone"
+                ],
+                coloringPage: "Titus teaching people on the island of Crete with good works and kindness all around"
+            },
+            { 
+                name: "Philemon", 
+                testament: "new", 
+                icon: "🤝", 
+                description: "A short letter about forgiveness and friendship! Paul asks Philemon to forgive his runaway slave Onesimus.",
+                verse: "Philemon 1:6", 
+                verseText: "I pray that your partnership with us in the faith may be effective.",
+                youVersionLink: "https://www.bible.com/bible/1359/PHM.1.ERV",
+                memoryTip: "Shake hands with someone and remember - we're all partners together in following Jesus!",
+                funFact: "This is the shortest of Paul's letters to churches - only 25 verses!",
+                story: "Onesimus was Philemon's slave who ran away but became a Christian through Paul's ministry. Paul writes this personal letter asking Philemon to forgive Onesimus and welcome him back as a brother in Christ.",
+                activities: [
+                    "Practice forgiving others",
+                    "Learn about treating everyone as family",
+                    "Make friendship bracelets",
+                    "Write a letter asking for forgiveness"
+                ],
+                coloringPage: "Philemon welcoming back Onesimus with open arms, showing Christian forgiveness and love"
+            },
+            { 
+                name: "Hebrews", 
+                testament: "new", 
+                icon: "✨", 
+                description: "Jesus is better than anything else in the whole world! This book shows how Jesus is the perfect High Priest and Savior.",
+                verse: "Hebrews 11:1", 
+                verseText: "Faith is confidence in what we hope for.",
+                youVersionLink: "https://www.bible.com/bible/1359/HEB.11.ERV",
+                memoryTip: "Stand confidently and point forward - faith is being sure about things we hope for!",
+                funFact: "Hebrews 11 is called the 'Hall of Fame of Faith' because it lists so many faithful people!",
+                story: "The writer of Hebrews shows how Jesus is better than angels, Moses, and the Old Testament priests. Jesus is the perfect sacrifice for our sins and the only way to God. We should have faith like the heroes of old.",
+                activities: [
+                    "Learn about the heroes of faith",
+                    "Make a 'Jesus is better' chart",
+                    "Practice having faith like Abraham",
+                    "Run the race of faith"
+                ],
+                coloringPage: "Jesus as the perfect High Priest with the heroes of faith cheering us on in the race"
+            },
+            { 
+                name: "James", 
+                testament: "new", 
+                icon: "🛠️", 
+                description: "James teaches us how to live out our faith every day! Real faith shows itself through our actions and good works.",
+                verse: "James 1:17", 
+                verseText: "Every good and perfect gift is from above.",
+                youVersionLink: "https://www.bible.com/bible/1359/JAS.1.ERV",
+                memoryTip: "Point up to heaven and remember - every good gift comes from God above!",
+                funFact: "James was Jesus' half-brother who didn't believe in Jesus at first, but later became a leader in the church!",
+                story: "James, Jesus' brother, writes about practical Christian living. He teaches that real faith isn't just believing in your head - it shows up in how you treat others, control your tongue, and help those in need.",
+                activities: [
+                    "Practice controlling your words",
+                    "Help people in need",
+                    "Show your faith through actions",
+                    "Be quick to listen, slow to speak"
+                ],
+                coloringPage: "James teaching about faith in action with people helping others and working together"
+            },
+            { 
+                name: "1 Peter", 
+                testament: "new", 
+                icon: "🗿", 
+                description: "Peter encourages us to be strong when life is hard! He teaches about suffering for Jesus and living as God's chosen people.",
+                verse: "1 Peter 5:7", 
+                verseText: "Cast all your anxiety on him because he cares for you.",
+                youVersionLink: "https://www.bible.com/bible/1359/1PE.5.ERV",
+                memoryTip: "Pretend to throw your worries away and remember - God cares for you and will catch them!",
+                funFact: "Peter wrote this letter to Christians who were being persecuted for their faith!",
+                story: "Peter writes to Christians who are suffering for their faith. He encourages them to stay strong and remember that Jesus suffered too. We are God's chosen people, and He cares for us even in hard times.",
+                activities: [
+                    "Practice giving your worries to God",
+                    "Learn about being God's chosen people",
+                    "Encourage someone who is suffering",
+                    "Build with stones like Peter's name means"
+                ],
+                coloringPage: "Peter as a strong rock encouraging Christians who are facing difficulties with God's care surrounding them"
+            },
+            { 
+                name: "2 Peter", 
+                testament: "new", 
+                icon: "📖", 
+                description: "Keep growing in your knowledge and love of Jesus! Peter warns about false teachers and reminds us to grow in grace.",
+                verse: "2 Peter 3:18", 
+                verseText: "Grow in the grace and knowledge of our Lord and Savior.",
+                youVersionLink: "https://www.bible.com/bible/1359/2PE.3.ERV",
+                memoryTip: "Stretch up tall like you're growing and remember - keep growing in knowing Jesus!",
+                funFact: "Peter reminds us that one day with God is like 1,000 years to us - God's timing is different!",
+                story: "In his second letter, Peter warns about false teachers who will try to lead people away from the truth. He encourages believers to keep growing in their knowledge of Jesus and to remember that God is patient with everyone.",
+                activities: [
+                    "Practice growing in knowledge of Jesus",
+                    "Learn to spot false teaching",
+                    "Be patient like God is patient",
+                    "Study God's word more"
+                ],
+                coloringPage: "Peter reading from a scroll with people growing like plants in God's grace and knowledge"
+            },
+            { 
+                name: "1 John", 
+                testament: "new", 
+                icon: "💝", 
+                description: "John reminds us how much God loves us! He teaches that God is love and we should love each other too.",
+                verse: "1 John 4:19", 
+                verseText: "We love because he first loved us.",
+                youVersionLink: "https://www.bible.com/bible/1359/1JN.4.ERV",
+                memoryTip: "Point to God, then to yourself, then to others - God loved us first, so we can love others!",
+                funFact: "The word 'love' appears over 40 times in this short letter!",
+                story: "John writes about God's amazing love for us. He teaches that if we really know God, we will love other people too. God is light, God is love, and when we follow Jesus, we can be sure we belong to God's family.",
+                activities: [
+                    "Practice loving others like God loves us",
+                    "Make heart crafts about God's love",
+                    "Show love through actions",
+                    "Walk in the light like Jesus"
+                ],
+                coloringPage: "John surrounded by hearts and light, showing God's love flowing to and through His children"
+            },
+            { 
+                name: "2 John", 
+                testament: "new", 
+                icon: "💌", 
+                description: "A short letter about walking in love and truth! John warns about false teachers but emphasizes love.",
+                verse: "2 John 1:6", 
+                verseText: "This is love: that we walk in obedience to his commands.",
+                youVersionLink: "https://www.bible.com/bible/1359/2JN.1.ERV",
+                memoryTip: "Walk in place and make a heart with your hands - walking in love means obeying God!",
+                funFact: "This letter is short enough to fit on one piece of papyrus - like an ancient postcard!",
+                story: "John writes a short letter to 'the chosen lady and her children' (probably a church). He encourages them to keep walking in truth and love, but warns them not to welcome false teachers into their homes.",
+                activities: [
+                    "Practice walking in truth and love",
+                    "Learn about being wise with strangers",
+                    "Write short encouraging letters",
+                    "Show love through obedience"
+                ],
+                coloringPage: "John writing a loving letter with truth and love symbols surrounding the message"
+            },
+            { 
+                name: "3 John", 
+                testament: "new", 
+                icon: "🤗", 
+                description: "John praises Gaius for his hospitality and kindness! He encourages us to support those who serve God.",
+                verse: "3 John 1:4", 
+                verseText: "I have no greater joy than to hear that my children are walking in the truth.",
+                youVersionLink: "https://www.bible.com/bible/1359/3JN.1.ERV",
+                memoryTip: "Smile really big and remember - it makes God happy when we follow the truth!",
+                funFact: "This is the shortest book in the New Testament - only 219 words in Greek!",
+                story: "John writes to his friend Gaius, praising him for showing hospitality to traveling missionaries. He contrasts Gaius with Diotrephes, who was selfish and unwelcoming. John encourages supporting those who serve God.",
+                activities: [
+                    "Practice showing hospitality",
+                    "Support missionaries and church workers",
+                    "Be welcoming like Gaius",
+                    "Walk in truth like John's spiritual children"
+                ],
+                coloringPage: "Gaius warmly welcoming traveling missionaries with food and shelter, showing Christian hospitality"
+            },
+            { 
+                name: "Jude", 
+                testament: "new", 
+                icon: "⚓", 
+                description: "Stay strong in your faith and help others too! Jude warns about false teachers but encourages us to keep believing.",
+                verse: "Jude 1:24", 
+                verseText: "To him who is able to keep you from stumbling.",
+                youVersionLink: "https://www.bible.com/bible/1359/JUD.1.ERV",
+                memoryTip: "Walk carefully without tripping and remember - God keeps us from falling!",
+                funFact: "Jude was another half-brother of Jesus who became a believer after Jesus rose from the dead!",
+                story: "Jude planned to write about salvation but instead had to warn about false teachers who had crept into the church. He encourages believers to contend for the faith and help rescue others who are being led astray.",
+                activities: [
+                    "Practice staying strong in faith",
+                    "Help others who are struggling",
+                    "Learn about false teaching",
+                    "Trust God to keep you from falling"
+                ],
+                coloringPage: "Jude as an anchor keeping believers steady in stormy seas with God's protective hand above"
+            },
+            { 
+                name: "Revelation", 
+                testament: "new", 
+                icon: "🌈", 
+                description: "John sees amazing visions of God's victory and new heaven! Jesus wins over evil and makes everything new.",
+                verse: "Revelation 21:4", 
+                verseText: "He will wipe every tear from their eyes.",
+                youVersionLink: "https://www.bible.com/bible/1359/REV.21.ERV",
+                memoryTip: "Gently wipe away pretend tears and smile - in heaven, there will be no more sadness!",
+                funFact: "Revelation has more Old Testament references than any other New Testament book!",
+                story: "John receives incredible visions of the future while on the island of Patmos. He sees Jesus in His glory, messages to seven churches, and the final victory over evil. In the end, God makes a new heaven and earth where there's no more sadness!",
+                activities: [
+                    "Draw your own vision of heaven",
+                    "Make rainbow crafts about God's promises",
+                    "Act out Jesus' victory over evil",
+                    "Imagine a world with no tears"
+                ],
+                coloringPage: "John's vision of the new Jerusalem coming down from heaven with Jesus on the throne and a rainbow"
+            }
+        ];
+
+        // Configuration
+        const defaultConfig = {
+            main_title: "Faith for Little Hearts",
+            subtitle: "Discover God's Amazing Stories",
+            search_placeholder: "Search for a Bible book...",
+            story_button_text: "Read Story",
+            verse_button_text: "Memory Verse",
+            coloring_button_text: "Coloring Page"
+        };
+
+        let config = { ...defaultConfig };
+
+        // State
+        let currentIndex = 0;
+        let filteredBooks = [...bibleBooks];
+
+        // DOM elements
+        const bookDisplay = document.getElementById('bookDisplay');
+        const dotsContainer = document.getElementById('dotsContainer');
+        const bookCounter = document.getElementById('bookCounter');
+        const searchInput = document.getElementById('searchInput');
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const modal = document.getElementById('bookModal');
+        const modalContent = document.getElementById('modalContent');
+        const closeModal = document.getElementById('closeModal');
+
+        // Initialize
+        function init() {
+            renderCurrentBook();
+            renderDots();
+            updateCounter();
+            setupEventListeners();
+        }
+
+        // Render current book
+        function renderCurrentBook() {
+            if (filteredBooks.length === 0) {
+                bookDisplay.innerHTML = `
+                    <div class="no-results">
+                        <div class="no-results-icon">📚</div>
+                        <div>No books found matching your search.</div>
+                        <div style="margin-top: 10px; font-size: 0.9rem;">Try searching for a different book name!</div>
+                    </div>
+                `;
+                return;
+            }
+
+            const book = filteredBooks[currentIndex];
+            const bookIndex = bibleBooks.indexOf(book);
+            
+            bookDisplay.innerHTML = `
+                <div class="book-number">${bookIndex + 1}</div>
+                <div class="book-icon">${book.icon}</div>
+                <h2 class="book-title">${book.name}</h2>
+                <div class="book-testament">${book.testament === 'old' ? 'Old Testament' : 'New Testament'}</div>
+                <p class="book-description">${book.description}</p>
+                <div class="memory-verse">
+                    <div class="verse-text">"${book.verseText}"</div>
+                    <div class="verse-reference">- ${book.verse}</div>
+                </div>
+                <div class="book-actions">
+                    <a href="${book.youVersionLink}" target="_blank" rel="noopener noreferrer" class="action-btn story-btn">
+                        📖 <span>${config.story_button_text}</span>
+                    </a>
+                    <button class="action-btn verse-btn" onclick="showMemoryCard(${bookIndex})">
+                        💭 <span>${config.verse_button_text}</span>
+                    </button>
+                    <a href="https://ministry-to-children.com/bible-coloring-pages/" target="_blank" rel="noopener noreferrer" class="action-btn coloring-btn">
+                        🎨 <span>${config.coloring_button_text}</span>
+                    </a>
+                    <button class="action-btn details-btn" onclick="showBookDetails(${bookIndex})">
+                        ⭐ Book Details
+                    </button>
+                </div>
+            `;
+        }
+
+        // Show book details modal
+        function showBookDetails(bookIndex) {
+            const book = bibleBooks[bookIndex];
+            modalContent.innerHTML = `
+                <div class="modal-book-icon">${book.icon}</div>
+                <h2 class="modal-book-title">${book.name}</h2>
+                <div class="modal-testament">${book.testament === 'old' ? 'Old Testament' : 'New Testament'} - Book ${bookIndex + 1} of 66</div>
+                
+                <div class="activity-section">
+                    <div class="activity-title">📖 The Story</div>
+                    <p>${book.story}</p>
+                </div>
+
+                <div class="activity-section">
+                    <div class="activity-title">💭 Memory Verse</div>
+                    <div class="memory-verse">
+                        <div class="verse-text">"${book.verseText}"</div>
+                        <div class="verse-reference">- ${book.verse}</div>
+                    </div>
+                </div>
+
+                <div class="activity-section">
+                    <div class="activity-title">🧠 Fun Fact</div>
+                    <p>${book.funFact}</p>
+                </div>
+
+                <div class="activity-section">
+                    <div class="activity-title">🌟 Fun Activities</div>
+                    <ul class="activity-list">
+                        ${book.activities.map(activity => `<li>${activity}</li>`).join('')}
+                    </ul>
+                </div>
+
+                <div style="text-align: center; margin-top: 20px;">
+                    <a href="${book.youVersionLink}" target="_blank" rel="noopener noreferrer" class="action-btn story-btn">
+                        📱 Read in Bible App
+                    </a>
+                </div>
+            `;
+            modal.style.display = 'block';
+        }
+
+        // Show memory card modal
+        function showMemoryCard(bookIndex) {
+            const book = bibleBooks[bookIndex];
+            modalContent.innerHTML = `
+                <div class="modal-book-icon">💭</div>
+                <h2 class="modal-book-title">Memory Verse Card</h2>
+                <div class="modal-testament">${book.name} - ${book.testament === 'old' ? 'Old Testament' : 'New Testament'}</div>
+                
+                <div class="activity-section" style="background: linear-gradient(135deg, #FFE4E1 0%, #E6E6FA 100%); border: 3px solid #FF69B4;">
+                    <div class="activity-title">📖 The Verse</div>
+                    <div class="memory-verse" style="font-size: 1.3rem; text-align: center;">
+                        <div class="verse-text" style="font-size: 1.4rem; font-weight: bold;">"${book.verseText}"</div>
+                        <div class="verse-reference" style="font-size: 1.2rem; margin-top: 15px;">- ${book.verse}</div>
+                    </div>
+                </div>
+
+                <div class="activity-section">
+                    <div class="activity-title">🎯 Memory Tip</div>
+                    <p style="font-size: 1.1rem; color: #4A90E2; font-weight: bold;">${book.memoryTip}</p>
+                </div>
+
+                <div class="activity-section">
+                    <div class="activity-title">🌟 Practice Ideas</div>
+                    <ul class="activity-list">
+                        <li>Say it 5 times in a row</li>
+                        <li>Act out the verse with motions</li>
+                        <li>Draw a picture of what it means</li>
+                        <li>Teach it to a family member</li>
+                        <li>Say it before meals this week</li>
+                    </ul>
+                </div>
+
+                <div style="text-align: center; margin-top: 20px;">
+                    <a href="${book.youVersionLink}" target="_blank" rel="noopener noreferrer" class="action-btn story-btn">
+                        📱 Read More in Bible App
+                    </a>
+                </div>
+            `;
+            modal.style.display = 'block';
+        }
+
+        // Make functions globally available
+        window.showBookDetails = showBookDetails;
+        window.showMemoryCard = showMemoryCard;
+
+        // Render dots
+        function renderDots() {
+            if (filteredBooks.length === 0) {
+                dotsContainer.innerHTML = '';
+                return;
+            }
+
+            dotsContainer.innerHTML = filteredBooks.map((_, index) => 
+                `<div class="dot ${index === currentIndex ? 'active' : ''}" onclick="goToSlide(${index})"></div>`
+            ).join('');
+        }
+
+        // Update counter
+        function updateCounter() {
+            if (filteredBooks.length === 0) {
+                bookCounter.textContent = 'No books found';
+            } else {
+                bookCounter.textContent = `Book ${currentIndex + 1} of ${filteredBooks.length}`;
+            }
+        }
+
+        // Navigation
+        function nextSlide() {
+            if (filteredBooks.length > 0) {
+                currentIndex = (currentIndex + 1) % filteredBooks.length;
+                renderCurrentBook();
+                renderDots();
+                updateCounter();
+            }
+        }
+
+        function prevSlide() {
+            if (filteredBooks.length > 0) {
+                currentIndex = currentIndex === 0 ? filteredBooks.length - 1 : currentIndex - 1;
+                renderCurrentBook();
+                renderDots();
+                updateCounter();
+            }
+        }
+
+        function goToSlide(index) {
+            if (index >= 0 && index < filteredBooks.length) {
+                currentIndex = index;
+                renderCurrentBook();
+                renderDots();
+                updateCounter();
+            }
+        }
+
+        // Make goToSlide globally available
+        window.goToSlide = goToSlide;
+
+
+
+        // Filter books
+        function filterBooks() {
+            const searchTerm = searchInput.value.toLowerCase().trim();
+            const activeButton = document.querySelector('.filter-btn.active');
+            const activeTestament = activeButton ? activeButton.dataset.testament : 'all';
+
+            filteredBooks = bibleBooks.filter(book => {
+                const matchesSearch = searchTerm === '' || 
+                                    book.name.toLowerCase().includes(searchTerm) ||
+                                    book.description.toLowerCase().includes(searchTerm);
+                const matchesTestament = activeTestament === 'all' || book.testament === activeTestament;
+                
+                return matchesSearch && matchesTestament;
+            });
+
+            currentIndex = 0;
+            renderCurrentBook();
+            renderDots();
+            updateCounter();
+        }
+
+        // Event listeners
+        function setupEventListeners() {
+            // Navigation buttons
+            nextBtn.addEventListener('click', nextSlide);
+            prevBtn.addEventListener('click', prevSlide);
+
+            // Search input
+            searchInput.addEventListener('input', filterBooks);
+
+            // Filter buttons
+            filterButtons.forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    filterButtons.forEach(b => b.classList.remove('active'));
+                    e.target.classList.add('active');
+                    filterBooks();
+                });
+            });
+
+            // Modal events
+            closeModal.addEventListener('click', () => {
+                modal.style.display = 'none';
+            });
+
+            window.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    modal.style.display = 'none';
+                }
+            });
+
+            // Keyboard navigation
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'ArrowLeft') {
+                    prevSlide();
+                } else if (e.key === 'ArrowRight') {
+                    nextSlide();
+                } else if (e.key === 'Escape') {
+                    modal.style.display = 'none';
+                }
+            });
+        }
+
+        // Configuration update function
+        async function onConfigChange(newConfig) {
+            config = { ...config, ...newConfig };
+            
+            // Update text content
+            document.getElementById('mainTitle').textContent = config.main_title || defaultConfig.main_title;
+            document.getElementById('subtitle').textContent = config.subtitle || defaultConfig.subtitle;
+            document.getElementById('searchInput').placeholder = config.search_placeholder || defaultConfig.search_placeholder;
+            
+            // Re-render current book to update button text
+            renderCurrentBook();
+        }
+
+        // Element SDK integration
+        if (window.elementSdk) {
+            window.elementSdk.init({
+                defaultConfig,
+                onConfigChange,
+                mapToCapabilities: () => ({
+                    recolorables: [],
+                    borderables: [],
+                    fontEditable: undefined,
+                    fontSizeable: undefined
+                }),
+                mapToEditPanelValues: (config) => new Map([
+                    ["main_title", config.main_title || defaultConfig.main_title],
+                    ["subtitle", config.subtitle || defaultConfig.subtitle],
+                    ["search_placeholder", config.search_placeholder || defaultConfig.search_placeholder],
+                    ["story_button_text", config.story_button_text || defaultConfig.story_button_text],
+                    ["verse_button_text", config.verse_button_text || defaultConfig.verse_button_text],
+                    ["coloring_button_text", config.coloring_button_text || defaultConfig.coloring_button_text]
+                ])
+            });
+        }
+
+        // Initialize when page loads
+        document.addEventListener('DOMContentLoaded', init);
+    </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'99ebd4e7762d5c1c',t:'MTc2MzE3OTEyMi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
