@@ -1,0 +1,962 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Faith for Little Hearts Hub</title>
+  <script src="/_sdk/data_sdk.js"></script>
+  <script src="/_sdk/element_sdk.js"></script>
+  <style>
+        body {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #F5E6D3 0%, #E8D5B7 100%);
+            min-height: 100%;
+            color: #5D4E37;
+        }
+
+        html {
+            height: 100%;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            min-height: 100%;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+            background: #FAF7F2;
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: 0 8px 32px rgba(93, 78, 55, 0.15);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 215, 0, 0.1) 0%, transparent 70%);
+            animation: gentle-pulse 4s ease-in-out infinite;
+        }
+
+        @keyframes gentle-pulse {
+            0%, 100% { transform: scale(1); opacity: 0.3; }
+            50% { transform: scale(1.1); opacity: 0.1; }
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .main-title {
+            font-size: 3rem;
+            font-weight: bold;
+            color: #8B4513;
+            margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .subtitle {
+            font-size: 1.5rem;
+            color: #A0522D;
+            margin-bottom: 1rem;
+        }
+
+        .welcome-message {
+            font-size: 1.1rem;
+            color: #666;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        .heart-icon {
+            font-size: 2rem;
+            color: #D2691E;
+            margin: 0 0.5rem;
+            animation: heartbeat 2s ease-in-out infinite;
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .floating-elements {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        .floating-heart, .floating-cloud {
+            position: absolute;
+            opacity: 0.6;
+            animation-timing-function: ease-in-out;
+            animation-iteration-count: infinite;
+        }
+
+        .floating-heart {
+            font-size: 1.5rem;
+            color: #D2691E;
+            animation: floatHeart 8s infinite;
+        }
+
+        .floating-cloud {
+            font-size: 2rem;
+            color: #E8D5B7;
+            animation: floatCloud 12s infinite;
+        }
+
+        .floating-heart:nth-child(1) { left: 10%; animation-delay: 0s; }
+        .floating-heart:nth-child(2) { left: 20%; animation-delay: 2s; }
+        .floating-heart:nth-child(3) { left: 70%; animation-delay: 4s; }
+        .floating-heart:nth-child(4) { left: 85%; animation-delay: 6s; }
+
+        .floating-cloud:nth-child(5) { left: 5%; animation-delay: 1s; }
+        .floating-cloud:nth-child(6) { left: 40%; animation-delay: 3s; }
+        .floating-cloud:nth-child(7) { left: 75%; animation-delay: 5s; }
+        .floating-cloud:nth-child(8) { left: 90%; animation-delay: 7s; }
+
+        @keyframes floatHeart {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.6;
+            }
+            90% {
+                opacity: 0.6;
+            }
+            100% {
+                transform: translateY(-10vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        @keyframes floatCloud {
+            0% {
+                transform: translateY(100vh) translateX(0px);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.4;
+            }
+            50% {
+                transform: translateY(50vh) translateX(20px);
+            }
+            90% {
+                opacity: 0.4;
+            }
+            100% {
+                transform: translateY(-10vh) translateX(-20px);
+                opacity: 0;
+            }
+        }
+
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .add-section {
+            display: none;
+            background: #FAF7F2;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(93, 78, 55, 0.15);
+            height: fit-content;
+        }
+
+        .add-section h3 {
+            color: #8B4513;
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #5D4E37;
+            font-weight: bold;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid #D2B48C;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-family: inherit;
+            transition: border-color 0.3s ease;
+            background: #FEFCF7;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #A0522D;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        .add-btn {
+            background: linear-gradient(45deg, #8B4513, #A0522D);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 25px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            box-shadow: 0 4px 15px rgba(139, 69, 19, 0.3);
+        }
+
+        .add-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(139, 69, 19, 0.4);
+        }
+
+        .add-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .resources-section {
+            background: #FAF7F2;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(93, 78, 55, 0.15);
+        }
+
+        .resources-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .admin-toggle {
+            background: #8B4513;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-left: 1rem;
+        }
+
+        .admin-toggle:hover {
+            background: #A0522D;
+            transform: translateY(-1px);
+        }
+
+        .resources-title {
+            color: #8B4513;
+            font-size: 1.8rem;
+            margin: 0;
+        }
+
+        .resource-count {
+            background: #DEB887;
+            color: #5D4E37;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: bold;
+        }
+
+        .resources-grid {
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        .resource-card {
+            background: linear-gradient(135deg, #FEFCF7 0%, #F5E6D3 100%);
+            padding: 1.5rem;
+            border-radius: 12px;
+            border-left: 5px solid #A0522D;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .resource-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .resource-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+
+        .resource-title {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #5D4E37;
+            margin: 0;
+        }
+
+        .resource-type {
+            background: #8B4513;
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        .resource-age {
+            background: #A0522D;
+            color: white;
+            padding: 0.2rem 0.6rem;
+            border-radius: 10px;
+            font-size: 0.75rem;
+            margin-top: 0.5rem;
+            display: inline-block;
+        }
+
+        .resource-description {
+            color: #666;
+            line-height: 1.5;
+            margin: 0.5rem 0;
+        }
+
+        .resource-date {
+            font-size: 0.85rem;
+            color: #999;
+            margin-top: 1rem;
+        }
+
+        .resource-link {
+            display: inline-block;
+            background: linear-gradient(45deg, #8B4513, #A0522D);
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            margin: 0.5rem 0;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(139, 69, 19, 0.3);
+        }
+
+        .resource-link:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(139, 69, 19, 0.4);
+            text-decoration: none;
+        }
+
+        .delete-btn {
+            background: #CD853F;
+            color: white;
+            border: none;
+            padding: 0.4rem 0.8rem;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+        }
+
+        .delete-btn:hover {
+            background: #D2691E;
+            transform: scale(1.05);
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 3rem;
+            color: #999;
+        }
+
+        .empty-state-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .limit-warning {
+            background: #F5E6D3;
+            color: #8B4513;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            border: 1px solid #DEB887;
+        }
+
+        @media (max-width: 768px) {
+            .main-title {
+                font-size: 2rem;
+            }
+            
+            .subtitle {
+                font-size: 1.2rem;
+            }
+            
+            .container {
+                padding: 1rem;
+            }
+        }
+    </style>
+  <style>@view-transition { navigation: auto; }</style>
+  <script src="https://cdn.tailwindcss.com" type="text/javascript"></script>
+ </head>
+ <body>
+  <div class="floating-elements">
+   <div class="floating-heart">
+    💕
+   </div>
+   <div class="floating-heart">
+    💖
+   </div>
+   <div class="floating-heart">
+    💝
+   </div>
+   <div class="floating-heart">
+    💗
+   </div>
+   <div class="floating-cloud">
+    ☁️
+   </div>
+   <div class="floating-cloud">
+    ☁️
+   </div>
+   <div class="floating-cloud">
+    ☁️
+   </div>
+   <div class="floating-cloud">
+    ☁️
+   </div>
+  </div>
+  <main class="container">
+   <header class="header">
+    <div class="header-content">
+     <h1 class="main-title" id="mainTitle">Faith for Little Hearts</h1>
+     <div class="heart-icon">
+      💕
+     </div>
+     <p class="subtitle" id="subtitle">Bible Studies &amp; Resources for Kids</p>
+     <p class="welcome-message" id="welcomeMessage">Welcome to our curated collection of Bible studies and resources designed to help children grow in their faith. Explore materials organized by age group and type to find the perfect fit for your little ones.</p>
+    </div>
+   </header>
+   <div class="main-content">
+    <section class="add-section">
+     <h3>Add New Resource</h3>
+     <div id="limitWarning" class="limit-warning" style="display: none;">
+      You've reached the maximum limit of 999 resources. Please delete some items to add new ones.
+     </div>
+     <form id="resourceForm">
+      <div class="form-group"><label for="title">Resource Title</label> <input type="text" id="title" name="title" required placeholder="e.g., Noah's Ark Story">
+      </div>
+      <div class="form-group"><label for="type">Resource Type</label> <select id="type" name="type" required> <option value="">Select type...</option> <option value="Bible Study">Bible Study</option> <option value="Activity">Activity</option> <option value="Craft">Craft</option> <option value="Song">Song</option> <option value="Game">Game</option> <option value="Worksheet">Worksheet</option> <option value="Story">Story</option> <option value="Video">Video</option> </select>
+      </div>
+      <div class="form-group"><label for="ageGroup">Age Group</label> <select id="ageGroup" name="ageGroup" required> <option value="">Select age group...</option> <option value="Toddlers (2-3)">Toddlers (2-3)</option> <option value="Preschool (4-5)">Preschool (4-5)</option> <option value="Elementary (6-8)">Elementary (6-8)</option> <option value="Tweens (9-12)">Tweens (9-12)</option> <option value="All Ages">All Ages</option> </select>
+      </div>
+      <div class="form-group"><label for="description">Description</label> <textarea id="description" name="description" placeholder="Brief description of the resource..."></textarea>
+      </div>
+      <div class="form-group"><label for="resourceUrl">Resource Link (Optional)</label> <input type="url" id="resourceUrl" name="resourceUrl" placeholder="https://example.com/resource">
+      </div><button type="submit" class="add-btn" id="addBtn"> <span id="addBtnText">Add New Resource</span> <span id="addBtnLoading" class="loading" style="display: none;"></span> </button>
+     </form>
+    </section>
+    <section class="resources-section">
+     <div class="resources-header">
+      <h2 class="resources-title">Faith-Building Treasures</h2>
+      <div style="display: flex; align-items: center;">
+       <div class="resource-count" id="resourceCount">
+        0 Resources
+       </div><button class="admin-toggle" onclick="toggleAdminMode()" id="adminToggle">Admin</button>
+      </div>
+     </div>
+     <div id="resourcesGrid" class="resources-grid">
+      <div class="empty-state">
+       <div class="empty-state-icon">
+        📚
+       </div>
+       <h3>No resources yet</h3>
+       <p>Our collection of faith-building treasures is being prepared for you. Check back soon for wonderful Bible studies and activities!</p>
+      </div>
+     </div>
+    </section>
+   </div>
+  </main>
+  <script>
+        let currentResources = [];
+        let isLoading = false;
+
+        const defaultConfig = {
+            main_title: "Faith for Little Hearts",
+            subtitle: "Bible Studies & Resources for Kids",
+            welcome_message: "Welcome to our curated collection of Bible studies and resources designed to help children grow in their faith. Explore materials organized by age group and type to find the perfect fit for your little ones.",
+            add_button_text: "Add New Resource",
+            background_color: "#F5E6D3",
+            card_color: "#FAF7F2",
+            text_color: "#5D4E37",
+            primary_color: "#8B4513",
+            accent_color: "#A0522D",
+            font_family: "Segoe UI"
+        };
+
+        const dataHandler = {
+            onDataChanged(data) {
+                currentResources = data;
+                updateResourceCount();
+                renderResources();
+                updateLimitWarning();
+            }
+        };
+
+        async function onConfigChange(config) {
+            const mainTitle = document.getElementById('mainTitle');
+            const subtitle = document.getElementById('subtitle');
+            const welcomeMessage = document.getElementById('welcomeMessage');
+            const addBtnText = document.getElementById('addBtnText');
+
+            if (mainTitle) mainTitle.textContent = config.main_title || defaultConfig.main_title;
+            if (subtitle) subtitle.textContent = config.subtitle || defaultConfig.subtitle;
+            if (welcomeMessage) welcomeMessage.textContent = config.welcome_message || defaultConfig.welcome_message;
+            if (addBtnText && !isLoading) addBtnText.textContent = config.add_button_text || defaultConfig.add_button_text;
+        }
+
+        function mapToCapabilities(config) {
+            return {
+                recolorables: [
+                    {
+                        get: () => config.background_color || "#F5E6D3",
+                        set: (value) => {
+                            config.background_color = value;
+                            window.elementSdk.setConfig({ background_color: value });
+                        }
+                    },
+                    {
+                        get: () => config.card_color || "#FAF7F2",
+                        set: (value) => {
+                            config.card_color = value;
+                            window.elementSdk.setConfig({ card_color: value });
+                        }
+                    },
+                    {
+                        get: () => config.text_color || "#5D4E37",
+                        set: (value) => {
+                            config.text_color = value;
+                            window.elementSdk.setConfig({ text_color: value });
+                        }
+                    },
+                    {
+                        get: () => config.primary_color || "#8B4513",
+                        set: (value) => {
+                            config.primary_color = value;
+                            window.elementSdk.setConfig({ primary_color: value });
+                        }
+                    },
+                    {
+                        get: () => config.accent_color || "#A0522D",
+                        set: (value) => {
+                            config.accent_color = value;
+                            window.elementSdk.setConfig({ accent_color: value });
+                        }
+                    }
+                ],
+                borderables: [],
+                fontEditable: {
+                    get: () => config.font_family || "Segoe UI",
+                    set: (value) => {
+                        config.font_family = value;
+                        window.elementSdk.setConfig({ font_family: value });
+                    }
+                },
+                fontSizeable: {
+                    get: () => config.font_size || 16,
+                    set: (value) => {
+                        config.font_size = value;
+                        window.elementSdk.setConfig({ font_size: value });
+                    }
+                }
+            };
+        }
+
+        function mapToEditPanelValues(config) {
+            return new Map([
+                ["main_title", config.main_title || defaultConfig.main_title],
+                ["subtitle", config.subtitle || defaultConfig.subtitle],
+                ["welcome_message", config.welcome_message || defaultConfig.welcome_message],
+                ["add_button_text", config.add_button_text || defaultConfig.add_button_text]
+            ]);
+        }
+
+        function updateResourceCount() {
+            const countElement = document.getElementById('resourceCount');
+            const count = currentResources.length;
+            countElement.textContent = `${count} Resource${count !== 1 ? 's' : ''}`;
+        }
+
+        function updateLimitWarning() {
+            const warningElement = document.getElementById('limitWarning');
+            const addBtn = document.getElementById('addBtn');
+            
+            if (currentResources.length >= 999) {
+                warningElement.style.display = 'block';
+                addBtn.disabled = true;
+            } else {
+                warningElement.style.display = 'none';
+                addBtn.disabled = false;
+            }
+        }
+
+        function renderResources() {
+            const grid = document.getElementById('resourcesGrid');
+            
+            if (currentResources.length === 0) {
+                grid.innerHTML = `
+                    <div class="empty-state">
+                        <div class="empty-state-icon">📚</div>
+                        <h3>No resources yet</h3>
+                        <p>Our collection of faith-building treasures is being prepared for you. Check back soon for wonderful Bible studies and activities!</p>
+                    </div>
+                `;
+                return;
+            }
+
+            const sortedResources = [...currentResources].sort((a, b) => 
+                new Date(b.created_at) - new Date(a.created_at)
+            );
+
+            grid.innerHTML = sortedResources.map(resource => `
+                <div class="resource-card">
+                    <button class="delete-btn" onclick="deleteResource('${resource.__backendId}')">×</button>
+                    <div class="resource-header">
+                        <h3 class="resource-title">${escapeHtml(resource.title)}</h3>
+                        <span class="resource-type">${escapeHtml(resource.type)}</span>
+                    </div>
+                    <div class="resource-age">${escapeHtml(resource.age_group)}</div>
+                    ${resource.description ? `<p class="resource-description">${escapeHtml(resource.description)}</p>` : ''}
+                    ${resource.resource_url ? `<a href="${resource.resource_url}" target="_blank" rel="noopener noreferrer" class="resource-link">🔗 Open Resource</a>` : ''}
+                    <div class="resource-date">Added ${formatDate(resource.created_at)}</div>
+                </div>
+            `).join('');
+        }
+
+        async function deleteResource(backendId) {
+            const resource = currentResources.find(r => r.__backendId === backendId);
+            if (!resource) return;
+
+            const result = await window.dataSdk.delete(resource);
+            if (!result.isOk) {
+                console.error('Failed to delete resource:', result.error);
+            }
+        }
+
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            return date.toLocaleDateString('en-US', { 
+                year: 'numeric', 
+                month: 'short', 
+                day: 'numeric' 
+            });
+        }
+
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        function generateId() {
+            return Date.now().toString(36) + Math.random().toString(36).substr(2);
+        }
+
+        function toggleAdminMode() {
+            const addSection = document.querySelector('.add-section');
+            const adminToggle = document.getElementById('adminToggle');
+            
+            if (addSection.style.display === 'none' || addSection.style.display === '') {
+                // Show password prompt
+                showPasswordPrompt();
+            } else {
+                addSection.style.display = 'none';
+                adminToggle.textContent = 'Admin';
+                adminToggle.style.background = '#8B4513';
+            }
+        }
+
+        function showPasswordPrompt() {
+            // Create password modal
+            const modal = document.createElement('div');
+            modal.style.cssText = `
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.5);
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                z-index: 1000;
+            `;
+
+            const modalContent = document.createElement('div');
+            modalContent.style.cssText = `
+                background: #FAF7F2;
+                padding: 2rem;
+                border-radius: 15px;
+                box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+                max-width: 400px;
+                width: 90%;
+                text-align: center;
+            `;
+
+            modalContent.innerHTML = `
+                <h3 style="color: #8B4513; margin-bottom: 1rem;">Admin Access Required</h3>
+                <p style="color: #5D4E37; margin-bottom: 1.5rem;">Please enter the admin password:</p>
+                <input type="password" id="adminPassword" style="
+                    width: 100%;
+                    padding: 0.75rem;
+                    border: 2px solid #D2B48C;
+                    border-radius: 10px;
+                    font-size: 1rem;
+                    margin-bottom: 1rem;
+                    background: #FEFCF7;
+                " placeholder="Enter password">
+                <div style="display: flex; gap: 1rem;">
+                    <button onclick="checkPassword()" style="
+                        flex: 1;
+                        background: linear-gradient(45deg, #8B4513, #A0522D);
+                        color: white;
+                        border: none;
+                        padding: 0.75rem;
+                        border-radius: 10px;
+                        font-weight: bold;
+                        cursor: pointer;
+                    ">Enter</button>
+                    <button onclick="closePasswordModal()" style="
+                        flex: 1;
+                        background: #CD853F;
+                        color: white;
+                        border: none;
+                        padding: 0.75rem;
+                        border-radius: 10px;
+                        font-weight: bold;
+                        cursor: pointer;
+                    ">Cancel</button>
+                </div>
+            `;
+
+            modal.appendChild(modalContent);
+            document.body.appendChild(modal);
+
+            // Focus on password input
+            setTimeout(() => {
+                document.getElementById('adminPassword').focus();
+            }, 100);
+
+            // Handle Enter key
+            document.getElementById('adminPassword').addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    checkPassword();
+                }
+            });
+
+            window.currentModal = modal;
+        }
+
+        function checkPassword() {
+            const passwordInput = document.getElementById('adminPassword');
+            const password = passwordInput.value;
+
+            if (password === 'faithkids123') {
+                // Correct password - show admin section
+                const addSection = document.querySelector('.add-section');
+                const adminToggle = document.getElementById('adminToggle');
+                
+                addSection.style.display = 'block';
+                adminToggle.textContent = 'Hide Admin';
+                adminToggle.style.background = '#CD853F';
+                
+                closePasswordModal();
+            } else {
+                // Wrong password - show error
+                passwordInput.style.borderColor = '#D2691E';
+                passwordInput.style.background = '#FFF5F5';
+                passwordInput.value = '';
+                passwordInput.placeholder = 'Incorrect password - try again';
+                
+                setTimeout(() => {
+                    passwordInput.style.borderColor = '#D2B48C';
+                    passwordInput.style.background = '#FEFCF7';
+                    passwordInput.placeholder = 'Enter password';
+                }, 2000);
+            }
+        }
+
+        function closePasswordModal() {
+            if (window.currentModal) {
+                document.body.removeChild(window.currentModal);
+                window.currentModal = null;
+            }
+        }
+
+        function setLoading(loading) {
+            isLoading = loading;
+            const addBtn = document.getElementById('addBtn');
+            const addBtnText = document.getElementById('addBtnText');
+            const addBtnLoading = document.getElementById('addBtnLoading');
+            
+            if (loading) {
+                addBtn.disabled = true;
+                addBtnText.style.display = 'none';
+                addBtnLoading.style.display = 'inline-block';
+            } else {
+                addBtn.disabled = currentResources.length >= 999;
+                addBtnText.style.display = 'inline';
+                addBtnLoading.style.display = 'none';
+            }
+        }
+
+        document.getElementById('resourceForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            if (currentResources.length >= 999) {
+                return;
+            }
+
+            setLoading(true);
+
+            const formData = new FormData(e.target);
+            const resourceData = {
+                id: generateId(),
+                title: formData.get('title'),
+                type: formData.get('type'),
+                age_group: formData.get('ageGroup'),
+                description: formData.get('description') || '',
+                resource_url: formData.get('resourceUrl') || '',
+                created_at: new Date().toISOString()
+            };
+
+            const result = await window.dataSdk.create(resourceData);
+            
+            setLoading(false);
+
+            if (result.isOk) {
+                e.target.reset();
+            } else {
+                console.error('Failed to add resource:', result.error);
+            }
+        });
+
+        async function initializeApp() {
+            try {
+                if (window.elementSdk) {
+                    await window.elementSdk.init({
+                        defaultConfig,
+                        onConfigChange,
+                        mapToCapabilities,
+                        mapToEditPanelValues
+                    });
+                }
+
+                if (window.dataSdk) {
+                    const result = await window.dataSdk.init(dataHandler);
+                    if (!result.isOk) {
+                        console.error('Failed to initialize data SDK:', result.error);
+                    } else {
+                        // Add initial resources if database is empty
+                        await addInitialResources();
+                    }
+                }
+            } catch (error) {
+                console.error('Failed to initialize app:', error);
+            }
+        }
+
+        async function addInitialResources() {
+            // Add initial resources every time to ensure they're always available
+            const initialResources = [
+                {
+                    id: generateId(),
+                    title: "Faith for Little Hearts Bible Stories",
+                    type: "Bible Study",
+                    age_group: "All Ages",
+                    description: "A comprehensive collection of Bible stories designed specifically for young hearts. These engaging narratives help children connect with God's word in age-appropriate ways.",
+                    resource_url: "https://wholeheartedlegacy.com/faith-for-little-hearts-bible-stories",
+                    created_at: new Date().toISOString()
+                },
+                {
+                    id: generateId(),
+                    title: "Faith for Little Hearts Main Resource",
+                    type: "Bible Study",
+                    age_group: "All Ages", 
+                    description: "The main Faith for Little Hearts resource hub featuring Bible studies, activities, and faith-building materials for children and families.",
+                    resource_url: "https://wholeheartedlegacy.com/faith-for-little-hearts",
+                    created_at: new Date().toISOString()
+                }
+            ];
+
+            // Check if these resources already exist to avoid duplicates
+            const existingTitles = currentResources.map(r => r.title);
+            
+            for (const resource of initialResources) {
+                if (!existingTitles.includes(resource.title)) {
+                    const result = await window.dataSdk.create(resource);
+                    if (!result.isOk) {
+                        console.error('Failed to add initial resource:', result.error);
+                    }
+                }
+            }
+        }
+
+        initializeApp();
+    </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'99f166581206ebeb',t:'MTc2MzIzNzUwOC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
