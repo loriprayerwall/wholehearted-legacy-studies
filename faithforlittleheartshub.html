@@ -6,7 +6,6 @@
   <title>Faith for Little Hearts Hub</title>
   <script src="/_sdk/data_sdk.js"></script>
   <script src="/_sdk/element_sdk.js"></script>
-
   <style>
         body {
             box-sizing: border-box;
@@ -82,7 +81,8 @@
             margin: 0 auto;
             line-height: 1.6;
         }
-    .heart-icon {
+
+        .heart-icon {
             font-size: 2rem;
             color: #D2691E;
             margin: 0 0.5rem;
@@ -253,7 +253,8 @@
             cursor: not-allowed;
             transform: none;
         }
-   resources-section {
+
+        .resources-section {
             background: #FAF7F2;
             padding: 2rem;
             border-radius: 15px;
@@ -434,106 +435,95 @@
             margin-bottom: 1rem;
             border: 1px solid #DEB887;
         }
-    </style>
 
+        @media (max-width: 768px) {
+            .main-title {
+                font-size: 2rem;
+            }
+            
+            .subtitle {
+                font-size: 1.2rem;
+            }
+            
+            .container {
+                padding: 1rem;
+            }
+        }
+    </style>
   <style>@view-transition { navigation: auto; }</style>
   <script src="https://cdn.tailwindcss.com" type="text/javascript"></script>
  </head>
  <body>
   <div class="floating-elements">
-   <div class="floating-heart">💕</div>
-   <div class="floating-heart">💖</div>
-   <div class="floating-heart">💝</div>
-   <div class="floating-heart">💗</div>
-   <div class="floating-cloud">☁️</div>
-   <div class="floating-cloud">☁️</div>
-   <div class="floating-cloud">☁️</div>
-   <div class="floating-cloud">☁️</div>
+   <div class="floating-heart">
+    💕
+   </div>
+   <div class="floating-heart">
+    💖
+   </div>
+   <div class="floating-heart">
+    💝
+   </div>
+   <div class="floating-heart">
+    💗
+   </div>
+   <div class="floating-cloud">
+    ☁️
+   </div>
+   <div class="floating-cloud">
+    ☁️
+   </div>
+   <div class="floating-cloud">
+    ☁️
+   </div>
+   <div class="floating-cloud">
+    ☁️
+   </div>
   </div>
-
   <main class="container">
    <header class="header">
     <div class="header-content">
      <h1 class="main-title" id="mainTitle">Faith for Little Hearts</h1>
-     <div class="heart-icon">💕</div>
-     <p class="subtitle" id="subtitle">Bible Studies & Resources for Kids</p>
-     <p class="welcome-message" id="welcomeMessage">
-       Welcome to our curated collection of Bible studies and resources designed to help children grow in their faith.
-       Explore materials organized by age group and type to find the perfect fit for your little ones.
-     </p>
+     <div class="heart-icon">
+      💕
+     </div>
+     <p class="subtitle" id="subtitle">Bible Studies &amp; Resources for Kids</p>
+     <p class="welcome-message" id="welcomeMessage">Welcome to our curated collection of Bible studies and resources designed to help children grow in their faith. Explore materials organized by age group and type to find the perfect fit for your little ones.</p>
     </div>
    </header>
-
    <div class="main-content">
     <section class="add-section">
      <h3>Add New Resource</h3>
-
      <div id="limitWarning" class="limit-warning" style="display: none;">
       You've reached the maximum limit of 999 resources. Please delete some items to add new ones.
      </div>
-
      <form id="resourceForm">
-      <div class="form-group">
-       <label for="title">Resource Title</label>
-       <input type="text" id="title" name="title" required placeholder="e.g., Noah's Ark Story">
+      <div class="form-group"><label for="title">Resource Title</label> <input type="text" id="title" name="title" required placeholder="e.g., Noah's Ark Story">
       </div>
-
-      <div class="form-group">
-       <label for="type">Resource Type</label>
-       <select id="type" name="type" required>
-        <option value="">Select type...</option>
-        <option value="Bible Study">Bible Study</option>
-        <option value="Activity">Activity</option>
-        <option value="Craft">Craft</option>
-        <option value="Song">Song</option>
-        <option value="Game">Game</option>
-        <option value="Worksheet">Worksheet</option>
-        <option value="Story">Story</option>
-        <option value="Video">Video</option>
-       </select>
+      <div class="form-group"><label for="type">Resource Type</label> <select id="type" name="type" required> <option value="">Select type...</option> <option value="Bible Study">Bible Study</option> <option value="Activity">Activity</option> <option value="Craft">Craft</option> <option value="Song">Song</option> <option value="Game">Game</option> <option value="Worksheet">Worksheet</option> <option value="Story">Story</option> <option value="Video">Video</option> </select>
       </div>
-
-      <div class="form-group">
-       <label for="ageGroup">Age Group</label>
-       <select id="ageGroup" name="ageGroup" required>
-        <option value="">Select age group...</option>
-        <option value="Toddlers (2-3)">Toddlers (2-3)</option>
-        <option value="Preschool (4-5)">Preschool (4-5)</option>
-        <option value="Elementary (6-8)">Elementary (6-8)</option>
-        <option value="Tweens (9-12)">Tweens (9-12)</option>
-        <option value="All Ages">All Ages</option>
-       </select>
+      <div class="form-group"><label for="ageGroup">Age Group</label> <select id="ageGroup" name="ageGroup" required> <option value="">Select age group...</option> <option value="Toddlers (2-3)">Toddlers (2-3)</option> <option value="Preschool (4-5)">Preschool (4-5)</option> <option value="Elementary (6-8)">Elementary (6-8)</option> <option value="Tweens (9-12)">Tweens (9-12)</option> <option value="All Ages">All Ages</option> </select>
       </div>
-
-      <div class="form-group">
-       <label for="description">Description</label>
-       <textarea id="description" name="description" placeholder="Brief description of the resource..."></textarea>
+      <div class="form-group"><label for="description">Description</label> <textarea id="description" name="description" placeholder="Brief description of the resource..."></textarea>
       </div>
-
-      <div class="form-group">
-       <label for="resourceUrl">Resource Link (Optional)</label>
-       <input type="url" id="resourceUrl" name="resourceUrl" placeholder="https://example.org/resource">
-      </div>
-
-      <button type="submit" class="add-btn" id="addBtn">
-       <span id="addBtnText">Add New Resource</span>
-       <span id="addBtnLoading" class="loading" style="display: none;"></span>
-      </button>
+      <div class="form-group"><label for="resourceUrl">Resource Link (Optional)</label> <input type="url" id="resourceUrl" name="resourceUrl" placeholder="https://example.com/resource">
+      </div><button type="submit" class="add-btn" id="addBtn"> <span id="addBtnText">Add New Resource</span> <span id="addBtnLoading" class="loading" style="display: none;"></span> </button>
      </form>
     </section>
-
     <section class="resources-section">
      <div class="resources-header">
       <h2 class="resources-title">Faith-Building Treasures</h2>
       <div style="display: flex; align-items: center;">
-       <div class="resource-count" id="resourceCount">0 Resources</div>
-       <button class="admin-toggle" onclick="toggleAdminMode()" id="adminToggle">Admin</button>
+       <div class="resource-count" id="resourceCount">
+        0 Resources
+       </div><button class="admin-toggle" onclick="toggleAdminMode()" id="adminToggle">Admin</button>
       </div>
      </div>
-
      <div id="resourcesGrid" class="resources-grid">
       <div class="empty-state">
-       <div class="empty-state-icon">📚</div>
+       <div class="empty-state-icon">
+        📚
+       </div>
        <h3>No resources yet</h3>
        <p>Our collection of faith-building treasures is being prepared for you. Check back soon for wonderful Bible studies and activities!</p>
       </div>
@@ -654,7 +644,7 @@
         function updateLimitWarning() {
             const warningElement = document.getElementById('limitWarning');
             const addBtn = document.getElementById('addBtn');
-
+            
             if (currentResources.length >= 999) {
                 warningElement.style.display = 'block';
                 addBtn.disabled = true;
@@ -666,7 +656,7 @@
 
         function renderResources() {
             const grid = document.getElementById('resourcesGrid');
-
+            
             if (currentResources.length === 0) {
                 grid.innerHTML = `
                     <div class="empty-state">
@@ -678,7 +668,7 @@
                 return;
             }
 
-            const sortedResources = [...currentResources].sort((a, b) =>
+            const sortedResources = [...currentResources].sort((a, b) => 
                 new Date(b.created_at) - new Date(a.created_at)
             );
 
@@ -696,7 +686,8 @@
                 </div>
             `).join('');
         }
-   async function deleteResource(backendId) {
+
+        async function deleteResource(backendId) {
             const resource = currentResources.find(r => r.__backendId === backendId);
             if (!resource) return;
 
@@ -708,10 +699,10 @@
 
         function formatDate(dateString) {
             const date = new Date(dateString);
-            return date.toLocaleDateString('en-US', {
-                year: 'numeric',
-                month: 'short',
-                day: 'numeric'
+            return date.toLocaleDateString('en-US', { 
+                year: 'numeric', 
+                month: 'short', 
+                day: 'numeric' 
             });
         }
 
@@ -728,8 +719,9 @@
         function toggleAdminMode() {
             const addSection = document.querySelector('.add-section');
             const adminToggle = document.getElementById('adminToggle');
-
+            
             if (addSection.style.display === 'none' || addSection.style.display === '') {
+                // Show password prompt
                 showPasswordPrompt();
             } else {
                 addSection.style.display = 'none';
@@ -739,6 +731,7 @@
         }
 
         function showPasswordPrompt() {
+            // Create password modal
             const modal = document.createElement('div');
             modal.style.cssText = `
                 position: fixed;
@@ -776,7 +769,6 @@
                     margin-bottom: 1rem;
                     background: #FEFCF7;
                 " placeholder="Enter password">
-
                 <div style="display: flex; gap: 1rem;">
                     <button onclick="checkPassword()" style="
                         flex: 1;
@@ -788,7 +780,6 @@
                         font-weight: bold;
                         cursor: pointer;
                     ">Enter</button>
-
                     <button onclick="closePasswordModal()" style="
                         flex: 1;
                         background: #CD853F;
@@ -804,10 +795,17 @@
 
             modal.appendChild(modalContent);
             document.body.appendChild(modal);
-            setTimeout(() => document.getElementById('adminPassword').focus(), 100);
 
+            // Focus on password input
+            setTimeout(() => {
+                document.getElementById('adminPassword').focus();
+            }, 100);
+
+            // Handle Enter key
             document.getElementById('adminPassword').addEventListener('keypress', (e) => {
-                if (e.key === 'Enter') checkPassword();
+                if (e.key === 'Enter') {
+                    checkPassword();
+                }
             });
 
             window.currentModal = modal;
@@ -818,20 +816,22 @@
             const password = passwordInput.value;
 
             if (password === 'faithkids123') {
+                // Correct password - show admin section
                 const addSection = document.querySelector('.add-section');
                 const adminToggle = document.getElementById('adminToggle');
-
+                
                 addSection.style.display = 'block';
                 adminToggle.textContent = 'Hide Admin';
                 adminToggle.style.background = '#CD853F';
-
+                
                 closePasswordModal();
             } else {
+                // Wrong password - show error
                 passwordInput.style.borderColor = '#D2691E';
                 passwordInput.style.background = '#FFF5F5';
                 passwordInput.value = '';
                 passwordInput.placeholder = 'Incorrect password - try again';
-
+                
                 setTimeout(() => {
                     passwordInput.style.borderColor = '#D2B48C';
                     passwordInput.style.background = '#FEFCF7';
@@ -852,7 +852,7 @@
             const addBtn = document.getElementById('addBtn');
             const addBtnText = document.getElementById('addBtnText');
             const addBtnLoading = document.getElementById('addBtnLoading');
-
+            
             if (loading) {
                 addBtn.disabled = true;
                 addBtnText.style.display = 'none';
@@ -863,21 +863,10 @@
                 addBtnLoading.style.display = 'none';
             }
         }
-    // --- FIX URL VALIDATION FOR SQUARESPACE & GITHUB LINKS ---
-        function sanitizeUrl(url) {
-            if (!url) return "";
-
-            // If user enters "wholeheartedlegacy.org/page"
-            if (!/^https?:\/\//i.test(url)) {
-                return "https://" + url.replace(/^\/+/, "");
-            }
-
-            return url;
-        }
 
         document.getElementById('resourceForm').addEventListener('submit', async (e) => {
             e.preventDefault();
-
+            
             if (currentResources.length >= 999) {
                 return;
             }
@@ -891,15 +880,12 @@
                 type: formData.get('type'),
                 age_group: formData.get('ageGroup'),
                 description: formData.get('description') || '',
-
-                // ⭐ FIXED: sanitize the URL so .org and GitHub links always pass
-                resource_url: sanitizeUrl(formData.get('resourceUrl')) || '',
-
+                resource_url: formData.get('resourceUrl') || '',
                 created_at: new Date().toISOString()
             };
 
             const result = await window.dataSdk.create(resourceData);
-
+            
             setLoading(false);
 
             if (result.isOk) {
@@ -925,6 +911,7 @@
                     if (!result.isOk) {
                         console.error('Failed to initialize data SDK:', result.error);
                     } else {
+                        // Add initial resources if database is empty
                         await addInitialResources();
                     }
                 }
@@ -934,31 +921,31 @@
         }
 
         async function addInitialResources() {
-            // Always ensure these two are present
-
+            // Add resources every time to ensure they appear
             const initialResources = [
                 {
                     id: generateId(),
-                    title: "Faith for Little Hearts Bible Stories",
+                    title: "🌈 Faith for Little Hearts: 66-Book Bible Carousel",
                     type: "Bible Study",
                     age_group: "All Ages",
-                    description: "A comprehensive collection of Bible stories designed specifically for young hearts.",
-                    resource_url: "https://wholeheartedlegacy.org/faith-for-little-hearts-bible-stories",
+                    description: "Explore all 66 books of the Bible through a colorful, kid-friendly carousel designed to spark wonder and deepen faith! Each book features a joyful icon, simple story summary, memory verse, fun fact, and hands-on activities to help children connect with God's Word in meaningful ways. Whether you're marching around Jericho or planting seeds from Genesis, this interactive experience brings Scripture to life—one book at a time.",
+                    resource_url: "https://www.wholeheartedlegacy.org/faith-for-little-hearts-bible-stories",
                     created_at: new Date().toISOString()
                 },
                 {
                     id: generateId(),
-                    title: "Faith for Little Hearts Main Resource",
+                    title: "🌟 Meet the Heroes of the Bible",
                     type: "Bible Study",
                     age_group: "All Ages",
-                    description: "The main Faith for Little Hearts resource hub featuring Bible studies, activities, and materials.",
-                    resource_url: "https://wholeheartedlegacy.org/faith-for-little-hearts",
+                    description: "The Bible is full of amazing people who trusted God, showed courage, and helped others! From brave queens and wise kings to curious kids and faithful friends, each character has a special story that teaches us how to live with love, kindness, and faith. Get ready to meet God's helpers—like Noah who built a big boat, Esther who saved her people, and David who faced a giant with just a sling and a prayer. Their adventures will inspire your heart and help you grow closer to God every day!",
+                    resource_url: "https://www.wholeheartedlegacy.org/faith-for-little-hearts",
                     created_at: new Date().toISOString()
                 }
             ];
 
+            // Check if these specific resources already exist to avoid duplicates
             const existingTitles = currentResources.map(r => r.title);
-
+            
             for (const resource of initialResources) {
                 if (!existingTitles.includes(resource.title)) {
                     const result = await window.dataSdk.create(resource);
@@ -971,45 +958,5 @@
 
         initializeApp();
     </script>
-    <script>
-      (function(){
-        function c(){
-          var b=a.contentDocument||a.contentWindow.document;
-          if(b){
-            var d=b.createElement('script');
-            d.innerHTML =
-              "window.__CF$cv$params={r:'99f166581206ebeb',t:'MTc2MzIzNzUwOC4wMDAwMDA='};" +
-              "var a=document.createElement('script');" +
-              "a.nonce='';" +
-              "a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';" +
-              "document.getElementsByTagName('head')[0].appendChild(a);";
-            b.getElementsByTagName('head')[0].appendChild(d)
-          }
-        }
-        if(document.body){
-          var a=document.createElement('iframe');
-          a.height=1;
-          a.width=1;
-          a.style.position='absolute';
-          a.style.top=0;
-          a.style.left=0;
-          a.style.border='none';
-          a.style.visibility='hidden';
-          document.body.appendChild(a);
-
-          if('loading'!==document.readyState) c();
-          else if(window.addEventListener)
-            document.addEventListener('DOMContentLoaded',c);
-          else {
-            var e=document.onreadystatechange||function(){};
-            document.onreadystatechange=function(b){
-              e(b);
-              'loading'!==document.readyState && (document.onreadystatechange=e,c())
-            }
-          }
-        }
-      })();
-    </script>
-
- </body>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'99f1e428d7b0ebeb',t:'MTc2MzI0MjY2MS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
