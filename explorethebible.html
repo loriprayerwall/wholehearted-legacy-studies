@@ -1,0 +1,1488 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bible Study Navigator</title>
+  <script src="/_sdk/element_sdk.js"></script>
+  <style>
+        body {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 20px;
+            font-family: 'Georgia', 'Times New Roman', serif;
+            background: linear-gradient(135deg, #f5f1e8 0%, #e8dcc6 100%);
+            min-height: 100%;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: #faf8f3;
+            border-radius: 12px;
+            box-shadow: 0 8px 32px rgba(101, 67, 33, 0.15);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #3d2914 0%, #5d4037 100%);
+            color: #faf8f3;
+            padding: 40px 30px;
+            text-align: center;
+        }
+
+        .main-title {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin: 0 0 10px 0;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin: 0;
+            font-style: italic;
+        }
+
+        .content {
+            padding: 40px 30px;
+        }
+
+        .testament-section {
+            margin-bottom: 50px;
+        }
+
+        .testament-title {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #3d2914;
+            margin-bottom: 25px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #8d6e63;
+            text-align: center;
+        }
+
+        .books-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .book-card {
+            background: #faf8f3;
+            border: 2px solid #d7cc9f;
+            border-radius: 8px;
+            padding: 20px;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(101, 67, 33, 0.1);
+            position: relative;
+        }
+
+        .book-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(101, 67, 33, 0.2);
+            border-color: #8d6e63;
+        }
+
+        .book-header {
+            cursor: pointer;
+        }
+
+        .book-title {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #3d2914;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .expand-icon {
+            font-size: 1rem;
+            color: #8d6e63;
+            transition: transform 0.3s ease;
+        }
+
+        .book-card.expanded .expand-icon {
+            transform: rotate(180deg);
+        }
+
+        .book-info {
+            font-size: 0.9rem;
+            color: #8d6e63;
+            margin-bottom: 15px;
+        }
+
+        .chapter-count {
+            background: #f0ebe1;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            color: #3d2914;
+        }
+
+        .book-overview {
+            display: none;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid #e8dcc6;
+        }
+
+        .book-card.expanded .book-overview {
+            display: block;
+        }
+
+        .overview-section {
+            margin-bottom: 20px;
+        }
+
+        .overview-title {
+            font-size: 1rem;
+            font-weight: bold;
+            color: #3d2914;
+            margin-bottom: 8px;
+        }
+
+        .overview-content {
+            font-size: 0.9rem;
+            line-height: 1.5;
+            color: #5d4037;
+        }
+
+        .memory-verse {
+            background: #f5f1e8;
+            padding: 15px;
+            border-left: 4px solid #8d6e63;
+            border-radius: 4px;
+            font-style: italic;
+            margin-bottom: 15px;
+        }
+
+        .verse-text {
+            color: #3d2914;
+            margin-bottom: 5px;
+        }
+
+        .verse-reference {
+            font-size: 0.8rem;
+            color: #8d6e63;
+            font-weight: bold;
+        }
+
+        .highlights {
+            background: #f9f5f0;
+            padding: 12px;
+            border-radius: 4px;
+            border-left: 4px solid #d7cc9f;
+        }
+
+        .highlights ul {
+            margin: 0;
+            padding-left: 20px;
+        }
+
+        .highlights li {
+            margin-bottom: 5px;
+            font-size: 0.9rem;
+            color: #5d4037;
+        }
+
+        .chapters-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .chapter-item {
+            background: #f5f1e8;
+            padding: 12px;
+            border-radius: 6px;
+            border: 1px solid #e8dcc6;
+        }
+
+        .chapter-title {
+            font-weight: bold;
+            color: #3d2914;
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+        }
+
+        .chapter-summary {
+            font-size: 0.8rem;
+            color: #8d6e63;
+            line-height: 1.4;
+        }
+
+        .study-link {
+            display: inline-block;
+            background: #8d6e63;
+            color: #faf8f3;
+            padding: 8px 16px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: background-color 0.3s ease;
+            margin-top: 15px;
+        }
+
+        .study-link:hover {
+            background: #5d4037;
+        }
+
+        .download-section {
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 1px solid #e8dcc6;
+        }
+
+        .download-buttons {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .download-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: #d7cc9f;
+            color: #3d2914;
+            padding: 8px 12px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border: 1px solid #c7bc8f;
+        }
+
+        .download-btn:hover {
+            background: #c7bc8f;
+            transform: translateY(-1px);
+            box-shadow: 0 2px 8px rgba(101, 67, 33, 0.2);
+        }
+
+        .download-icon {
+            font-size: 0.9rem;
+        }
+
+        .note-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(61, 41, 20, 0.8);
+            z-index: 1000;
+            backdrop-filter: blur(4px);
+        }
+
+        .note-modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .note-content {
+            background: #faf8f3;
+            border-radius: 12px;
+            padding: 30px;
+            max-width: 800px;
+            width: 100%;
+            max-height: 90%;
+            overflow-y: auto;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            position: relative;
+        }
+
+        .note-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #e8dcc6;
+        }
+
+        .note-title {
+            font-size: 1.8rem;
+            color: #3d2914;
+            font-weight: bold;
+            margin: 0;
+        }
+
+        .close-btn {
+            background: #d7cc9f;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            color: #3d2914;
+            transition: all 0.3s ease;
+        }
+
+        .close-btn:hover {
+            background: #c7bc8f;
+            transform: scale(1.1);
+        }
+
+        .note-section {
+            margin-bottom: 25px;
+        }
+
+        .note-section-title {
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: #3d2914;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .note-textarea {
+            width: 100%;
+            min-height: 120px;
+            padding: 15px;
+            border: 2px solid #e8dcc6;
+            border-radius: 8px;
+            font-family: 'Georgia', serif;
+            font-size: 1rem;
+            line-height: 1.6;
+            color: #3d2914;
+            background: #faf8f3;
+            resize: vertical;
+            transition: border-color 0.3s ease;
+        }
+
+        .note-textarea:focus {
+            outline: none;
+            border-color: #8d6e63;
+            box-shadow: 0 0 0 3px rgba(141, 110, 99, 0.1);
+        }
+
+        .note-actions {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-top: 25px;
+            padding-top: 20px;
+            border-top: 1px solid #e8dcc6;
+        }
+
+        .note-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: #8d6e63;
+            color: #faf8f3;
+            padding: 12px 18px;
+            border: none;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .note-btn:hover {
+            background: #5d4037;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(93, 64, 55, 0.3);
+        }
+
+        .note-btn.secondary {
+            background: #d7cc9f;
+            color: #3d2914;
+        }
+
+        .note-btn.secondary:hover {
+            background: #c7bc8f;
+        }
+
+        .character-count {
+            font-size: 0.85rem;
+            color: #8d6e63;
+            text-align: right;
+            margin-top: 5px;
+        }
+
+        @media (max-width: 768px) {
+            .books-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .main-title {
+                font-size: 2rem;
+            }
+            
+            .testament-title {
+                font-size: 1.5rem;
+            }
+
+            .note-content {
+                margin: 10px;
+                padding: 20px;
+                max-height: 95%;
+            }
+
+            .note-actions {
+                flex-direction: column;
+            }
+
+            .note-btn {
+                justify-content: center;
+            }
+        }
+    </style>
+  <style>@view-transition { navigation: auto; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+  <script src="https://cdn.tailwindcss.com" type="text/javascript"></script>
+ </head>
+ <body>
+  <main class="container">
+   <header class="header">
+    <h1 class="main-title" id="main-title">Bible Study Navigator</h1>
+    <p class="subtitle" id="subtitle">Explore God's Word Book by Book</p>
+   </header>
+   <div class="content">
+    <section class="testament-section">
+     <h2 class="testament-title" id="old-testament-title">Old Testament</h2>
+     <div class="books-grid" id="old-testament-grid"></div>
+    </section>
+    <section class="testament-section">
+     <h2 class="testament-title" id="new-testament-title">New Testament</h2>
+     <div class="books-grid" id="new-testament-grid"></div>
+    </section>
+   </div>
+  </main><!-- Note Taking Modal -->
+  <div id="noteModal" class="note-modal">
+   <div class="note-content">
+    <div class="note-header">
+     <h2 class="note-title" id="noteBookTitle">Study Notes</h2><button class="close-btn" onclick="closeNoteTaker()">×</button>
+    </div>
+    <div class="note-section">
+     <div class="note-section-title"><span>💡</span> Key Insights &amp; Observations
+     </div><textarea id="insightsNotes" class="note-textarea" placeholder="What stood out to you? What new insights did you discover? Record your observations and thoughts here..." oninput="updateCharacterCount('insights')"></textarea>
+     <div class="character-count" id="insightsCount">
+      0 characters
+     </div>
+    </div>
+    <div class="note-section">
+     <div class="note-section-title"><span>🎯</span> Personal Applications
+     </div><textarea id="applicationsNotes" class="note-textarea" placeholder="How does this apply to your life? What changes will you make? What actions will you take?" oninput="updateCharacterCount('applications')"></textarea>
+     <div class="character-count" id="applicationsCount">
+      0 characters
+     </div>
+    </div>
+    <div class="note-section">
+     <div class="note-section-title"><span>🙏</span> Prayer Points &amp; Reflections
+     </div><textarea id="prayerNotes" class="note-textarea" placeholder="What prayers has this study inspired? What do you want to talk to God about?" oninput="updateCharacterCount('prayer')"></textarea>
+     <div class="character-count" id="prayerCount">
+      0 characters
+     </div>
+    </div>
+    <div class="note-section">
+     <div class="note-section-title"><span>❓</span> Questions &amp; Further Study
+     </div><textarea id="questionsNotes" class="note-textarea" placeholder="What questions do you have? What would you like to study further? What cross-references might be helpful?" oninput="updateCharacterCount('questions')"></textarea>
+     <div class="character-count" id="questionsCount">
+      0 characters
+     </div>
+    </div>
+    <div class="note-actions"><button class="note-btn" onclick="saveNotesToFile()"> <span>💾</span> Save as File </button> <button class="note-btn" onclick="copyNotesToClipboard()"> <span>📋</span> Copy to Clipboard </button> <button class="note-btn" onclick="shareNotes()"> <span>📤</span> Share Notes </button> <button class="note-btn secondary" onclick="clearAllNotes()"> <span>🗑️</span> Clear All </button>
+    </div>
+   </div>
+  </div>
+  <script>
+        const defaultConfig = {
+            main_title: "Bible Study Navigator",
+            subtitle: "Explore God's Word Book by Book",
+            old_testament_title: "Old Testament",
+            new_testament_title: "New Testament"
+        };
+
+        const oldTestamentBooks = [
+            { name: "Genesis", chapters: 50, abbrev: "Gen", overview: "The book of beginnings - creation, fall, flood, and the patriarchs.", memoryVerse: { text: "In the beginning God created the heavens and the earth.", reference: "Genesis 1:1" }, highlights: ["Creation account", "The Fall", "Noah's flood", "Abraham's covenant", "Joseph in Egypt"] },
+            { name: "Exodus", chapters: 40, abbrev: "Exod", overview: "Israel's deliverance from Egypt and receiving the Law at Sinai.", memoryVerse: { text: "I am the LORD your God, who brought you out of Egypt.", reference: "Exodus 20:2" }, highlights: ["Ten plagues", "Passover", "Red Sea crossing", "Ten Commandments", "Golden calf"] },
+            { name: "Leviticus", chapters: 27, abbrev: "Lev", overview: "Laws for worship, sacrifices, and holy living for God's people.", memoryVerse: { text: "Be holy because I, the LORD your God, am holy.", reference: "Leviticus 19:2" }, highlights: ["Five offerings", "Priesthood", "Day of Atonement", "Holiness laws", "Jubilee year"] },
+            { name: "Numbers", chapters: 36, abbrev: "Num", overview: "Israel's 40-year wilderness journey from Sinai to the Promised Land.", memoryVerse: { text: "The LORD bless you and keep you.", reference: "Numbers 6:24" }, highlights: ["Two censuses", "Spies in Canaan", "Wilderness wandering", "Bronze serpent", "Balaam's prophecy"] },
+            { name: "Deuteronomy", chapters: 34, abbrev: "Deut", overview: "Moses' farewell speeches restating the Law before entering Canaan.", memoryVerse: { text: "Love the LORD your God with all your heart.", reference: "Deuteronomy 6:5" }, highlights: ["Shema", "Love commandment", "Blessings and curses", "Joshua commissioned", "Moses' death"] },
+            { name: "Joshua", chapters: 24, abbrev: "Josh", overview: "The conquest and division of the Promised Land under Joshua's leadership.", memoryVerse: { text: "Choose for yourselves this day whom you will serve.", reference: "Joshua 24:15" }, highlights: ["Crossing Jordan", "Jericho falls", "Conquest of Canaan", "Land divided", "Covenant renewal"] },
+            { name: "Judges", chapters: 21, abbrev: "Judg", overview: "The cycle of sin, oppression, and deliverance during the judges period.", memoryVerse: { text: "In those days Israel had no king; everyone did as they saw fit.", reference: "Judges 21:25" }, highlights: ["Deborah", "Gideon", "Samson", "Moral decline", "Civil war"] },
+            { name: "Ruth", chapters: 4, abbrev: "Ruth", overview: "A beautiful story of loyalty, love, and redemption in the lineage of David.", memoryVerse: { text: "Where you go I will go, and where you stay I will stay.", reference: "Ruth 1:16" }, highlights: ["Ruth's loyalty", "Gleaning fields", "Boaz as kinsman-redeemer", "Marriage and redemption", "David's ancestry"] },
+            { name: "1 Samuel", chapters: 31, abbrev: "1Sam", overview: "The transition from judges to monarchy; Samuel, Saul, and young David.", memoryVerse: { text: "The LORD looks at the heart.", reference: "1 Samuel 16:7" }, highlights: ["Samuel's birth", "Saul anointed king", "David anointed", "David and Goliath", "Saul's jealousy"] },
+            { name: "2 Samuel", chapters: 24, abbrev: "2Sam", overview: "David's reign as king over Israel, his triumphs and failures.", memoryVerse: { text: "Your house and your kingdom will endure forever.", reference: "2 Samuel 7:16" }, highlights: ["David becomes king", "Davidic covenant", "Bathsheba affair", "Absalom's rebellion", "David's psalms"] },
+            { name: "1 Kings", chapters: 22, abbrev: "1Kgs", overview: "Solomon's reign, temple building, and the kingdom's division.", memoryVerse: { text: "If my people will humble themselves and pray...", reference: "2 Chronicles 7:14" }, highlights: ["Solomon's wisdom", "Temple built", "Queen of Sheba", "Kingdom divides", "Elijah's ministry"] },
+            { name: "2 Kings", chapters: 25, abbrev: "2Kgs", overview: "The decline and fall of both Israel and Judah into exile.", memoryVerse: { text: "The LORD was very angry with Israel and removed them from his presence.", reference: "2 Kings 17:18" }, highlights: ["Elijah taken up", "Elisha's miracles", "Israel's exile", "Judah's reforms", "Jerusalem destroyed"] },
+            { name: "1 Chronicles", chapters: 29, abbrev: "1Chr", overview: "A priestly perspective on Israel's history focusing on David's reign.", memoryVerse: { text: "Yours, LORD, is the greatness and the power and the glory.", reference: "1 Chronicles 29:11" }, highlights: ["Genealogies", "David's reign", "Temple preparations", "Levitical duties", "David's prayer"] },
+            { name: "2 Chronicles", chapters: 36, abbrev: "2Chr", overview: "The history of Judah's kings with emphasis on temple worship.", memoryVerse: { text: "If my people will humble themselves and pray...", reference: "2 Chronicles 7:14" }, highlights: ["Solomon's temple", "Kingdom divides", "Judah's kings", "Religious reforms", "Babylonian exile"] },
+            { name: "Ezra", chapters: 10, abbrev: "Ezra", overview: "The return from Babylonian exile and rebuilding of the temple.", memoryVerse: { text: "The hand of our God is on everyone who looks to him.", reference: "Ezra 8:22" }, highlights: ["Return from exile", "Temple rebuilt", "Opposition faced", "Ezra's reforms", "Mixed marriages"] },
+            { name: "Nehemiah", chapters: 13, abbrev: "Neh", overview: "Rebuilding Jerusalem's walls and spiritual renewal of the people.", memoryVerse: { text: "The joy of the LORD is your strength.", reference: "Nehemiah 8:10" }, highlights: ["Walls rebuilt", "Opposition overcome", "Law read publicly", "Covenant renewed", "Reforms instituted"] },
+            { name: "Esther", chapters: 10, abbrev: "Esth", overview: "God's providence in preserving the Jewish people through Queen Esther.", memoryVerse: { text: "Who knows but that you have come to your royal position for such a time as this?", reference: "Esther 4:14" }, highlights: ["Esther becomes queen", "Haman's plot", "Esther's courage", "Jews delivered", "Purim established"] },
+            { name: "Job", chapters: 42, abbrev: "Job", overview: "The problem of suffering and God's sovereignty in the life of a righteous man.", memoryVerse: { text: "I know that my redeemer lives.", reference: "Job 19:25" }, highlights: ["Job's trials", "Friends' counsel", "Job's complaints", "God's response", "Job's restoration"] },
+            { name: "Psalms", chapters: 150, abbrev: "Ps", overview: "The songbook of Israel expressing worship, lament, and praise to God.", memoryVerse: { text: "The LORD is my shepherd, I lack nothing.", reference: "Psalm 23:1" }, highlights: ["Worship songs", "Lament psalms", "Messianic psalms", "Wisdom psalms", "Praise psalms"] },
+            { name: "Proverbs", chapters: 31, abbrev: "Prov", overview: "Practical wisdom for daily living and godly character development.", memoryVerse: { text: "Trust in the LORD with all your heart.", reference: "Proverbs 3:5" }, highlights: ["Fear of the LORD", "Wisdom vs folly", "Righteous living", "Family relationships", "Virtuous woman"] },
+            { name: "Ecclesiastes", chapters: 12, abbrev: "Eccl", overview: "The search for meaning in life apart from God; vanity of earthly pursuits.", memoryVerse: { text: "Fear God and keep his commandments.", reference: "Ecclesiastes 12:13" }, highlights: ["Vanity of life", "Time for everything", "Enjoy God's gifts", "Remember your Creator", "Final judgment"] },
+            { name: "Song of Solomon", chapters: 8, abbrev: "Song", overview: "A celebration of love between husband and wife; God's love for His people.", memoryVerse: { text: "I am my beloved's and my beloved is mine.", reference: "Song of Solomon 6:3" }, highlights: ["Courtship", "Wedding", "Married love", "Separation and reunion", "Mature love"] },
+            { name: "Isaiah", chapters: 66, abbrev: "Isa", overview: "Prophecies of judgment and salvation; the coming Messiah and His kingdom.", memoryVerse: { text: "Here am I. Send me!", reference: "Isaiah 6:8" }, highlights: ["Isaiah's call", "Immanuel prophecy", "Suffering Servant", "New heavens and earth", "Messianic kingdom"] },
+            { name: "Jeremiah", chapters: 52, abbrev: "Jer", overview: "The weeping prophet's call to repentance before Jerusalem's destruction.", memoryVerse: { text: "For I know the plans I have for you, declares the LORD.", reference: "Jeremiah 29:11" }, highlights: ["Jeremiah's call", "Temple sermon", "New covenant", "Jerusalem's fall", "Hope for restoration"] },
+            { name: "Lamentations", chapters: 5, abbrev: "Lam", overview: "Mourning over Jerusalem's destruction with hope in God's faithfulness.", memoryVerse: { text: "Great is your faithfulness.", reference: "Lamentations 3:23" }, highlights: ["Jerusalem's desolation", "God's anger", "Hope in God's mercy", "Prayer for restoration", "Trust in God's love"] },
+            { name: "Ezekiel", chapters: 48, abbrev: "Ezek", overview: "Visions of God's glory, judgment on nations, and restoration of Israel.", memoryVerse: { text: "I will give you a new heart and put a new spirit in you.", reference: "Ezekiel 36:26" }, highlights: ["Ezekiel's call", "Temple's glory departs", "Dry bones vision", "New covenant", "Millennial temple"] },
+            { name: "Daniel", chapters: 12, abbrev: "Dan", overview: "Faithfulness in exile and prophetic visions of world empires and God's kingdom.", memoryVerse: { text: "Those who are wise will shine like the brightness of the heavens.", reference: "Daniel 12:3" }, highlights: ["Fiery furnace", "Lion's den", "Nebuchadnezzar's dreams", "Seventy weeks", "End times prophecy"] },
+            { name: "Hosea", chapters: 14, abbrev: "Hos", overview: "God's unfailing love for unfaithful Israel illustrated through Hosea's marriage.", memoryVerse: { text: "I will heal their waywardness and love them freely.", reference: "Hosea 14:4" }, highlights: ["Hosea's marriage", "Israel's unfaithfulness", "God's persistent love", "Call to repentance", "Promise of restoration"] },
+            { name: "Joel", chapters: 3, abbrev: "Joel", overview: "The Day of the LORD and the outpouring of God's Spirit on all people.", memoryVerse: { text: "I will pour out my Spirit on all people.", reference: "Joel 2:28" }, highlights: ["Locust plague", "Call to repentance", "Spirit poured out", "Day of the LORD", "Final judgment"] },
+            { name: "Amos", chapters: 9, abbrev: "Amos", overview: "A shepherd's call for social justice and warning of coming judgment.", memoryVerse: { text: "Let justice roll on like a river.", reference: "Amos 5:24" }, highlights: ["Social injustice", "Religious hypocrisy", "Coming judgment", "Visions of judgment", "Future restoration"] },
+            { name: "Obadiah", chapters: 1, abbrev: "Obad", overview: "Judgment on Edom for their pride and mistreatment of Israel.", memoryVerse: { text: "The kingdom will be the LORD's.", reference: "Obadiah 1:21" }, highlights: ["Edom's pride", "Judgment pronounced", "Israel's restoration", "God's sovereignty", "Final victory"] },
+            { name: "Jonah", chapters: 4, abbrev: "Jonah", overview: "God's mercy extends to all nations, even Israel's enemies like Nineveh.", memoryVerse: { text: "Should I not have concern for the great city of Nineveh?", reference: "Jonah 4:11" }, highlights: ["Jonah flees", "Great fish", "Nineveh repents", "God's mercy", "Jonah's anger"] },
+            { name: "Micah", chapters: 7, abbrev: "Mic", overview: "Judgment for injustice and the promise of the Messiah from Bethlehem.", memoryVerse: { text: "He has shown you, O mortal, what is good.", reference: "Micah 6:8" }, highlights: ["Social injustice", "Bethlehem prophecy", "God's requirements", "Future restoration", "God's forgiveness"] },
+            { name: "Nahum", chapters: 3, abbrev: "Nah", overview: "The destruction of Nineveh and God's judgment on wickedness.", memoryVerse: { text: "The LORD is good, a refuge in times of trouble.", reference: "Nahum 1:7" }, highlights: ["God's jealousy", "Nineveh's fall", "God's justice", "Comfort for Judah", "Complete destruction"] },
+            { name: "Habakkuk", chapters: 3, abbrev: "Hab", overview: "Wrestling with God's justice and learning to live by faith.", memoryVerse: { text: "The righteous person will live by his faithfulness.", reference: "Habakkuk 2:4" }, highlights: ["Habakkuk's complaint", "God's answer", "Living by faith", "Woe to the wicked", "Prayer of praise"] },
+            { name: "Zephaniah", chapters: 3, abbrev: "Zeph", overview: "The Day of the LORD brings judgment but also restoration and joy.", memoryVerse: { text: "The LORD your God is with you, the Mighty Warrior who saves.", reference: "Zephaniah 3:17" }, highlights: ["Day of the LORD", "Universal judgment", "Remnant preserved", "Joy and restoration", "God's love"] },
+            { name: "Haggai", chapters: 2, abbrev: "Hag", overview: "Encouragement to rebuild the temple and put God's priorities first.", memoryVerse: { text: "Give careful thought to your ways.", reference: "Haggai 1:7" }, highlights: ["Temple rebuilding", "God's priorities", "Future glory", "God's blessing", "Messianic promise"] },
+            { name: "Zechariah", chapters: 14, abbrev: "Zech", overview: "Visions of restoration and the coming Messiah's first and second advents.", memoryVerse: { text: "Not by might nor by power, but by my Spirit.", reference: "Zechariah 4:6" }, highlights: ["Eight visions", "Joshua the priest", "Messianic prophecies", "Triumphal entry", "Second coming"] },
+            { name: "Malachi", chapters: 4, abbrev: "Mal", overview: "The final Old Testament prophet calls for spiritual renewal and faithfulness.", memoryVerse: { text: "Will a mere mortal rob God? Yet you rob me.", reference: "Malachi 3:8" }, highlights: ["God's love questioned", "Corrupt priests", "Faithless people", "Tithing", "Elijah's coming"] }
+        ];
+
+        const newTestamentBooks = [
+            { name: "Matthew", chapters: 28, abbrev: "Matt", overview: "The Gospel presenting Jesus as the promised Messiah and King for Jewish readers.", memoryVerse: { text: "Come to me, all you who are weary and burdened, and I will give you rest.", reference: "Matthew 11:28" }, highlights: ["Sermon on the Mount", "Parables of Kingdom", "Great Commission", "Jesus' genealogy", "Wise men visit"] },
+            { name: "Mark", chapters: 16, abbrev: "Mark", overview: "The shortest Gospel emphasizing Jesus as the suffering Servant for Roman readers.", memoryVerse: { text: "For even the Son of Man came to serve and give his life as a ransom.", reference: "Mark 10:45" }, highlights: ["Fast-paced narrative", "Many miracles", "Transfiguration", "Passion week", "Resurrection"] },
+            { name: "Luke", chapters: 24, abbrev: "Luke", overview: "Written by a physician presenting Jesus as the perfect Son of Man for Gentiles.", memoryVerse: { text: "For the Son of Man came to seek and to save the lost.", reference: "Luke 19:10" }, highlights: ["Birth narratives", "Good Samaritan", "Prodigal Son", "Prayer emphasis", "Road to Emmaus"] },
+            { name: "John", chapters: 21, abbrev: "John", overview: "The theological Gospel presenting Jesus as the Son of God with seven signs.", memoryVerse: { text: "For God so loved the world that he gave his one and only Son.", reference: "John 3:16" }, highlights: ["Seven 'I AM' statements", "Wedding at Cana", "Nicodemus", "Woman at well", "Lazarus raised"] },
+            { name: "Acts", chapters: 28, abbrev: "Acts", overview: "The history of the early church and spread of the Gospel to the world.", memoryVerse: { text: "You will be my witnesses to the ends of the earth.", reference: "Acts 1:8" }, highlights: ["Pentecost", "Stephen's martyrdom", "Paul's conversion", "Peter's vision", "Missionary journeys"] },
+            { name: "Romans", chapters: 16, abbrev: "Rom", overview: "Paul's systematic presentation of the Gospel and Christian doctrine.", memoryVerse: { text: "For I am not ashamed of the gospel.", reference: "Romans 1:16" }, highlights: ["Justification by faith", "Sin and salvation", "Christian living", "Israel's future", "Practical duties"] },
+            { name: "1 Corinthians", chapters: 16, abbrev: "1Cor", overview: "Paul addresses divisions and moral issues in the Corinthian church.", memoryVerse: { text: "Love is patient, love is kind.", reference: "1 Corinthians 13:4" }, highlights: ["Church divisions", "Moral purity", "Love chapter", "Spiritual gifts", "Resurrection"] },
+            { name: "2 Corinthians", chapters: 13, abbrev: "2Cor", overview: "Paul defends his apostolic ministry and calls for reconciliation.", memoryVerse: { text: "My grace is sufficient for you.", reference: "2 Corinthians 12:9" }, highlights: ["Ministry vindicated", "Comfort in trials", "Generous giving", "Paul's sufferings", "Weakness and strength"] },
+            { name: "Galatians", chapters: 6, abbrev: "Gal", overview: "Paul's defense of salvation by grace through faith, not works.", memoryVerse: { text: "I have been crucified with Christ.", reference: "Galatians 2:20" }, highlights: ["Gospel defended", "Justification by faith", "Freedom in Christ", "Fruit of Spirit", "New creation"] },
+            { name: "Ephesians", chapters: 6, abbrev: "Eph", overview: "Paul's letter about the church as the body of Christ and Christian unity.", memoryVerse: { text: "For by grace you have been saved through faith.", reference: "Ephesians 2:8" }, highlights: ["Spiritual blessings", "Unity in Christ", "New life", "Christian relationships", "Spiritual warfare"] },
+            { name: "Philippians", chapters: 4, abbrev: "Phil", overview: "Paul's joyful letter about Christian contentment and Christ-centered living.", memoryVerse: { text: "I can do all things through Christ who strengthens me.", reference: "Philippians 4:13" }, highlights: ["Joy in suffering", "Christ's humility", "Pressing forward", "Peace and contentment", "Rejoicing always"] },
+            { name: "Colossians", chapters: 4, abbrev: "Col", overview: "Paul's letter emphasizing the supremacy and sufficiency of Christ.", memoryVerse: { text: "He is before all things, and in him all things hold together.", reference: "Colossians 1:17" }, highlights: ["Christ's supremacy", "Fullness in Christ", "New life", "Christian household", "Prayer and witness"] },
+            { name: "1 Thessalonians", chapters: 5, abbrev: "1Thess", overview: "Paul's encouragement to new believers about Christian living and Christ's return.", memoryVerse: { text: "Pray without ceasing.", reference: "1 Thessalonians 5:17" }, highlights: ["Model church", "Paul's ministry", "Holy living", "Second coming", "Christian conduct"] },
+            { name: "2 Thessalonians", chapters: 3, abbrev: "2Thess", overview: "Paul corrects misunderstandings about the Day of the Lord and end times.", memoryVerse: { text: "Stand firm and hold to the traditions we taught you.", reference: "2 Thessalonians 2:15" }, highlights: ["Perseverance in trials", "Day of the Lord", "Man of lawlessness", "Prayer requests", "Disciplinary action"] },
+            { name: "1 Timothy", chapters: 6, abbrev: "1Tim", overview: "Paul's instructions to Timothy about church leadership and pastoral care.", memoryVerse: { text: "Fight the good fight of faith.", reference: "1 Timothy 6:12" }, highlights: ["Church leadership", "False teaching", "Prayer and worship", "Church discipline", "Pastoral duties"] },
+            { name: "2 Timothy", chapters: 4, abbrev: "2Tim", overview: "Paul's final letter encouraging Timothy to remain faithful in ministry.", memoryVerse: { text: "All Scripture is God-breathed and useful for teaching.", reference: "2 Timothy 3:16" }, highlights: ["Spiritual legacy", "Enduring hardship", "Scripture's authority", "Final charge", "Paul's farewell"] },
+            { name: "Titus", chapters: 3, abbrev: "Titus", overview: "Paul's instructions for establishing church order and sound doctrine in Crete.", memoryVerse: { text: "The grace of God has appeared, bringing salvation to all people.", reference: "Titus 2:11" }, highlights: ["Church leadership", "Sound doctrine", "Good works", "Christian behavior", "Salvation by grace"] },
+            { name: "Philemon", chapters: 1, abbrev: "Phlm", overview: "Paul's personal appeal for forgiveness and reconciliation with a runaway slave.", memoryVerse: { text: "Perhaps this is why he was separated from you for a while.", reference: "Philemon 1:15" }, highlights: ["Christian forgiveness", "Reconciliation", "Brotherhood in Christ", "Personal appeal", "Love in action"] },
+            { name: "Hebrews", chapters: 13, abbrev: "Heb", overview: "The superiority of Christ over the Old Testament system and call to perseverance.", memoryVerse: { text: "Jesus Christ is the same yesterday and today and forever.", reference: "Hebrews 13:8" }, highlights: ["Christ's superiority", "Better covenant", "Faith heroes", "Perseverance", "Christian community"] },
+            { name: "James", chapters: 5, abbrev: "Jas", overview: "Practical wisdom for Christian living with emphasis on faith and works.", memoryVerse: { text: "Faith without works is dead.", reference: "James 2:26" }, highlights: ["Trials and wisdom", "Faith and works", "Taming the tongue", "Worldliness warning", "Prayer and healing"] },
+            { name: "1 Peter", chapters: 5, abbrev: "1Pet", overview: "Encouragement for suffering Christians to live holy lives in hostile world.", memoryVerse: { text: "Cast all your anxiety on him because he cares for you.", reference: "1 Peter 5:7" }, highlights: ["Living hope", "Holy living", "Suffering for Christ", "Christian relationships", "Shepherding flock"] },
+            { name: "2 Peter", chapters: 3, abbrev: "2Pet", overview: "Warning against false teachers and reminder of Christ's promised return.", memoryVerse: { text: "The Lord is not slow in keeping his promise.", reference: "2 Peter 3:9" }, highlights: ["Spiritual growth", "False teachers", "Scripture's authority", "Day of the Lord", "New heavens and earth"] },
+            { name: "1 John", chapters: 5, abbrev: "1John", overview: "Tests of genuine faith: belief in Christ, love for others, and obedience to God.", memoryVerse: { text: "God is love.", reference: "1 John 4:8" }, highlights: ["Fellowship with God", "Walking in light", "Love one another", "Testing spirits", "Assurance of salvation"] },
+            { name: "2 John", chapters: 1, abbrev: "2John", overview: "Warning against false teachers who deny Christ's incarnation.", memoryVerse: { text: "Grace, mercy and peace will be with us from God the Father and Jesus Christ.", reference: "2 John 1:3" }, highlights: ["Truth and love", "Walking in truth", "False teachers", "Hospitality warning", "Joy in truth"] },
+            { name: "3 John", chapters: 1, abbrev: "3John", overview: "Commendation for hospitality and condemnation of church authoritarianism.", memoryVerse: { text: "Beloved, I pray that you may prosper in all things.", reference: "3 John 1:2" }, highlights: ["Gaius commended", "Hospitality praised", "Diotrephes condemned", "Demetrius recommended", "Truth and love"] },
+            { name: "Jude", chapters: 1, abbrev: "Jude", overview: "Urgent warning to contend for the faith against false teachers and apostates.", memoryVerse: { text: "Keep yourselves in God's love.", reference: "Jude 1:21" }, highlights: ["Contend for faith", "False teachers", "Historical examples", "Building up faith", "Doxology"] },
+            { name: "Revelation", chapters: 22, abbrev: "Rev", overview: "The apocalyptic vision of Christ's victory and the consummation of God's kingdom.", memoryVerse: { text: "Behold, I am coming soon.", reference: "Revelation 22:12" }, highlights: ["Seven churches", "Throne room vision", "Seven seals", "New Jerusalem", "Christ's return"] }
+        ];
+
+        function generateChapterSummaries(bookName, totalChapters) {
+            // Generate generic chapter summaries for all books
+            const summaries = [];
+            for (let i = 1; i <= totalChapters; i++) {
+                summaries.push(`Chapter ${i} - Key themes and events from ${bookName}`);
+            }
+            return summaries;
+        }
+
+        function createBookCard(book) {
+            const card = document.createElement('div');
+            card.className = 'book-card';
+            
+            // Generate chapter summaries for all chapters
+            const allChapterSummaries = generateChapterSummaries(book.name, book.chapters);
+            const chapterItems = allChapterSummaries.map((summary, index) => `
+                <div class="chapter-item">
+                    <div class="chapter-title">Chapter ${index + 1}</div>
+                    <div class="chapter-summary">
+                        <a href="https://www.biblegateway.com/passage/?search=${encodeURIComponent(book.abbrev)}%20${index + 1}&version=NIV" 
+                           target="_blank" 
+                           rel="noopener noreferrer" 
+                           style="color: #8d6e63; text-decoration: none;">
+                           Study Chapter ${index + 1} →
+                        </a>
+                    </div>
+                </div>
+            `).join('');
+            
+            // Create highlights list
+            const highlightsList = book.highlights ? book.highlights.map(highlight => `<li>${highlight}</li>`).join('') : '';
+            
+            card.innerHTML = `
+                <div class="book-header" onclick="toggleCard(this)">
+                    <div class="book-title">
+                        ${book.name}
+                        <span class="expand-icon">▼</span>
+                    </div>
+                    <div class="book-info">
+                        <span class="chapter-count">${book.chapters} ${book.chapters === 1 ? 'Chapter' : 'Chapters'}</span>
+                    </div>
+                </div>
+                
+                <div class="book-overview">
+                    ${book.memoryVerse ? `
+                        <div class="memory-verse">
+                            <div class="verse-text">"${book.memoryVerse.text}"</div>
+                            <div class="verse-reference">— ${book.memoryVerse.reference}</div>
+                        </div>
+                    ` : ''}
+                    
+                    <div class="overview-section">
+                        <div class="overview-title">Book Overview</div>
+                        <div class="overview-content">${book.overview || 'Overview coming soon...'}</div>
+                    </div>
+                    
+                    ${book.highlights ? `
+                        <div class="overview-section">
+                            <div class="overview-title">Key Highlights</div>
+                            <div class="highlights">
+                                <ul>${highlightsList}</ul>
+                            </div>
+                        </div>
+                    ` : ''}
+                    
+                    <div class="overview-section">
+                        <div class="overview-title">All ${book.chapters} Chapters</div>
+                        <div class="chapters-grid">
+                            ${chapterItems}
+                        </div>
+                    </div>
+                    
+                    <a href="https://www.biblegateway.com/passage/?search=${encodeURIComponent(book.abbrev)}&version=NIV" 
+                       target="_blank" 
+                       rel="noopener noreferrer" 
+                       class="study-link">
+                       Study Full Book on Bible Gateway →
+                    </a>
+                    
+                    <div class="download-section">
+                        <div class="overview-title">Study Resources</div>
+                        <div class="download-buttons">
+                            <button class="download-btn" onclick="downloadBookOverview('${book.name}', '${book.abbrev}')">
+                                <span class="download-icon">📄</span>
+                                Download Overview
+                            </button>
+                            <button class="download-btn" onclick="printBookOverview('${book.name}', '${book.abbrev}')">
+                                <span class="download-icon">🖨️</span>
+                                Print Overview
+                            </button>
+                            <button class="download-btn" onclick="openNoteTaker('${book.name}', '${book.abbrev}')">
+                                <span class="download-icon">📝</span>
+                                Take Notes
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            return card;
+        }
+
+        function toggleCard(header) {
+            const card = header.closest('.book-card');
+            card.classList.toggle('expanded');
+        }
+
+        function renderBooks() {
+            const oldTestamentGrid = document.getElementById('old-testament-grid');
+            const newTestamentGrid = document.getElementById('new-testament-grid');
+            
+            // Clear existing content
+            oldTestamentGrid.innerHTML = '';
+            newTestamentGrid.innerHTML = '';
+            
+            // Render Old Testament books
+            oldTestamentBooks.forEach(book => {
+                oldTestamentGrid.appendChild(createBookCard(book));
+            });
+            
+            // Render New Testament books
+            newTestamentBooks.forEach(book => {
+                newTestamentGrid.appendChild(createBookCard(book));
+            });
+        }
+
+        async function onConfigChange(config) {
+            document.getElementById('main-title').textContent = config.main_title || defaultConfig.main_title;
+            document.getElementById('subtitle').textContent = config.subtitle || defaultConfig.subtitle;
+            document.getElementById('old-testament-title').textContent = config.old_testament_title || defaultConfig.old_testament_title;
+            document.getElementById('new-testament-title').textContent = config.new_testament_title || defaultConfig.new_testament_title;
+        }
+
+        function mapToCapabilities(config) {
+            return {
+                recolorables: [],
+                borderables: [],
+                fontEditable: undefined,
+                fontSizeable: undefined
+            };
+        }
+
+        function mapToEditPanelValues(config) {
+            return new Map([
+                ["main_title", config.main_title || defaultConfig.main_title],
+                ["subtitle", config.subtitle || defaultConfig.subtitle],
+                ["old_testament_title", config.old_testament_title || defaultConfig.old_testament_title],
+                ["new_testament_title", config.new_testament_title || defaultConfig.new_testament_title]
+            ]);
+        }
+
+        function findBookData(bookName) {
+            return [...oldTestamentBooks, ...newTestamentBooks].find(book => book.name === bookName);
+        }
+
+        function generateBookOverviewText(bookData) {
+            const highlightsList = bookData.highlights ? bookData.highlights.map((highlight, i) => `${i + 1}. ${highlight}`).join('\n') : '';
+            
+            // Generate comprehensive chapter breakdown
+            const chapterBreakdown = Array.from({length: bookData.chapters}, (_, i) => {
+                const chapterNum = i + 1;
+                return `
+CHAPTER ${chapterNum}
+${'─'.repeat(20)}
+Focus: Key themes and events in ${bookData.name} ${chapterNum}
+
+Study Questions:
+• What is the main theme of this chapter?
+• How does this chapter connect to the overall message of ${bookData.name}?
+• What can I apply to my life from this passage?
+
+Notes:
+_________________________________________________
+_________________________________________________
+_________________________________________________
+
+`;
+            }).join('');
+
+            // Generate study schedule
+            const weeksToComplete = Math.ceil(bookData.chapters / 7);
+            const chaptersPerWeek = Math.ceil(bookData.chapters / weeksToComplete);
+            
+            let studySchedule = '';
+            for (let week = 1; week <= weeksToComplete; week++) {
+                const startChapter = (week - 1) * chaptersPerWeek + 1;
+                const endChapter = Math.min(week * chaptersPerWeek, bookData.chapters);
+                studySchedule += `Week ${week}: Chapters ${startChapter}${endChapter > startChapter ? `-${endChapter}` : ''}\n`;
+                studySchedule += `Focus: Understanding the progression of themes and key events\n\n`;
+            }
+            
+            return `${bookData.name.toUpperCase()} - COMPREHENSIVE BIBLE STUDY GUIDE
+${'═'.repeat(60)}
+
+📖 BOOK INFORMATION
+${bookData.chapters} ${bookData.chapters === 1 ? 'Chapter' : 'Chapters'} • ${weeksToComplete} Week Study Plan
+
+${bookData.memoryVerse ? `
+🎯 MEMORY VERSE
+"${bookData.memoryVerse.text}"
+— ${bookData.memoryVerse.reference}
+
+` : ''}📚 BOOK OVERVIEW
+${bookData.overview}
+
+🎯 STUDY APPROACH
+• Historical Context: Research the time period and cultural background of ${bookData.name}
+• Literary Style: Notice the writing style, themes, and structure  
+• Personal Application: Look for timeless principles that apply to your life today
+• Cross-References: Compare with other Bible passages for deeper understanding
+
+${bookData.highlights ? `
+⭐ KEY HIGHLIGHTS
+${highlightsList}
+
+` : ''}📅 ${weeksToComplete}-WEEK STUDY SCHEDULE
+Recommended Pace: ${chaptersPerWeek} chapters per week for ${weeksToComplete} weeks
+
+${studySchedule}
+
+📚 CHAPTER-BY-CHAPTER STUDY GUIDE
+Use this section to guide your daily study. Take notes, answer questions, and reflect on each chapter.
+
+${chapterBreakdown}
+
+📝 PERSONAL STUDY NOTES
+
+💡 KEY INSIGHTS & REFLECTIONS
+_________________________________________________
+_________________________________________________
+_________________________________________________
+_________________________________________________
+_________________________________________________
+
+🎯 LIFE APPLICATIONS  
+How will you apply what you've learned from ${bookData.name} to your daily life?
+_________________________________________________
+_________________________________________________
+_________________________________________________
+_________________________________________________
+_________________________________________________
+
+🙏 PRAYER POINTS
+What specific prayers has your study of ${bookData.name} inspired?
+_________________________________________________
+_________________________________________________
+_________________________________________________
+_________________________________________________
+_________________________________________________
+
+${'═'.repeat(60)}
+${bookData.name} - Comprehensive Study Guide
+Generated from Bible Study Navigator • For personal study and group discussion
+
+"All Scripture is God-breathed and is useful for teaching, rebuking, 
+correcting and training in righteousness" - 2 Timothy 3:16
+${'═'.repeat(60)}`;
+        }
+
+        function generateBookOverviewHTML(bookData) {
+            const highlightsList = bookData.highlights ? bookData.highlights.map(highlight => `<li>${highlight}</li>`).join('') : '';
+            
+            // Generate comprehensive chapter breakdown
+            const chapterBreakdown = Array.from({length: bookData.chapters}, (_, i) => {
+                const chapterNum = i + 1;
+                return `
+                    <div class="chapter-item">
+                        <h4>Chapter ${chapterNum}</h4>
+                        <p class="chapter-focus">Focus: Key themes and events in ${bookData.name} ${chapterNum}</p>
+                        <div class="study-questions">
+                            <strong>Study Questions:</strong>
+                            <ul>
+                                <li>What is the main theme of this chapter?</li>
+                                <li>How does this chapter connect to the overall message of ${bookData.name}?</li>
+                                <li>What can I apply to my life from this passage?</li>
+                            </ul>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            // Generate study schedule
+            const weeksToComplete = Math.ceil(bookData.chapters / 7);
+            const chaptersPerWeek = Math.ceil(bookData.chapters / weeksToComplete);
+            
+            let studySchedule = '';
+            for (let week = 1; week <= weeksToComplete; week++) {
+                const startChapter = (week - 1) * chaptersPerWeek + 1;
+                const endChapter = Math.min(week * chaptersPerWeek, bookData.chapters);
+                studySchedule += `
+                    <div class="week-item">
+                        <strong>Week ${week}:</strong> Chapters ${startChapter}${endChapter > startChapter ? `-${endChapter}` : ''}
+                        <div class="week-focus">Focus on understanding the progression of themes and key events.</div>
+                    </div>
+                `;
+            }
+            
+            return `
+                <!DOCTYPE html>
+                <html>
+                <head>
+                    <meta charset="UTF-8">
+                    <title>${bookData.name} - Comprehensive Study Guide</title>
+                    <style>
+                        body { 
+                            font-family: Georgia, serif; 
+                            max-width: 900px; 
+                            margin: 0 auto; 
+                            padding: 40px 20px; 
+                            line-height: 1.6; 
+                            color: #3d2914;
+                            background: #faf8f3;
+                        }
+                        .header { 
+                            text-align: center; 
+                            margin-bottom: 40px; 
+                            border-bottom: 3px solid #8d6e63; 
+                            padding-bottom: 20px; 
+                        }
+                        .book-title { 
+                            font-size: 2.8rem; 
+                            color: #3d2914; 
+                            margin-bottom: 10px; 
+                            font-weight: bold;
+                        }
+                        .subtitle {
+                            font-size: 1.3rem;
+                            color: #8d6e63;
+                            font-style: italic;
+                            margin-bottom: 15px;
+                        }
+                        .chapter-info { 
+                            font-size: 1.1rem; 
+                            color: #8d6e63; 
+                            margin-bottom: 20px; 
+                        }
+                        .section { 
+                            margin-bottom: 35px; 
+                            page-break-inside: avoid;
+                        }
+                        .section-title { 
+                            font-size: 1.5rem; 
+                            color: #3d2914; 
+                            border-bottom: 2px solid #d7cc9f; 
+                            padding-bottom: 8px; 
+                            margin-bottom: 20px; 
+                            font-weight: bold;
+                        }
+                        .memory-verse { 
+                            background: #f5f1e8; 
+                            padding: 25px; 
+                            border-left: 5px solid #8d6e63; 
+                            font-style: italic; 
+                            margin: 25px 0; 
+                            border-radius: 0 8px 8px 0;
+                        }
+                        .verse-text { 
+                            font-size: 1.2rem; 
+                            margin-bottom: 12px; 
+                            font-weight: 500;
+                        }
+                        .verse-reference { 
+                            font-weight: bold; 
+                            color: #8d6e63; 
+                            font-size: 1rem;
+                        }
+                        .highlights { 
+                            background: #f9f5f0; 
+                            padding: 20px; 
+                            border-radius: 8px; 
+                            border-left: 4px solid #d7cc9f;
+                        }
+                        .chapter-item {
+                            background: #f5f1e8;
+                            padding: 20px;
+                            margin-bottom: 15px;
+                            border-radius: 8px;
+                            border-left: 4px solid #8d6e63;
+                        }
+                        .chapter-item h4 {
+                            color: #3d2914;
+                            margin-top: 0;
+                            margin-bottom: 10px;
+                            font-size: 1.1rem;
+                        }
+                        .chapter-focus {
+                            color: #5d4037;
+                            margin-bottom: 15px;
+                            font-style: italic;
+                        }
+                        .study-questions {
+                            font-size: 0.95rem;
+                        }
+                        .study-questions ul {
+                            margin-top: 8px;
+                        }
+                        .study-questions li {
+                            margin-bottom: 6px;
+                            color: #5d4037;
+                        }
+                        .week-item {
+                            background: #f0ebe1;
+                            padding: 15px;
+                            margin-bottom: 12px;
+                            border-radius: 6px;
+                            border-left: 3px solid #8d6e63;
+                        }
+                        .week-focus {
+                            font-size: 0.9rem;
+                            color: #5d4037;
+                            margin-top: 5px;
+                            font-style: italic;
+                        }
+                        .study-tips {
+                            background: #e8dcc6;
+                            padding: 20px;
+                            border-radius: 8px;
+                            margin: 20px 0;
+                        }
+                        .study-tips h4 {
+                            color: #3d2914;
+                            margin-top: 0;
+                            margin-bottom: 15px;
+                        }
+                        ul { 
+                            padding-left: 25px; 
+                        }
+                        li { 
+                            margin-bottom: 8px; 
+                        }
+                        .footer { 
+                            margin-top: 50px; 
+                            text-align: center; 
+                            color: #8d6e63; 
+                            font-size: 0.9rem; 
+                            border-top: 2px solid #e8dcc6; 
+                            padding-top: 25px; 
+                        }
+                        .notes-section {
+                            background: #faf8f3;
+                            border: 2px dashed #d7cc9f;
+                            padding: 20px;
+                            margin: 20px 0;
+                            min-height: 150px;
+                        }
+                        .notes-title {
+                            color: #8d6e63;
+                            font-weight: bold;
+                            margin-bottom: 10px;
+                        }
+                        @media print {
+                            body { background: white; }
+                            .header { page-break-after: avoid; }
+                            .section { page-break-inside: avoid; }
+                            .chapter-item { page-break-inside: avoid; }
+                        }
+                    </style>
+                </head>
+                <body>
+                    <div class="header">
+                        <h1 class="book-title">${bookData.name}</h1>
+                        <div class="subtitle">Comprehensive Bible Study Guide</div>
+                        <div class="chapter-info">${bookData.chapters} ${bookData.chapters === 1 ? 'Chapter' : 'Chapters'} • ${weeksToComplete} Week Study Plan</div>
+                    </div>
+
+                    ${bookData.memoryVerse ? `
+                        <div class="memory-verse">
+                            <div class="verse-text">"${bookData.memoryVerse.text}"</div>
+                            <div class="verse-reference">— ${bookData.memoryVerse.reference}</div>
+                        </div>
+                    ` : ''}
+
+                    <div class="section">
+                        <h2 class="section-title">📖 Book Overview</h2>
+                        <p style="font-size: 1.1rem; line-height: 1.7;">${bookData.overview}</p>
+                        
+                        <div class="study-tips">
+                            <h4>🎯 Study Approach</h4>
+                            <ul>
+                                <li><strong>Historical Context:</strong> Research the time period and cultural background of ${bookData.name}</li>
+                                <li><strong>Literary Style:</strong> Notice the writing style, themes, and structure</li>
+                                <li><strong>Personal Application:</strong> Look for timeless principles that apply to your life today</li>
+                                <li><strong>Cross-References:</strong> Compare with other Bible passages for deeper understanding</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    ${bookData.highlights ? `
+                        <div class="section">
+                            <h2 class="section-title">⭐ Key Highlights</h2>
+                            <div class="highlights">
+                                <ul style="font-size: 1.05rem;">${highlightsList}</ul>
+                            </div>
+                        </div>
+                    ` : ''}
+
+                    <div class="section">
+                        <h2 class="section-title">📅 ${weeksToComplete}-Week Study Schedule</h2>
+                        <p style="margin-bottom: 20px;"><strong>Recommended Pace:</strong> ${chaptersPerWeek} chapters per week for ${weeksToComplete} weeks</p>
+                        ${studySchedule}
+                    </div>
+
+                    <div class="section">
+                        <h2 class="section-title">📚 Chapter-by-Chapter Study Guide</h2>
+                        <p style="margin-bottom: 25px;">Use this section to guide your daily study. Take notes, answer questions, and reflect on each chapter.</p>
+                        ${chapterBreakdown}
+                    </div>
+
+                    <div class="section">
+                        <h2 class="section-title">📝 Personal Study Notes</h2>
+                        <div class="notes-section">
+                            <div class="notes-title">Key Insights & Reflections:</div>
+                            <p style="color: #8d6e63; font-style: italic;">Use this space to write down your thoughts, questions, and insights as you study ${bookData.name}.</p>
+                        </div>
+                        
+                        <div class="notes-section">
+                            <div class="notes-title">Life Applications:</div>
+                            <p style="color: #8d6e63; font-style: italic;">How will you apply what you've learned from ${bookData.name} to your daily life?</p>
+                        </div>
+                        
+                        <div class="notes-section">
+                            <div class="notes-title">Prayer Points:</div>
+                            <p style="color: #8d6e63; font-style: italic;">What specific prayers has your study of ${bookData.name} inspired?</p>
+                        </div>
+                    </div>
+
+                    <div class="footer">
+                        <p><strong>${bookData.name} - Comprehensive Study Guide</strong></p>
+                        <p>Generated from Bible Study Navigator • For personal study and group discussion</p>
+                        <p style="margin-top: 15px; font-style: italic;">"All Scripture is God-breathed and is useful for teaching, rebuking, correcting and training in righteousness" - 2 Timothy 3:16</p>
+                    </div>
+                </body>
+                </html>
+            `;
+        }
+
+        function downloadBookOverview(bookName, abbrev) {
+            const bookData = findBookData(bookName);
+            if (!bookData) {
+                showNotification('Book data not found! ❌');
+                return;
+            }
+
+            try {
+                // Generate the study guide content
+                const textContent = generateBookOverviewText(bookData);
+                
+                // Try multiple download methods for maximum compatibility
+                if (navigator.msSaveBlob) {
+                    // Internet Explorer
+                    const blob = new Blob([textContent], { type: 'text/plain;charset=utf-8' });
+                    navigator.msSaveBlob(blob, `${bookName.replace(/\s+/g, '_')}_Study_Guide.txt`);
+                    showNotification('Study guide downloaded! 📄');
+                } else {
+                    // Modern browsers
+                    const blob = new Blob([textContent], { type: 'text/plain;charset=utf-8' });
+                    
+                    // Create download link
+                    const link = document.createElement('a');
+                    const url = URL.createObjectURL(blob);
+                    
+                    link.href = url;
+                    link.download = `${bookName.replace(/\s+/g, '_')}_Study_Guide.txt`;
+                    
+                    // Ensure the link is added to DOM for Firefox compatibility
+                    document.body.appendChild(link);
+                    
+                    // Trigger download
+                    link.click();
+                    
+                    // Clean up immediately
+                    document.body.removeChild(link);
+                    URL.revokeObjectURL(url);
+                    
+                    showNotification('Study guide downloaded! 📄');
+                }
+            } catch (error) {
+                console.error('Download error:', error);
+                
+                // Fallback: Copy to clipboard and show instructions
+                try {
+                    const textContent = generateBookOverviewText(bookData);
+                    navigator.clipboard.writeText(textContent).then(() => {
+                        showNotification('Download failed, but content copied to clipboard! You can paste it into a text editor and save. 📋');
+                    }).catch(() => {
+                        // Final fallback: show content in new window
+                        const newWindow = window.open('', '_blank');
+                        if (newWindow) {
+                            newWindow.document.write(`<pre style="font-family: monospace; white-space: pre-wrap; padding: 20px;">${textContent.replace(/</g, '&lt;').replace(/>/g, '&gt;')}</pre>`);
+                            newWindow.document.title = `${bookName} Study Guide`;
+                            showNotification('Content opened in new window - you can copy and save it manually! 📄');
+                        } else {
+                            showNotification('Download failed. Please allow popups and try again! ❌');
+                        }
+                    });
+                } catch (fallbackError) {
+                    showNotification('Download not supported in this browser. Try a different browser! ❌');
+                }
+            }
+        }
+
+        function printBookOverview(bookName, abbrev) {
+            const bookData = findBookData(bookName);
+            if (!bookData) return;
+
+            const htmlContent = generateBookOverviewHTML(bookData);
+            const printWindow = window.open('', '_blank', 'width=800,height=600');
+            
+            if (printWindow) {
+                printWindow.document.open();
+                printWindow.document.write(htmlContent);
+                printWindow.document.close();
+                
+                // Wait for content to load, then focus and print
+                printWindow.addEventListener('load', function() {
+                    setTimeout(() => {
+                        printWindow.focus();
+                        printWindow.print();
+                    }, 500);
+                });
+            }
+        }
+
+        let currentBookName = '';
+
+        function openNoteTaker(bookName, abbrev) {
+            currentBookName = bookName;
+            document.getElementById('noteBookTitle').textContent = `${bookName} - Study Notes`;
+            document.getElementById('noteModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+            
+            // Load any existing notes from localStorage
+            loadSavedNotes(bookName);
+        }
+
+        function closeNoteTaker() {
+            document.getElementById('noteModal').classList.remove('active');
+            document.body.style.overflow = 'auto';
+            
+            // Auto-save notes when closing
+            if (currentBookName) {
+                saveNotesToLocalStorage(currentBookName);
+            }
+        }
+
+        function updateCharacterCount(section) {
+            const textarea = document.getElementById(`${section}Notes`);
+            const counter = document.getElementById(`${section}Count`);
+            const count = textarea.value.length;
+            counter.textContent = `${count} characters`;
+        }
+
+        function loadSavedNotes(bookName) {
+            const savedNotes = localStorage.getItem(`bible_notes_${bookName}`);
+            if (savedNotes) {
+                const notes = JSON.parse(savedNotes);
+                document.getElementById('insightsNotes').value = notes.insights || '';
+                document.getElementById('applicationsNotes').value = notes.applications || '';
+                document.getElementById('prayerNotes').value = notes.prayer || '';
+                document.getElementById('questionsNotes').value = notes.questions || '';
+                
+                // Update character counts
+                updateCharacterCount('insights');
+                updateCharacterCount('applications');
+                updateCharacterCount('prayer');
+                updateCharacterCount('questions');
+            }
+        }
+
+        function saveNotesToLocalStorage(bookName) {
+            const notes = {
+                insights: document.getElementById('insightsNotes').value,
+                applications: document.getElementById('applicationsNotes').value,
+                prayer: document.getElementById('prayerNotes').value,
+                questions: document.getElementById('questionsNotes').value,
+                lastUpdated: new Date().toISOString()
+            };
+            
+            localStorage.setItem(`bible_notes_${bookName}`, JSON.stringify(notes));
+        }
+
+        function getAllNotesText() {
+            const insights = document.getElementById('insightsNotes').value;
+            const applications = document.getElementById('applicationsNotes').value;
+            const prayer = document.getElementById('prayerNotes').value;
+            const questions = document.getElementById('questionsNotes').value;
+            
+            const date = new Date().toLocaleDateString();
+            
+            let notesText = `${currentBookName} - Bible Study Notes\n`;
+            notesText += `Date: ${date}\n`;
+            notesText += `${'='.repeat(50)}\n\n`;
+            
+            if (insights.trim()) {
+                notesText += `💡 KEY INSIGHTS & OBSERVATIONS\n`;
+                notesText += `${'-'.repeat(30)}\n`;
+                notesText += `${insights.trim()}\n\n`;
+            }
+            
+            if (applications.trim()) {
+                notesText += `🎯 PERSONAL APPLICATIONS\n`;
+                notesText += `${'-'.repeat(30)}\n`;
+                notesText += `${applications.trim()}\n\n`;
+            }
+            
+            if (prayer.trim()) {
+                notesText += `🙏 PRAYER POINTS & REFLECTIONS\n`;
+                notesText += `${'-'.repeat(30)}\n`;
+                notesText += `${prayer.trim()}\n\n`;
+            }
+            
+            if (questions.trim()) {
+                notesText += `❓ QUESTIONS & FURTHER STUDY\n`;
+                notesText += `${'-'.repeat(30)}\n`;
+                notesText += `${questions.trim()}\n\n`;
+            }
+            
+            notesText += `\nGenerated by Bible Study Navigator`;
+            
+            return notesText;
+        }
+
+        function saveNotesToFile() {
+            const notesText = getAllNotesText();
+            const blob = new Blob([notesText], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = `${currentBookName.replace(/\s+/g, '_')}_Study_Notes_${new Date().toISOString().split('T')[0]}.txt`;
+            link.style.display = 'none';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            
+            setTimeout(() => {
+                URL.revokeObjectURL(url);
+            }, 100);
+            
+            // Also save to localStorage
+            saveNotesToLocalStorage(currentBookName);
+            
+            // Show success message
+            showNotification('Notes saved successfully! 📝');
+        }
+
+        async function copyNotesToClipboard() {
+            const notesText = getAllNotesText();
+            
+            try {
+                await navigator.clipboard.writeText(notesText);
+                showNotification('Notes copied to clipboard! 📋');
+            } catch (err) {
+                // Fallback for older browsers
+                const textArea = document.createElement('textarea');
+                textArea.value = notesText;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+                showNotification('Notes copied to clipboard! 📋');
+            }
+            
+            // Save to localStorage
+            saveNotesToLocalStorage(currentBookName);
+        }
+
+        function shareNotes() {
+            const notesText = getAllNotesText();
+            
+            if (navigator.share) {
+                // Use native sharing if available (mobile devices)
+                navigator.share({
+                    title: `${currentBookName} - Bible Study Notes`,
+                    text: notesText
+                }).then(() => {
+                    showNotification('Notes shared successfully! 📤');
+                }).catch(() => {
+                    // Fallback to copying
+                    copyNotesToClipboard();
+                });
+            } else {
+                // Fallback: copy to clipboard and show instructions
+                copyNotesToClipboard();
+                showNotification('Notes copied! You can now paste them into any app 📤');
+            }
+            
+            // Save to localStorage
+            saveNotesToLocalStorage(currentBookName);
+        }
+
+        function clearAllNotes() {
+            // Create inline confirmation
+            const clearBtn = event.target.closest('.note-btn');
+            const originalText = clearBtn.innerHTML;
+            
+            clearBtn.innerHTML = '<span>⚠️</span> Click again to confirm';
+            clearBtn.style.background = '#d32f2f';
+            
+            setTimeout(() => {
+                clearBtn.innerHTML = originalText;
+                clearBtn.style.background = '';
+            }, 3000);
+            
+            clearBtn.onclick = function() {
+                document.getElementById('insightsNotes').value = '';
+                document.getElementById('applicationsNotes').value = '';
+                document.getElementById('prayerNotes').value = '';
+                document.getElementById('questionsNotes').value = '';
+                
+                updateCharacterCount('insights');
+                updateCharacterCount('applications');
+                updateCharacterCount('prayer');
+                updateCharacterCount('questions');
+                
+                // Remove from localStorage
+                localStorage.removeItem(`bible_notes_${currentBookName}`);
+                
+                showNotification('All notes cleared! 🗑️');
+                
+                // Reset the button
+                clearBtn.innerHTML = originalText;
+                clearBtn.style.background = '';
+                clearBtn.onclick = clearAllNotes;
+            };
+        }
+
+        function showNotification(message) {
+            // Create a temporary notification
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: #8d6e63;
+                color: white;
+                padding: 15px 20px;
+                border-radius: 8px;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+                z-index: 10000;
+                font-family: Georgia, serif;
+                font-size: 0.9rem;
+                max-width: 300px;
+                animation: slideIn 0.3s ease;
+            `;
+            
+            notification.textContent = message;
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.style.animation = 'slideOut 0.3s ease';
+                setTimeout(() => {
+                    if (notification.parentNode) {
+                        notification.parentNode.removeChild(notification);
+                    }
+                }, 300);
+            }, 3000);
+        }
+
+        // Add CSS animations for notifications
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes slideIn {
+                from { transform: translateX(100%); opacity: 0; }
+                to { transform: translateX(0); opacity: 1; }
+            }
+            @keyframes slideOut {
+                from { transform: translateX(0); opacity: 1; }
+                to { transform: translateX(100%); opacity: 0; }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Close modal when clicking outside
+        document.getElementById('noteModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeNoteTaker();
+            }
+        });
+
+        // Auto-save notes every 30 seconds
+        setInterval(() => {
+            if (currentBookName && document.getElementById('noteModal').classList.contains('active')) {
+                saveNotesToLocalStorage(currentBookName);
+            }
+        }, 30000);
+
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', function() {
+            renderBooks();
+            
+            if (window.elementSdk) {
+                window.elementSdk.init({
+                    defaultConfig,
+                    onConfigChange,
+                    mapToCapabilities,
+                    mapToEditPanelValues
+                });
+            }
+        });
+    </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'99f2c198d79dcfb0',t:'MTc2MzI1MTczMS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
