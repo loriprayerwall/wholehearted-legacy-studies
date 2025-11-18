@@ -1,0 +1,457 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>A Savior's Call</title>
+  <style>
+    body {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Georgia', serif;
+      background: linear-gradient(135deg, #f5e6d3 0%, #d4b896 100%);
+      color: #4a3f35;
+      line-height: 1.8;
+      min-height: 100%;
+    }
+
+    html {
+      height: 100%;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 60px 30px;
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 60px;
+      padding: 40px 20px;
+      background: rgba(255, 255, 255, 0.3);
+      border-radius: 20px;
+      backdrop-filter: blur(10px);
+    }
+
+    .main-title {
+      font-size: 56px;
+      font-weight: bold;
+      margin: 0 0 20px 0;
+      color: #6b4423;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.15);
+      letter-spacing: 2px;
+    }
+
+    .subtitle {
+      font-size: 28px;
+      color: #5a4a3a;
+      margin: 0;
+      font-style: italic;
+    }
+
+    .cross-section {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      margin: 50px 0;
+      padding: 40px;
+      background: rgba(255, 255, 255, 0.4);
+      border-radius: 20px;
+    }
+
+    .cross-container {
+      position: relative;
+      width: 200px;
+      height: 280px;
+      margin-bottom: 20px;
+    }
+
+    .cross {
+      position: absolute;
+      background: #8b6f47;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    }
+
+    .cross-vertical {
+      width: 40px;
+      height: 280px;
+      left: 80px;
+      top: 0;
+      border-radius: 4px;
+    }
+
+    .cross-horizontal {
+      width: 200px;
+      height: 40px;
+      left: 0;
+      top: 60px;
+      border-radius: 4px;
+    }
+
+    .figure {
+      position: absolute;
+      top: 80px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .head {
+      width: 30px;
+      height: 30px;
+      background: #c9a87c;
+      border-radius: 50%;
+      margin: 0 auto;
+    }
+
+    .body-figure {
+      width: 8px;
+      height: 60px;
+      background: #c9a87c;
+      margin: 0 auto;
+    }
+
+    .arms {
+      width: 100px;
+      height: 8px;
+      background: #c9a87c;
+      position: absolute;
+      top: 40px;
+      left: -36px;
+    }
+
+    .sacrifice-text {
+      text-align: center;
+      font-style: italic;
+      color: #6b4423;
+      font-size: 18px;
+      max-width: 600px;
+    }
+
+    .urgency-box {
+      background: linear-gradient(135deg, rgba(166, 124, 82, 0.25) 0%, rgba(139, 111, 71, 0.15) 100%);
+      padding: 35px;
+      margin: 40px 0;
+      border-radius: 15px;
+      border: 3px solid #a67c52;
+      text-align: center;
+    }
+
+    .urgency-title {
+      font-size: 32px;
+      font-weight: bold;
+      color: #6b4423;
+      margin: 0 0 20px 0;
+    }
+
+    .urgency-text {
+      font-size: 22px;
+      line-height: 1.9;
+      color: #4a3f35;
+      font-weight: 500;
+    }
+
+    .testimony-box {
+      background: rgba(255, 255, 255, 0.5);
+      padding: 35px;
+      margin: 40px 0;
+      border-radius: 15px;
+      border-left: 5px solid #a67c52;
+      font-size: 21px;
+      line-height: 1.9;
+      color: #4a3f35;
+    }
+
+    .section {
+      background: rgba(255, 255, 255, 0.5);
+      padding: 40px;
+      margin-bottom: 40px;
+      border-radius: 15px;
+      border-left: 6px solid #a67c52;
+    }
+
+    .section-title {
+      font-size: 36px;
+      color: #6b4423;
+      margin: 0 0 25px 0;
+      font-weight: bold;
+    }
+
+    .section-content {
+      font-size: 20px;
+      margin-bottom: 20px;
+      color: #4a3f35;
+    }
+
+    .scripture {
+      background: rgba(166, 124, 82, 0.15);
+      padding: 25px;
+      margin: 25px 0;
+      border-left: 4px solid #a67c52;
+      font-style: italic;
+      font-size: 19px;
+      color: #3a2f25;
+      border-radius: 8px;
+      font-weight: 500;
+    }
+
+    .list-item {
+      margin: 20px 0;
+      padding-left: 30px;
+      position: relative;
+      font-size: 20px;
+    }
+
+    .list-item:before {
+      content: "✦";
+      position: absolute;
+      left: 0;
+      color: #a67c52;
+      font-size: 24px;
+    }
+
+    .highlight {
+      color: #8b6f47;
+      font-weight: bold;
+    }
+
+    .call-to-action {
+      background: linear-gradient(135deg, #a67c52 0%, #8b6f47 100%);
+      color: #fff;
+      padding: 50px;
+      text-align: center;
+      border-radius: 20px;
+      margin-top: 60px;
+      box-shadow: 0 10px 30px rgba(139, 111, 71, 0.4);
+    }
+
+    .cta-title {
+      font-size: 42px;
+      margin: 0 0 25px 0;
+      font-weight: bold;
+    }
+
+    .cta-text {
+      font-size: 22px;
+      line-height: 1.8;
+      margin-bottom: 20px;
+    }
+
+    .truth-section {
+      background: rgba(255, 255, 255, 0.4);
+      padding: 35px;
+      margin: 30px 0;
+      border-radius: 12px;
+      border: 2px solid #a67c52;
+    }
+
+    .truth-title {
+      font-size: 28px;
+      color: #6b4423;
+      margin: 0 0 20px 0;
+      font-weight: bold;
+    }
+
+    .truth-content {
+      font-size: 19px;
+      line-height: 1.8;
+      color: #4a3f35;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        padding: 40px 20px;
+      }
+
+      .main-title {
+        font-size: 40px;
+      }
+
+      .subtitle {
+        font-size: 22px;
+      }
+
+      .section-title {
+        font-size: 28px;
+      }
+
+      .section-content {
+        font-size: 18px;
+      }
+
+      .cta-title {
+        font-size: 32px;
+      }
+
+      .cross-container {
+        transform: scale(0.8);
+      }
+    }
+  </style>
+  <style>@view-transition { navigation: auto; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+  <script src="/_sdk/element_sdk.js" type="text/javascript"></script>
+  <script src="https://cdn.tailwindcss.com" type="text/javascript"></script>
+ </head>
+ <body>
+  <div class="container">
+   <div class="header">
+    <h1 class="main-title" id="mainTitle">A Savior's Call</h1>
+    <p class="subtitle" id="subtitle">An Invitation to Meet Jesus, Our Lord and Savior</p>
+   </div>
+   <div class="urgency-box">
+    <h2 class="urgency-title">Tomorrow Is Not Promised</h2>
+    <p class="urgency-text" id="urgencyMessage">Get to know Jesus TODAY. Stop letting the things of this world prevent you from living with purpose. Your eternal destiny hangs in the balance—choose life, choose hope, choose Christ.</p>
+   </div>
+   <div class="cross-section">
+    <div class="cross-container">
+     <div class="cross cross-vertical"></div>
+     <div class="cross cross-horizontal"></div>
+     <div class="figure">
+      <div class="head"></div>
+      <div class="body-figure"></div>
+      <div class="arms"></div>
+     </div>
+    </div>
+    <p class="sacrifice-text">"Greater love hath no man than this, that a man lay down his life for his friends." - John 15:13</p>
+   </div>
+   <div class="testimony-box">
+    <h3 style="font-size: 28px; color: #6b4423; margin: 0 0 20px 0; text-align: center;">A Testimony of Faith Through the Fire</h3>
+    <p id="personalTestimony" style="margin-bottom: 20px;">This world is not our eternal home. While I have endured the most unimaginable loss any parent can face, I still love God—for His thoughts are higher than mine. I still trust God and His perfect timing. I still believe there is good in people, and I want to invite you to know a God whose love transcends all understanding.</p>
+    <p style="font-size: 20px; line-height: 1.9;">When everything you love is stripped away, when your heart is shattered beyond recognition, when the weight of grief threatens to crush your very soul—it is in that darkest valley that you discover whether your faith is real. My faith was tested in the furnace of unthinkable pain, and by God's grace alone, it emerged refined, not destroyed.</p>
+    <p style="font-size: 20px; line-height: 1.9; margin-top: 20px;">I could have chosen bitterness. I could have turned away from God in anger. Many would have understood. But instead, I fell deeper into His arms, because I know this truth: <strong>God is still good, even when life is not.</strong> His purposes are higher than my understanding. His timing is perfect, even when it feels unbearable. And His love—oh, His love—remains constant through every storm.</p>
+    <p style="font-size: 20px; line-height: 1.9; margin-top: 20px;">If God can sustain me through my darkest hour, He can sustain you through yours. If He can give me hope when all seemed lost, He can give you hope too. This is why I share my story—not to glorify my pain, but to glorify the God who carried me through it and continues to carry me still.</p>
+    <div class="scripture" style="margin-top: 25px;">
+     "The LORD is nigh unto them that are of a broken heart; and saveth such as be of a contrite spirit." - Psalm 34:18 (KJV)
+    </div>
+   </div>
+   <div class="truth-section">
+    <h3 class="truth-title">📖 The Bible: Historically Accurate and Absolute Truth</h3>
+    <p class="truth-content">The Bible stands as the most historically verified ancient text in existence. Archaeological discoveries continually confirm its accounts—from the Dead Sea Scrolls validating Old Testament accuracy, to historical records confirming New Testament events and figures. The Bible's prophecies, fulfilled with precision, demonstrate divine inspiration. Its 66 books, written by 40 authors over 1,500 years, maintain perfect harmony and consistency. This isn't just an ancient book—it's God's living Word, historically proven, eternally relevant, and personally transformative. Every word is truth, every promise is sure, and every prophecy will be fulfilled.</p>
+   </div>
+   <div class="section">
+    <h2 class="section-title">Jesus: The Way, The Truth, The Life</h2>
+    <div class="scripture">
+     "Jesus saith unto him, I am the way, the truth, and the life: no man cometh unto the Father, but by me." - John 14:6 (KJV)
+    </div>
+    <p class="section-content">Jesus didn't just show us the way—He IS the way. He didn't just teach truth—He IS the truth. He didn't just offer life—He IS life itself. There is no other path to salvation, no other name by which we can be saved. This is the exclusive, powerful, life-changing reality of the Gospel.</p>
+   </div>
+   <div class="section">
+    <h2 class="section-title">Heaven is Real</h2>
+    <div class="scripture">
+     "In my Father's house are many mansions: if it were not so, I would have told you. I go to prepare a place for you." - John 14:2 (KJV)
+    </div>
+    <p class="section-content">Heaven is real—a place of unimaginable joy and eternal communion with God. This is the destiny offered to those who accept Jesus Christ as their Savior. It's a promise of hope, a home prepared with love, waiting for all who choose to follow Him.</p>
+   </div>
+   <div class="section">
+    <h2 class="section-title">Hell is Real</h2>
+    <div class="scripture">
+     "And these shall go away into everlasting punishment: but the righteous into life eternal." - Matthew 25:46 (KJV)
+    </div>
+    <p class="section-content">The Bible speaks plainly about the reality of hell—a place of eternal separation from God. This isn't meant to frighten, but to awaken us to the urgency of our choice. God, in His love, has provided a way of escape through Jesus Christ. But we must choose Him while we still have time.</p>
+   </div>
+   <div class="section">
+    <h2 class="section-title">The Chains of Sin That Bind Us to This World</h2>
+    <p class="section-content">Sin is not just an action—it's a condition. It's a force that binds us, distorts our perception, and destroys everything it touches. Without Jesus, we are enslaved to a world system designed to keep us from God. These chains are real, and they are deadly:</p>
+    <div style="margin: 30px 0;">
+     <div class="list-item">
+      <span class="highlight">The Chain of Pride:</span> Pride tells us we don't need God, that we are self-sufficient. It whispers, "You are enough." But pride leads to destruction, cutting us off from the very Source of life. Pride keeps us from admitting our need for a Savior.
+     </div>
+     <div class="list-item">
+      <span class="highlight">The Chain of Materialism:</span> The world screams that happiness is found in possessions, wealth, and status. We chase after things that rust and decay, neglecting the eternal treasures of heaven. Jesus warned us: "For what shall it profit a man, if he shall gain the whole world, and lose his own soul?" (Mark 8:36)
+     </div>
+     <div class="list-item">
+      <span class="highlight">The Chain of Sexual Immorality:</span> Our culture has distorted God's beautiful design for intimacy. Pornography enslaves millions. Fornication and adultery destroy families. God's standard hasn't changed—He calls us to purity because He knows that sin in this area devastates our souls and relationships.
+     </div>
+     <div class="list-item">
+      <span class="highlight">The Chain of Addiction:</span> Whether it's substances, alcohol, gambling, or any compulsive behavior—addiction is slavery. It promises relief but delivers bondage. Only Christ can break the power of addiction and set the captive free.
+     </div>
+     <div class="list-item">
+      <span class="highlight">The Chain of Bitterness and Unforgiveness:</span> Holding onto grudges, nursing wounds, refusing to forgive—these chains poison our hearts from within. Bitterness separates us from God's peace and from meaningful relationships. Jesus commands us to forgive as we have been forgiven.
+     </div>
+     <div class="list-item">
+      <span class="highlight">The Chain of Fear and Anxiety:</span> Living without God means living in constant fear—fear of death, fear of meaninglessness, fear of the future. Anxiety cripples us when we try to carry burdens we were never meant to bear alone. "Cast all your care upon him; for he careth for you." (1 Peter 5:7)
+     </div>
+     <div class="list-item">
+      <span class="highlight">The Chain of Deception:</span> Sin blinds us to truth. It makes evil look appealing and good look foolish. The devil is the father of lies, and without God's Word to guide us, we stumble in darkness, calling good evil and evil good.
+     </div>
+     <div class="list-item">
+      <span class="highlight">The Chain of Self-Worship:</span> We live in an age of selfies and self-obsession. "Follow your heart," the world says. "Do what makes YOU happy." But the heart is deceitful above all things (Jeremiah 17:9). When we make ourselves the center of our universe, we push God out—and lose our way entirely.
+     </div>
+     <div class="list-item">
+      <span class="highlight">The Chain of Worldly Entertainment:</span> Endless scrolling, binge-watching, gaming for hours—the world offers countless distractions to numb us and keep us from seeking God. We waste precious time on things that neither satisfy nor endure, while our souls starve for lack of spiritual nourishment.
+     </div>
+     <div class="list-item">
+      <span class="highlight">The Chain of Rebellion:</span> At its core, all sin is rebellion against God. It says, "I know better than You. I will do it my way." This is the same lie Satan told Eve in the garden, and it leads to the same result: separation from God, shame, and death.
+     </div>
+    </div>
+    <div class="scripture">
+     "Know ye not, that to whom ye yield yourselves servants to obey, his servants ye are to whom ye obey; whether of sin unto death, or of obedience unto righteousness?" - Romans 6:16 (KJV)
+    </div>
+    <p class="section-content" style="margin-top: 25px; font-size: 22px; font-weight: bold;">These chains are too strong for human strength to break. We cannot free ourselves. We need a Savior—and His name is Jesus Christ. He alone has the power to shatter every chain and set the captive free.</p>
+    <div class="scripture">
+     "If the Son therefore shall make you free, ye shall be free indeed." - John 8:36 (KJV)
+    </div>
+   </div>
+   <div class="section">
+    <h2 class="section-title">Salvation Through Grace Alone</h2>
+    <div class="scripture">
+     "For all have sinned, and come short of the glory of God; Being justified freely by his grace through the redemption that is in Christ Jesus." - Romans 3:23-24 (KJV)
+    </div>
+    <p class="section-content">Jesus offers redemption from these chains. His sacrifice on the cross paid the price for our sins, offering us forgiveness and a new beginning. This is grace—unmerited, unearned, freely given.</p>
+    <div class="scripture">
+     "For by grace are ye saved through faith; and that not of yourselves: it is the gift of God: Not of works, lest any man should boast." - Ephesians 2:8-9 (KJV)
+    </div>
+    <p class="section-content">Christians are not perfect—they are forgiven. Through Christ, we are made new. We are not saved by our good deeds, but by our acknowledgment of God's gift and by putting our trust in Him.</p>
+   </div>
+   <div class="section">
+    <h2 class="section-title">Why Jesus Died for You</h2>
+    <div class="scripture">
+     "For God so loved the world, that he gave his only begotten Son, that whosoever believeth in him should not perish, but have everlasting life." - John 3:16 (KJV)
+    </div>
+    <p class="section-content">Jesus, the Son of God, lived a perfect life and willingly took upon Himself the sins of the world. His death on the cross was a sacrifice of unimaginable love—the sinless dying for the sinful, the innocent paying the debt of the guilty. This is the heart of the Gospel: God demonstrating His love for us while we were still sinners.</p>
+    <div class="scripture">
+     "But God commendeth his love toward us, in that, while we were yet sinners, Christ died for us." - Romans 5:8 (KJV)
+    </div>
+   </div>
+   <div class="section">
+    <h2 class="section-title">How to Be Saved</h2>
+    <p class="section-content">Salvation requires a conscious decision to turn away from sin and embrace Jesus Christ as Lord and Savior. It's more than a casual acknowledgment; it's a wholehearted commitment of your life.</p>
+    <div class="scripture">
+     "That if thou shalt confess with thy mouth the Lord Jesus, and shalt believe in thine heart that God hath raised him from the dead, thou shalt be saved." - Romans 10:9 (KJV)
+    </div>
+    <div class="scripture">
+     "I know thy works, that thou art neither cold nor hot: I would thou wert cold or hot. So then because thou art lukewarm, and neither cold nor hot, I will spue thee out of my mouth." - Revelation 3:15-16 (KJV)
+    </div>
+    <p class="section-content">You cannot be a lukewarm Christian—you're either all in or you're not in at all. Salvation demands everything, but it gives you everything in return.</p>
+    <p class="section-content">Following Jesus doesn't guarantee a life without trials. In fact, Scripture promises tribulation. But it also promises something far greater—eternal life and peace that surpasses all understanding.</p>
+    <div class="scripture">
+     "These things I have spoken unto you, that in me ye might have peace. In the world ye shall have tribulation: but be of good cheer; I have overcome the world." - John 16:33 (KJV)
+    </div>
+   </div>
+   <div class="section">
+    <h2 class="section-title">Be a Light in the Darkness</h2>
+    <div class="scripture">
+     "Ye are the light of the world. A city that is set on an hill cannot be hid." - Matthew 5:14 (KJV)
+    </div>
+    <p class="section-content">Accepting Jesus is not the end—it is only the beginning. Once you experience the transformative power of His love, you're called to be a light to those around you, sharing the hope and truth that has set you free.</p>
+    <p class="section-content">In a world of darkness, you can shine brightly. In a world of despair, you can offer hope. In a world of hatred, you can demonstrate love. Stop letting the things of this world prevent you from living with purpose. Your life has meaning, and that meaning is found in Christ alone.</p>
+   </div>
+   <div class="call-to-action">
+    <h2 class="cta-title">Today Is the Day of Salvation</h2>
+    <div class="scripture" style="background: rgba(255, 255, 255, 0.2); border-left-color: #fff;">
+     "Behold, now is the accepted time; behold, now is the day of salvation." - 2 Corinthians 6:2 (KJV)
+    </div>
+    <p class="cta-text">Jesus is calling you TODAY. Not tomorrow, not someday—TODAY. Tomorrow is not promised. You don't know if you'll have another opportunity to respond to this call.</p>
+    <p class="cta-text">He stands at the door of your heart, knocking, waiting for you to open it and invite Him in. Will you answer?</p>
+    <p class="cta-text" style="margin-top: 30px; font-weight: bold; font-size: 26px;">This is your moment. This is your invitation. Will you answer the call?</p><a href="https://wholeheartedlegacy.org/im-new" target="_blank" rel="noopener noreferrer" style="display: inline-block; margin-top: 30px; padding: 20px 50px; background: #fff; color: #6b4423; font-size: 24px; font-weight: bold; text-decoration: none; border-radius: 50px; box-shadow: 0 6px 20px rgba(0,0,0,0.3); transition: transform 0.3s ease, box-shadow 0.3s ease;" onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 8px 25px rgba(0,0,0,0.4)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 6px 20px rgba(0,0,0,0.3)';">START HERE</a>
+   </div>
+  </div>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9a04c622d7a07af4',t:'MTc2MzQ0MDY2MS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
