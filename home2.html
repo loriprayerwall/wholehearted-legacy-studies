@@ -1,0 +1,3162 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wholehearted Legacy - Faith Journey Together</title>
+  <script src="/_sdk/element_sdk.js"></script>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
+      line-height: 1.6;
+      color: #3F2E1E;
+      background: #F7F2EA;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      height: 100%;
+    }
+
+    .page {
+      display: none;
+    }
+
+    .page.active {
+      display: block;
+    }
+
+    /* Clean Header */
+    header {
+      background: rgba(255, 255, 255, 0.98);
+      backdrop-filter: blur(8px);
+      padding: 20px 0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      border-bottom: 1px solid rgba(0,0,0,0.05);
+    }
+
+    .header-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      cursor: pointer;
+    }
+
+    .logo h1 {
+      font-size: 24px;
+      font-weight: 600;
+      color: #5d4a3a;
+      letter-spacing: -0.5px;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 40px;
+      align-items: center;
+    }
+
+    nav button {
+      background: none;
+      border: none;
+      color: #5d4a3a;
+      text-decoration: none;
+      font-size: 15px;
+      font-weight: 500;
+      transition: color 0.3s;
+      cursor: pointer;
+      font-family: inherit;
+    }
+
+    nav button:hover {
+      color: #9c826b;
+    }
+
+    /* Hero - Full Width Clean */
+    .hero {
+      min-height: 80%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #f7f3ef 0%, #ede6dd 100%);
+      text-align: center;
+      padding: 80px 40px;
+    }
+
+    .hero-content {
+      max-width: 800px;
+    }
+
+    .hero h2 {
+      font-size: 72px;
+      color: #5d4a3a;
+      margin-bottom: 30px;
+      font-weight: 300;
+      line-height: 1.1;
+      letter-spacing: -2px;
+    }
+
+    .hero p {
+      font-size: 22px;
+      color: #7a6a5a;
+      margin-bottom: 45px;
+      line-height: 1.7;
+      font-weight: 300;
+    }
+
+    .btn-group {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 18px 40px;
+      border-radius: 50px;
+      font-size: 16px;
+      font-weight: 500;
+      text-decoration: none;
+      transition: all 0.3s;
+      cursor: pointer;
+      border: none;
+      letter-spacing: 0.3px;
+      font-family: inherit;
+    }
+
+    .btn-primary {
+      background: #9c826b;
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background: #8b7355;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(156, 130, 107, 0.3);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: #9c826b;
+      border: 2px solid #9c826b;
+    }
+
+    .btn-secondary:hover {
+      background: #9c826b;
+      color: white;
+    }
+
+    .btn-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: transparent;
+      color: #9c826b;
+      border: 2px solid #9c826b;
+      padding: 12px 28px;
+      border-radius: 50px;
+      font-size: 15px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s;
+      margin-bottom: 30px;
+      font-family: inherit;
+    }
+
+    .btn-back:hover {
+      background: #9c826b;
+      color: white;
+    }
+
+    .back-to-top {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      background: #9c826b;
+      color: white;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s;
+      border: none;
+      font-size: 20px;
+      box-shadow: 0 4px 15px rgba(156, 130, 107, 0.4);
+      z-index: 90;
+    }
+
+    .back-to-top:hover {
+      background: #8b7355;
+      transform: translateY(-3px);
+      box-shadow: 0 6px 20px rgba(156, 130, 107, 0.5);
+    }
+
+    /* Pathways - Simple Grid with Warm Background */
+    .pathways {
+      padding: 120px 40px;
+      background: linear-gradient(135deg, #9c826b 0%, #8b7355 100%);
+    }
+
+    .pathways-intro {
+      text-align: center;
+      max-width: 650px;
+      margin: 0 auto 70px;
+    }
+
+    .pathways-intro h3 {
+      font-size: 48px;
+      color: white;
+      margin-bottom: 20px;
+      font-weight: 300;
+      letter-spacing: -1px;
+    }
+
+    .pathways-intro p {
+      font-size: 18px;
+      color: rgba(255,255,255,0.95);
+      line-height: 1.8;
+    }
+
+    .pathways-grid {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 40px;
+    }
+
+    .pathway-item {
+      background: rgba(255, 255, 255, 0.7);
+      padding: 50px 40px;
+      border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      transition: all 0.3s;
+      cursor: pointer;
+      box-shadow: 0 3px 15px rgba(0,0,0,0.05);
+      backdrop-filter: blur(10px);
+    }
+
+    .pathway-item:hover {
+      transform: translateY(-8px);
+      background: rgba(255, 255, 255, 0.95);
+      box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+    }
+
+    .pathway-icon {
+      font-size: 56px;
+      margin-bottom: 25px;
+      display: block;
+    }
+
+    .pathway-item h4 {
+      font-size: 26px;
+      color: #5d4a3a;
+      margin-bottom: 15px;
+      font-weight: 500;
+    }
+
+    .pathway-item p {
+      color: #7a6a5a;
+      line-height: 1.8;
+      font-size: 16px;
+    }
+
+    /* CTA Section */
+    .cta-section {
+      background: linear-gradient(135deg, #9c826b 0%, #8b7355 100%);
+      padding: 100px 40px;
+      text-align: center;
+      color: white;
+    }
+
+    .cta-content {
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .cta-content h3 {
+      font-size: 42px;
+      margin-bottom: 25px;
+      font-weight: 300;
+      letter-spacing: -1px;
+    }
+
+    .cta-content p {
+      font-size: 19px;
+      margin-bottom: 40px;
+      opacity: 0.95;
+      line-height: 1.7;
+    }
+
+    .email-form {
+      max-width: 500px;
+      margin: 0 auto;
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .email-form input {
+      flex: 1;
+      min-width: 250px;
+      padding: 18px 28px;
+      border: none;
+      border-radius: 50px;
+      font-size: 15px;
+    }
+
+    .email-form button {
+      padding: 18px 40px;
+      background: white;
+      color: #9c826b;
+      border: none;
+      border-radius: 50px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s;
+      font-size: 15px;
+    }
+
+    .email-form button:hover {
+      transform: scale(1.05);
+      box-shadow: 0 8px 20px rgba(255,255,255,0.3);
+    }
+
+    /* Hub Page Styles */
+    .hub-page {
+      padding: 60px 40px 100px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .hub-hero {
+      text-align: center;
+      margin-bottom: 80px;
+    }
+
+    .hub-hero-icon {
+      font-size: 80px;
+      margin-bottom: 20px;
+    }
+
+    .hub-hero h2 {
+      font-size: 56px;
+      color: #5d4a3a;
+      margin-bottom: 20px;
+      font-weight: 300;
+      letter-spacing: -1px;
+    }
+
+    .hub-hero p {
+      font-size: 20px;
+      color: #7a6a5a;
+      max-width: 700px;
+      margin: 0 auto;
+      line-height: 1.8;
+    }
+
+    .hub-content {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 40px;
+      margin-bottom: 60px;
+    }
+
+    .hub-card {
+      background: #fdfbf7;
+      padding: 40px 35px;
+      border-radius: 12px;
+      border: none;
+      transition: all 0.3s;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    }
+
+    .hub-card:hover {
+      transform: translateY(-5px);
+      background: #fdfbf7;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+    }
+
+    .hub-card h3 {
+      font-size: 24px;
+      color: #5d4a3a;
+      margin-bottom: 15px;
+      font-weight: 500;
+    }
+
+    .hub-card p {
+      color: #7a6a5a;
+      line-height: 1.8;
+      margin-bottom: 20px;
+    }
+
+    .hub-card ul {
+      list-style: none;
+      margin-bottom: 25px;
+    }
+
+    .hub-card li {
+      padding: 10px 0;
+      color: #7a6a5a;
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+    }
+
+    .hub-card li:before {
+      content: "✓";
+      color: #9c826b;
+      font-weight: bold;
+      flex-shrink: 0;
+    }
+
+    .hub-card a, .hub-card button {
+      color: #9c826b;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s;
+      cursor: pointer;
+      background: none;
+      border: none;
+      font-family: inherit;
+      padding: 0;
+      text-align: left;
+      font-size: inherit;
+    }
+
+    .hub-card a:hover, .hub-card button:hover {
+      color: #8b7355;
+      text-decoration: underline;
+    }
+
+    /* Content Page Styles */
+    .content-page {
+      padding: 60px 40px 100px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .content-header {
+      margin-bottom: 50px;
+    }
+
+    .content-header h2 {
+      font-size: 48px;
+      color: #5d4a3a;
+      margin-bottom: 20px;
+      font-weight: 300;
+      letter-spacing: -1px;
+    }
+
+    .content-header .meta {
+      color: #7a6a5a;
+      font-size: 16px;
+      margin-bottom: 30px;
+    }
+
+    .content-body {
+      background: #fdfbf7;
+      padding: 50px 45px;
+      border-radius: 12px;
+      border: none;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+      line-height: 1.9;
+    }
+
+    .content-body h3 {
+      font-size: 28px;
+      color: #5d4a3a;
+      margin: 40px 0 20px 0;
+      font-weight: 500;
+    }
+
+    .content-body h3:first-child {
+      margin-top: 0;
+    }
+
+    .content-body h4 {
+      font-size: 22px;
+      color: #5d4a3a;
+      margin: 30px 0 15px 0;
+      font-weight: 500;
+    }
+
+    .content-body p {
+      color: #7a6a5a;
+      margin-bottom: 20px;
+      font-size: 17px;
+    }
+
+    .content-body ul, .content-body ol {
+      margin: 20px 0 20px 30px;
+      color: #7a6a5a;
+    }
+
+    .content-body li {
+      margin-bottom: 12px;
+      line-height: 1.8;
+    }
+
+    .content-body blockquote {
+      border-left: 4px solid #9c826b;
+      padding-left: 25px;
+      margin: 30px 0;
+      font-style: italic;
+      color: #7a6a5a;
+    }
+
+    .intro-section {
+      background: #F7F2EA;
+      border-left: 4px solid #9c826b;
+      padding: 35px 40px;
+      border-radius: 12px;
+      margin-bottom: 50px;
+    }
+
+    .intro-section h3 {
+      color: #5d4a3a;
+      font-size: 24px;
+      margin-bottom: 15px;
+      font-weight: 500;
+    }
+
+    .intro-section p {
+      color: #7a6a5a;
+      line-height: 1.8;
+      font-size: 17px;
+    }
+
+    /* Footer */
+    footer {
+      background: #2d2520;
+      color: rgba(255,255,255,0.7);
+      padding: 80px 40px 40px;
+    }
+
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 60px;
+      margin-bottom: 50px;
+    }
+
+    .footer-brand h5 {
+      color: white;
+      font-size: 20px;
+      margin-bottom: 20px;
+      font-weight: 500;
+    }
+
+    .footer-brand p {
+      font-size: 14px;
+      line-height: 1.9;
+      margin-bottom: 25px;
+    }
+
+    .social-links {
+      display: flex;
+      gap: 15px;
+    }
+
+    .social-icon {
+      width: 42px;
+      height: 42px;
+      background: rgba(255,255,255,0.08);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      color: white;
+      transition: all 0.3s;
+      font-size: 18px;
+    }
+
+    .social-icon:hover {
+      background: #9c826b;
+      transform: translateY(-3px);
+    }
+
+    .footer-section h6 {
+      color: white;
+      font-size: 15px;
+      margin-bottom: 20px;
+      font-weight: 500;
+    }
+
+    .footer-section ul {
+      list-style: none;
+    }
+
+    .footer-section li {
+      margin-bottom: 12px;
+    }
+
+    .footer-section a, .footer-section button {
+      color: rgba(255,255,255,0.6);
+      text-decoration: none;
+      font-size: 14px;
+      transition: color 0.3s;
+      cursor: pointer;
+      background: none;
+      border: none;
+      font-family: inherit;
+      padding: 0;
+      text-align: left;
+    }
+
+    .footer-section a:hover, .footer-section button:hover {
+      color: white;
+    }
+
+    .footer-bottom {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding-top: 40px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      text-align: center;
+      font-size: 13px;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .hero h2 {
+        font-size: 48px;
+      }
+
+      .hero p {
+        font-size: 18px;
+      }
+
+      .pathways-grid {
+        grid-template-columns: 1fr;
+        gap: 25px;
+      }
+
+      .pathways-intro h3 {
+        font-size: 36px;
+      }
+
+      .hub-hero h2 {
+        font-size: 38px;
+      }
+
+      .hub-content {
+        grid-template-columns: 1fr;
+      }
+
+      .email-form {
+        flex-direction: column;
+      }
+
+      .email-form input {
+        width: 100%;
+      }
+
+      .footer-content {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+
+      nav ul {
+        gap: 25px;
+      }
+    }
+  </style>
+  <style>@view-transition { navigation: auto; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+  <script src="https://cdn.tailwindcss.com" type="text/javascript"></script>
+ </head>
+ <body><!-- Header -->
+  <header>
+   <div class="header-content">
+    <div class="logo" onclick="showPage('home')">
+     <h1 id="site-title">Wholehearted Legacy</h1>
+    </div>
+    <nav>
+     <ul>
+      <li><button onclick="showPage('home')">Home</button></li>
+      <li><button onclick="scrollToSection('home-about')">About</button></li>
+      <li><button onclick="scrollToSection('home-connect')">Connect</button></li>
+     </ul>
+    </nav>
+   </div>
+  </header><!-- HOME PAGE -->
+  <main id="home" class="page active"><!-- Hero Section -->
+   <section class="hero">
+    <div class="hero-content">
+     <h2 id="hero-title">Faith. Hope. Healing.</h2>
+     <p id="hero-description">Journey with us through Christ—one step, one verse, one act of love at a time. Discover hope in every season.</p>
+     <div class="btn-group"><button class="btn btn-primary" onclick="scrollToSection('home-pathways')">Start Your Journey</button> <button class="btn btn-secondary" onclick="scrollToSection('home-about')">Our Story</button>
+     </div>
+    </div>
+   </section><!-- Salvation Section -->
+   <section style="padding: 100px 40px; max-width: 1200px; margin: 0 auto; text-align: center;">
+    <h3 style="font-size: 48px; color: #5d4a3a; margin-bottom: 25px; font-weight: 300; letter-spacing: -1px;">A Savior's Call</h3>
+    <p style="font-size: 20px; color: #7a6a5a; max-width: 700px; margin: 0 auto 40px; line-height: 1.8;">The most important decision you'll ever make starts with understanding why we need Jesus and what He offers us.</p>
+    <div style="display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;"><button class="btn btn-primary" onclick="showPage('why-savior')">Why We Need a Savior</button> <button class="btn btn-secondary" onclick="showPage('beginning-faith')">Beginning Your Faith Journey</button>
+    </div>
+   </section><!-- Pathways Section -->
+   <section class="pathways" id="home-pathways">
+    <div class="pathways-intro">
+     <h3 id="pathways-title">Your Journey Starts Here</h3>
+     <p>Four pathways designed for anyone seeking to grow closer to Christ—no matter where you are in life's journey.</p>
+    </div>
+    <div class="pathways-grid">
+     <div class="pathway-item" onclick="showPage('footsteps')"><span class="pathway-icon">👣</span>
+      <h4>Footsteps in Faith</h4>
+      <p>Weekly devotions, Bible studies, and Scripture journeys to deepen your walk with Christ.</p>
+     </div>
+     <div class="pathway-item" onclick="showPage('little-hearts')"><span class="pathway-icon">❤️</span>
+      <h4>Faith for Little Hearts</h4>
+      <p>Engaging stories and interactive resources to nurture faith in children.</p>
+     </div>
+     <div class="pathway-item" onclick="showPage('finding-hope')"><span class="pathway-icon">🕊️</span>
+      <h4>Light in the Darkness</h4>
+      <p>Compassionate resources for grief and loss with God's promises and hope.</p>
+     </div>
+     <div class="pathway-item" onclick="showPage('healing-hearts')"><span class="pathway-icon">💚</span>
+      <h4>Healing Hearts</h4>
+      <p>A sacred space for emotional and spiritual healing through prayer and community.</p>
+     </div>
+    </div>
+   </section><!-- Faith Resources Section -->
+   <section style="padding: 100px 40px; background: linear-gradient(135deg, #f7f3ef 0%, #ede6dd 100%);">
+    <div style="max-width: 1200px; margin: 0 auto;">
+     <div style="text-align: center; margin-bottom: 60px;">
+      <h3 style="font-size: 48px; color: #5d4a3a; margin-bottom: 25px; font-weight: 300; letter-spacing: -1px;">Faith Resources</h3>
+      <p style="font-size: 20px; color: #7a6a5a; max-width: 700px; margin: 0 auto; line-height: 1.8;">Tools, templates, and guides to equip you for deeper Bible study and spiritual growth.</p>
+     </div>
+     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;">
+      <div style="background: #fdfbf7; padding: 40px 35px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); transition: all 0.3s; cursor: pointer;" onclick="showPage('adult-study-tools')">
+       <div style="font-size: 48px; margin-bottom: 20px;">
+        📚
+       </div>
+       <h4 style="font-size: 24px; color: #5d4a3a; margin-bottom: 15px; font-weight: 500;">Adult Study Tools</h4>
+       <p style="color: #7a6a5a; line-height: 1.8;">Comprehensive resources for Bible study, research, and spiritual disciplines.</p>
+      </div>
+      <div style="background: #fdfbf7; padding: 40px 35px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); transition: all 0.3s; cursor: pointer;" onclick="showPage('kids-family-resources')">
+       <div style="font-size: 48px; margin-bottom: 20px;">
+        ���‍👩‍👧‍👦
+       </div>
+       <h4 style="font-size: 24px; color: #5d4a3a; margin-bottom: 15px; font-weight: 500;">Kids &amp; Family Resources</h4>
+       <p style="color: #7a6a5a; line-height: 1.8;">Age-appropriate tools to nurture faith in children and strengthen families.</p>
+      </div>
+      <div style="background: #fdfbf7; padding: 40px 35px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); transition: all 0.3s; cursor: pointer;" onclick="showPage('study-templates')">
+       <div style="font-size: 48px; margin-bottom: 20px;">
+        ✏️
+       </div>
+       <h4 style="font-size: 24px; color: #5d4a3a; margin-bottom: 15px; font-weight: 500;">Study Templates</h4>
+       <p style="color: #7a6a5a; line-height: 1.8;">Printable and digital templates for deeper Scripture engagement.</p>
+      </div>
+     </div>
+    </div>
+   </section><!-- CTA Section -->
+   <section class="cta-section" id="home-connect">
+    <div class="cta-content">
+     <h3 id="cta-title">Ready to Begin?</h3>
+     <p>Join our community and receive encouragement, devotions, and resources delivered to your inbox.</p>
+     <form class="email-form" onsubmit="handleSubmit(event)"><label for="email-input" style="position: absolute; left: -9999px;">Email address</label> <input id="email-input" type="email" placeholder="Enter your email" required aria-label="Email address"> <button type="submit">Get Started</button>
+     </form>
+    </div>
+   </section><!-- Footer -->
+   <footer id="home-about">
+    <div class="footer-content">
+     <div class="footer-brand">
+      <h5>Wholehearted Legacy</h5>
+      <p>Born from a journey of loss and healing, we share Christ's hope in every season. Walking alongside Isabella and Caleb as they grow in faith, remembering AJ, and inviting you into a community seeking light in darkness.</p>
+      <div class="social-links"><a href="https://pinterest.com" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Pinterest">📌</a> <a href="https://x.com" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="X (Twitter)">✖️</a> <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Instagram">📷</a> <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Facebook">📘</a>
+      </div>
+     </div>
+     <div class="footer-section">
+      <h6>Pathways</h6>
+      <ul>
+       <li><button onclick="showPage('footsteps')">Footsteps in Faith</button></li>
+       <li><button onclick="showPage('little-hearts')">Little Hearts</button></li>
+       <li><button onclick="showPage('finding-hope')">Light in the Darkness</button></li>
+       <li><button onclick="showPage('healing-hearts')">Healing Hearts</button></li>
+      </ul>
+     </div>
+     <div class="footer-section">
+      <h6>Connect</h6>
+      <ul>
+       <li><button onclick="scrollToSection('home-about')">About Us</button></li>
+       <li><a href="mailto:contact@wholeheartedlegacy.com">Contact</a></li>
+       <li><button onclick="scrollToSection('home-connect')">Subscribe</button></li>
+      </ul>
+     </div>
+    </div>
+    <div class="footer-bottom">
+     <p>© 2024 Wholehearted Legacy. All rights reserved.</p>
+     <p style="margin-top: 10px;">In loving memory of AJ 🕊️ Celebrating Isabella &amp; Caleb</p>
+    </div>
+   </footer>
+  </main><!-- FOOTSTEPS IN FAITH HUB -->
+  <div id="footsteps" class="page">
+   <div class="hub-page"><button class="btn-back" onclick="showPage('home')">← Back to Home</button>
+    <div class="hub-hero">
+     <div class="hub-hero-icon">
+      👣
+     </div>
+     <h2>Footsteps in Faith</h2>
+     <p>Deepen your relationship with Christ through Scripture, study, and daily devotion.</p>
+    </div>
+    <div class="hub-content">
+     <div class="hub-card">
+      <h3>📖 Weekly Devotions</h3>
+      <p>Fresh encouragement and biblical truth delivered every week.</p>
+      <ul>
+       <li><button onclick="showPage('weekly-devotions')">Browse Weekly Devotions</button></li>
+      </ul>
+     </div>
+     <div class="hub-card">
+      <h3>📚 Bible Studies</h3>
+      <p>In-depth studies to help you understand and live out God's Word.</p>
+      <ul>
+       <li><button onclick="showPage('bible-studies')">Current Bible Studies</button></li>
+       <li><button onclick="showPage('past-studies')">Past Studies Archive</button></li>
+       <li><button onclick="showPage('seasonal-studies')">Seasonal Studies</button></li>
+      </ul>
+     </div>
+     <div class="hub-card">
+      <h3>🦁 Heroes of the Bible</h3>
+      <p>Discover the lives, struggles, and faith of men and women God used.</p>
+      <ul>
+       <li><button onclick="showPage('heroes-of-bible')">Meet the Heroes</button></li>
+      </ul>
+     </div>
+     <div class="hub-card">
+      <h3>�� Bible Timeline</h3>
+      <p>Explore the grand narrative of Scripture from Genesis to Revelation.</p>
+      <ul>
+       <li><button onclick="showPage('bible-timeline')">View Timeline</button></li>
+      </ul>
+     </div>
+     <div class="hub-card">
+      <h3>📖 Journey Through Scripture</h3>
+      <p>Experience all 66 books of the Bible with guided introductions.</p>
+      <ul>
+       <li><button onclick="showPage('66-books-journey')">Start the Journey</button></li>
+      </ul>
+     </div>
+     <div class="hub-card">
+      <h3>✏️ Study Templates</h3>
+      <p>Downloadable templates to help you dig deeper into God's Word.</p>
+      <ul>
+       <li><button onclick="showPage('study-templates')">Get Templates</button></li>
+      </ul>
+     </div>
+    </div>
+   </div>
+  </div><!-- LITTLE HEARTS HUB -->
+  <div id="little-hearts" class="page">
+   <div class="hub-page"><button class="btn-back" onclick="showPage('home')">← Back to Home</button>
+    <div class="hub-hero">
+     <div class="hub-hero-icon">
+      ❤️
+     </div>
+     <h2>Faith for Little Hearts</h2>
+     <p>Nurture faith in the children God has entrusted to your care. Engaging, age-appropriate resources that introduce little ones to the heroes of the Bible and the beautiful story of Scripture.</p>
+    </div>
+    <div class="hub-content">
+     <div class="hub-card">
+      <h3>🌟 Faith-Building Treasures</h3>
+      <p>Meet the heroes of the Bible through stories that capture imagination and plant seeds of faith.</p>
+      <ul>
+       <li><button onclick="showPage('faith-building-treasures')">Explore Heroes Collection</button></li>
+      </ul>
+     </div>
+     <div class="hub-card">
+      <h3>📚 66-Book Bible Carousel</h3>
+      <p>An interactive journey through every book of the Bible, designed especially for young hearts and minds.</p>
+      <ul>
+       <li><button onclick="showPage('66-books-carousel')">Start the Carousel</button></li>
+      </ul>
+     </div>
+    </div>
+   </div>
+  </div><!-- FINDING HOPE HUB -->
+  <div id="finding-hope" class="page">
+   <div class="hub-page"><button class="btn-back" onclick="showPage('home')">← Back to Home</button>
+    <div class="hub-hero">
+     <div class="hub-hero-icon">
+      🕊️
+     </div>
+     <h2>Light in the Darkness</h2>
+     <p>Compassionate resources for grief, loss, and life's most difficult seasons. You are not alone. Even in the deepest valleys, God's light breaks through.</p>
+    </div>
+    <div class="hub-content">
+     <div class="hub-card">
+      <h3>🕯️ Light in the Darkness Devotional</h3>
+      <p>A gentle devotional for those walking through grief—offering comfort, hope, and the presence of God in your pain.</p>
+      <ul>
+       <li><button onclick="showPage('light-darkness-devotional')">Read the Devotional</button></li>
+      </ul>
+     </div>
+     <div class="hub-card">
+      <h3>✝️ God's Promises for Hard Days</h3>
+      <p>Anchoring truths from Scripture when everything feels uncertain. God's promises are steadfast, even when we're not.</p>
+      <ul>
+       <li><button onclick="showPage('gods-promises-hard-days')">View Promises</button></li>
+      </ul>
+     </div>
+     <div class="hub-card">
+      <h3>💙 AJ's Story</h3>
+      <p>Our family's journey through loss and the faithful presence of God that carried us through the darkest days.</p>
+      <ul>
+       <li><button onclick="showPage('ajs-story')">Read AJ's Story</button></li>
+      </ul>
+     </div>
+     <div class="hub-card">
+      <h3>📖 Verses for Grief and Comfort</h3>
+      <p>Scripture that speaks directly to hurting hearts. God's Word is living, active, and deeply comforting.</p>
+      <ul>
+       <li><button onclick="showPage('verses-grief-comfort')">Find Comfort</button></li>
+      </ul>
+     </div>
+     <div class="hub-card">
+      <h3>🙏 When You Don't Know What to Pray</h3>
+      <p>Prayers for when words fail and grief makes it hard to speak. Let these words carry your heart to the Father.</p>
+      <ul>
+       <li><button onclick="showPage('when-dont-know-pray')">Pray With Us</button></li>
+      </ul>
+     </div>
+     <div class="hub-card">
+      <h3>✨ Stories of Hope</h3>
+      <p>Testimonies of God's faithfulness from others who have walked through loss and found light on the other side.</p>
+      <ul>
+       <li><button onclick="showPage('stories-of-hope')">Read Stories</button></li>
+      </ul>
+     </div>
+     <div class="hub-card">
+      <h3>🎵 Comforting Psalms Collection</h3>
+      <p>The Psalms gave voice to every human emotion. Find comfort in these ancient prayers that still speak today.</p>
+      <ul>
+       <li><button onclick="showPage('comforting-psalms')">Explore Psalms</button></li>
+      </ul>
+     </div>
+     <div class="hub-card">
+      <h3>💌 Encouragement Messages</h3>
+      <p>Gentle reminders that you're not alone, you're loved, and God is present—even when it doesn't feel like it.</p>
+      <ul>
+       <li><button onclick="showPage('encouragement-messages')">Receive Encouragement</button></li>
+      </ul>
+     </div>
+    </div>
+   </div>
+  </div><!-- HEALING HEARTS HUB -->
+  <div id="healing-hearts" class="page">
+   <div class="hub-page"><button class="btn-back" onclick="showPage('home')">← Back to Home</button>
+    <div class="hub-hero">
+     <div class="hub-hero-icon">
+      💚
+     </div>
+     <h2>Healing Hearts</h2>
+     <p>A sacred space for emotional and spiritual healing. God restores every broken place—not always how we expect, but always with grace, love, and wholeness.</p>
+    </div>
+    <div class="hub-content">
+     <div class="hub-card">
+      <h3>🌿 The Healing Room</h3>
+      <p>Enter a sacred space designed for prayer, reflection, and encountering God's healing presence.</p>
+      <ul>
+       <li><button onclick="showPage('healing-room')">Enter the Healing Room</button></li>
+      </ul>
+     </div>
+     <div class="hub-card">
+      <h3>🙏 The Prayer Wall</h3>
+      <p>Submit prayer requests, pray for others, and witness God's faithfulness in answered prayers.</p>
+      <ul>
+       <li><a href="https://www.wholeheartedlegacy.org/prayer-wall" target="_blank" rel="noopener noreferrer">Visit Prayer Wall</a></li>
+      </ul>
+     </div>
+     <div class="hub-card">
+      <h3>📖 Our Story</h3>
+      <p>How Wholehearted Legacy began—a testimony of God's faithfulness through loss, healing, and new life.</p>
+      <ul>
+       <li><button onclick="showPage('our-story')">Read Our Story</button></li>
+      </ul>
+     </div>
+     <div class="hub-card">
+      <h3>✨ Lori's Light</h3>
+      <p>Personal reflections, lessons from the journey, and encouragement from a heart learning to trust God through every season.</p>
+      <ul>
+       <li><button onclick="showPage('loris-light')">Read Lori's Reflections</button></li>
+      </ul>
+     </div>
+     <div class="hub-card">
+      <h3>🎨 Caleb's Corner</h3>
+      <p>Wisdom, creativity, and joy from Caleb's perspective—seeing the world through the eyes of a child of God.</p>
+      <ul>
+       <li><button onclick="showPage('calebs-corner')">Visit Caleb's Corner</button></li>
+      </ul>
+     </div>
+     <div class="hub-card">
+      <h3>💫 Isabella's Insights</h3>
+      <p>Faith, hope, and discoveries from Isabella's journey�����learning to walk with Jesus one step at a time.</p>
+      <ul>
+       <li><button onclick="showPage('isabellas-insights')">Explore Isabella's Insights</button></li>
+      </ul>
+     </div>
+     <div class="hub-card">
+      <h3>❤️ Community Stories</h3>
+      <p>Share your testimony, celebrate God's faithfulness, and encourage others walking the path of healing.</p>
+      <ul>
+       <li><button onclick="showPage('community-stories')">Read &amp; Share Stories</button></li>
+      </ul>
+     </div>
+    </div>
+   </div>
+  </div><!-- SALVATION PAGES -->
+  <div id="why-savior" class="page">
+   <div class="content-page"><button class="btn-back" onclick="showPage('home')">← Back to Home</button> <button class="back-to-top" onclick="scrollToTop()" aria-label="Back to top">↑</button>
+    <div class="content-header">
+     <h2>Why We Need a Savior</h2>
+     <div class="meta">
+      A Savior's Call
+     </div>
+    </div>
+    <div class="intro-section">
+     <h3>The Most Important Truth</h3>
+     <p>Before we can understand the beauty of salvation, we need to understand why we need to be saved in the first place. This isn't about guilt or shame—it's about truth, love, and the incredible gift God offers us.</p>
+    </div>
+    <div class="content-body">
+     <h3>We Were Created for Relationship</h3>
+     <p>In the beginning, God created humanity in His image, designed for perfect relationship with Him. We were made to walk with God, know Him, and reflect His glory. But something went terribly wrong.</p>
+     <blockquote>
+      "For all have sinned and fall short of the glory of God." - Romans 3:23
+     </blockquote>
+     <h3>The Problem of Sin</h3>
+     <p>Sin isn't just about breaking rules—it's about broken relationship. When humanity chose to go our own way instead of God's way, we were separated from the One who created us. This separation affects everything:</p>
+     <ul>
+      <li><strong>Spiritual Death:</strong> We're cut off from the source of life itself</li>
+      <li><strong>Broken Identity:</strong> We don't know who we truly are</li>
+      <li><strong>Endless Searching:</strong> We try to fill the God-shaped void with everything except God</li>
+      <li><strong>Eternal Consequences:</strong> Without restoration, separation continues forever</li>
+     </ul>
+     <blockquote>
+      "For the wages of sin is death, but the gift of God is eternal life in Christ Jesus our Lord." - Romans 6:23
+     </blockquote>
+     <h3>We Can't Save Ourselves</h3>
+     <p>Here's the hard truth: no amount of good works, religious activity, or moral living can bridge the gap between us and God. The separation is too great, the debt too large. We need rescue from outside ourselves.</p>
+     <h3>God's Solution: Jesus</h3>
+     <p>This is where the gospel—the "good news"—begins. God didn't leave us in our brokenness. He sent His Son, Jesus Christ, to do what we could never do:</p>
+     <ul>
+      <li><strong>He lived the perfect life</strong> we couldn't live</li>
+      <li><strong>He died the death</strong> we deserved</li>
+      <li><strong>He rose from the dead</strong> defeating sin and death forever</li>
+      <li><strong>He offers us His righteousness</strong> in exchange for our sin</li>
+     </ul>
+     <blockquote>
+      "God demonstrates his own love for us in this: While we were still sinners, Christ died for us." - Romans 5:8
+     </blockquote>
+     <h3>The Invitation</h3>
+     <p>Jesus doesn't just offer forgiveness—He offers complete restoration. A new identity. A new life. Relationship with God Himself. This is why we need a Savior. Not to make us better people, but to make us new creations entirely.</p>
+     <p><em>"Therefore, if anyone is in Christ, the new creation has come: The old has gone, the new is here!" - 2 Corinthians 5:17</em></p>
+     <div style="text-align: center; margin-top: 50px;"><button class="btn btn-primary" onclick="showPage('beginning-faith')">Learn About Salvation</button>
+     </div>
+    </div>
+   </div>
+  </div>
+  <div id="beginning-faith" class="page">
+   <div class="content-page"><button class="btn-back" onclick="showPage('home')">← Back to Home</button> <button class="back-to-top" onclick="scrollToTop()" aria-label="Back to top">↑</button>
+    <div class="content-header">
+     <h2>Beginning Your Faith Journey</h2>
+     <div class="meta">
+      A Savior's Call
+     </div>
+    </div>
+    <div class="intro-section">
+     <h3>Welcome to the Most Important Journey</h3>
+     <p>Whether you're brand new to faith, exploring Christianity for the first time, or coming back after being away, we're so glad you're here. This page will guide you through the basics of what it means to follow Jesus and provide resources to help you take your next steps.</p>
+    </div>
+    <div class="content-body">
+     <h3>Understanding Salvation</h3>
+     <p>Salvation isn't complicated, but it is profound. It's God's free gift of forgiveness, new life, and eternal relationship with Him through Jesus Christ.</p>
+     <div style="text-align: center; margin: 30px 0;"><button class="btn btn-primary" onclick="showPage('what-is-salvation')">What is Salvation?</button>
+     </div>
+     <h3>Your First Steps</h3>
+     <p>Starting your faith journey can feel overwhelming. Here's what matters most in the beginning:</p>
+     <ul>
+      <li><strong>Read the Bible:</strong> Start with the Gospel of John to meet Jesus</li>
+      <li><strong>Pray:</strong> Talk to God honestly—He wants to hear from you</li>
+      <li><strong>Find Community:</strong> Connect with other believers who can encourage you</li>
+      <li><strong>Ask Questions:</strong> Doubt and questions are part of faith, not the opposite of it</li>
+     </ul>
+     <h3>30-Day Beginner Reading Plan</h3>
+     <p>Not sure where to start reading the Bible? This simple 30-day plan introduces you to the life and teachings of Jesus through the Gospel of John, plus key passages that explain salvation and new life in Christ.</p>
+     <div style="text-align: center; margin: 30px 0;"><button class="btn btn-primary" onclick="showPage('beginner-reading-plan')">Start the Reading Plan</button>
+     </div>
+     <h3>Common Questions</h3>
+     <p>It's normal to have questions! Here are some resources that address what new believers often wonder about:</p>
+     <ul>
+      <li><button onclick="showPage('what-is-salvation')" style="color: #9c826b; text-decoration: none; cursor: pointer; background: none; border: none; font: inherit; padding: 0;"><strong>What is Salvation?</strong></button> - Understanding God's gift</li>
+      <li><button onclick="showPage('how-do-i-pray')" style="color: #9c826b; text-decoration: none; cursor: pointer; background: none; border: none; font: inherit; padding: 0;"><strong>How do I pray?</strong></button> - Simple guidance for talking with God</li>
+      <li><button onclick="showPage('what-translation')" style="color: #9c826b; text-decoration: none; cursor: pointer; background: none; border: none; font: inherit; padding: 0;"><strong>What translation should I read?</strong></button> - Choosing a Bible version</li>
+      <li><button onclick="showPage('do-i-need-church')" style="color: #9c826b; text-decoration: none; cursor: pointer; background: none; border: none; font: inherit; padding: 0;"><strong>Do I need to go to church?</strong></button> - The importance of community</li>
+      <li><button onclick="showPage('what-about-baptism')" style="color: #9c826b; text-decoration: none; cursor: pointer; background: none; border: none; font: inherit; padding: 0;"><strong>What about baptism?</strong></button> - The next step of obedience</li>
+     </ul>
+     <h3>You're Not Alone</h3>
+     <p>Starting something new can feel lonely, but you're joining a family of believers around the world. We're here to walk with you, answer questions, and encourage you along the way.</p>
+     <div style="text-align: center; margin-top: 40px;"><button class="btn btn-secondary" onclick="scrollToSection('home-connect')">Subscribe for Encouragement</button>
+     </div>
+    </div>
+   </div>
+  </div><!-- FOOTSTEPS CONTENT PAGES -->
+  <div id="weekly-devotions" class="page">
+   <div class="content-page"><button class="btn-back" onclick="goBack()">← Back</button> <button class="back-to-top" onclick="scrollToTop()" aria-label="Back to top">↑</button>
+    <div class="content-header">
+     <h2>Weekly Devotions</h2>
+     <div class="meta">
+      Footsteps in Faith
+     </div>
+    </div>
+    <div class="intro-section">
+     <h3>Welcome to Weekly Devotions</h3>
+     <p>Each week, receive fresh encouragement and biblical insight to guide your daily walk with Christ.</p>
+    </div>
+    <div class="content-body">
+     <h3>This Week's Devotion</h3>
+     <p><em>Content coming soon—your weekly devotion will appear here.</em></p>
+    </div>
+   </div>
+  </div>
+  <div id="bible-studies" class="page">
+   <div class="content-page"><button class="btn-back" onclick="goBack()">← Back</button> <button class="back-to-top" onclick="scrollToTop()" aria-label="Back to top">↑</button>
+    <div class="content-header">
+     <h2>Current Bible Studies</h2>
+     <div class="meta">
+      Footsteps in Faith
+     </div>
+    </div>
+    <div class="intro-section">
+     <h3>Dive Deeper Into God's Word</h3>
+     <p>These Bible studies invite you to slow down, dig deep, and discover the richness of Scripture.</p>
+    </div>
+    <div class="content-body">
+     <h3>Active Studies</h3>
+     <p><em>Your current Bible studies will be listed here.</em></p>
+    </div>
+   </div>
+  </div>
+  <div id="past-studies" class="page">
+   <div class="content-page"><button class="btn-back" onclick="goBack()">← Back</button> <button class="back-to-top" onclick="scrollToTop()" aria-label="Back to top">↑</button>
+    <div class="content-header">
+     <h2>Past Studies Archive</h2>
+     <div class="meta">
+      Footsteps in Faith
+     </div>
+    </div>
+    <div class="intro-section">
+     <h3>Explore Previous Studies</h3>
+     <p>Browse our archive of completed Bible studies.</p>
+    </div>
+    <div class="content-body">
+     <h3>Study Archive</h3>
+     <p><em>Your past Bible studies will be organized here.</em></p>
+    </div>
+   </div>
+  </div>
+  <div id="seasonal-studies" class="page">
+   <div class="content-page"><button class="btn-back" onclick="goBack()">← Back</button> <button class="back-to-top" onclick="scrollToTop()" aria-label="Back to top">↑</button>
+    <div class="content-header">
+     <h2>Seasonal Studies</h2>
+     <div class="meta">
+      Footsteps in Faith
+     </div>
+    </div>
+    <div class="intro-section">
+     <h3>Studies for Every Season</h3>
+     <p>Celebrate the beauty of each season with studies designed for Advent, Lent, Easter, and more.</p>
+    </div>
+    <div class="content-body">
+     <h3>Available Seasonal Studies</h3>
+     <p><em>Seasonal studies organized by time of year will appear here.</em></p>
+    </div>
+   </div>
+  </div>
+  <div id="heroes-of-bible" class="page">
+   <div class="content-page"><button class="btn-back" onclick="goBack()">← Back</button> <button class="back-to-top" onclick="scrollToTop()" aria-label="Back to top">↑</button>
+    <div class="content-header">
+     <h2>Heroes of the Bible</h2>
+     <div class="meta">
+      Footsteps in Faith
+     </div>
+    </div>
+    <div class="intro-section">
+     <h3>Faith That Changed History</h3>
+     <p>From Abraham to Esther, discover the lives of ordinary people who trusted an extraordinary God.</p>
+    </div>
+    <div class="content-body">
+     <h3>Meet the Heroes</h3>
+     <p><em>Your collection of Bible hero profiles will be organized here.</em></p>
+    </div>
+   </div>
+  </div>
+  <div id="bible-timeline" class="page">
+   <div class="content-page"><button class="btn-back" onclick="goBack()">← Back</button> <button class="back-to-top" onclick="scrollToTop()" aria-label="Back to top">↑</button>
+    <div class="content-header">
+     <h2>Bible Timeline</h2>
+     <div class="meta">
+      Footsteps in Faith
+     </div>
+    </div>
+    <div class="intro-section">
+     <h3>The Grand Story of Scripture</h3>
+     <p>See the big picture of God's redemptive plan from Creation to the New Heaven and New Earth.</p>
+    </div>
+    <div class="content-body">
+     <h3>Explore the Timeline</h3>
+     <p><em>Your interactive Bible timeline will be embedded here.</em></p>
+    </div>
+   </div>
+  </div>
+  <div id="66-books-journey" class="page">
+   <div class="content-page"><button class="btn-back" onclick="goBack()">← Back</button> <button class="back-to-top" onclick="scrollToTop()" aria-label="Back to top">↑</button>
+    <div class="content-header">
+     <h2>Journey Through Scripture: 66 Books</h2>
+     <div class="meta">
+      Footsteps in Faith
+     </div>
+    </div>
+    <div class="intro-section">
+     <h3>Experience Every Book of the Bible</h3>
+     <p>Walk through all 66 books of Scripture with guided introductions and key themes.</p>
+    </div>
+    <div class="content-body">
+     <h3>Start Your Journey</h3>
+     <p><em>Your 66-book series will be organized here.</em></p>
+    </div>
+   </div>
+  </div>
+  <div id="study-templates" class="page">
+   <div class="content-page"><button class="btn-back" onclick="goBack()">← Back</button> <button class="back-to-top" onclick="scrollToTop()" aria-label="Back to top">↑</button>
+    <div class="content-header">
+     <h2>Study Templates</h2>
+     <div class="meta">
+      Faith Resources
+     </div>
+    </div>
+    <div class="intro-section">
+     <h3>Tools for Deeper Scripture Engagement</h3>
+     <p>Structured templates and practical guides to help you engage with Scripture in meaningful ways. Each method includes step-by-step instructions and downloadable templates.</p>
+    </div>
+    <div class="content-body">
+     <h3>📝 Scripture Writing</h3>
+     <p>The ancient practice of writing out Scripture word-for-word to slow down, notice details, and internalize God's Word.</p>
+     <h4>How to Use:</h4>
+     <ol>
+      <li><strong>Choose a passage:</strong> Start with a chapter or meaningful section</li>
+      <li><strong>Write slowly:</strong> Copy each word exactly as written</li>
+      <li><strong>Notice details:</strong> Pay attention to repeated words, phrases, themes</li>
+      <li><strong>Pause and pray:</strong> When something strikes you, stop and pray</li>
+      <li><strong>Reflect:</strong> What did you notice that you've never seen before?</li>
+     </ol>
+     <p><strong>Benefits:</strong> Slows you down, increases retention, helps you notice patterns</p>
+     <p><em>Download template: Coming soon</em></p>
+     <h3>🎨 Bible Journaling</h3>
+     <p>Combine art and Scripture to engage both your creative and analytical mind. No artistic skill required!</p>
+     <h4>How to Use:</h4>
+     <ol>
+      <li><strong>Read the passage:</strong> Let God speak to your heart</li>
+      <li><strong>Pick a verse:</strong> Choose one that stands out</li>
+      <li><strong>Create:</strong> Draw, doodle, paint, collage—whatever expresses the truth</li>
+      <li><strong>Write reflections:</strong> Journal what God is teaching you</li>
+      <li><strong>Pray:</strong> Ask God to apply this truth to your life</li>
+     </ol>
+     <p><strong>Beginner Tips:</strong></p>
+     <ul>
+      <li>Start simple—use colored pencils or markers</li>
+      <li>Try hand-lettering the verse in decorative fonts</li>
+      <li>Use stickers, washi tape, or magazine cutouts</li>
+      <li>Focus on the process, not perfection</li>
+     </ul>
+     <p><em>Download template: Coming soon</em></p>
+     <h3>🙏 Prayer Reflection</h3>
+     <p>Structure your prayer time using the ACTS model and track how God answers over time.</p>
+     <h4>How to Use (ACTS Model):</h4>
+     <ol>
+      <li><strong>Adoration:</strong> Praise God for who He is (His character, attributes)</li>
+      <li><strong>Confession:</strong> Admit your sins and ask for forgiveness</li>
+      <li><strong>Thanksgiving:</strong> Thank God for what He's done</li>
+      <li><strong>Supplication:</strong> Ask God for your needs and the needs of others</li>
+     </ol>
+     <p><strong>Benefits:</strong> Keeps prayer balanced, helps you remember requests, builds faith as you see answers</p>
+     <p><em>Download template: Coming soon</em></p>
+     <h3>🗺️ Verse Mapping</h3>
+     <p>Deep-dive into a single verse by examining context, keywords, and cross-references.</p>
+     <h4>How to Use:</h4>
+     <ol>
+      <li><strong>Choose one verse:</strong> Select a verse that confuses or intrigues you</li>
+      <li><strong>Read context:</strong> Read the chapter before and after</li>
+      <li><strong>Identify keywords:</strong> Circle important or repeated words</li>
+      <li><strong>Define words:</strong> Look up original Hebrew/Greek meanings</li>
+      <li><strong>Cross-reference:</strong> Find other verses that use the same words</li>
+      <li><strong>Summarize:</strong> Write what you learned in your own words</li>
+      <li><strong>Apply:</strong> How does this truth change how you live?</li>
+     </ol>
+     <p><strong>Tools needed:</strong> Bible concordance, lexicon (try BlueLetterBible.org)</p>
+     <p><em>Download template: Coming soon</em></p>
+     <h3>🔍 Inductive Bible Study</h3>
+     <p>A three-step method for studying any passage: Observation, Interpretation, Application.</p>
+     <h4>How to Use:</h4>
+     <ol>
+      <li><strong>Observation (What does it say?):</strong>
+       <ul>
+        <li>Who is speaking? Who is the audience?</li>
+        <li>What is happening? Where? When?</li>
+        <li>Are there repeated words or themes?</li>
+        <li>What stands out as important?</li>
+       </ul></li>
+      <li><strong>Interpretation (What does it mean?):</strong>
+       <ul>
+        <li>What did this mean to the original audience?</li>
+        <li>What is the main point or principle?</li>
+        <li>How does this fit with the rest of Scripture?</li>
+       </ul></li>
+      <li><strong>Application (How do I live this out?):</strong>
+       <ul>
+        <li>What is God saying to me personally?</li>
+        <li>Is there a command to obey? A promise to claim?</li>
+        <li>How will I apply this today?</li>
+       </ul></li>
+     </ol>
+     <p><em>Download template: Coming soon</em></p>
+     <h3>👤 Character Study</h3>
+     <p>Follow a biblical person through Scripture to learn from their faith, failures, and relationship with God.</p>
+     <h4>How to Use:</h4>
+     <ol>
+      <li><strong>Choose a person:</strong> Moses, David, Ruth, Mary, Paul, etc.</li>
+      <li><strong>Find all references:</strong> Use a concordance or Bible app</li>
+      <li><strong>Note key events:</strong> Birth, calling, major decisions, death</li>
+      <li><strong>Observe patterns:</strong> Strengths, weaknesses, repeated behaviors</li>
+      <li><strong>Learn from mistakes:</strong> What did they do wrong? Why?</li>
+      <li><strong>Learn from faith:</strong> How did they trust God?</li>
+      <li><strong>Apply:</strong> What can you learn from their life?</li>
+     </ol>
+     <p><em>Download template: Coming soon</em></p>
+     <h3>📑 Topical Study</h3>
+     <p>Trace a theme or topic throughout Scripture to understand God's full teaching on that subject.</p>
+     <h4>How to Use:</h4>
+     <ol>
+      <li><strong>Choose a topic:</strong> Love, faith, prayer, suffering, joy, etc.</li>
+      <li><strong>Find verses:</strong> Use a concordance or topical Bible</li>
+      <li><strong>Organize by theme:</strong> Group similar verses together</li>
+      <li><strong>Look for progression:</strong> How does understanding develop through Scripture?</li>
+      <li><strong>Synthesize:</strong> What is God's complete teaching on this topic?</li>
+      <li><strong>Apply:</strong> How should this truth shape your life?</li>
+     </ol>
+     <p><em>Download template: Coming soon</em></p>
+     <h3>📓 Sermon Notes</h3>
+     <p>Capture and apply what God teaches you through preaching.</p>
+     <h4>How to Use:</h4>
+     <ol>
+      <li><strong>Passage &amp; Title:</strong> Write down the Scripture and sermon title</li>
+      <li><strong>Main Point:</strong> What is the big idea? (Usually stated early)</li>
+      <li><strong>Key Points:</strong> Note 2-4 sub-points with supporting verses</li>
+      <li><strong>Questions:</strong> Write down anything unclear to research later</li>
+      <li><strong>Personal Application:</strong> What is God calling you to do?</li>
+      <li><strong>Prayer:</strong> Ask God to help you live it out</li>
+     </ol>
+     <p><strong>Tips:</strong> Review notes within 24 hours, share one truth with someone else</p>
+     <p><em>Download template: Coming soon</em></p>
+     <h3>📥 Download All Templates</h3>
+     <p><em>Your complete collection of printable study templates will be available for download here. Check back soon!</em></p>
+    </div>
+   </div>
+  </div><!-- FAITH RESOURCES PAGES -->
+  <div id="adult-study-tools" class="page">
+   <div class="hub-page"><button class="btn-back" onclick="showPage('home')">← Back to Home</button>
+    <div class="hub-hero">
+     <div class="hub-hero-icon">
+      📚
+     </div>
+     <h2>Adult Study Tools</h2>
+     <p>Comprehensive resources to deepen your Bible study and strengthen your theological understanding.</p>
+    </div>
+    <div class="hub-content">
+     <div class="hub-card">
+      <h3>📖 Online Bible Resources</h3>
+      <p>Access trusted Bible translations and study tools online.</p>
+      <ul>
+       <li><a href="https://www.biblegateway.com" target="_blank" rel="noopener noreferrer">Bible Gateway</a> - Multiple translations, keyword search, reading plans</li>
+       <li><a href="https://www.blueletterbible.org" target="_blank" rel="noopener noreferrer">Blue Letter Bible</a> - Original language tools, concordances, commentaries</li>
+       <li><a href="https://www.biblehub.com" target="_blank" rel="noopener noreferrer">Bible Hub</a> - Parallel translations, interlinear Bible, lexicons</li>
+       <li><a href="https://bibleproject.com" target="_blank" rel="noopener noreferrer">The Bible Project</a> - Visual Bible study resources and videos</li>
+      </ul>
+     </div>
+     <div class="hub-card">
+      <h3>🔍 Inductive Study Methods</h3>
+      <p>Learn to study Scripture deeply using proven methods.</p>
+      <ul>
+       <li><strong>Observation:</strong> What does it say?</li>
+       <li><strong>Interpretation:</strong> What does it mean?</li>
+       <li><strong>Application:</strong> How do I live this out?</li>
+      </ul>
+     </div>
+     <div class="hub-card">
+      <h3>🎧 Recommended Podcasts</h3>
+      <p>Deepen your understanding with quality teaching.</p>
+      <ul>
+       <li><strong>The Bible Project Podcast</strong> - Exploring biblical themes</li>
+       <li><strong>Revive Our Hearts</strong> - Nancy DeMoss Wolgemuth</li>
+       <li><strong>Truth For Life</strong> - Alistair Begg</li>
+       <li><strong>Knowing Faith</strong> - Jen Wilkin, JT English, Kyle Worley</li>
+      </ul>
+     </div>
+     <div class="hub-card">
+      <h3>📚 Recommended Books</h3>
+      <p>Build your theological library with these essential reads.</p>
+      <ul>
+       <li><strong>Women of the Word</strong> - Jen Wilkin</li>
+       <li><strong>How to Read the Bible for All Its Worth</strong> - Gordon Fee &amp; Douglas Stuart</li>
+       <li><strong>Knowing God</strong> - J.I. Packer</li>
+       <li><strong>The Knowledge of the Holy</strong> - A.W. Tozer</li>
+      </ul>
+     </div>
+     <div class="hub-card">
+      <h3>🙏 Spiritual Disciplines Guide</h3>
+      <p>Practices that deepen your relationship with God.</p>
+      <ul>
+       <li><button onclick="showPage('spiritual-disciplines')">Complete Spiritual Disciplines Guide</button></li>
+      </ul>
+     </div>
+     <div class="hub-card">
+      <h3>📖 Bible Study Methods</h3>
+      <p>Different approaches for different passages—comprehensive guides to help you study God's Word effectively.</p>
+      <ul>
+       <li><button onclick="showPage('bible-study-methods')">Complete Bible Study Methods Guide</button></li>
+      </ul>
+     </div>
+     <div class="hub-card">
+      <h3>🗺️ Background Resources</h3>
+      <p>Understand the context behind Scripture.</p>
+      <ul>
+       <li><strong>Bible Atlases:</strong> Geography and locations</li>
+       <li><strong>Cultural Context:</strong> Ancient Near Eastern customs</li>
+       <li><strong>Historical Timeline:</strong> When events occurred</li>
+       <li><strong>Archaeological Insights:</strong> Physical evidence</li>
+      </ul>
+     </div>
+    </div>
+   </div>
+  </div>
+  <div id="kids-family-resources" class="page">
+   <div class="hub-page"><button class="btn-back" onclick="showPage('home')">← Back to Home</button>
+    <div class="hub-hero">
+     <div class="hub-hero-icon">
+      👨‍👩‍👧‍👦
+     </div>
+     <h2>Kids &amp; Family Resources</h2>
+     <p>Age-appropriate tools to nurture faith in children and strengthen families spiritually.</p>
+    </div>
+    <div class="hub-content">
+     <div class="hub-card">
+      <h3>📖 Age-Appropriate Bibles</h3>
+      <p>Choosing the right Bible for your child's age and reading level.</p>
+      <ul>
+       <li><strong>Toddlers (0-3):</strong> Board book Bibles with simple stories and pictures</li>
+       <li><strong>Preschool (3-5):</strong> The Beginner's Bible, Read-Aloud Bible Stories</li>
+       <li><strong>Early Elementary (6-8):</strong> The Jesus Storybook Bible, ICB Big Red Bible</li>
+       <li><strong>Upper Elementary (9-12):</strong> NIrV Adventure Bible, ESV Kids Bible</li>
+       <li><strong>Teen (13+):</strong> NIV Student Bible, ESV Journaling Bible</li>
+      </ul>
+     </div>
+     <div class="hub-card">
+      <h3>🏠 Family Devotion Ideas</h3>
+      <p>Simple ways to build faith together as a family.</p>
+      <ul>
+       <li><strong>Mealtime Blessings:</strong> Pray together before meals</li>
+       <li><strong>Bedtime Bible Stories:</strong> Read Scripture before sleep</li>
+       <li><strong>Weekly Family Worship:</strong> Sing and pray together</li>
+       <li><strong>Scripture Memory:</strong> Learn verses as a family</li>
+       <li><strong>Service Projects:</strong> Serve others together</li>
+       <li><strong>Gratitude Journal:</strong> Share daily blessings</li>
+      </ul>
+     </div>
+     <div class="hub-card">
+      <h3>🎨 Creative Faith Activities</h3>
+      <p>Hands-on ways to engage children with biblical truths.</p>
+      <ul>
+       <li><strong>Bible Story Crafts:</strong> Create art based on Scripture</li>
+       <li><strong>Scripture Coloring Pages:</strong> Color while learning verses</li>
+       <li><strong>Bible Memory Games:</strong> Fun ways to memorize Scripture</li>
+       <li><strong>Worship Dance:</strong> Move to worship music</li>
+       <li><strong>Nature Walks:</strong> Discover God's creation together</li>
+       <li><strong>Prayer Journals:</strong> Draw and write prayers</li>
+      </ul>
+     </div>
+     <div class="hub-card">
+      <h3>📚 Recommended Children's Books</h3>
+      <p>Faith-building books for different ages.</p>
+      <ul>
+       <li><strong>The Jesus Storybook Bible</strong> - Sally Lloyd-Jones</li>
+       <li><strong>Long Story Short</strong> - Marty Machowski</li>
+       <li><strong>Thoughts to Make Your Heart Sing</strong> - Sally Lloyd-Jones</li>
+       <li><strong>The Ology</strong> - Marty Machowski</li>
+       <li><strong>Leading Little Ones to God</strong> - Marian Schoolland</li>
+      </ul>
+     </div>
+     <div class="hub-card">
+      <h3>🎵 Kids Worship Music</h3>
+      <p>Music that teaches truth and builds faith.</p>
+      <ul>
+       <li><strong>Songs for Saplings</strong> - Scripture set to music</li>
+       <li><strong>Slugs &amp; Bugs</strong> - Fun, theologically rich songs</li>
+       <li><strong>The Sing Team</strong> - Worship for kids</li>
+       <li><strong>Keith &amp; Kristyn Getty</strong> - Family hymns</li>
+      </ul>
+     </div>
+     <div class="hub-card">
+      <h3>💬 Talking About Faith</h3>
+      <p>Tips for spiritual conversations with children.</p>
+      <ul>
+       <li><strong>Answer Questions Honestly:</strong> It's okay to say "I don't know"</li>
+       <li><strong>Use Everyday Moments:</strong> Connect faith to daily life</li>
+       <li><strong>Tell Your Story:</strong> Share your own faith journey</li>
+       <li><strong>Read Together:</strong> Discuss what you read</li>
+       <li><strong>Pray Out Loud:</strong> Let them hear you pray</li>
+       <li><strong>Be Authentic:</strong> Show your real faith, struggles included</li>
+      </ul>
+     </div>
+     <div class="hub-card">
+      <h3>🙏 Teaching Kids to Pray</h3>
+      <p>Helping children develop their own prayer life.</p>
+      <ul>
+       <li><strong>Model Prayer:</strong> Pray with and for them</li>
+       <li><strong>Keep it Simple:</strong> Short, honest prayers</li>
+       <li><strong>Use ACTS Model:</strong> Adoration, Confession, Thanksgiving, Supplication</li>
+       <li><strong>Pray Scripture:</strong> Use Bible verses as prayers</li>
+       <li><strong>Encourage Questions:</strong> Let them talk to God honestly</li>
+       <li><strong>Celebrate Answers:</strong> Notice when God responds</li>
+      </ul>
+     </div>
+    </div>
+   </div>
+  </div><!-- LITTLE HEARTS CONTENT PAGES -->
+  <div id="faith-building-treasures" class="page">
+   <div class="content-page"><button class="btn-back" onclick="goBack()">← Back</button> <button class="back-to-top" onclick="scrollToTop()" aria-label="Back to top">↑</button>
+    <div class="content-header">
+     <h2>Faith-Building Treasures</h2>
+     <div class="meta">
+      Faith for Little Hearts
+     </div>
+    </div>
+    <div class="intro-section">
+     <h3>Heroes of Faith for Little Hearts</h3>
+     <p>Introduce children to the incredible men and women of the Bible through engaging stories.</p>
+    </div>
+    <div class="content-body">
+     <h3>Explore the Heroes</h3>
+     <p><em>Your collection of Bible hero stories for children will be organized here.</em></p>
+    </div>
+   </div>
+  </div>
+  <div id="66-books-carousel" class="page">
+   <div class="content-page"><button class="btn-back" onclick="goBack()">← Back</button> <button class="back-to-top" onclick="scrollToTop()" aria-label="Back to top">↑</button>
+    <div class="content-header">
+     <h2>66-Book Bible Carousel</h2>
+     <div class="meta">
+      Faith for Little Hearts
+     </div>
+    </div>
+    <div class="intro-section">
+     <h3>A Journey Through Every Book</h3>
+     <p>An interactive tour through all 66 books of the Bible designed for children.</p>
+    </div>
+    <div class="content-body">
+     <h3>Start the Carousel</h3>
+     <p><em>Your interactive 66-book carousel for children will be embedded here.</em></p>
+    </div>
+   </div>
+  </div><!-- LIGHT IN THE DARKNESS CONTENT PAGES -->
+  <div id="light-darkness-devotional" class="page">
+   <div class="content-page"><button class="btn-back" onclick="goBack()">← Back</button> <button class="back-to-top" onclick="scrollToTop()" aria-label="Back to top">↑</button>
+    <div class="content-header">
+     <h2>Light in the Darkness Devotional</h2>
+     <div class="meta">
+      Light in the Darkness
+     </div>
+    </div>
+    <div class="intro-section">
+     <h3>A Companion for Your Grief Journey</h3>
+     <p>This devotional was written for those walking through the valley of loss.</p>
+    </div>
+    <div class="content-body">
+     <h3>Begin Reading</h3>
+     <p><em>Your devotional content will be organized here.</em></p>
+    </div>
+   </div>
+  </div>
+  <div id="gods-promises-hard-days" class="page">
+   <div class="content-page"><button class="btn-back" onclick="goBack()">← Back</button> <button class="back-to-top" onclick="scrollToTop()" aria-label="Back to top">↑</button>
+    <div class="content-header">
+     <h2>God's Promises for Hard Days</h2>
+     <div class="meta">
+      Light in the Darkness
+     </div>
+    </div>
+    <div class="intro-section">
+     <h3>Anchoring Truths When Life Feels Uncertain</h3>
+     <p>God's promises are steadfast—even when we're not.</p>
+    </div>
+    <div class="content-body">
+     <h3>God's Unchanging Promises</h3>
+     <p><em>Your collection of Scripture promises will appear here.</em></p>
+    </div>
+   </div>
+  </div>
+  <div id="ajs-story" class="page">
+   <div class="content-page"><button class="btn-back" onclick="goBack()">← Back</button> <button class="back-to-top" onclick="scrollToTop()" aria-label="Back to top">↑</button>
+    <div class="content-header">
+     <h2>AJ's Story</h2>
+     <div class="meta">
+      Light in the Darkness
+     </div>
+    </div>
+    <div class="intro-section">
+     <h3>A Life That Continues to Shine</h3>
+     <p>This is the story of our beloved AJ.</p>
+    </div>
+    <div class="content-body">
+     <h3>Our Journey</h3>
+     <p><em>AJ's story will be shared here with love and hope.</em></p>
+    </div>
+   </div>
+  </div>
+  <div id="verses-grief-comfort" class="page">
+   <div class="content-page"><button class="btn-back" onclick="goBack()">← Back</button> <button class="back-to-top" onclick="scrollToTop()" aria-label="Back to top">↑</button>
+    <div class="content-header">
+     <h2>Verses for Grief and Comfort</h2>
+     <div class="meta">
+      Light in the Darkness
+     </div>
+    </div>
+    <div class="intro-section">
+     <h3>Scripture for Hurting Hearts</h3>
+     <p>God's Word speaks directly into our pain with comfort and truth.</p>
+    </div>
+    <div class="content-body">
+     <h3>Comfort from Scripture</h3>
+     <p><em>Your curated collection of verses will be organized here.</em></p>
+    </div>
+   </div>
+  </div>
+  <div id="when-dont-know-pray" class="page">
+   <div class="content-page"><button class="btn-back" onclick="goBack()">← Back</button> <button class="back-to-top" onclick="scrollToTop()" aria-label="Back to top">↑</button>
+    <div class="content-header">
+     <h2>When You Don't Know What to Pray</h2>
+     <div class="meta">
+      Light in the Darkness
+     </div>
+    </div>
+    <div class="intro-section">
+     <h3>Prayers When Words Fail</h3>
+     <p>These prayers carry your heart to God when you can't find the words.</p>
+    </div>
+    <div class="content-body">
+     <h3>Prayers for Different Moments</h3>
+     <p><em>Your collection of prayers for grief will be organized here.</em></p>
+    </div>
+   </div>
+  </div>
+  <div id="stories-of-hope" class="page">
+   <div class="content-page"><button class="btn-back" onclick="goBack()">← Back</button> <button class="back-to-top" onclick="scrollToTop()" aria-label="Back to top">↑</button>
+    <div class="content-header">
+     <h2>Stories of Hope</h2>
+     <div class="meta">
+      Light in the Darkness
+     </div>
+    </div>
+    <div class="intro-section">
+     <h3>Testimonies of God's Faithfulness</h3>
+     <p>Real stories from people who have found God faithful through loss.</p>
+    </div>
+    <div class="content-body">
+     <h3>Read the Stories</h3>
+     <p><em>Your collection of hope testimonies will be shared here.</em></p>
+    </div>
+   </div>
+  </div>
+  <div id="comforting-psalms" class="page">
+   <div class="content-page"><button class="btn-back" onclick="goBack()">← Back</button> <button class="back-to-top" onclick="scrollToTop()" aria-label="Back to top">↑</button>
+    <div class="content-header">
+     <h2>Comforting Psalms Collection</h2>
+     <div class="meta">
+      Light in the Darkness
+     </div>
+    </div>
+    <div class="intro-section">
+     <h3>Ancient Prayers That Still Speak</h3>
+     <p>The Psalms gave voice to every human emotion.</p>
+    </div>
+    <div class="content-body">
+     <h3>Explore the Psalms</h3>
+     <p><em>Your curated collection of comforting Psalms will be featured here.</em></p>
+    </div>
+   </div>
+  </div>
+  <div id="encouragement-messages" class="page">
+   <div class="content-page"><button class="btn-back" onclick="goBack()">← Back</button> <button class="back-to-top" onclick="scrollToTop()" aria-label="Back to top">↑</button>
+    <div class="content-header">
+     <h2>Encouragement Messages</h2>
+     <div class="meta">
+      Light in the Darkness
+     </div>
+    </div>
+    <div class="intro-section">
+     <h3>Gentle Reminders for Hard Days</h3>
+     <p>You're not alone, you're loved, and God is present.</p>
+    </div>
+    <div class="content-body">
+     <h3>Messages of Hope</h3>
+     <p><em>Your collection of encouragement messages will be organized here.</em></p>
+    </div>
+   </div>
+  </div><!-- HEALING HEARTS CONTENT PAGES -->
+  <div id="healing-room" class="page">
+   <div class="content-page"><button class="btn-back" onclick="goBack()">← Back</button> <button class="back-to-top" onclick="scrollToTop()" aria-label="Back to top">↑</button>
+    <div class="content-header">
+     <h2>The Healing Room</h2>
+     <div class="meta">
+      Healing Hearts
+     </div>
+    </div>
+    <div class="intro-section">
+     <h3>A Sacred Space for Encounter</h3>
+     <p>A place where heaven meets earth, where you bring your broken pieces to the Great Healer.</p>
+    </div>
+    <div class="content-body">
+     <h3>What You'll Find Here</h3>
+     <p><em>Your Healing Room resources will be accessible here.</em></p>
+    </div>
+   </div>
+  </div>
+  <div id="our-story" class="page">
+   <div class="content-page"><button class="btn-back" onclick="goBack()">← Back</button> <button class="back-to-top" onclick="scrollToTop()" aria-label="Back to top">↑</button>
+    <div class="content-header">
+     <h2>Our Story</h2>
+     <div class="meta">
+      Healing Hearts
+     </div>
+    </div>
+    <div class="intro-section">
+     <h3>How Wholehearted Legacy Began</h3>
+     <p>This ministry was born from loss, shaped by grief, and sustained by God's faithful presence.</p>
+    </div>
+    <div class="content-body">
+     <h3>The Beginning</h3>
+     <p><em>Your family's testimony will be shared here.</em></p>
+    </div>
+   </div>
+  </div>
+  <div id="loris-light" class="page">
+   <div class="content-page"><button class="btn-back" onclick="goBack()">← Back</button> <button class="back-to-top" onclick="scrollToTop()" aria-label="Back to top">↑</button>
+    <div class="content-header">
+     <h2>Lori's Light</h2>
+     <div class="meta">
+      Healing Hearts
+     </div>
+    </div>
+    <div class="intro-section">
+     <h3>Reflections from the Journey</h3>
+     <p>Personal reflections and lessons learned from the journey of faith, loss, and healing.</p>
+    </div>
+    <div class="content-body">
+     <h3>Recent Reflections</h3>
+     <p><em>Your personal reflections will be organized here.</em></p>
+    </div>
+   </div>
+  </div>
+  <div id="calebs-corner" class="page">
+   <div class="content-page"><button class="btn-back" onclick="goBack()">← Back</button> <button class="back-to-top" onclick="scrollToTop()" aria-label="Back to top">↑</button>
+    <div class="content-header">
+     <h2>Caleb's Corner</h2>
+     <div class="meta">
+      Healing Hearts
+     </div>
+    </div>
+    <div class="intro-section">
+     <h3>Wisdom Through a Child's Eyes</h3>
+     <p>Creativity, joy, and insights from Caleb's perspective.</p>
+    </div>
+    <div class="content-body">
+     <h3>From Caleb</h3>
+     <p><em>Caleb's creative expressions will be featured here.</em></p>
+    </div>
+   </div>
+  </div>
+  <div id="isabellas-insights" class="page">
+   <div class="content-page"><button class="btn-back" onclick="goBack()">�� Back</button> <button class="back-to-top" onclick="scrollToTop()" aria-label="Back to top">↑</button>
+    <div class="content-header">
+     <h2>Isabella's Insights</h2>
+     <div class="meta">
+      Healing Hearts
+     </div>
+    </div>
+    <div class="intro-section">
+     <h3>Faith Through Young Eyes</h3>
+     <p>Isabella's journey of discovering who God is and what faith looks like.</p>
+    </div>
+    <div class="content-body">
+     <h3>From Isabella</h3>
+     <p><em>Isabella's reflections will be shared here.</em></p>
+    </div>
+   </div>
+  </div>
+  <div id="community-stories" class="page">
+   <div class="content-page"><button class="btn-back" onclick="goBack()">← Back</button> <button class="back-to-top" onclick="scrollToTop()" aria-label="Back to top">↑</button>
+    <div class="content-header">
+     <h2>Community Stories</h2>
+     <div class="meta">
+      Healing Hearts
+     </div>
+    </div>
+    <div class="intro-section">
+     <h3>Testimonies of Hope and Healing</h3>
+     <p>Share your journey and encourage others walking the path of healing.</p>
+    </div>
+    <div class="content-body">
+     <h3>Read Stories from Our Community</h3>
+     <p><em>Community testimonies will be displayed here.</em></p>
+    </div>
+   </div>
+  </div><!-- SALVATION QUESTION PAGES -->
+  <div id="what-is-salvation" class="page">
+   <div class="content-page"><button class="btn-back" onclick="goBack()">← Back</button> <button class="back-to-top" onclick="scrollToTop()" aria-label="Back to top">↑</button>
+    <div class="content-header">
+     <h2>What is Salvation?</h2>
+     <div class="meta">
+      A Savior's Call
+     </div>
+    </div>
+    <div class="intro-section">
+     <h3>God's Free Gift</h3>
+     <p>Salvation is God's gracious act of rescuing us from sin and death through Jesus Christ.</p>
+    </div>
+    <div class="content-body">
+     <h3>The Gospel in Simple Terms</h3>
+     <p>Salvation is God's free gift of forgiveness, new life, and eternal relationship with Him through Jesus Christ. It's not something we earn—it's something we receive by faith.</p>
+     <h3>The Problem: We Are Separated from God</h3>
+     <p>God created us for relationship with Him, but sin has separated us. Sin isn't just "bad things we do"—it's our choice to go our own way instead of God's way. The Bible tells us:</p>
+     <blockquote>
+      "For all have sinned and fall short of the glory of God." - Romans 3:23
+     </blockquote>
+     <blockquote>
+      "For the wages of sin is death, but the gift of God is eternal life in Christ Jesus our Lord." - Romans 6:23
+     </blockquote>
+     <p>The consequence of sin is death—both physical death and spiritual separation from God forever. We can't fix this problem ourselves. No amount of good works, religious activity, or moral living can bridge the gap between us and a holy God.</p>
+     <h3>The Solution: Jesus Died in Our Place</h3>
+     <p>Here's the incredible news: God didn't leave us in our sin. He sent His Son, Jesus Christ, to do what we could never do for ourselves.</p>
+     <blockquote>
+      "But God demonstrates his own love for us in this: While we were still sinners, Christ died for us." - Romans 5:8
+     </blockquote>
+     <p>Jesus, who never sinned, took the punishment we deserved. He lived the perfect life we couldn't live, died the death we deserved to die, and rose from the dead three days later—defeating sin, death, and hell forever.</p>
+     <h3>The Response: Believe and Receive</h3>
+     <p>Salvation is a gift. You can't earn it, buy it, or work for it. You simply receive it by faith.</p>
+     <blockquote>
+      "For it is by grace you have been saved, through faith—and this is not from yourselves, it is the gift of God—not by works, so that no one can boast." - Ephesians 2:8-9
+     </blockquote>
+     <p><strong>To receive salvation, you must:</strong></p>
+     <ol>
+      <li><strong>Admit</strong> you are a sinner and cannot save yourself</li>
+      <li><strong>Believe</strong> that Jesus died for your sins and rose from the dead</li>
+      <li><strong>Confess</strong> Jesus as Lord and surrender your life to Him</li>
+     </ol>
+     <blockquote>
+      "If you declare with your mouth, 'Jesus is Lord,' and believe in your heart that God raised him from the dead, you will be saved." - Romans 10:9
+     </blockquote>
+     <h3>A Prayer to Receive Christ</h3>
+     <p>If you're ready to receive Jesus as your Savior and Lord, you can pray something like this:</p>
+     <blockquote style="background: #f7f3ef; padding: 25px; border-left: 4px solid #9c826b; font-style: normal;">
+      <p><em>"Dear God,</em></p>
+      <p><em>I know I am a sinner and I cannot save myself. I believe that Jesus Christ died on the cross for my sins and rose from the dead. I confess Jesus as my Lord and Savior. Please forgive my sins and give me the gift of eternal life. I surrender my life to You and ask You to be the Lord of my life from this day forward.</em></p>
+      <p><em>In Jesus' name, Amen."</em></p>
+     </blockquote>
+     <p><strong>Did you just pray that prayer and mean it?</strong> If so, congratulations! You are now a child of God! The Bible says:</p>
+     <blockquote>
+      "Yet to all who did receive him, to those who believed in his name, he gave the right to become children of God." - John 1:12
+     </blockquote>
+     <h3>What Happens When You're Saved?</h3>
+     <ul>
+      <li><strong>Your sins are forgiven</strong> - Past, present, and future (Colossians 2:13-14)</li>
+      <li><strong>You become a new creation</strong> - Your old life is gone, the new has come (2 Corinthians 5:17)</li>
+      <li><strong>You receive the Holy Spirit</strong> - God Himself lives in you (Ephesians 1:13-14)</li>
+      <li><strong>You're adopted into God's family</strong> - You become a child of God (Romans 8:15-16)</li>
+      <li><strong>You have eternal life</strong> - You will live with God forever (John 3:16)</li>
+      <li><strong>Nothing can separate you from God's love</strong> - You are secure in Christ (Romans 8:38-39)</li>
+     </ul>
+     <h3>What's Next?</h3>
+     <p>If you just accepted Christ, here are your next steps:</p>
+     <ol>
+      <li><strong>Tell someone!</strong> Share your decision with a Christian friend or family member</li>
+      <li><strong>Read the Bible</strong> - Start with the Gospel of John to learn about Jesus</li>
+      <li><strong>Pray every day</strong> - Talk to God like you would a loving Father</li>
+      <li><strong>Find a church</strong> - Connect with other believers who can encourage you</li>
+      <li><strong>Get baptized</strong> - This is your public declaration of faith in Jesus</li>
+     </ol>
+     <div style="text-align: center; margin-top: 40px;"><button class="btn btn-primary" onclick="showPage('beginning-faith')">New Believer Resources</button>
+     </div>
+    </div>
+   </div>
+  </div>
+  <div id="how-do-i-pray" class="page">
+   <div class="content-page"><button class="btn-back" onclick="goBack()">← Back</button> <button class="back-to-top" onclick="scrollToTop()" aria-label="Back to top">↑</button>
+    <div class="content-header">
+     <h2>How Do I Pray?</h2>
+     <div class="meta">
+      A Savior's Call
+     </div>
+    </div>
+    <div class="intro-section">
+     <h3>Simple Guidance for Talking with God</h3>
+     <p>Prayer isn't complicated—it's simply talking with God.</p>
+    </div>
+    <div class="content-body">
+     <h3>What Is Prayer?</h3>
+     <p>Prayer is simply talking with God. It's not a formula, a ritual, or fancy religious language—it's honest conversation with your loving heavenly Father. If you can talk, you can pray.</p>
+     <blockquote>
+      "The Lord is near to all who call on him, to all who call on him in truth." - Psalm 145:18
+     </blockquote>
+     <h3>You Don't Need Special Words</h3>
+     <p>Many new believers worry they don't know "how" to pray. The truth is, God cares more about your heart than your words. You can pray:</p>
+     <ul>
+      <li><strong>Out loud or silently</strong> - God hears both</li>
+      <li><strong>With your eyes open or closed</strong> - Either way is fine</li>
+      <li><strong>Sitting, standing, kneeling, or walking</strong> - Posture doesn't matter</li>
+      <li><strong>Using simple everyday language</strong> - No need for "thee" or "thou"</li>
+      <li><strong>For as long or as short as you need</strong> - God isn't watching the clock</li>
+     </ul>
+     <h3>How Jesus Taught Us to Pray</h3>
+     <p>When Jesus' disciples asked Him to teach them to pray, He gave them a simple model we call "The Lord's Prayer." It's not meant to be recited mindlessly—it's a pattern showing what prayer should include:</p>
+     <blockquote>
+      <p><strong>"Our Father in heaven, hallowed be your name,"</strong></p>
+      <p>Start with <strong>worship</strong> - Acknowledge who God is and praise His character</p><br>
+      <p><strong>"Your kingdom come, your will be done, on earth as it is in heaven."</strong></p>
+      <p><strong>Align with God's purposes</strong> - Submit to His plans, not just your own</p><br>
+      <p><strong>"Give us today our daily bread."</strong></p>
+      <p>Bring your <strong>needs</strong> - Ask God to provide what you need (physically, emotionally, spiritually)</p><br>
+      <p><strong>"And forgive us our debts, as we also have forgiven our debtors."</strong></p>
+      <p>Practice <strong>confession and forgiveness</strong> - Admit your sins and forgive others</p><br>
+      <p><strong>"And lead us not into temptation, but deliver us from the evil one."</strong></p>
+      <p>Ask for <strong>protection and guidance</strong> - Request help to resist temptation and stand against evil</p>
+     </blockquote>
+     <h3>The ACTS Prayer Model</h3>
+     <p>Another helpful prayer framework is ACTS, which stands for:</p>
+     <h4>A - Adoration</h4>
+     <p>Start by praising God for who He is. Tell Him what you love about His character.</p>
+     <p><em>Example: "God, You are faithful and loving. You never change, and Your mercy is new every morning."</em></p>
+     <h4>C - Confession</h4>
+     <p>Admit your sins honestly. God already knows—confession keeps your relationship with Him clear.</p>
+     <p><em>Example: "Father, I confess I was impatient with my family today. I spoke harshly. Please forgive me."</em></p>
+     <h4>T - Thanksgiving</h4>
+     <p>Thank God for specific things He's done. Gratitude shifts our perspective.</p>
+     <p><em>Example: "Thank You for providing for my needs, for my health, for the people who love me."</em></p>
+     <h4>S - Supplication</h4>
+     <p>Bring your requests to God. Ask for yourself and intercede for others.</p>
+     <p><em>Example: "Please heal my friend who is sick. Give me wisdom at work. Help me grow in patience."</em></p>
+     <h3>What Can You Pray About?</h3>
+     <p>Literally anything! God wants to hear about every part of your life:</p>
+     <ul>
+      <li><strong>Your worries and fears</strong> - "Cast all your anxiety on him because he cares for you" (1 Peter 5:7)</li>
+      <li><strong>Your joys and celebrations</strong> - Share your happiness with God</li>
+      <li><strong>Your questions and doubts</strong> - God can handle your honest questions</li>
+      <li><strong>Your needs</strong> - Physical, emotional, financial, spiritual—all of it</li>
+      <li><strong>Other people</strong> - Pray for family, friends, enemies, leaders, the lost</li>
+      <li><strong>Decisions you need to make</strong> - Ask for wisdom and guidance</li>
+      <li><strong>Your sins</strong> - Confess and receive forgiveness</li>
+     </ul>
+     <h3>Does God Always Answer Prayer?</h3>
+     <p>Yes—but not always the way we expect. God answers prayer in three ways:</p>
+     <ul>
+      <li><strong>"Yes"</strong> - He grants what you asked for</li>
+      <li><strong>"No"</strong> - He knows what's best and sometimes protects us by saying no</li>
+      <li><strong>"Wait"</strong> - His timing is perfect, even when it's not ours</li>
+     </ul>
+     <blockquote>
+      "This is the confidence we have in approaching God: that if we ask anything according to his will, he hears us." - 1 John 5:14
+     </blockquote>
+     <h3>Tips for Building a Prayer Life</h3>
+     <ol>
+      <li><strong>Start small</strong> - Even 5 minutes a day builds the habit</li>
+      <li><strong>Choose a consistent time</strong> - Morning, lunch, or bedtime—pick what works</li>
+      <li><strong>Find a quiet place</strong> - Minimize distractions when possible</li>
+      <li><strong>Keep a prayer journal</strong> - Write down prayers and watch God answer</li>
+      <li><strong>Pray Scripture</strong> - Use Bible verses as prayers (the Psalms are great for this)</li>
+      <li><strong>Pray with others</strong> - Praying with friends or family strengthens faith</li>
+      <li><strong>Don't give up</strong> - Keep praying even when it feels hard</li>
+     </ol>
+     <h3>Simple Prayers to Get You Started</h3>
+     <p><strong>Morning Prayer:</strong></p>
+     <blockquote style="font-style: normal; background: #f7f3ef; padding: 20px;"><em>"Good morning, God. Thank You for this new day. Help me to walk closely with You today. Give me wisdom, patience, and love for others. Let my life bring You glory. In Jesus' name, Amen."</em>
+     </blockquote>
+     <p><strong>Evening Prayer:</strong></p>
+     <blockquote style="font-style: normal; background: #f7f3ef; padding: 20px;"><em>"Father, thank You for being with me today. Forgive me for the ways I fell short. Thank You for Your patience and love. Watch over me and my loved ones tonight. Help me rest in Your peace. In Jesus' name, Amen."</em>
+     </blockquote>
+     <p><strong>When You're Worried:</strong></p>
+     <blockquote style="font-style: normal; background: #f7f3ef; padding: 20px;"><em>"God, I'm anxious about [specific situation]. I don't know what to do, but You do. I trust You. Please give me peace and help me see Your faithfulness. In Jesus' name, Amen."</em>
+     </blockquote>
+     <p><strong>When You Need Guidance:</strong></p>
+     <blockquote style="font-style: normal; background: #f7f3ef; padding: 20px;"><em>"Lord, I need wisdom about [specific decision]. Your Word says if I lack wisdom, I should ask You. Please make Your will clear to me. Help me trust You with the outcome. In Jesus' name, Amen."</em>
+     </blockquote>
+     <h3>Remember This</h3>
+     <p>God is your loving Father who wants to hear from you. You can't pray "wrong." Just start talking to Him like you would talk to someone who loves you completely—because that's exactly who He is.</p>
+     <blockquote>
+      "Do not be anxious about anything, but in every situation, by prayer and petition, with thanksgiving, present your requests to God. And the peace of God, which transcends all understanding, will guard your hearts and your minds in Christ Jesus." - Philippians 4:6-7
+     </blockquote>
+    </div>
+   </div>
+  </div>
+  <div id="what-translation" class="page">
+   <div class="content-page"><button class="btn-back" onclick="goBack()">← Back</button> <button class="back-to-top" onclick="scrollToTop()" aria-label="Back to top">↑</button>
+    <div class="content-header">
+     <h2>What Translation Should I Read?</h2>
+     <div class="meta">
+      A Savior's Call
+     </div>
+    </div>
+    <div class="intro-section">
+     <h3>Choosing a Bible Version</h3>
+     <p>The best Bible is the one you'll actually read.</p>
+    </div>
+    <div class="content-body">
+     <h3>Why Are There Different Translations?</h3>
+     <p>The Bible was originally written in Hebrew (Old Testament), Aramaic (small portions), and Greek (New Testament). Since most of us don't read ancient languages, we need translations into English. Different translations use different approaches, and each has strengths depending on your needs.</p>
+     <p><strong>The key principle:</strong> The best Bible translation is the one you'll actually read!</p>
+     <h3>Understanding Translation Approaches</h3>
+     <p>Bible translations fall on a spectrum between two approaches:</p>
+     <h4>Word-for-Word (Formal Equivalence)</h4>
+     <p>These translations stay as close as possible to the original language's word order and structure. They're more literal and great for deep study, but can sometimes be harder to read smoothly.</p>
+     <p><strong>Strength:</strong> Precision and accuracy for study</p>
+     <p><strong>Challenge:</strong> Can be more difficult to understand at first</p>
+     <h4>Thought-for-Thought (Dynamic Equivalence)</h4>
+     <p>These translations aim to convey the meaning and ideas of the original text in clear, natural English. They're easier to read but involve more interpretation.</p>
+     <p><strong>Strength:</strong> Clarity and readability</p>
+     <p><strong>Challenge:</strong> Some nuance may be lost in translation</p>
+     <h4>Paraphrase</h4>
+     <p>These aren't strict translations but restatements of the Bible in contemporary language. They're easy to read but should be used alongside a more literal translation.</p>
+     <p><strong>Strength:</strong> Very accessible and engaging</p>
+     <p><strong>Challenge:</strong> More interpretive, not as precise for study</p>
+     <h3>Popular Bible Translations Explained</h3>
+     <h4>ESV (English Standard Version)</h4>
+     <p><strong>Translation Style:</strong> Essentially word-for-word</p>
+     <p><strong>Best For:</strong> Bible study, memorization, reading aloud</p>
+     <p><strong>Why Choose It:</strong> Excellent balance of accuracy and readability. Widely used in churches and for serious Bible study. Great for those who want to dig deep into Scripture.</p>
+     <p><strong>Reading Level:</strong> 10th grade</p>
+     <h4>NIV (New International Version)</h4>
+     <p><strong>Translation Style:</strong> Balanced between word-for-word and thought-for-thought</p>
+     <p><strong>Best For:</strong> General reading, daily devotions, new believers</p>
+     <p><strong>Why Choose It:</strong> The most popular modern translation. Clear, accurate, and easy to understand. Great all-around Bible for reading and study.</p>
+     <p><strong>Reading Level:</strong> 7th-8th grade</p>
+     <h4>NASB (New American Standard Bible)</h4>
+     <p><strong>Translation Style:</strong> Strictly word-for-word</p>
+     <p><strong>Best For:</strong> Serious study, cross-referencing, comparing word meanings</p>
+     <p><strong>Why Choose It:</strong> One of the most literal translations available. Excellent for in-depth study but can be more challenging to read smoothly.</p>
+     <p><strong>Reading Level:</strong> 11th grade</p>
+     <h4>NLT (New Living Translation)</h4>
+     <p><strong>Translation Style:</strong> Thought-for-thought</p>
+     <p><strong>Best For:</strong> Easy reading, devotional time, reading through books quickly</p>
+     <p><strong>Why Choose It:</strong> Very readable and clear. Great for understanding difficult passages. Perfect for new believers or reading large sections of Scripture.</p>
+     <p><strong>Reading Level:</strong> 6th grade</p>
+     <h4>CSB (Christian Standard Bible)</h4>
+     <p><strong>Translation Style:</strong> Balance of word-for-word and thought-for-thought</p>
+     <p><strong>Best For:</strong> Readable study, teaching, preaching</p>
+     <p><strong>Why Choose It:</strong> A newer translation that aims for optimal equivalence—as literal as possible while maintaining readability. Growing in popularity.</p>
+     <p><strong>Reading Level:</strong> 7th-8th grade</p>
+     <h4>KJV (King James Version)</h4>
+     <p><strong>Translation Style:</strong> Word-for-word (1611 English)</p>
+     <p><strong>Best For:</strong> Those who appreciate traditional language, memorization</p>
+     <p><strong>Why Choose It:</strong> Beautiful, poetic language that's been used for 400+ years. However, the archaic English ("thee," "thou") can be challenging for modern readers.</p>
+     <p><strong>Note:</strong> While beloved by many, it's based on fewer and older manuscripts than modern translations</p>
+     <h4>NKJV (New King James Version)</h4>
+     <p><strong>Translation Style:</strong> Word-for-word (updated English)</p>
+     <p><strong>Best For:</strong> Those who want KJV accuracy with modern English</p>
+     <p><strong>Why Choose It:</strong> Maintains the KJV's translation philosophy but uses contemporary English. Good middle ground for those who appreciate tradition but need clarity.</p>
+     <h4>MSG (The Message)</h4>
+     <p><strong>Translation Style:</strong> Paraphrase</p>
+     <p><strong>Best For:</strong> Fresh perspective, devotional reading</p>
+     <p><strong>Why Choose It:</strong> Written in very contemporary, conversational language. Great for getting a fresh take on familiar passages, but should be used alongside a more literal translation for study.</p>
+     <p><strong>Important:</strong> This is not a translation but a paraphrase—one person's interpretation of Scripture</p>
+     <h3>How to Choose Your Translation</h3>
+     <p><strong>For New Believers:</strong></p>
+     <ul>
+      <li><strong>Best Choice:</strong> NIV or NLT</li>
+      <li><strong>Why:</strong> Clear, readable, accurate—perfect for building consistency in Bible reading</li>
+     </ul>
+     <p><strong>For Bible Study:</strong></p>
+     <ul>
+      <li><strong>Best Choice:</strong> ESV, NASB, or CSB</li>
+      <li><strong>Why:</strong> More literal translations help you study the nuances of the original text</li>
+     </ul>
+     <p><strong>For Reading Through Books:</strong></p>
+     <ul>
+      <li><strong>Best Choice:</strong> NLT or NIV</li>
+      <li><strong>Why:</strong> Smooth reading makes it easier to read large portions without getting bogged down</li>
+     </ul>
+     <p><strong>For Kids:</strong></p>
+     <ul>
+      <li><strong>Best Choice:</strong> NLT, NIrV (New International Reader's Version), or ICB (International Children's Bible)</li>
+      <li><strong>Why:</strong> Age-appropriate language and simpler sentence structure</li>
+     </ul>
+     <h3>Pro Tips</h3>
+     <ol>
+      <li><strong>Use more than one:</strong> Reading different translations can help you understand difficult passages</li>
+      <li><strong>Start readable:</strong> If you're new to Bible reading, start with an easier translation (NIV, NLT) to build the habit</li>
+      <li><strong>Try before you buy:</strong> Read a chapter in different translations online at BibleGateway.com to see which you prefer</li>
+      <li><strong>Don't overthink it:</strong> God's Word is powerful in any good translation—just start reading!</li>
+      <li><strong>Study Bibles help:</strong> Consider getting a Study Bible in your chosen translation for helpful notes and context</li>
+     </ol>
+     <h3>Free Online Bibles</h3>
+     <p>You don't need to buy a physical Bible to start reading! These websites and apps offer multiple translations for free:</p>
+     <ul>
+      <li><a href="https://www.biblegateway.com" target="_blank" rel="noopener noreferrer"><strong>BibleGateway.com</strong></a> - Multiple translations, keyword search, audio Bibles</li>
+      <li><a href="https://www.youversion.com" target="_blank" rel="noopener noreferrer"><strong>YouVersion Bible App</strong></a> - Mobile app with reading plans and devotionals</li>
+      <li><a href="https://www.blueletterbible.org" target="_blank" rel="noopener noreferrer"><strong>Blue Letter Bible</strong></a> - Study tools and commentaries</li>
+     </ul>
+     <h3>Our Recommendation for Beginners</h3>
+     <p>If you're brand new to reading the Bible, we recommend starting with the <strong>NIV</strong> or <strong>NLT</strong>. Both are accurate, clear, and readable. As you grow in your faith, you might add a more literal translation like the ESV for deeper study. But the most important thing? Pick one and start reading!</p>
+     <blockquote>
+      "All Scripture is God-breathed and is useful for teaching, rebuking, correcting and training in righteousness, so that the servant of God may be thoroughly equipped for every good work." - 2 Timothy 3:16-17 (NIV)
+     </blockquote>
+     <div style="text-align: center; margin-top: 40px;"><button class="btn btn-primary" onclick="showPage('beginner-reading-plan')">Start Your Reading Journey</button>
+     </div>
+    </div>
+   </div>
+  </div>
+  <div id="do-i-need-church" class="page">
+   <div class="content-page"><button class="btn-back" onclick="goBack()">← Back</button> <button class="back-to-top" onclick="scrollToTop()" aria-label="Back to top">↑</button>
+    <div class="content-header">
+     <h2>Do I Need to Go to Church?</h2>
+     <div class="meta">
+      A Savior's Call
+     </div>
+    </div>
+    <div class="intro-section">
+     <h3>The Importance of Community</h3>
+     <p>Being part of a church community is essential for spiritual growth.</p>
+    </div>
+    <div class="content-body">
+     <h3>What Is the Church?</h3>
+     <p>When the Bible talks about "the church," it doesn't mean a building—it means people. The church is the global community of all believers in Jesus Christ throughout history. But practically speaking, being part of a local church community is an essential part of the Christian life.</p>
+     <blockquote>
+      "And let us consider how we may spur one another on toward love and good deeds, not giving up meeting together, as some are in the habit of doing, but encouraging one another—and all the more as you see the Day approaching." - Hebrews 10:24-25
+     </blockquote>
+     <h3>Why Church Matters</h3>
+     <p>Some people say, "I can worship God on my own. I don't need church." While personal devotion is crucial, God designed us to live out our faith in community. Here's why the church is essential:</p>
+     <h4>1. We Need Each Other</h4>
+     <p>The Christian life was never meant to be lived alone. We're described in Scripture as a body, a family, living stones being built together. We need:</p>
+     <ul>
+      <li><strong>Encouragement</strong> when faith is hard</li>
+      <li><strong>Accountability</strong> to keep us from sin</li>
+      <li><strong>Teaching</strong> to grow in understanding</li>
+      <li><strong>Prayer</strong> from brothers and sisters in Christ</li>
+      <li><strong>Fellowship</strong> with people who share your faith</li>
+     </ul>
+     <blockquote>
+      "Two are better than one, because they have a good return for their labor: If either of them falls down, one can help the other up. But pity anyone who falls and has no one to help them up." - Ecclesiastes 4:9-10
+     </blockquote>
+     <h4>2. We Grow Through Community</h4>
+     <p>Some of the most important spiritual growth happens in relationships with other believers. When we gather together, we:</p>
+     <ul>
+      <li>Learn from mature believers who've walked with God longer</li>
+      <li>Serve others and discover our spiritual gifts</li>
+      <li>Practice biblical commands like forgiving, encouraging, loving, and bearing with one another</li>
+      <li>Have our rough edges smoothed through relationship</li>
+      <li>See how other people live out their faith in real life</li>
+     </ul>
+     <blockquote>
+      "As iron sharpens iron, so one person sharpens another." - Proverbs 27:17
+     </blockquote>
+     <h4>3. God Commands It</h4>
+     <p>Being part of a church isn't optional—it's a biblical command. Throughout the New Testament, the normal Christian life includes being part of a local church. The early believers:</p>
+     <ul>
+      <li>Met together regularly (Acts 2:42-47)</li>
+      <li>Ate together and shared their lives</li>
+      <li>Learned from teaching and Scripture</li>
+      <li>Prayed together</li>
+      <li>Took communion together</li>
+      <li>Cared for each other's practical needs</li>
+     </ul>
+     <h4>4. The Church Is Jesus' Plan</h4>
+     <p>Jesus didn't just save individuals—He's building a church. He said, "I will build my church, and the gates of hell will not overcome it" (Matthew 16:18). When you become a Christian, you're joining something bigger than yourself—a global family that spans cultures, languages, and generations.</p>
+     <h3>What Does the Church Do?</h3>
+     <p>A healthy church serves several key purposes:</p>
+     <h4>Worship</h4>
+     <p>We gather to praise God together through singing, prayer, and thanksgiving. There's something powerful about worshiping alongside other believers.</p>
+     <h4>Teaching</h4>
+     <p>The church teaches God's Word accurately and applies it to our lives. Solid biblical teaching helps us grow in maturity and discern truth from error.</p>
+     <h4>Fellowship</h4>
+     <p>The church provides authentic relationships where we encourage, support, and do life with other believers.</p>
+     <h4>Discipleship</h4>
+     <p>Mature believers help newer believers grow in their faith, teaching them how to follow Jesus in everyday life.</p>
+     <h4>Service</h4>
+     <p>The church equips and mobilizes believers to use their gifts to serve God and others, both inside and outside the church.</p>
+     <h4>Mission</h4>
+     <p>The church exists to spread the gospel, making disciples of all nations as Jesus commanded.</p>
+     <h3>"But I've Been Hurt by the Church"</h3>
+     <p>This is a painful reality for many people. Churches are made up of imperfect people, and sometimes believers fail to live up to Christ's example. If you've been hurt by a church, here's what we want you to know:</p>
+     <ul>
+      <li><strong>Your pain is valid.</strong> Jesus takes it seriously when His people hurt others</li>
+      <li><strong>Not all churches are the same.</strong> A bad experience at one church doesn't mean all churches are unhealthy</li>
+      <li><strong>Healing takes time.</strong> It's okay to take time to heal, but don't give up on finding a healthy church community</li>
+      <li><strong>The church needs you.</strong> Despite its flaws, the church is Jesus' chosen means of reaching the world</li>
+     </ul>
+     <h3>"What If I Don't Fit In?"</h3>
+     <p>Many people worry they won't fit in at church. Maybe you:</p>
+     <ul>
+      <li>Don't know the songs or when to stand/sit</li>
+      <li>Feel like everyone else has it together except you</li>
+      <li>Don't dress like others</li>
+      <li>Come from a different background</li>
+      <li>Struggle with doubts or questions</li>
+     </ul>
+     <p><strong>Here's the truth:</strong> A healthy church is a hospital for sinners, not a museum for saints. Everyone is broken, struggling, and in need of grace. The church isn't a place for perfect people—it's a community of forgiven people learning to follow Jesus together.</p>
+     <h3>How to Find a Good Church</h3>
+     <p>Not all churches are created equal. Here's what to look for:</p>
+     <ol>
+      <li><strong>The Bible is taught faithfully</strong> - The pastor preaches through Scripture, not just personal opinions</li>
+      <li><strong>The gospel is central</strong> - Jesus' death and resurrection for our sins is emphasized</li>
+      <li><strong>Baptism and communion are practiced</strong> - These ordinances Jesus commanded are observed</li>
+      <li><strong>Genuine community exists</strong> - People know and care for each other beyond Sunday services</li>
+      <li><strong>Mission and service are valued</strong> - The church reaches out to share the gospel and serve others</li>
+      <li><strong>Leadership is godly</strong> - Pastors and elders demonstrate Christ-like character</li>
+      <li><strong>Accountability and discipline exist</strong> - Sin is addressed lovingly but firmly when necessary</li>
+      <li><strong>Members are growing</strong> - People are maturing in their faith and being discipled</li>
+     </ol>
+     <h3>Red Flags to Watch For</h3>
+     <p>Avoid churches that:</p>
+     <ul>
+      <li>Don't teach the Bible or twist its meaning</li>
+      <li>Focus more on money, politics, or entertainment than the gospel</li>
+      <li>Have authoritarian or abusive leadership</li>
+      <li>Lack financial transparency</li>
+      <li>Discourage questions or independent Bible study</li>
+      <li>Promote a "health and wealth" gospel (claiming God promises material prosperity)</li>
+      <li>Don't believe Jesus is fully God and fully human</li>
+      <li>Claim Scripture isn't sufficient or needs to be supplemented by other revelations</li>
+     </ul>
+     <h3>Getting Involved</h3>
+     <p>Finding a church is just the first step. To truly benefit from church community, you need to get involved:</p>
+     <ol>
+      <li><strong>Attend regularly</strong> - Consistency is key to building relationships</li>
+      <li><strong>Join a small group</strong> - Deeper relationships happen in smaller settings</li>
+      <li><strong>Serve somewhere</strong> - Use your gifts to contribute to the body</li>
+      <li><strong>Give financially</strong> - Support the ministry of your local church</li>
+      <li><strong>Pursue membership</strong> - Formally commit to a local body of believers</li>
+      <li><strong>Build relationships</strong> - Invite people over, grab coffee, do life together</li>
+     </ol>
+     <h3>Online Church: Is It Enough?</h3>
+     <p>Especially after the pandemic, many people wonder if watching church online is sufficient. While online services can be a helpful supplement (especially for those who are sick, homebound, or traveling), they can't replace in-person community. Here's why:</p>
+     <ul>
+      <li>You can't practice "one another" commands through a screen (serve, encourage, bear burdens, etc.)</li>
+      <li>Relationships require face-to-face interaction</li>
+      <li>It's too easy to remain a spectator rather than a participant</li>
+      <li>Physical presence demonstrates commitment and sacrifice</li>
+     </ul>
+     <p>Use online services when necessary, but prioritize gathering in person whenever possible.</p>
+     <h3>The Bottom Line</h3>
+     <p>Yes, you need church. Not because going to church saves you (it doesn't), but because the Christian life is meant to be lived in community. We need each other to grow, to serve, to persevere, and to shine the light of Christ to the world.</p>
+     <p>The church isn't perfect—it won't be until Jesus returns. But it's His church, His bride, His chosen instrument to display His glory to the world. Be part of it.</p>
+     <blockquote>
+      "Now you are the body of Christ, and each one of you is a part of it." - 1 Corinthians 12:27
+     </blockquote>
+     <div style="text-align: center; margin-top: 40px;"><button class="btn btn-primary" onclick="showPage('beginning-faith')">New Believer Resources</button>
+     </div>
+    </div>
+   </div>
+  </div>
+  <div id="what-about-baptism" class="page">
+   <div class="content-page"><button class="btn-back" onclick="goBack()">← Back</button> <button class="back-to-top" onclick="scrollToTop()" aria-label="Back to top">↑</button>
+    <div class="content-header">
+     <h2>What About Baptism?</h2>
+     <div class="meta">
+      A Savior's Call
+     </div>
+    </div>
+    <div class="intro-section">
+     <h3>The Next Step of Obedience</h3>
+     <p>After accepting Christ, one of the first steps is baptism.</p>
+    </div>
+    <div class="content-body">
+     <h3>What Is Baptism?</h3>
+     <p>Baptism is a public declaration of your faith in Jesus Christ. It's an outward symbol of an inward reality—the spiritual transformation that happened when you trusted Jesus as your Savior. In baptism, a believer is immersed in water (or water is applied to them, depending on church tradition) to symbolize dying to your old life and rising to new life in Christ.</p>
+     <blockquote>
+      "We were therefore buried with him through baptism into death in order that, just as Christ was raised from the dead through the glory of the Father, we too may live a new life." - Romans 6:4
+     </blockquote>
+     <h3>What Baptism Means</h3>
+     <p>Baptism is rich with symbolic meaning:</p>
+     <h4>Death, Burial, and Resurrection</h4>
+     <p>Going under the water represents dying to your old life of sin and being buried with Christ. Coming up out of the water symbolizes being raised to new life with Him. You're publicly declaring: "My old self died with Christ, and I've been raised to walk in newness of life."</p>
+     <h4>Identification with Christ</h4>
+     <p>Baptism identifies you with Jesus—with His death, His burial, and His resurrection. You're saying, "What happened to Jesus happened to me. I died with Him, and I've been raised with Him."</p>
+     <h4>Public Testimony</h4>
+     <p>Baptism is your public declaration of faith. You're telling the world: "I am a follower of Jesus Christ. I'm not ashamed of the gospel. I belong to Him now."</p>
+     <h4>Obedience to Jesus</h4>
+     <p>Jesus commanded His followers to be baptized. It's one of the first acts of obedience in the Christian life. When you're baptized, you're obeying Jesus' clear instruction.</p>
+     <blockquote>
+      "Therefore go and make disciples of all nations, baptizing them in the name of the Father and of the Son and of the Holy Spirit." - Matthew 28:19
+     </blockquote>
+     <h3>Does Baptism Save You?</h3>
+     <p><strong>No.</strong> This is crucial to understand. Baptism does not save you—only faith in Jesus saves you. Baptism is a response to salvation, not the means of salvation.</p>
+     <p>Think of it this way: A wedding ring doesn't make you married—it's a symbol of a commitment you've already made. Similarly, baptism doesn't make you a Christian—it's an outward symbol of the inward faith you already have.</p>
+     <blockquote>
+      "For it is by grace you have been saved, through faith—and this is not from yourselves, it is the gift of God—not by works, so that no one can boast." - Ephesians 2:8-9
+     </blockquote>
+     <p>However, baptism is commanded by Jesus and practiced by believers throughout the New Testament. It's not optional for followers of Christ—it's an expected expression of genuine faith.</p>
+     <h3>When Should I Be Baptized?</h3>
+     <p><strong>As soon as possible after you trust Christ.</strong></p>
+     <p>In the New Testament, baptism typically followed conversion immediately. When people believed the gospel, they were baptized right away:</p>
+     <ul>
+      <li>The Ethiopian eunuch: Believed and was baptized the same day (Acts 8:36-38)</li>
+      <li>The Philippian jailer: Believed and was baptized that very night (Acts 16:30-33)</li>
+      <li>Three thousand at Pentecost: Believed and were baptized the same day (Acts 2:41)</li>
+     </ul>
+     <p>There's no biblical reason to wait. If you've trusted Christ, you're ready to be baptized. Some churches require a baptism class first, which is fine—but don't delay unnecessarily. Baptism is a joyful step of obedience, not a test you need to pass.</p>
+     <h3>Who Should Be Baptized?</h3>
+     <p>In the New Testament pattern, baptism is for believers—those who have personally trusted Jesus Christ as their Savior and Lord. It's not about being baptized as an infant before you can understand or choose faith (though different Christian traditions view this differently). Biblical baptism follows this order:</p>
+     <ol>
+      <li><strong>Hear the gospel</strong> - The good news of Jesus</li>
+      <li><strong>Believe the gospel</strong> - Trust Christ for salvation</li>
+      <li><strong>Be baptized</strong> - Publicly profess your faith</li>
+     </ol>
+     <blockquote>
+      "Those who accepted his message were baptized." - Acts 2:41
+     </blockquote>
+     <h3>Different Views on Baptism</h3>
+     <p>Sincere, Bible-believing Christians have different views on the specifics of baptism. Here are the main perspectives:</p>
+     <h4>Mode of Baptism</h4>
+     <ul>
+      <li><strong>Immersion:</strong> The believer is fully submerged under water. This is the practice of most Baptist, evangelical, and non-denominational churches. They believe immersion best symbolizes death, burial, and resurrection.</li>
+      <li><strong>Affusion (Pouring):</strong> Water is poured over the head. This is common in Presbyterian and some other Reformed churches.</li>
+      <li><strong>Aspersion (Sprinkling):</strong> Water is sprinkled on the head. Also practiced in some traditions.</li>
+     </ul>
+     <h4>Timing and Recipients</h4>
+     <ul>
+      <li><strong>Believer's Baptism (Credobaptism):</strong> Only those who personally profess faith in Christ should be baptized. This is the view of Baptist, evangelical, and many non-denominational churches.</li>
+      <li><strong>Infant Baptism (Paedobaptism):</strong> Children of believing parents should be baptized as infants as a sign of God's covenant with their family. They'll later confirm their faith personally. This is practiced in Presbyterian, Lutheran, Anglican, and other traditions.</li>
+     </ul>
+     <p><em>Note: While believers disagree on these details, what unites us is far greater—we all agree that Jesus Christ is Lord and that salvation is by grace through faith alone.</em></p>
+     <h3>What If I Was Baptized as an Infant?</h3>
+     <p>If you were baptized as an infant but didn't personally trust Christ until later, many evangelical churches encourage believer's baptism. Here's why:</p>
+     <ul>
+      <li>As an infant, you couldn't personally profess faith or understand what was happening</li>
+      <li>Believer's baptism is your opportunity to publicly declare your own faith</li>
+      <li>It's not about "undoing" infant baptism—it's about following Jesus' command as a believer</li>
+     </ul>
+     <p>However, this is a personal decision. Talk with a pastor or mature believer about what's appropriate in your situation.</p>
+     <h3>What Happens at a Baptism?</h3>
+     <p>While practices vary by church, here's what typically happens:</p>
+     <ol>
+      <li><strong>You meet with church leadership</strong> - They'll make sure you understand the gospel and have trusted Christ</li>
+      <li><strong>You may share your testimony</strong> - Some churches invite you to briefly share how you came to faith</li>
+      <li><strong>You're asked questions</strong> - Usually something like, "Do you profess Jesus Christ as your Lord and Savior?" and you publicly answer "Yes" or "I do"</li>
+      <li><strong>You're baptized</strong> - A pastor or church leader baptizes you in the name of the Father, Son, and Holy Spirit</li>
+      <li><strong>The church celebrates</strong> - Your church family rejoices with you!</li>
+     </ol>
+     <h3>Practical Questions</h3>
+     <h4>What should I wear?</h4>
+     <p>Most churches provide baptismal robes or suggest modest swimwear covered by a t-shirt. Bring a change of clothes and a towel. Dark colors work best as they're less see-through when wet.</p>
+     <h4>Can I be baptized if I still struggle with sin?</h4>
+     <p>Yes! Every Christian still struggles with sin. Baptism doesn't require perfection—it requires faith in Jesus. If you've trusted Christ, you're ready to be baptized, even though you're still growing.</p>
+     <h4>What if I'm scared of water?</h4>
+     <p>Talk to your pastor. They can help you through your fear, and in some cases, accommodations can be made. The important thing is the step of obedience, not your comfort level.</p>
+     <h4>Can my family and friends come?</h4>
+     <p>Absolutely! Most churches encourage you to invite loved ones. Baptism is a celebration, and having your support system there makes it even more meaningful.</p>
+     <h4>Do I need to be a church member first?</h4>
+     <p>Practices vary. Some churches baptize anyone who professes faith; others prefer you begin the membership process first. Ask your church leadership.</p>
+     <h3>What Baptism Is NOT</h3>
+     <p>To be clear, baptism is not:</p>
+     <ul>
+      <li><strong>Magic or a ritual that changes you spiritually</strong> - The change happened when you believed; baptism pictures that change</li>
+      <li><strong>A guarantee you'll never struggle with sin</strong> - Every Christian battles sin; baptism is one step of many in the Christian life</li>
+      <li><strong>Proof you're "good enough"</strong> - Baptism is an act of obedience that follows salvation by grace</li>
+      <li><strong>Required to go to heaven</strong> - The thief on the cross was saved without being baptized (Luke 23:43)</li>
+      <li><strong>Something you earn</strong> - It's a free gift for believers, just like salvation itself</li>
+     </ul>
+     <h3>Jesus' Example</h3>
+     <p>Even Jesus was baptized, though He had no sin. When John the Baptist hesitated to baptize Him, Jesus said:</p>
+     <blockquote>
+      "Let it be so now; it is proper for us to do this to fulfill all righteousness." - Matthew 3:15
+     </blockquote>
+     <p>If Jesus—who was sinless—chose to be baptized, how much more should we follow His example?</p>
+     <h3>Ready to Take the Next Step?</h3>
+     <p>If you've trusted Jesus Christ as your Savior and Lord, baptism is your next step. It's a joyful, public declaration that you belong to Jesus now. Don't let fear, uncertainty, or waiting for the "perfect time" hold you back.</p>
+     <p><strong>Here's what to do:</strong></p>
+     <ol>
+      <li>Talk to a pastor or church leader at your church</li>
+      <li>Let them know you've trusted Christ and want to be baptized</li>
+      <li>Attend any required baptism class</li>
+      <li>Set a date for your baptism</li>
+      <li>Invite your family and friends</li>
+      <li>Celebrate this incredible step of faith!</li>
+     </ol>
+     <blockquote>
+      "And now what are you waiting for? Get up, be baptized and wash your sins away, calling on his name." - Acts 22:16
+     </blockquote>
+     <div style="text-align: center; margin-top: 40px;"><button class="btn btn-primary" onclick="showPage('beginning-faith')">New Believer Resources</button>
+     </div>
+    </div>
+   </div>
+  </div>
+  <div id="spiritual-disciplines" class="page">
+   <div class="content-page"><button class="btn-back" onclick="goBack()">← Back</button> <button class="back-to-top" onclick="scrollToTop()" aria-label="Back to top">↑</button>
+    <div class="content-header">
+     <h2>Spiritual Disciplines Guide</h2>
+     <div class="meta">
+      Faith Resources
+     </div>
+    </div>
+    <div class="intro-section">
+     <h3>Practices That Deepen Your Relationship with God</h3>
+     <p>Spiritual disciplines aren't legalistic rules or ways to earn God's favor—they're practices that position us to experience more of God. Think of them as channels of His grace, habits that open our hearts to receive what God wants to give us.</p>
+    </div>
+    <div class="content-body">
+     <h3>What Are Spiritual Disciplines?</h3>
+     <p>Spiritual disciplines are intentional practices that help us grow in our relationship with God. Just as physical exercise trains our bodies, spiritual disciplines train our souls. They don't make God love us more—His love is already perfect and complete—but they help us experience His presence, hear His voice, and become more like Jesus.</p>
+     <blockquote>
+      "Train yourself to be godly. For physical training is of some value, but godliness has value for all things, holding promise for both the present life and the life to come." - 1 Timothy 4:7-8
+     </blockquote>
+     <h3>🙏 Prayer: Conversation with God</h3>
+     <h4>What It Is</h4>
+     <p>Prayer is simply talking with God—sharing your heart, listening for His voice, and aligning your will with His. It's the most fundamental spiritual discipline because it's direct communication with your heavenly Father.</p>
+     <h4>Why It Matters</h4>
+     <p>Prayer deepens intimacy with God, changes our perspective, and invites God's power into our circumstances. Jesus Himself prioritized prayer, often withdrawing to solitary places to pray (Luke 5:16).</p>
+     <h4>How to Practice It</h4>
+     <ul>
+      <li><strong>Set aside daily time:</strong> Start with 10-15 minutes each day</li>
+      <li><strong>Use a prayer model:</strong> Try ACTS (Adoration, Confession, Thanksgiving, Supplication)</li>
+      <li><strong>Keep a prayer journal:</strong> Write down prayers and track God's answers</li>
+      <li><strong>Pray Scripture:</strong> Use Bible verses as the framework for your prayers</li>
+      <li><strong>Practice breath prayers:</strong> Short prayers repeated throughout the day ("Lord Jesus Christ, have mercy on me")</li>
+      <li><strong>Pray with others:</strong> Join with friends or family in prayer</li>
+     </ul>
+     <h4>Challenges &amp; Solutions</h4>
+     <p><strong>Challenge:</strong> "My mind wanders when I pray."</p>
+     <p><strong>Solution:</strong> Try praying out loud, writing your prayers, or praying while walking</p>
+     <p><strong>Challenge:</strong> "I don't know what to say."</p>
+     <p><strong>Solution:</strong> Start by reading a Psalm, then pray the truths you just read</p>
+     <blockquote>
+      "Do not be anxious about anything, but in every situation, by prayer and petition, with thanksgiving, present your requests to God." - Philippians 4:6
+     </blockquote>
+     <h3>📖 Meditation: Dwelling on Scripture</h3>
+     <h4>What It Is</h4>
+     <p>Biblical meditation isn't emptying your mind—it's filling it with God's Word. It's the practice of reading Scripture slowly, repeatedly, and thoughtfully, letting truth sink deep into your heart and mind.</p>
+     <h4>Why It Matters</h4>
+     <p>Meditation allows Scripture to move from your head to your heart. It's how God's Word transforms your thinking, renews your mind, and shapes your character.</p>
+     <h4>How to Practice It</h4>
+     <ul>
+      <li><strong>Choose a short passage:</strong> Start with 3-5 verses (not a whole chapter)</li>
+      <li><strong>Read it multiple times:</strong> Read slowly, out loud if possible</li>
+      <li><strong>Ask questions:</strong>
+       <ul>
+        <li>What does this reveal about God's character?</li>
+        <li>What does this teach about humanity?</li>
+        <li>Is there a promise to claim or command to obey?</li>
+        <li>How does this apply to my life today?</li>
+       </ul></li>
+      <li><strong>Emphasize different words:</strong> Read the verse multiple times, stressing a different word each time</li>
+      <li><strong>Memorize it:</strong> Hide God's Word in your heart</li>
+      <li><strong>Pray it back to God:</strong> Turn the passage into a prayer</li>
+     </ul>
+     <h4>Practical Example</h4>
+     <p>Psalm 23:1 - "The LORD is my shepherd, I lack nothing."</p>
+     <ul>
+      <li>Read 1: <em>"<strong>The LORD</strong> is my shepherd"</em> (Focus on who He is)</li>
+      <li>Read 2: <em>"The LORD is <strong>my</strong> shepherd"</em> (This is personal)</li>
+      <li>Read 3: <em>"The LORD is my <strong>shepherd</strong>"</em> (What does a shepherd do?)</li>
+      <li>Read 4: <em>"The LORD is my shepherd, I <strong>lack nothing</strong>"</em> (He provides everything I need)</li>
+     </ul>
+     <blockquote>
+      "Blessed is the one who does not walk in step with the wicked or stand in the way that sinners take or sit in the company of mockers, but whose delight is in the law of the LORD, and who meditates on his law day and night." - Psalm 1:1-2
+     </blockquote>
+     <h3>🍽️ Fasting: Focusing on Spiritual Hunger</h3>
+     <h4>What It Is</h4>
+     <p>Fasting is voluntarily abstaining from food (or other things) for a spiritual purpose. It's not about earning God's favor or punishing yourself—it's about replacing physical hunger with spiritual hunger for God.</p>
+     <h4>Why It Matters</h4>
+     <p>Fasting heightens our spiritual awareness, breaks the power of fleshly appetites, and demonstrates that we need God more than we need physical sustenance. Jesus expected His followers to fast (Matthew 6:16 says "when you fast," not "if you fast").</p>
+     <h4>Types of Fasting</h4>
+     <ul>
+      <li><strong>Normal Fast:</strong> Abstain from food but drink water (most common)</li>
+      <li><strong>Partial Fast:</strong> Restrict certain foods (like the Daniel fast—only vegetables and water)</li>
+      <li><strong>Absolute Fast:</strong> No food or water (only for very short periods and with caution)</li>
+      <li><strong>Media Fast:</strong> Abstain from TV, social media, or entertainment</li>
+      <li><strong>Intermittent Fast:</strong> Fast during specific hours (e.g., sunrise to sunset)</li>
+     </ul>
+     <h4>How to Practice It</h4>
+     <ul>
+      <li><strong>Start small:</strong> Begin with one meal or a 24-hour fast</li>
+      <li><strong>Choose a purpose:</strong> What are you fasting for? Clarity? Breakthrough? Repentance?</li>
+      <li><strong>Replace eating time with prayer:</strong> When you feel hungry, pray instead</li>
+      <li><strong>Stay hydrated:</strong> Drink plenty of water</li>
+      <li><strong>Break your fast gently:</strong> Don't overeat when you're done; start with light foods</li>
+      <li><strong>Keep it between you and God:</strong> Jesus warns against fasting for show (Matthew 6:16-18)</li>
+     </ul>
+     <h4>Important Notes</h4>
+     <ul>
+      <li>Consult a doctor if you have medical conditions, are pregnant, or take medication</li>
+      <li>Fasting is not about weight loss—that's dieting, not spiritual discipline</li>
+      <li>If food fasting isn't possible, try fasting from media or other distractions</li>
+     </ul>
+     <blockquote>
+      "When you fast, do not look somber as the hypocrites do, for they disfigure their faces to show others they are fasting. Truly I tell you, they have received their reward in full. But when you fast, put oil on your head and wash your face, so that it will not be obvious to others that you are fasting, but only to your Father, who is unseen; and your Father, who sees what is done in secret, will reward you." - Matthew 6:16-18
+     </blockquote>
+     <h3>🌄 Solitude: Quiet Time with God</h3>
+     <h4>What It Is</h4>
+     <p>Solitude is intentionally withdrawing from people and noise to be alone with God. It's creating space to hear His voice without the distractions and demands of daily life.</p>
+     <h4>Why It Matters</h4>
+     <p>In our noisy, busy culture, solitude is countercultural—and essential. Jesus regularly withdrew to solitary places (Mark 1:35), and we need the same. Solitude helps us hear God's voice, process life with Him, and find rest for our souls.</p>
+     <h4>How to Practice It</h4>
+     <ul>
+      <li><strong>Schedule it:</strong> Put it on your calendar like any other important appointment</li>
+      <li><strong>Start short:</strong> Begin with 15-30 minutes and build up</li>
+      <li><strong>Find a place:</strong> A quiet room, a park, your car—anywhere you can be alone</li>
+      <li><strong>Eliminate distractions:</strong> Turn off your phone, TV, and computer</li>
+      <li><strong>Bring your Bible:</strong> Read, pray, and listen</li>
+      <li><strong>Embrace silence:</strong> Don't fill every moment with words; sit quietly in God's presence</li>
+      <li><strong>Try a longer retreat:</strong> Once a quarter, take a half-day or full-day alone with God</li>
+     </ul>
+     <h4>What to Do in Solitude</h4>
+     <ul>
+      <li>Read Scripture slowly and meditatively</li>
+      <li>Pray through your concerns, relationships, and decisions</li>
+      <li>Journal your thoughts and what you sense God saying</li>
+      <li>Confess sin and receive God's forgiveness</li>
+      <li>Simply rest in God's presence without an agenda</li>
+      <li>Listen—wait for God to speak to your heart</li>
+     </ul>
+     <h4>Challenges &amp; Solutions</h4>
+     <p><strong>Challenge:</strong> "I feel restless and can't sit still."</p>
+     <p><strong>Solution:</strong> This is normal at first. Start with shorter times and ask God to help you rest</p>
+     <p><strong>Challenge:</strong> "I fall asleep when I try to have solitude."</p>
+     <p><strong>Solution:</strong> Choose a time when you're more alert, or try solitude while walking</p>
+     <blockquote>
+      "But Jesus often withdrew to lonely places and prayed." - Luke 5:16
+     </blockquote>
+     <h3>🤝 Service: Loving Others Practically</h3>
+     <h4>What It Is</h4>
+     <p>Service is using your time, energy, and resources to meet the needs of others in Jesus' name. It's loving your neighbor in practical, tangible ways—often through small, hidden acts that no one notices.</p>
+     <h4>Why It Matters</h4>
+     <p>Service combats self-centeredness and pride. It reminds us that the Christian life isn't about being served but serving others (Mark 10:45). When we serve, we become more like Jesus, who "did not come to be served, but to serve."</p>
+     <h4>How to Practice It</h4>
+     <ul>
+      <li><strong>Serve in your church:</strong> Join a ministry team (greeting, hospitality, children's ministry, etc.)</li>
+      <li><strong>Serve your family:</strong> Do household tasks joyfully without being asked</li>
+      <li><strong>Serve your neighbors:</strong> Mow their lawn, bring them meals, help with projects</li>
+      <li><strong>Serve in secret:</strong> Do acts of kindness anonymously</li>
+      <li><strong>Serve the "least of these":</strong> Visit the sick, lonely, imprisoned, or marginalized</li>
+      <li><strong>Use your skills:</strong> How can your talents meet someone's need?</li>
+     </ul>
+     <h4>Practical Ideas</h4>
+     <ul>
+      <li>Make a meal for a new mom or someone who's sick</li>
+      <li>Offer free childcare so a single parent can rest</li>
+      <li>Write encouraging notes to people in your church</li>
+      <li>Volunteer at a homeless shelter or food pantry</li>
+      <li>Help an elderly neighbor with yard work or errands</li>
+      <li>Tutor a struggling student</li>
+      <li>Clean the church building without being asked</li>
+      <li>Invite someone lonely to dinner</li>
+     </ul>
+     <h4>Service with the Right Heart</h4>
+     <ul>
+      <li>Serve joyfully, not begrudgingly</li>
+      <li>Serve without expecting recognition or thanks</li>
+      <li>Serve the "unlovable" as you would serve Jesus Himself</li>
+      <li>Serve in small ways—they matter just as much as big ones</li>
+      <li>Remember: you're serving Jesus, not just people (Colossians 3:23-24)</li>
+     </ul>
+     <blockquote>
+      "For even the Son of Man did not come to be served, but to serve, and to give his life as a ransom for many." - Mark 10:45
+     </blockquote>
+     <blockquote>
+      "Whatever you did for one of the least of these brothers and sisters of mine, you did for me." - Matthew 25:40
+     </blockquote>
+     <h3>🎵 Worship: Declaring God's Worth</h3>
+     <h4>What It Is</h4>
+     <p>Worship is declaring God's worth—acknowledging who He is and responding with adoration, praise, and surrender. While singing is one form of worship, true worship encompasses every aspect of life lived for God's glory.</p>
+     <h4>Why It Matters</h4>
+     <p>Worship realigns our hearts with truth. It reminds us that God is worthy of all praise, shifts our focus off ourselves and onto Him, and prepares us to hear from Him. We were created to worship—the question is what (or who) we'll worship.</p>
+     <h4>Forms of Worship</h4>
+     <ul>
+      <li><strong>Singing:</strong> Lifting your voice in songs of praise</li>
+      <li><strong>Prayer:</strong> Adoring God for who He is</li>
+      <li><strong>Scripture Reading:</strong> Proclaiming God's Word</li>
+      <li><strong>Testimony:</strong> Declaring what God has done</li>
+      <li><strong>Giving:</strong> Offering your resources to God</li>
+      <li><strong>Obedience:</strong> Living according to God's commands</li>
+      <li><strong>Daily Work:</strong> Doing everything for God's glory (Colossians 3:17)</li>
+     </ul>
+     <h4>How to Practice It</h4>
+     <ul>
+      <li><strong>Worship Sundays:</strong> Engage wholeheartedly in corporate worship at church</li>
+      <li><strong>Personal worship:</strong> Sing, pray, and read Scripture alone at home</li>
+      <li><strong>Worship through music:</strong> Listen to worship music in your car or while working</li>
+      <li><strong>Declare God's attributes:</strong> Spend time listing and praising God's characteristics</li>
+      <li><strong>Read the Psalms:</strong> Pray these ancient worship songs</li>
+      <li><strong>Keep a gratitude list:</strong> Thank God for specific blessings</li>
+      <li><strong>Live worshipfully:</strong> Do everything—work, parenting, errands—as an act of worship</li>
+     </ul>
+     <h4>Attributes of God to Worship</h4>
+     <ul>
+      <li><strong>Holy:</strong> God, You are set apart, pure, perfect in every way</li>
+      <li><strong>Loving:</strong> Your love is unconditional, sacrificial, and never-ending</li>
+      <li><strong>Faithful:</strong> You keep every promise and never abandon Your children</li>
+      <li><strong>Wise:</strong> Your plans are perfect, even when I don't understand</li>
+      <li><strong>Powerful:</strong> Nothing is too difficult for You</li>
+      <li><strong>Just:</strong> You are perfectly fair and righteous</li>
+      <li><strong>Merciful:</strong> You withhold the punishment we deserve</li>
+      <li><strong>Gracious:</strong> You give us blessings we don't deserve</li>
+      <li><strong>Eternal:</strong> You have no beginning or end; You are the same forever</li>
+      <li><strong>Sovereign:</strong> You are in complete control of all things</li>
+     </ul>
+     <h4>Worship Beyond Sunday</h4>
+     <p>True worship isn't limited to a church service. Romans 12:1 calls us to offer our entire lives as "living sacrifices"—that's worship. This means:</p>
+     <ul>
+      <li>Working at your job with excellence for God's glory</li>
+      <li>Parenting your children as an act of worship</li>
+      <li>Serving others in Jesus' name</li>
+      <li>Obeying God even when it's hard</li>
+      <li>Choosing purity and holiness</li>
+      <li>Using your words to build up, not tear down</li>
+     </ul>
+     <blockquote>
+      "Ascribe to the LORD the glory due his name; worship the LORD in the splendor of his holiness." - Psalm 29:2
+     </blockquote>
+     <blockquote>
+      "Therefore, I urge you, brothers and sisters, in view of God's mercy, to offer your bodies as a living sacrifice, holy and pleasing to God—this is your true and proper worship." - Romans 12:1
+     </blockquote>
+     <h3>Getting Started</h3>
+     <p>Don't try to practice all these disciplines at once! Start with one or two that resonate most with you. Build consistency over weeks and months, then gradually add others. Remember:</p>
+     <ul>
+      <li><strong>Grace, not legalism:</strong> These are means of grace, not requirements for salvation</li>
+      <li><strong>Progress, not perfection:</strong> You'll miss days—that's okay. Start again tomorrow</li>
+      <li><strong>Relationship, not ritual:</strong> The goal is knowing God, not checking boxes</li>
+      <li><strong>Power through the Spirit:</strong> You can't do this in your own strength—ask for God's help</li>
+     </ul>
+     <p>The spiritual disciplines aren't ends in themselves—they're pathways to experiencing more of God. As you practice them consistently, you'll find yourself growing in Christ-likeness, hearing God's voice more clearly, and experiencing the abundant life Jesus promised.</p>
+     <blockquote>
+      "But grow in the grace and knowledge of our Lord and Savior Jesus Christ. To him be glory both now and forever! Amen." - 2 Peter 3:18
+     </blockquote>
+    </div>
+   </div>
+  </div>
+  <div id="bible-study-methods" class="page">
+   <div class="content-page"><button class="btn-back" onclick="goBack()">← Back</button> <button class="back-to-top" onclick="scrollToTop()" aria-label="Back to top">↑</button>
+    <div class="content-header">
+     <h2>Bible Study Methods Guide</h2>
+     <div class="meta">
+      Faith Resources
+     </div>
+    </div>
+    <div class="intro-section">
+     <h3>Approaches for Every Passage</h3>
+     <p>Different passages call for different study methods. This guide equips you with multiple approaches to help you dig deeper into God's Word, whether you're studying a single chapter, an entire book, or tracing a theme throughout Scripture.</p>
+    </div>
+    <div class="content-body">
+     <h3>📚 Book Study: Study an Entire Bible Book</h3>
+     <h4>What It Is</h4>
+     <p>Book study involves reading and studying an entire book of the Bible from beginning to end, understanding its purpose, structure, and main themes. This method helps you see the big picture of what the author is communicating.</p>
+     <h4>Why It Matters</h4>
+     <p>Individual verses make more sense when you understand the context of the entire book. Book study prevents proof-texting (taking verses out of context) and helps you grasp the author's intended message.</p>
+     <h4>How to Do a Book Study</h4>
+     <ol>
+      <li><strong>Choose a Book:</strong> Start with shorter books like Philippians, 1 John, James, or Jonah</li>
+      <li><strong>Read it Through:</strong> Read the entire book in one sitting to get the big picture (yes, even if it takes an hour!)</li>
+      <li><strong>Research Background:</strong>
+       <ul>
+        <li>Who wrote it? When? Why?</li>
+        <li>Who was the original audience?</li>
+        <li>What was happening historically/culturally?</li>
+        <li>What problem was the author addressing?</li>
+       </ul></li>
+      <li><strong>Outline the Book:</strong> Break it into sections and identify main themes</li>
+      <li><strong>Study Section by Section:</strong> Work through each section using observation, interpretation, and application</li>
+      <li><strong>Identify Key Themes:</strong> What are the repeated ideas, words, or concepts?</li>
+      <li><strong>Find the Main Point:</strong> What is the author's primary message? Can you state it in one sentence?</li>
+      <li><strong>Apply It:</strong> How should this book change how you think, believe, or live?</li>
+     </ol>
+     <h4>Example: Studying Philippians</h4>
+     <ul>
+      <li><strong>Author:</strong> Paul, while imprisoned (around AD 60-62)</li>
+      <li><strong>Audience:</strong> The church in Philippi (in modern-day Greece)</li>
+      <li><strong>Purpose:</strong> Thank them for financial support and encourage them to rejoice despite suffering</li>
+      <li><strong>Main Theme:</strong> Joy in Christ regardless of circumstances</li>
+      <li><strong>Key Verse:</strong> Philippians 4:4 - "Rejoice in the Lord always"</li>
+      <li><strong>Outline:</strong>
+       <ul>
+        <li>Chapter 1: Joy in Living and Dying</li>
+        <li>Chapter 2: Joy in Humility (Christ's Example)</li>
+        <li>Chapter 3: Joy in Knowing Christ</li>
+        <li>Chapter 4: Joy in God's Provision</li>
+       </ul></li>
+     </ul>
+     <h4>Good Books to Start With</h4>
+     <ul>
+      <li><strong>Beginners:</strong> Philippians, 1 John, James, Ruth, Jonah</li>
+      <li><strong>Intermediate:</strong> Colossians, 1 Peter, Nehemiah, Daniel</li>
+      <li><strong>Advanced:</strong> Romans, Hebrews, Isaiah, Genesis</li>
+     </ul>
+     <h3>👤 Character Study: Follow a Biblical Person</h3>
+     <h4>What It Is</h4>
+     <p>Character study involves tracing a person's life throughout Scripture, examining their faith, failures, relationships with God, and lessons we can learn from their journey.</p>
+     <h4>Why It Matters</h4>
+     <p>The Bible is filled with real people who experienced real struggles, victories, and encounters with God. Their stories teach us how faith works in everyday life and show us both what to emulate and what to avoid.</p>
+     <h4>How to Do a Character Study</h4>
+     <ol>
+      <li><strong>Choose a Character:</strong> Pick someone who interests you</li>
+      <li><strong>Find All References:</strong> Use a concordance or Bible app to find every mention of this person</li>
+      <li><strong>Create a Timeline:</strong> Map out the major events in their life chronologically</li>
+      <li><strong>Observe Their Character:</strong>
+       <ul>
+        <li>What were their strengths?</li>
+        <li>What were their weaknesses?</li>
+        <li>What sins did they struggle with?</li>
+        <li>What virtues did they display?</li>
+        <li>How did they respond to trials?</li>
+       </ul></li>
+      <li><strong>Examine Their Faith:</strong>
+       <ul>
+        <li>How did they come to know God?</li>
+        <li>What did they believe about God?</li>
+        <li>How did their faith grow (or decline)?</li>
+        <li>When did they trust God? When did they doubt?</li>
+       </ul></li>
+      <li><strong>Note Their Relationships:</strong>
+       <ul>
+        <li>How did they interact with God?</li>
+        <li>How did they treat family, friends, enemies?</li>
+        <li>What role did community play in their life?</li>
+       </ul></li>
+      <li><strong>Identify Key Moments:</strong> What were the turning points in their story?</li>
+      <li><strong>Learn from Their Example:</strong>
+       <ul>
+        <li>What can you imitate?</li>
+        <li>What mistakes should you avoid?</li>
+        <li>How does their story point you to Jesus?</li>
+       </ul></li>
+     </ol>
+     <h4>Example: Studying David</h4>
+     <ul>
+      <li><strong>References:</strong> 1 Samuel 16-31, 2 Samuel (entire book), 1 Kings 1-2, many Psalms</li>
+      <li><strong>Key Events:</strong> Anointed as king, defeats Goliath, flees from Saul, becomes king, commits adultery with Bathsheba, son Absalom rebels, final days</li>
+      <li><strong>Strengths:</strong> "Man after God's own heart," worship, repentance, courage, trust in God</li>
+      <li><strong>Weaknesses:</strong> Adultery, murder, poor parenting, pride (census)</li>
+      <li><strong>Lessons:</strong>
+       <ul>
+        <li>God looks at the heart, not outward appearance</li>
+        <li>Even great men of faith fall into serious sin</li>
+        <li>True repentance involves confession and consequences</li>
+        <li>God's grace covers our failures</li>
+        <li>Worship should be central to life</li>
+       </ul></li>
+     </ul>
+     <h4>Great Characters to Study</h4>
+     <ul>
+      <li><strong>Old Testament:</strong> Abraham, Moses, Joseph, David, Esther, Ruth, Daniel, Elijah</li>
+      <li><strong>New Testament:</strong> Peter, Paul, Mary (mother of Jesus), John, Timothy, Barnabas</li>
+      <li><strong>Women:</strong> Ruth, Esther, Mary, Mary Magdalene, Priscilla, Deborah</li>
+      <li><strong>Villains (to learn what NOT to do):</strong> Cain, Judas, Jezebel, Pharaoh</li>
+     </ul>
+     <h3>🔤 Word Study: Explore Original Meanings</h3>
+     <h4>What It Is</h4>
+     <p>Word study involves researching the original Hebrew (Old Testament) or Greek (New Testament) meaning of important words to understand their full significance and how they're used throughout Scripture.</p>
+     <h4>Why It Matters</h4>
+     <p>English translations can't always capture the full depth of the original language. Word studies reveal nuances, cultural context, and layers of meaning that deepen your understanding of what God is saying.</p>
+     <h4>How to Do a Word Study</h4>
+     <ol>
+      <li><strong>Choose a Word:</strong> Pick an important theological word or a word you don't fully understand</li>
+      <li><strong>Find the Original Language:</strong> Use tools like Blue Letter Bible or Bible Hub to find the Hebrew/Greek word</li>
+      <li><strong>Look Up the Definition:</strong> Use a lexicon (dictionary) to find:
+       <ul>
+        <li>The literal meaning</li>
+        <li>Related words from the same root</li>
+        <li>How it was used in ancient culture</li>
+       </ul></li>
+      <li><strong>Check Multiple Translations:</strong> See how different versions translate the word</li>
+      <li><strong>Find Other Uses:</strong> Use a concordance to see where else this word appears in Scripture</li>
+      <li><strong>Study the Context:</strong> How is the word used in each passage?</li>
+      <li><strong>Look for Patterns:</strong> Do you notice themes or connections across passages?</li>
+      <li><strong>Synthesize:</strong> What have you learned about this word's meaning and significance?</li>
+      <li><strong>Apply:</strong> How does this deeper understanding change how you live?</li>
+     </ol>
+     <h4>Example: Studying "Grace" (Greek: χάρις - charis)</h4>
+     <ul>
+      <li><strong>Literal Meaning:</strong> Unmerited favor, gift, kindness</li>
+      <li><strong>Usage in Culture:</strong> Used for goodwill shown to someone, a favor done freely (not earned)</li>
+      <li><strong>Related Words:</strong> Charizomai (to forgive graciously), charisma (spiritual gift)</li>
+      <li><strong>Key Verses:</strong> Ephesians 2:8-9, Romans 3:24, 2 Corinthians 12:9, Titus 2:11-12</li>
+      <li><strong>Patterns:</strong>
+       <ul>
+        <li>Grace is always unearned—it's a gift</li>
+        <li>Grace comes from God, not human effort</li>
+        <li>Grace not only saves us but teaches us to live godly lives</li>
+        <li>Grace is sufficient for every weakness</li>
+       </ul></li>
+      <li><strong>Application:</strong> Stop trying to earn God's favor; receive His free gift and extend grace to others</li>
+     </ul>
+     <h4>Tools for Word Study</h4>
+     <ul>
+      <li><strong>Online:</strong> <a href="https://www.blueletterbible.org" target="_blank" rel="noopener noreferrer">Blue Letter Bible</a>, <a href="https://biblehub.com" target="_blank" rel="noopener noreferrer">Bible Hub</a></li>
+      <li><strong>Books:</strong> Strong's Concordance, Vine's Expository Dictionary</li>
+      <li><strong>Apps:</strong> Logos Bible Software, Accordance</li>
+     </ul>
+     <h4>Good Words to Study</h4>
+     <ul>
+      <li><strong>Salvation Words:</strong> Grace, faith, justification, redemption, sanctification</li>
+      <li><strong>Character Words:</strong> Love, joy, peace, patience, kindness, goodness</li>
+      <li><strong>Relationship Words:</strong> Covenant, fellowship, reconciliation, adoption</li>
+      <li><strong>Worship Words:</strong> Praise, glory, honor, holy, righteousness</li>
+     </ul>
+     <h3>📌 Topical Study: Trace Themes Through Scripture</h3>
+     <h4>What It Is</h4>
+     <p>Topical study involves tracing a specific theme, doctrine, or topic throughout the entire Bible to understand God's complete teaching on that subject.</p>
+     <h4>Why It Matters</h4>
+     <p>No single passage contains everything God has to say about a topic. Topical study gives you the full picture by collecting all relevant verses and synthesizing God's unified message across both Testaments.</p>
+     <h4>How to Do a Topical Study</h4>
+     <ol>
+      <li><strong>Choose a Topic:</strong> Pick something you want to understand better (prayer, suffering, faith, etc.)</li>
+      <li><strong>Gather Verses:</strong> Use a concordance or topical Bible to find relevant passages</li>
+      <li><strong>Read in Context:</strong> Don't just collect verses—read the surrounding passages to understand context</li>
+      <li><strong>Organize by Theme:</strong> Group similar verses together
+       <ul>
+        <li>What God says about it</li>
+        <li>What humans should do about it</li>
+        <li>Examples from people's lives</li>
+        <li>Promises related to it</li>
+        <li>Warnings about it</li>
+       </ul></li>
+      <li><strong>Note Progressive Revelation:</strong> How does understanding of this topic develop from Genesis to Revelation?</li>
+      <li><strong>Look for Balance:</strong> Make sure you're seeing the whole picture, not just verses that support one view</li>
+      <li><strong>Synthesize:</strong> What is God's complete teaching on this topic?</li>
+      <li><strong>Apply:</strong> How should this truth reshape your beliefs and behavior?</li>
+     </ol>
+     <h4>Example: Studying "Prayer"</h4>
+     <ul>
+      <li><strong>What Prayer Is:</strong>
+       <ul>
+        <li>Communication with God (Philippians 4:6)</li>
+        <li>Bringing requests to God (Matthew 7:7-8)</li>
+        <li>Worship and thanksgiving (Psalm 95:1-2)</li>
+        <li>Confession of sin (1 John 1:9)</li>
+       </ul></li>
+      <li><strong>How to Pray:</strong>
+       <ul>
+        <li>With faith (James 1:6)</li>
+        <li>According to God's will (1 John 5:14)</li>
+        <li>In Jesus' name (John 14:13)</li>
+        <li>Persistently (Luke 18:1-8)</li>
+        <li>With a pure heart (Psalm 66:18)</li>
+       </ul></li>
+      <li><strong>Promises About Prayer:</strong>
+       <ul>
+        <li>God hears our prayers (Psalm 34:17)</li>
+        <li>He answers according to His will (1 John 5:14-15)</li>
+        <li>Prayer brings peace (Philippians 4:6-7)</li>
+        <li>The Spirit helps us pray (Romans 8:26)</li>
+       </ul></li>
+      <li><strong>Examples:</strong>
+       <ul>
+        <li>Daniel prayed three times daily (Daniel 6:10)</li>
+        <li>Jesus prayed before major decisions (Luke 6:12-13)</li>
+        <li>Paul constantly prayed for churches (Colossians 1:9)</li>
+        <li>Early church devoted themselves to prayer (Acts 2:42)</li>
+       </ul></li>
+     </ul>
+     <h4>Popular Topics to Study</h4>
+     <ul>
+      <li><strong>Foundational:</strong> Salvation, faith, grace, sin, repentance</li>
+      <li><strong>Christian Life:</strong> Prayer, worship, obedience, spiritual growth, disciplines</li>
+      <li><strong>Character:</strong> Love, joy, peace, patience, humility, integrity</li>
+      <li><strong>Difficult Topics:</strong> Suffering, doubt, fear, anxiety, temptation</li>
+      <li><strong>Relationships:</strong> Marriage, parenting, friendship, forgiveness, conflict</li>
+      <li><strong>Ministry:</strong> Evangelism, discipleship, serving, spiritual gifts</li>
+     </ul>
+     <h3>📄 Chapter Analysis: Deep Dive Into One Chapter</h3>
+     <h4>What It Is</h4>
+     <p>Chapter analysis is an intensive study of a single chapter, examining every verse in detail to understand the passage thoroughly. This method helps you mine the depths of a focused portion of Scripture.</p>
+     <h4>Why It Matters</h4>
+     <p>Some chapters are so rich that they deserve extended attention. Slowing down to study one chapter deeply often reveals truths you'd miss if you were reading quickly through a book.</p>
+     <h4>How to Do Chapter Analysis</h4>
+     <ol>
+      <li><strong>Choose Your Chapter:</strong> Pick a significant or challenging chapter</li>
+      <li><strong>Read Multiple Times:</strong> Read the chapter at least 5 times
+       <ul>
+        <li>Once for overview</li>
+        <li>Once to identify the main idea</li>
+        <li>Once in a different translation</li>
+        <li>Once to notice details</li>
+        <li>Once to see how it flows</li>
+       </ul></li>
+      <li><strong>Study Context:</strong> Read the chapters before and after to understand how this fits in the book</li>
+      <li><strong>Divide Into Sections:</strong> Break the chapter into natural paragraphs or thought units</li>
+      <li><strong>Analyze Verse by Verse:</strong> For each verse, ask:
+       <ul>
+        <li>What does it say? (Observation)</li>
+        <li>What does it mean? (Interpretation)</li>
+        <li>Why does it matter? (Application)</li>
+       </ul></li>
+      <li><strong>Identify Key Words:</strong> What words or phrases are repeated?</li>
+      <li><strong>Note Connections:</strong> How do the verses connect to each other logically?</li>
+      <li><strong>Cross-Reference:</strong> Find other passages that relate to what's being taught</li>
+      <li><strong>Summarize:</strong> Write a one-sentence summary of the chapter's main point</li>
+      <li><strong>Apply:</strong> What specific action will you take based on this chapter?</li>
+     </ol>
+     <h4>Example: Analyzing Romans 8</h4>
+     <ul>
+      <li><strong>Main Theme:</strong> Life in the Spirit and assurance of salvation</li>
+      <li><strong>Outline:</strong>
+       <ul>
+        <li>Verses 1-4: No condemnation in Christ</li>
+        <li>Verses 5-11: Life controlled by the Spirit</li>
+        <li>Verses 12-17: Children and heirs of God</li>
+        <li>Verses 18-25: Future glory amid present suffering</li>
+        <li>Verses 26-27: The Spirit's help in prayer</li>
+        <li>Verses 28-30: God's sovereign plan for good</li>
+        <li>Verses 31-39: Nothing can separate us from God's love</li>
+       </ul></li>
+      <li><strong>Key Verse:</strong> "And we know that in all things God works for the good of those who love him" (v. 28)</li>
+      <li><strong>Repeated Words:</strong> Spirit (19x), life (6x), glory (4x), suffer (3x)</li>
+      <li><strong>Application:</strong> Live by the Spirit, embrace your identity as God's child, find hope in suffering knowing nothing can separate you from God's love</li>
+     </ul>
+     <h4>Great Chapters to Analyze</h4>
+     <ul>
+      <li><strong>Old Testament:</strong> Genesis 1, Psalm 23, Psalm 51, Isaiah 53, Daniel 6</li>
+      <li><strong>Gospels:</strong> Matthew 5-7 (Sermon on the Mount), John 15, John 17</li>
+      <li><strong>Paul's Letters:</strong> Romans 8, Romans 12, 1 Corinthians 13, Ephesians 2, Philippians 2</li>
+      <li><strong>Other NT:</strong> Hebrews 11, James 1, 1 John 4</li>
+     </ul>
+     <h3>Choosing the Right Method</h3>
+     <p>Different situations call for different study methods:</p>
+     <ul>
+      <li><strong>Use Book Study when:</strong> You want to understand the overall message of a biblical book</li>
+      <li><strong>Use Character Study when:</strong> You want to learn from someone's example of faith (or failure)</li>
+      <li><strong>Use Word Study when:</strong> You encounter an important theological term or confusing word</li>
+      <li><strong>Use Topical Study when:</strong> You want God's full perspective on a specific issue</li>
+      <li><strong>Use Chapter Analysis when:</strong> You want to deeply understand a particularly significant passage</li>
+     </ul>
+     <h3>Combining Methods</h3>
+     <p>These methods work great together! For example:</p>
+     <ul>
+      <li>Do a <strong>book study</strong> of Ephesians, then do a <strong>chapter analysis</strong> of Ephesians 2, followed by a <strong>word study</strong> on "grace"</li>
+      <li>Do a <strong>character study</strong> on Abraham, then do a <strong>topical study</strong> on "faith" using what you learned</li>
+      <li>Do a <strong>chapter analysis</strong> of Romans 8, then do a <strong>word study</strong> on key words like "Spirit," "adoption," or "glory"</li>
+     </ul>
+     <h3>General Study Tips</h3>
+     <ul>
+      <li><strong>Pray before you study:</strong> Ask the Holy Spirit to illuminate Scripture</li>
+      <li><strong>Use good tools:</strong> Study Bible, concordance, commentaries (but read Scripture first!)</li>
+      <li><strong>Write it down:</strong> Keep a journal of insights and applications</li>
+      <li><strong>Be patient:</strong> Deep study takes time—don't rush</li>
+      <li><strong>Context is king:</strong> Always read surrounding passages</li>
+      <li><strong>Apply what you learn:</strong> Knowledge without obedience leads to pride</li>
+      <li><strong>Study with others:</strong> Discuss your findings with mature believers</li>
+     </ul>
+     <blockquote>
+      "Do your best to present yourself to God as one approved, a worker who does not need to be ashamed and who correctly handles the word of truth." - 2 Timothy 2:15
+     </blockquote>
+     <div style="text-align: center; margin-top: 40px;"><button class="btn btn-primary" onclick="showPage('study-templates')">Download Study Templates</button>
+     </div>
+    </div>
+   </div>
+  </div>
+  <div id="beginner-reading-plan" class="page">
+   <div class="content-page"><button class="btn-back" onclick="goBack()">← Back</button> <button class="back-to-top" onclick="scrollToTop()" aria-label="Back to top">↑</button>
+    <div class="content-header">
+     <h2>30-Day Beginner Reading Plan</h2>
+     <div class="meta">
+      A Savior's Call
+     </div>
+    </div>
+    <div class="intro-section">
+     <h3>Your First Month in God's Word</h3>
+     <p>This reading plan is designed specifically for new believers.</p>
+    </div>
+    <div class="content-body">
+     <h3>Week 1: Meeting Jesus (Days 1-7)</h3>
+     <h4>Day 1: John 1:1-18 - Who is Jesus?</h4>
+     <p>Begin your journey by discovering who Jesus truly is—not just a good teacher, but God Himself who became human to dwell among us.</p>
+     <h4>Day 2: John 3:1-21 - You Must Be Born Again</h4>
+     <p>Jesus explains to Nicodemus what it means to be born again. This is where we find the most famous verse in the Bible: John 3:16.</p>
+     <h4>Day 3: John 4:1-26 - The Woman at the Well</h4>
+     <p>Jesus offers "living water" to a Samaritan woman. See how Jesus breaks social barriers to offer salvation to everyone.</p>
+     <h4>Day 4: John 6:25-40 - The Bread of Life</h4>
+     <p>Jesus declares He is the bread of life. Discover what it means that Jesus satisfies our deepest spiritual hunger.</p>
+     <h4>Day 5: John 8:12-30 - The Light of the World</h4>
+     <p>Jesus claims to be the light of the world. Learn how following Him means walking out of darkness into light.</p>
+     <h4>Day 6: John 10:1-18 - The Good Shepherd</h4>
+     <p>One of the most comforting passages—Jesus as the Good Shepherd who knows His sheep by name and lays down His life for them.</p>
+     <h4>Day 7: John 11:17-44 - The Resurrection and the Life</h4>
+     <p>Jesus raises Lazarus from the dead and declares, "I am the resurrection and the life." This foreshadows His own resurrection.</p>
+     <h3>Week 2: The Cross and Resurrection (Days 8-14)</h3>
+     <h4>Day 8: John 13:1-17 - Jesus Washes the Disciples' Feet</h4>
+     <p>Jesus demonstrates servant leadership the night before His crucifixion. True greatness is found in humble service.</p>
+     <h4>Day 9: John 14:1-14 - The Way, the Truth, and the Life</h4>
+     <p>Jesus comforts His disciples with promises about heaven and declares He is the only way to the Father.</p>
+     <h4>Day 10: John 15:1-17 - Abide in Me</h4>
+     <p>The secret to the Christian life: remaining connected to Jesus like branches to a vine. Apart from Him, we can do nothing.</p>
+     <h4>Day 11: John 17:1-26 - Jesus Prays for You</h4>
+     <p>Jesus prays not just for His disciples, but for all who would believe in Him—including you! This is Jesus' heart for His followers.</p>
+     <h4>Day 12: John 18:1-19:16 - The Arrest and Trial</h4>
+     <p>Follow Jesus through His arrest and trials. See His courage, love, and willingness to go to the cross for our sins.</p>
+     <h4>Day 13: John 19:17-42 - The Crucifixion</h4>
+     <p>The darkest day in history—yet the most loving act ever accomplished. Jesus dies for our sins, crying "It is finished."</p>
+     <h4>Day 14: John 20:1-31 - The Resurrection</h4>
+     <p>The tomb is empty! Jesus is alive! Death could not hold Him. This changes everything about life, death, and eternity.</p>
+     <h3>Week 3: Understanding Salvation (Days 15-21)</h3>
+     <h4>Day 15: Romans 3:21-31 - Justified by Faith</h4>
+     <p>Paul explains how we are made right with God—not by our works, but by faith in Jesus Christ.</p>
+     <h4>Day 16: Romans 5:1-11 - Peace with God</h4>
+     <p>Through Jesus, we have peace with God and access to His grace. Even in suffering, we have hope because of God's love.</p>
+     <h4>Day 17: Romans 6:1-14 - Dead to Sin, Alive in Christ</h4>
+     <p>When you trust Christ, you die to your old life and are raised to new life. Sin no longer has mastery over you.</p>
+     <h4>Day 18: Romans 8:1-17 - No Condemnation</h4>
+     <p>There is now no condemnation for those in Christ Jesus! You are led by the Spirit and are a child of God.</p>
+     <h4>Day 19: Romans 8:28-39 - Nothing Can Separate Us</h4>
+     <p>One of the most encouraging passages in Scripture. Nothing—absolutely nothing—can separate you from God's love.</p>
+     <h4>Day 20: Ephesians 2:1-10 - Saved by Grace</h4>
+     <p>The clearest explanation of grace: we are saved by grace through faith, not by works. It is God's gift.</p>
+     <h4>Day 21: 1 John 1:5-2:2 - Walking in the Light</h4>
+     <p>What does it look like to live as a Christian? Walking in the light, confessing sin, and trusting Jesus as our advocate.</p>
+     <h3>Week 4: Living as a Believer (Days 22-30)</h3>
+     <h4>Day 22: Matthew 5:1-12 - The Beatitudes</h4>
+     <p>Jesus describes what citizens of His kingdom look like. These "blessed" characteristics are countercultural and beautiful.</p>
+     <h4>Day 23: Matthew 6:5-15 - The Lord's Prayer</h4>
+     <p>Jesus teaches His disciples how to pray. This is a model for prayer that covers worship, provision, forgiveness, and protection.</p>
+     <h4>Day 24: Matthew 6:25-34 - Do Not Worry</h4>
+     <p>Jesus addresses anxiety and worry, calling us to trust our heavenly Father who knows what we need and cares for us.</p>
+     <h4>Day 25: Matthew 22:34-40 - The Greatest Commandment</h4>
+     <p>Love God with everything you have, and love your neighbor as yourself. All of Scripture hangs on these two commands.</p>
+     <h4>Day 26: Matthew 28:16-20 - The Great Commission</h4>
+     <p>Jesus commissions His followers to make disciples of all nations. This is our mission as believers.</p>
+     <h4>Day 27: Acts 2:1-41 - The Day of Pentecost</h4>
+     <p>The Holy Spirit comes upon the believers, and the church is born. Peter preaches, and 3,000 people are saved in one day.</p>
+     <h4>Day 28: Galatians 5:16-26 - Fruit of the Spirit</h4>
+     <p>What does a Spirit-filled life look like? These nine character qualities grow in us as we walk with God.</p>
+     <h4>Day 29: Philippians 4:4-9 - Rejoice Always</h4>
+     <p>Paul's prescription for peace: rejoice, pray, be thankful, and think on what is true and lovely. God's peace will guard your heart.</p>
+     <h4>Day 30: 1 Corinthians 13:1-13 - The Love Chapter</h4>
+     <p>The most beautiful description of love in Scripture. This is the character we're called to live out as followers of Jesus.</p>
+     <h3>What's Next?</h3>
+     <p>Congratulations on completing this 30-day reading plan! You've read some of the most foundational passages in Scripture. Here are some great next steps:</p>
+     <ul>
+      <li><strong>Read a Full Gospel:</strong> Try reading Matthew, Mark, or Luke in their entirety to get the complete story of Jesus</li>
+      <li><strong>Join a Bible Study:</strong> Connect with other believers to study Scripture together</li>
+      <li><strong>Start a Reading Plan:</strong> Many Bible apps offer reading plans for different books or topics</li>
+      <li><strong>Memorize Scripture:</strong> Choose a few verses that were especially meaningful and commit them to memory</li>
+      <li><strong>Explore Other Resources:</strong> Check out our <button onclick="showPage('footsteps')" style="color: #9c826b; background: none; border: none; font: inherit; cursor: pointer; padding: 0;">Footsteps in Faith</button> section for more study resources</li>
+     </ul>
+     <blockquote>
+      "All Scripture is God-breathed and is useful for teaching, rebuking, correcting and training in righteousness, so that the servant of God may be thoroughly equipped for every good work." - 2 Timothy 3:16-17
+     </blockquote>
+    </div>
+   </div>
+  </div>
+  <script>
+    let pageHistory = [];
+
+    const defaultConfig = {
+      site_title: "Wholehearted Legacy",
+      hero_title: "Faith. Hope. Healing.",
+      hero_description: "Journey with us through Christ—one step, one verse, one act of love at a time. Discover hope in every season.",
+      pathways_title: "Your Journey Starts Here",
+      cta_title: "Ready to Begin?"
+    };
+
+    function showPage(pageId, addToHistory = true) {
+      const currentPage = document.querySelector('.page.active');
+      if (currentPage && addToHistory && currentPage.id !== pageId) {
+        pageHistory.push(currentPage.id);
+      }
+
+      const pages = document.querySelectorAll('.page');
+      pages.forEach(page => page.classList.remove('active'));
+
+      const targetPage = document.getElementById(pageId);
+      if (targetPage) {
+        targetPage.classList.add('active');
+        window.scrollTo(0, 0);
+      }
+    }
+
+    function goBack() {
+      if (pageHistory.length > 0) {
+        const previousPage = pageHistory.pop();
+        showPage(previousPage, false);
+      } else {
+        showPage('home', false);
+      }
+    }
+
+    function scrollToTop() {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function scrollToSection(sectionId) {
+      showPage('home');
+      setTimeout(() => {
+        const section = document.getElementById(sectionId);
+        if (section) {
+          section.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 100);
+    }
+
+    function handleSubmit(event) {
+      event.preventDefault();
+      const email = document.getElementById('email-input').value;
+      const message = document.createElement('div');
+      message.style.cssText = 'position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: white; padding: 30px 50px; border-radius: 12px; box-shadow: 0 8px 30px rgba(0,0,0,0.2); z-index: 1000; text-align: center;';
+      message.innerHTML = `<p style="color: #5d4a3a; font-size: 18px; margin-bottom: 20px;">Thank you for subscribing!</p><p style="color: #7a6a5a;">We'll be in touch soon at ${email}</p>`;
+      document.body.appendChild(message);
+      setTimeout(() => message.remove(), 3000);
+      event.target.reset();
+    }
+
+    // Initialize Element SDK
+    if (window.elementSdk) {
+      window.elementSdk.init({
+        defaultConfig: defaultConfig,
+        onConfigChange: async (config) => {
+          document.getElementById('site-title').textContent = config.site_title || defaultConfig.site_title;
+          document.getElementById('hero-title').textContent = config.hero_title || defaultConfig.hero_title;
+          document.getElementById('hero-description').textContent = config.hero_description || defaultConfig.hero_description;
+          document.getElementById('pathways-title').textContent = config.pathways_title || defaultConfig.pathways_title;
+          document.getElementById('cta-title').textContent = config.cta_title || defaultConfig.cta_title;
+        },
+        mapToCapabilities: (config) => ({
+          recolorables: [],
+          borderables: [],
+          fontEditable: undefined,
+          fontSizeable: undefined
+        }),
+        mapToEditPanelValues: (config) => new Map([
+          ["site_title", config.site_title || defaultConfig.site_title],
+          ["hero_title", config.hero_title || defaultConfig.hero_title],
+          ["hero_description", config.hero_description || defaultConfig.hero_description],
+          ["pathways_title", config.pathways_title || defaultConfig.pathways_title],
+          ["cta_title", config.cta_title || defaultConfig.cta_title]
+        ])
+      });
+    }
+  </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9a1469f1110516a6',t:'MTc2MzYwNDY1Ny4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
