@@ -630,6 +630,21 @@
     }
   
     nav#main-nav, footer { display: none !important; }
+
+@media (max-width: 768px) {
+  .timeline-container {
+    overflow-x: auto;
+  }
+  .timeline {
+    display: block;
+    min-width: 100%;
+  }
+  .timeline-item {
+    width: 100%;
+    box-sizing: border-box;
+  }
+}
+
 </style>
   <style>@view-transition { navigation: auto; }</style>
   <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
@@ -2522,45 +2537,364 @@
    </div>
   </section>
 <!-- Seasonal Studies Page -->
-  <section class="content-hub hidden" id="seasonal-studies-page">
-   <div class="hub-container"><button class="back-button" onclick="showHub('faith-rooted')">← Back to Faith Rooted</button>
-    <div class="content-page">
-     <h2>Seasonal Studies</h2>
-     <p>Celebrate the seasons of the Christian calendar with special studies designed for Advent, Lent, Easter, and other significant times of the year.</p>
-     <h3>🎄 Advent Studies</h3>
-     <div class="study-card">
-      <h4>The Light Has Come</h4><span class="study-duration">4-Week Advent Study</span>
-      <p>Prepare your heart for Christmas as we explore the prophecies, promises, and presence of Christ—the Light of the World.</p>
-      <ul>
-       <li><strong>Week 1:</strong> The Promise of Light - <a href="https://www.bible.com/bible/111/ISA.9.2-7.NIV" target="_blank" rel="noopener noreferrer">Isaiah 9:2-7</a></li>
-       <li><strong>Week 2:</strong> Waiting in Hope - <a href="https://www.bible.com/bible/111/LUK.1.26-38.NIV" target="_blank" rel="noopener noreferrer">Luke 1:26-38</a></li>
-       <li><strong>Week 3:</strong> Joy to the World - <a href="https://www.bible.com/bible/111/LUK.2.8-20.NIV" target="_blank" rel="noopener noreferrer">Luke 2:8-20</a></li>
-       <li><strong>Week 4:</strong> Immanuel Has Come - <a href="https://www.bible.com/bible/111/JHN.1.1-14.NIV" target="_blank" rel="noopener noreferrer">John 1:1-14</a></li>
-      </ul>
-     </div>
-     <h3>✝️ Lent &amp; Easter Studies</h3>
-     <div class="study-card">
-      <h4>The Road to the Cross</h4><span class="study-duration">6-Week Lent Study</span>
-      <p>Walk with Jesus from the wilderness to the cross, reflecting on His sacrifice and what it means for us today.</p><a href="https://www.bible.com/bible/111/MAT.26.NIV" target="_blank" rel="noopener noreferrer" class="bible-link">Begin in Matthew 26</a>
-     </div>
-     <div class="study-card">
-      <h4>Resurrection Life</h4><span class="study-duration">Easter Week Study</span>
-      <p>Celebrate the resurrection and what it means to live in the power of the risen Christ.</p><a href="https://www.bible.com/bible/111/JHN.20.NIV" target="_blank" rel="noopener noreferrer" class="bible-link">Read John 20</a>
-     </div>
-     <h3>🍂 Other Seasonal Studies</h3>
-     <div class="devotional-grid">
+   <section class="content-hub hidden" id="seasonal-studies-page">
+    <div class="hub-container">
+     <button class="back-button" onclick="showHub('faith-rooted')">← Back to Faith Rooted</button>
+     <div class="content-page">
+      <h2>Seasonal Studies</h2>
+      <p>Walk through the seasons of the Christian calendar with Scripture-rich studies that keep your heart anchored in the hope of Christ. All Scripture references below are from the <strong>King James Version (KJV)</strong> so they align with the rest of your Wholehearted Legacy resources.</p>
+
+      <!-- 🎄 Advent Studies -->
+      <h3>🎄 Advent Studies</h3>
       <div class="study-card">
-       <h4>Thanksgiving &amp; Gratitude</h4><span class="study-duration">1-Week Study</span>
-       <p>Cultivate a heart of thankfulness with daily reflections on God's goodness and provision.</p><a href="https://www.bible.com/bible/111/1TH.5.16-18.NIV" target="_blank" rel="noopener noreferrer" class="bible-link">1 Thessalonians 5:16-18</a>
+       <div class="study-header">
+        <h4>The Light Has Come</h4>
+        <span class="study-duration">4-Week Advent Study</span>
+       </div>
+       <p>This four-week Advent journey invites you to slow down, watch for the coming of Christ, and remember that the Light of the world stepped into our darkness. Use it individually, with family, or with a small group.</p>
+       <div class="verse-box">
+        <p><em>"For unto us a child is born, unto us a son is given: and the government shall be upon his shoulder: and his name shall be called Wonderful, Counsellor, The mighty God, The everlasting Father, The Prince of Peace."</em> – Isaiah 9:6 (KJV)</p>
+       </div>
+
+       <div class="reading-plan">
+        <div class="week-header">
+         <h3>Week 1 – The Promise of Light</h3>
+        </div>
+        <div class="reading-day">
+         <div class="day-number">Day 1 – First Glimpse of a Savior</div>
+         <p>Read: Genesis 3:15; Galatians 4:4–5</p>
+         <p>Focus: See how God promised a Redeemer even in humanity’s first fall into sin.</p>
+        </div>
+        <div class="reading-day">
+         <div class="day-number">Day 2 – God’s Covenant Faithfulness</div>
+         <p>Read: Genesis 12:1–3; Genesis 22:15–18</p>
+         <p>Focus: Trace God’s promise of blessing through Abraham that ultimately points to Christ.</p>
+        </div>
+        <div class="reading-day">
+         <div class="day-number">Day 3 – A Child, a Son, a King</div>
+         <p>Read: Isaiah 7:14; Isaiah 9:1–7</p>
+         <p>Focus: Meditate on the names and titles given to the promised Messiah.</p>
+        </div>
+        <div class="reading-day">
+         <div class="day-number">Day 4 – Light in a Dark Land</div>
+         <p>Read: Micah 5:2–5; John 1:1–5</p>
+         <p>Focus: Notice how God shines hope into places that feel small, forgotten, or dark.</p>
+        </div>
+
+        <div class="week-header">
+         <h3>Week 2 – Waiting in Hope</h3>
+        </div>
+        <div class="reading-day">
+         <div class="day-number">Day 5 – Mary’s Yes to God</div>
+         <p>Read: Luke 1:26–38</p>
+         <p>Focus: Reflect on Mary’s humble surrender and what it means to say, “Be it unto me according to thy word.”</p>
+        </div>
+        <div class="reading-day">
+         <div class="day-number">Day 6 – Elizabeth and the Joy of Confirmation</div>
+         <p>Read: Luke 1:39–45</p>
+         <p>Focus: Thank God for the people He sends to confirm His work in our lives.</p>
+        </div>
+        <div class="reading-day">
+         <div class="day-number">Day 7 – Mary’s Song of Praise</div>
+         <p>Read: Luke 1:46–55</p>
+         <p>Focus: Notice how Mary remembers God’s faithfulness to Israel and to the humble.</p>
+        </div>
+        <div class="reading-day">
+         <div class="day-number">Day 8 – Waiting with Trust</div>
+         <p>Read: Psalm 27; Psalm 130</p>
+         <p>Focus: Learn how God’s people have always waited with hope rooted in His character.</p>
+        </div>
+
+        <div class="week-header">
+         <h3>Week 3 – Joy to the World</h3>
+        </div>
+        <div class="reading-day">
+         <div class="day-number">Day 9 – Good Tidings of Great Joy</div>
+         <p>Read: Luke 2:1–20</p>
+         <p>Focus: Watch how the birth of Christ brings joy first to the humble shepherds.</p>
+        </div>
+        <div class="reading-day">
+         <div class="day-number">Day 10 – Simeon’s Long-Awaited Hope</div>
+         <p>Read: Luke 2:25–35</p>
+         <p>Focus: Consider what it means to “wait for the consolation of Israel.”</p>
+        </div>
+        <div class="reading-day">
+         <div class="day-number">Day 11 – Anna’s Faithful Worship</div>
+         <p>Read: Luke 2:36–38</p>
+         <p>Focus: Be encouraged by a life of steady worship that points others to Christ.</p>
+        </div>
+        <div class="reading-day">
+         <div class="day-number">Day 12 – Joy in Heaven and Earth</div>
+         <p>Read: Philippians 4:4–7; 1 Peter 1:3–9</p>
+         <p>Focus: Rejoice in the living hope we have because Christ has come.</p>
+        </div>
+
+        <div class="week-header">
+         <h3>Week 4 – Immanuel, God with Us</h3>
+        </div>
+        <div class="reading-day">
+         <div class="day-number">Day 13 – Word Made Flesh</div>
+         <p>Read: John 1:1–14</p>
+         <p>Focus: Marvel at the mystery of God taking on flesh and dwelling among us.</p>
+        </div>
+        <div class="reading-day">
+         <div class="day-number">Day 14 – God with Us in Our Weakness</div>
+         <p>Read: Hebrews 2:9–18; Hebrews 4:14–16</p>
+         <p>Focus: Rest in the truth that Jesus understands our weakness and intercedes for us.</p>
+        </div>
+        <div class="reading-day">
+         <div class="day-number">Day 15 – Light for the Nations</div>
+         <p>Read: Isaiah 42:1–7; Luke 2:29–32</p>
+         <p>Focus: Praise God that the Light of Christ reaches all nations and all people.</p>
+        </div>
+        <div class="reading-day">
+         <div class="day-number">Day 16 – Responding to the Light</div>
+         <p>Read: 1 John 1:5–9; Matthew 5:14–16</p>
+         <p>Focus: Ask how you can walk in the light and reflect Christ to others this season.</p>
+        </div>
+       </div>
       </div>
+
+      <!-- ✝️ Lent & Easter Studies -->
+      <h3>✝️ Lent &amp; Easter Studies</h3>
       <div class="study-card">
-       <h4>New Year, New Beginnings</h4><span class="study-duration">2-Week Study</span>
-       <p>Start the year with fresh vision, surrendered plans, and renewed commitment to following Christ.</p><a href="https://www.bible.com/bible/111/LAM.3.22-23.NIV" target="_blank" rel="noopener noreferrer" class="bible-link">Lamentations 3:22-23</a>
+       <div class="study-header">
+        <h4>The Road to the Cross</h4>
+        <span class="study-duration">6-Week Lent Study</span>
+       </div>
+       <p>Use this six-week journey to follow Jesus from the wilderness to the cross, slowing down to see His heart of obedience, humility, and love. This layout is flexible—use one “week” per group meeting or linger as long as needed on each theme.</p>
+       <div class="verse-box">
+        <p><em>"Looking unto Jesus the author and finisher of our faith; who for the joy that was set before him endured the cross, despising the shame, and is set down at the right hand of the throne of God."</em> – Hebrews 12:2 (KJV)</p>
+       </div>
+       <div class="reading-plan">
+        <div class="week-header">
+         <h3>Week 1 – Tested in the Wilderness</h3>
+        </div>
+        <div class="reading-day">
+         <div class="day-number">Key Passages</div>
+         <p>Read: Matthew 4:1–11; Deuteronomy 8:1–3</p>
+         <p>Focus: See how Jesus overcomes temptation by clinging to the written Word of God.</p>
+        </div>
+        <div class="reading-day">
+         <div class="day-number">Reflection</div>
+         <p>Questions: Where are you tempted to doubt God’s goodness? How can you answer with Scripture the way Jesus did?</p>
+        </div>
+
+        <div class="week-header">
+         <h3>Week 2 – The Call to Follow</h3>
+        </div>
+        <div class="reading-day">
+         <div class="day-number">Key Passages</div>
+         <p>Read: Matthew 16:24–27; Luke 9:57–62</p>
+         <p>Focus: Consider what it means to take up your cross and follow Christ daily.</p>
+        </div>
+        <div class="reading-day">
+         <div class="day-number">Reflection</div>
+         <p>Questions: What areas of your life is Jesus asking you to surrender more fully to Him?</p>
+        </div>
+
+        <div class="week-header">
+         <h3>Week 3 – The Upper Room</h3>
+        </div>
+        <div class="reading-day">
+         <div class="day-number">Key Passages</div>
+         <p>Read: John 13:1–17, 34–35; Luke 22:14–20</p>
+         <p>Focus: Watch Jesus serve, wash feet, and command His disciples to love one another.</p>
+        </div>
+        <div class="reading-day">
+         <div class="day-number">Reflection</div>
+         <p>Practice: Choose one humble act of service to quietly offer someone this week in Jesus’ name.</p>
+        </div>
+
+        <div class="week-header">
+         <h3>Week 4 – Gethsemane and Surrender</h3>
+        </div>
+        <div class="reading-day">
+         <div class="day-number">Key Passages</div>
+         <p>Read: Matthew 26:36–46; Luke 22:39–46</p>
+         <p>Focus: Listen to Jesus pray, “Not as I will, but as thou wilt,” and learn to pray the same.</p>
+        </div>
+        <div class="reading-day">
+         <div class="day-number">Reflection</div>
+         <p>Questions: What “cup” in your life feels heavy right now? How can you entrust it to the Father?</p>
+        </div>
+
+        <div class="week-header">
+         <h3>Week 5 – The Trial and the Cross</h3>
+        </div>
+        <div class="reading-day">
+         <div class="day-number">Key Passages</div>
+         <p>Read: Matthew 26:57–68; Matthew 27:27–54; Isaiah 53</p>
+         <p>Focus: Sit quietly with the cost of our salvation and what Jesus bore in our place.</p>
+        </div>
+        <div class="reading-day">
+         <div class="day-number">Reflection</div>
+         <p>Practice: Write a prayer of thanksgiving for specific ways Christ’s sacrifice has changed your life.</p>
+        </div>
+
+        <div class="week-header">
+         <h3>Week 6 – Buried and Raised in Glory</h3>
+        </div>
+        <div class="reading-day">
+         <div class="day-number">Key Passages</div>
+         <p>Read: Matthew 27:57–66; Matthew 28:1–10; 1 Corinthians 15:1–8, 20–22</p>
+         <p>Focus: Celebrate the victory of the empty tomb and the living hope we have in Christ.</p>
+        </div>
+        <div class="reading-day">
+         <div class="day-number">Reflection</div>
+         <p>Questions: How does the resurrection reshape the way you face suffering, grief, and even death?</p>
+        </div>
+       </div>
+      </div>
+
+      <div class="study-card">
+       <div class="study-header">
+        <h4>Resurrection Life</h4>
+        <span class="study-duration">Easter Week Study</span>
+       </div>
+       <p>This focused, Scripture-rich study is designed for the week surrounding Easter. Walk day by day through the events that lead from the cross to the empty tomb and into the hope of new life in Christ.</p>
+       <div class="verse-box">
+        <p><em>"Blessed be the God and Father of our Lord Jesus Christ, which according to his abundant mercy hath begotten us again unto a lively hope by the resurrection of Jesus Christ from the dead."</em> – 1 Peter 1:3 (KJV)</p>
+       </div>
+       <div class="reading-plan">
+        <div class="reading-day">
+         <div class="day-number">Day 1 – The Lamb of God</div>
+         <p>Read: John 1:29; Luke 22:7–20</p>
+         <p>Focus: Remember that Jesus is the Passover Lamb whose blood brings deliverance.</p>
+        </div>
+        <div class="reading-day">
+         <div class="day-number">Day 2 – In the Garden</div>
+         <p>Read: Matthew 26:36–46</p>
+         <p>Focus: Hear Jesus’ prayer and surrender your own will to the Father’s loving plan.</p>
+        </div>
+        <div class="reading-day">
+         <div class="day-number">Day 3 – Tried and Rejected</div>
+         <p>Read: Matthew 27:11–31; Isaiah 53:3–7</p>
+         <p>Focus: See the suffering Servant who was despised and rejected for our sake.</p>
+        </div>
+        <div class="reading-day">
+         <div class="day-number">Day 4 – It Is Finished</div>
+         <p>Read: John 19:16–30</p>
+         <p>Focus: Rest in the finished work of Christ on the cross—nothing more needs to be added.</p>
+        </div>
+        <div class="reading-day">
+         <div class="day-number">Day 5 – Silent Saturday</div>
+         <p>Read: Matthew 27:57–66; Psalm 13</p>
+         <p>Focus: Sit with seasons when God feels silent and trust that His plans are still moving.</p>
+        </div>
+        <div class="reading-day">
+         <div class="day-number">Day 6 – He Is Risen</div>
+         <p>Read: Matthew 28:1–10; John 20:1–18</p>
+         <p>Focus: Rejoice with the women at the tomb and hear Jesus call you by name.</p>
+        </div>
+        <div class="reading-day">
+         <div class="day-number">Day 7 – Walking in Resurrection Life</div>
+         <p>Read: Romans 6:4–11; Colossians 3:1–4</p>
+         <p>Focus: Consider what it means to live as someone raised with Christ—dead to sin and alive to God.</p>
+        </div>
+       </div>
+      </div>
+
+      <!-- 🍂 Other Seasonal Studies -->
+      <h3>🍂 Other Seasonal Studies</h3>
+      <div class="devotional-grid">
+       <div class="study-card">
+        <h4>Thanksgiving &amp; Gratitude</h4>
+        <span class="study-duration">1-Week Study</span>
+        <p>This one-week study helps you cultivate a grateful heart in every season—not only on a holiday. Use it leading up to Thanksgiving or anytime you want to refocus on God’s goodness.</p>
+        <div class="verse-box">
+         <p><em>"In every thing give thanks: for this is the will of God in Christ Jesus concerning you."</em> – 1 Thessalonians 5:18 (KJV)</p>
+        </div>
+        <div class="reading-plan">
+         <div class="reading-day">
+          <div class="day-number">Day 1 – Give Thanks in All Things</div>
+          <p>Read: 1 Thessalonians 5:16–18; Philippians 4:4–7</p>
+          <p>Focus: Learn how thanksgiving and peace are woven together in the Christian life.</p>
+         </div>
+         <div class="reading-day">
+          <div class="day-number">Day 2 – Remembering God’s Faithfulness</div>
+          <p>Read: Psalm 103:1–14</p>
+          <p>Focus: List the specific benefits and mercies of the Lord in your own life.</p>
+         </div>
+         <div class="reading-day">
+          <div class="day-number">Day 3 – Gratitude in Hard Seasons</div>
+          <p>Read: Habakkuk 3:17–19; 2 Corinthians 12:7–10</p>
+          <p>Focus: Explore what it means to rejoice in God even when circumstances are painful.</p>
+         </div>
+         <div class="reading-day">
+          <div class="day-number">Day 4 – Sharing God’s Goodness</div>
+          <p>Read: Psalm 34:1–8</p>
+          <p>Focus: Think of ways to “magnify the Lord” with others—family, friends, or your church.</p>
+         </div>
+         <div class="reading-day">
+          <div class="day-number">Day 5 – A Lifestyle of Thanksgiving</div>
+          <p>Read: Colossians 3:12–17</p>
+          <p>Focus: Ask God to clothe you with gratitude, kindness, and love in your everyday relationships.</p>
+         </div>
+        </div>
+       </div>
+
+       <div class="study-card">
+        <h4>New Year, New Beginning</h4>
+        <span class="study-duration">2-Week Study</span>
+        <p>Step into a new year (or a new season) with a heart anchored in God’s faithfulness. This two-week study helps you look back with gratitude and forward with trust.</p>
+        <div class="verse-box">
+         <p><em>"This I recall to my mind, therefore have I hope. It is of the Lord's mercies that we are not consumed, because his compassions fail not. They are new every morning: great is thy faithfulness."</em> – Lamentations 3:21–23 (KJV)</p>
+        </div>
+        <div class="reading-plan">
+         <div class="week-header">
+          <h3>Week 1 – Remembering God’s Faithfulness</h3>
+         </div>
+         <div class="reading-day">
+          <div class="day-number">Day 1 – God’s Steadfast Love</div>
+          <p>Read: Psalm 136 (select verses); Psalm 23</p>
+          <p>Focus: Recall specific ways the Lord has carried you in the past year.</p>
+         </div>
+         <div class="reading-day">
+          <div class="day-number">Day 2 – Numbering Our Days</div>
+          <p>Read: Psalm 90:12–17</p>
+          <p>Focus: Ask God to teach you to number your days with wisdom and purpose.</p>
+         </div>
+         <div class="reading-day">
+          <div class="day-number">Day 3 – God at Work in All Things</div>
+          <p>Read: Romans 8:28–39</p>
+          <p>Focus: Rest in the promise that nothing can separate you from the love of God.</p>
+         </div>
+         <div class="reading-day">
+          <div class="day-number">Day 4 – A Heart of Humble Dependence</div>
+          <p>Read: James 4:13–17; Proverbs 3:5–6</p>
+          <p>Focus: Surrender your plans to the Lord and invite Him to direct your steps.</p>
+         </div>
+
+         <div class="week-header">
+          <h3>Week 2 – Walking into a New Season with Hope</h3>
+         </div>
+         <div class="reading-day">
+          <div class="day-number">Day 5 – New Creation in Christ</div>
+          <p>Read: 2 Corinthians 5:17; Ephesians 4:22–24</p>
+          <p>Focus: Celebrate the new identity you have in Christ and the fresh start He offers.</p>
+         </div>
+         <div class="reading-day">
+          <div class="day-number">Day 6 – Pressing Toward the Mark</div>
+          <p>Read: Philippians 3:12–14</p>
+          <p>Focus: Identify what it looks like to “press toward the mark” in this coming season.</p>
+         </div>
+         <div class="reading-day">
+          <div class="day-number">Day 7 – Seeking First the Kingdom</div>
+          <p>Read: Matthew 6:19–34</p>
+          <p>Focus: Let Jesus’ words about worry, treasure, and God’s care shape your priorities.</p>
+         </div>
+         <div class="reading-day">
+          <div class="day-number">Day 8 – A Prayer for the Year Ahead</div>
+          <p>Read: Colossians 1:9–14; Jude 24–25</p>
+          <p>Focus: Turn these verses into a written prayer over your life, your family, and your church for the coming year.</p>
+         </div>
+        </div>
+       </div>
       </div>
      </div>
     </div>
-   </div>
-  </section><!-- Heroes of the Bible Page -->
+   </section><!-- Heroes of the Bible Page -->
   <section class="content-hub hidden" id="heroes-bible-page">
    <div class="hub-container"><button class="back-button" onclick="showHub('faith-rooted')">← Back to Faith Rooted</button>
     <div class="content-page">
@@ -2616,7 +2950,18 @@
        <p><strong>What We Learn:</strong> Faithful devotion and trust in God lead to redemption beyond what we can imagine.</p><a href="https://www.bible.com/bible/111/RUT.1.NIV" target="_blank" rel="noopener noreferrer" class="bible-link">Read Ruth's Story</a>
       </div>
      </div>
-    </div>
+    
+      <div class="study-card" style="margin-top:2.5rem; text-align:center;">
+       <p>Ready to go even deeper with these Bible characters?</p>
+       <a href="https://www.wholeheartedlegacy.org/characters-of-the-bible"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="cta-button"
+          style="margin-top:0.75rem;">
+        For a Deeper Study Click Here
+       </a>
+      </div>
+</div>
    </div>
   </section><!-- Bible Timeline Page -->
   <section class="content-hub hidden" id="bible-timeline-page">
@@ -2721,13 +3066,21 @@
     </div>
    </div>
   </section><!-- 66 Books Journey Page -->
+  
   <section class="content-hub hidden" id="66-books-journey-page">
    <div class="hub-container"><button class="back-button" onclick="showHub('faith-rooted')">← Back to Faith Rooted</button>
     <div class="content-page">
      <h2>Journey Through Scripture</h2>
-     <p>Explore every book of the Bible with summaries, key themes, and memory verses. Use the navigation below to journey through God's Word from Genesis to Revelation.</p>
+     <p>Welcome to the Journey Through Scripture hub — a gentle path through all 66 books of the Bible. Instead of listing every book here, this page points you to the full interactive experience on the Wholehearted Legacy website.</p>
+     <p>There you will find:</p>
+     <ul>
+      <li>Simple overviews for every book of the Bible</li>
+      <li>Key verses and themes to watch for as you read</li>
+      <li>Ideas for how to study one chapter at a time</li>
+      <li>Print-friendly and digital study pages you can use again and again</li>
+     </ul>
      <div class="study-card">
-      <p>Want a printable and digital overview of all 66 books?</p>
+      <p>When you are ready, continue your Journey Through Scripture on the main site.</p>
       <a href="https://www.wholeheartedlegacy.org/explore-the-bible"
          target="_blank"
          rel="noopener noreferrer"
@@ -2735,67 +3088,10 @@
        Open Journey Through Scripture
       </a>
      </div>
-
-     <div class="carousel-container">
-      <div class="carousel-controls"><button class="carousel-button" onclick="previousBook()" id="prev-btn">← Previous</button> <span id="book-counter" style="font-weight: bold; color: #8b7355;">Book 1 of 66</span> <button class="carousel-button" onclick="nextBook()" id="next-btn">Next →</button>
-      </div>
-      <div class="carousel-slide" id="book-slide">
-       <div class="book-number">
-        1
-       </div>
-       <h2 class="book-title">Genesis</h2>
-       <div class="book-info">
-        <div class="info-item">
-         <div class="info-label">
-          Testament
-         </div>
-         <div>
-          Old Testament
-         </div>
-        </div>
-        <div class="info-item">
-         <div class="info-label">
-          Category
-         </div>
-         <div>
-          Law (Torah)
-         </div>
-        </div>
-        <div class="info-item">
-         <div class="info-label">
-          Author
-         </div>
-         <div>
-          Moses
-         </div>
-        </div>
-        <div class="info-item">
-         <div class="info-label">
-          Chapters
-         </div>
-         <div>
-          50
-         </div>
-        </div>
-       </div>
-       <h4>Overview</h4>
-       <p>Genesis means "beginning" and covers the creation of the world, the fall of humanity, and God's promise to redeem through Abraham's descendants. It introduces key themes like God's sovereignty, humanity's sinfulness, and the need for a Savior.</p>
-       <h4>Key Themes</h4>
-       <ul>
-        <li>God as Creator and Sustainer of all things</li>
-        <li>The consequences of sin and separation from God</li>
-        <li>God's covenant promises to Abraham</li>
-        <li>God's faithfulness despite human failure</li>
-       </ul>
-       <h4>Key Verse</h4>
-       <div class="verse-box">
-        <p><em>"In the beginning God created the heavens and the earth."</em> - Genesis 1:1</p><a href="https://www.bible.com/bible/111/GEN.1.1.NIV" target="_blank" rel="noopener noreferrer" class="bible-link">Read on YouVersion</a>
-       </div>
-      </div>
-     </div>
     </div>
    </div>
-  </section><!-- Study Templates Page -->
+  </section>
+<!-- Study Templates Page -->
   <section class="content-hub hidden" id="study-templates-page">
    <div class="hub-container"><button class="back-button" onclick="showHub('faith-rooted')">← Back to Faith Rooted</button>
     <div class="content-page">
@@ -2810,7 +3106,7 @@
       <div class="study-card">
        <h3>🔍 Inductive Study Guide</h3>
        <p>Deep dive into any passage using observation, interpretation, and application questions.</p>
-       <p>Perfect for in-depth personal study or small group discussions.</p><a href="https://loriprayerwall.github.io/wholehearted-legacy-studies/templates/VerseMapping_Deep.pdf" target="_blank" rel="noopener noreferrer" class="cta-button">Download Template</a>
+       <p>Perfect for in-depth personal study or small group discussions.</p><a href="https://loriprayerwall.github.io/wholehearted-legacy-studies/templates/Topical_Deep.pdf" target="_blank" rel="noopener noreferrer" class="cta-button">Download Template</a>
       </div>
       <div class="study-card">
        <h3>📖 Chapter Summary Template</h3>
