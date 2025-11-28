@@ -983,6 +983,10 @@
        
        <p>Walking with Jesus is a lifelong journey—one step, one verse, one act of faith at a time. Whether you&apos;re seeking comfort in seasons of loss, strength for your faith walk, or encouragement to keep trusting God&apos;s promises, you&apos;re not alone.</p>
 
+       <div class="home-cta-row">
+        <button class="cta-button" onclick="showPage('pathways')">Explore Faith Pathways</button>
+       </div>
+
       </div>
            </section>
      <!-- Faith Pathways Cards -->
@@ -6406,11 +6410,21 @@
       }
 
       currentPage = page;
-      scrollToTopSmooth();
-      updateBackButtons();
-    }
 
-    function showHub(hubId) {
+      // Scroll behavior
+      if (page === 'pathways') {
+        var target = document.getElementById('pathways-section');
+        if (target && target.scrollIntoView) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        } else {
+          scrollToTopSmooth();
+        }
+      } else {
+        scrollToTopSmooth();
+      }
+
+      updateBackButtons();
+    }function showHub(hubId) {
       // Hide all main sections and hubs
       document.querySelectorAll('.hero, .pathways, .content-hub').forEach(function(el) {
         el.classList.add('hidden');
