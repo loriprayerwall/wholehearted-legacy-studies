@@ -969,7 +969,7 @@
        <h1>Wholehearted Legacy exists to help believers walk closer with Jesus—one step, one verse, one act of faith at a time.</h1>
        <p>Born from a journey of loss and healing, we share the hope of Christ in every season. Remembering AJ and walking alongside Isabella and Caleb as they grow in faith, our family invites you to join us in seeking light in the darkness—trusting that God turns pain into purpose and every story into a legacy of love.</p>
        <div class="home-cta-row">
-        <a href="#pathways-section" class="cta-button" onclick="showPage('pathways'); return false;">
+        <a href="https://loriprayerwall.github.io/wholehearted-legacy-studies/canva.html" class="cta-button">
          Meet My Jesus
         </a>
         <div class="home-note">Begin exploring studies, tools, and Christ-centered encouragement.</div>
@@ -984,7 +984,7 @@
        <p>Walking with Jesus is a lifelong journey—one step, one verse, one act of faith at a time. Whether you&apos;re seeking comfort in seasons of loss, strength for your faith walk, or encouragement to keep trusting God&apos;s promises, you&apos;re not alone.</p>
 
        <div class="home-cta-row">
-        <button class="cta-button" onclick="showPage('pathways')">Explore Faith Pathways</button>
+        <a class="cta-button" href="https://loriprayerwall.github.io/wholehearted-legacy-studies/canva.html">Explore Faith Pathways</a>
        </div>
 
       </div>
@@ -1004,7 +1004,7 @@
          <h3>Faith</h3>
          <p>Grow steady and strong in God&apos;s Word through studies and tools that keep your faith rooted in Scripture.</p>
          <div class="home-card-footer">
-          <a href="#pathways-section" class="cta-button" onclick="showPage('pathways'); return false;">Footsteps in Faith</a>
+          <a class="cta-button" href="https://loriprayerwall.github.io/wholehearted-legacy-studies/canva.html">Footsteps in Faith</a>
          </div>
         </div>
        </div>
@@ -1016,7 +1016,7 @@
          <h3>Hope</h3>
          <p>Find light in the darkness with studies and resources that speak hope into weary and waiting hearts.</p>
          <div class="home-card-footer">
-          <button class="cta-button" onclick="showPage('pathways')">Hope: Light in the Darkness</button>
+          <a class="cta-button" href="https://loriprayerwall.github.io/wholehearted-legacy-studies/canva.html">Hope: Light in the Darkness</a>
          </div>
         </div>
        </div>
@@ -1028,7 +1028,7 @@
          <h3>Healing</h3>
          <p>Experience Christ-centered comfort and gentle support for grieving and hurting hearts, one step at a time.</p>
          <div class="home-card-footer">
-          <button class="cta-button" onclick="showPage('pathways')">Healing Hearts</button>
+          <a class="cta-button" href="https://loriprayerwall.github.io/wholehearted-legacy-studies/canva.html">Healing Hearts</a>
          </div>
         </div>
        </div>
@@ -1048,7 +1048,7 @@
           <p>Each study is created to draw you closer to God, strengthen your faith, and help you carry His Word into your everyday life.</p>
           <p>Come as you are, and grow with a community that seeks hope, healing, and wholehearted living through Jesus.</p>
           <div class="home-cta-row">
-            <a href="#faith-rooted-hub" class="cta-button" onclick="showHub('faith-rooted'); return false;">Join the Current Study</a>
+            <a class="cta-button" href="https://loriprayerwall.github.io/wholehearted-legacy-studies/canva.html">Join the Current Study</a>
           </div>
         </div>
       </div>
@@ -1114,7 +1114,7 @@
 <!-- Hero Section -->
   <section class="hero hidden" id="home-section">
    <h1 id="heroTitle">Walking Closer with Jesus</h1>
-   <p id="heroSubtitle">One step, one verse, one act of faith at a time</p><button class="cta-button" onclick="showPage('pathways')">Explore Faith Pathways</button>
+   <p id="heroSubtitle">One step, one verse, one act of faith at a time</p><a class="cta-button" href="https://loriprayerwall.github.io/wholehearted-legacy-studies/canva.html">Explore Faith Pathways</a>
   </section><!-- Main Pathways Section -->
   <section class="pathways hidden" id="pathways-section">
    <h2>Faith Pathways</h2>
@@ -6394,21 +6394,25 @@
         el.classList.add('hidden');
       });
 
-      if (page === 'home') {
-        // Level 1: new home hub
+      if (page === 'home' || page === 'pathways') {
+        // Use the new home hub as the base for both Home and Faith Pathways
         var home = document.getElementById('home-page');
         if (home) home.classList.remove('hidden');
-        currentPage = 'home';
-        scrollToTopSmooth();
 
-      } else if (page === 'pathways') {
-        // Level 2: original Faith Pathways hub (hero + full grid)
-        var hero = document.getElementById('home-section');
-        var pathways = document.getElementById('pathways-section');
-        if (hero) hero.classList.remove('hidden');
-        if (pathways) pathways.classList.remove('hidden');
-        currentPage = 'pathways';
-        scrollToTopSmooth();
+        if (page === 'pathways') {
+          // Scroll to the Faith Pathways grid on the home hub
+          var target = document.getElementById('home-faith-pathways');
+          if (target && target.scrollIntoView) {
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          } else {
+            scrollToTopSmooth();
+          }
+          currentPage = 'pathways';
+        } else {
+          // Regular home view
+          scrollToTopSmooth();
+          currentPage = 'home';
+        }
 
       } else if (page === 'about') {
         var about = document.getElementById('about-page');
