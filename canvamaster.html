@@ -628,6 +628,7 @@
     .hidden {
       display: none;
     }
+
     /* Floating Back to Home / Back to Top buttons */
     .whl-floating-btn {
       position: fixed;
@@ -637,7 +638,7 @@
       border: none;
       background: #8b7355;
       color: #ffffff;
-      font-family: Georgia, "Times New Roman", serif;
+      font-family: 'Georgia', 'Times New Roman', serif;
       font-size: 0.9rem;
       font-weight: 600;
       box-shadow: 0 4px 14px rgba(0,0,0,0.18);
@@ -660,7 +661,6 @@
       bottom: 1.25rem;
       right: 1.25rem;
     }
-
   
     nav#main-nav, footer { display: none !important; }
 
@@ -6356,6 +6356,7 @@
     };
 
     
+    // --- Navigation helpers for main pages and hubs ---
     function scrollToTopSmooth() {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
@@ -6364,7 +6365,7 @@
       var homeBtn = document.getElementById('back-to-home-btn');
       var topBtn = document.getElementById('back-to-top-btn');
 
-      // Show or hide "Back to Home" depending on where we are
+      // Back to Home visible only when not on home
       if (homeBtn) {
         if (currentPage === 'home') {
           homeBtn.classList.add('hidden');
@@ -6373,7 +6374,7 @@
         }
       }
 
-      // Show "Back to Top" only after scrolling down a bit
+      // Back to Top visible after scrolling a bit
       if (topBtn) {
         if (window.scrollY > 200) {
           topBtn.classList.remove('hidden');
@@ -6384,24 +6385,24 @@
     }
 
     function showPage(page) {
-      // Hide all main sections
+      // Hide all sections
       document.querySelectorAll('.hero, .pathways, .content-hub').forEach(function(el) {
         el.classList.add('hidden');
       });
 
       // Show requested page
       if (page === 'home') {
-        // Home hub page
         var home = document.getElementById('home-page');
         if (home) home.classList.remove('hidden');
       } else if (page === 'pathways') {
-        // Faith Pathways level-2 hub
         var pathways = document.getElementById('pathways-section');
         if (pathways) pathways.classList.remove('hidden');
-      } else {
-        // Fallback for any other simple section (e.g., "about", "resources")
-        var section = document.getElementById(page + '-section');
-        if (section) section.classList.remove('hidden');
+      } else if (page === 'about') {
+        var about = document.getElementById('about-page');
+        if (about) about.classList.remove('hidden');
+      } else if (page === 'resources') {
+        var resources = document.getElementById('resources-page');
+        if (resources) resources.classList.remove('hidden');
       }
 
       currentPage = page;
@@ -6415,9 +6416,10 @@
         el.classList.add('hidden');
       });
 
-      // Show the requested hub (e.g., "saviors-call-hub")
       var hub = document.getElementById(hubId + '-hub');
-      if (hub) hub.classList.remove('hidden');
+      if (hub) {
+        hub.classList.remove('hidden');
+      }
 
       currentPage = hubId;
       scrollToTopSmooth();
@@ -6425,27 +6427,30 @@
     }
 
     function showSubpage(pageId) {
-      // Hide all hubs / content pages
+      // Hide all hubs/content pages
       document.querySelectorAll('.content-hub').forEach(function(el) {
         el.classList.add('hidden');
       });
 
-      // Show the requested content page (e.g., "what-is-gospel-page")
-      var page = document.getElementById(pageId + '-page');
-      if (page) page.classList.remove('hidden');
+      var pageEl = document.getElementById(pageId + '-page');
+      if (pageEl) {
+        pageEl.classList.remove('hidden');
+      }
 
       currentPage = pageId;
       scrollToTopSmooth();
       updateBackButtons();
     }
 
-    // Ensure the home hub is visible and buttons are in the right state on load
-    document.addEventListener('DOMContentLoaded', function () {
+    // Initialize view and button states once DOM is ready
+    document.addEventListener('DOMContentLoaded', function() {
       showPage('home');
+      updateBackButtons();
     });
 
-    // Update Back to Top visibility while scrolling
+    // Update Back to Top button when scrolling
     window.addEventListener('scroll', updateBackButtons);
+
 function nextBook() {
       if (currentBook < 66) {
         currentBook++;
