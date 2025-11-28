@@ -6389,7 +6389,7 @@
     }
 
     function showPage(page) {
-      // Hide all primary sections
+      // Hide all sections that act like separate pages
       document.querySelectorAll('.hero, .pathways, .content-hub').forEach(function(el) {
         el.classList.add('hidden');
       });
@@ -6402,7 +6402,7 @@
         scrollToTopSmooth();
 
       } else if (page === 'pathways') {
-        // Level 2: Faith Pathways hub (original hero + grid)
+        // Level 2: original Faith Pathways hub (hero + full grid)
         var hero = document.getElementById('home-section');
         var pathways = document.getElementById('pathways-section');
         if (hero) hero.classList.remove('hidden');
@@ -6423,7 +6423,7 @@
         scrollToTopSmooth();
 
       } else {
-        // Fallback to home if something unexpected is passed
+        // Fallback – default to home if something unexpected is passed
         var homeFallback = document.getElementById('home-page');
         if (homeFallback) homeFallback.classList.remove('hidden');
         currentPage = 'home';
