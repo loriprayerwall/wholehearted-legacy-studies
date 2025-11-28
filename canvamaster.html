@@ -969,9 +969,9 @@
        <h1>Wholehearted Legacy exists to help believers walk closer with Jesus—one step, one verse, one act of faith at a time.</h1>
        <p>Born from a journey of loss and healing, we share the hope of Christ in every season. Remembering AJ and walking alongside Isabella and Caleb as they grow in faith, our family invites you to join us in seeking light in the darkness—trusting that God turns pain into purpose and every story into a legacy of love.</p>
        <div class="home-cta-row">
-        <button class="cta-button" onclick="showHub('saviors-call')">
+        <a href="#saviors-call-hub" class="cta-button" onclick="showHub('saviors-call'); return false;">
          Meet My Jesus
-        </button>
+        </a>
         <div class="home-note">Begin exploring studies, tools, and Christ-centered encouragement.</div>
        </div>
       </div>
@@ -1004,7 +1004,7 @@
          <h3>Faith</h3>
          <p>Grow steady and strong in God&apos;s Word through studies and tools that keep your faith rooted in Scripture.</p>
          <div class="home-card-footer">
-          <button class="cta-button" onclick="showHub('faith-rooted')">Footsteps in Faith</button>
+          <a href="#faith-rooted-hub" class="cta-button" onclick="showHub('faith-rooted'); return false;">Footsteps in Faith</a>
          </div>
         </div>
        </div>
@@ -1048,7 +1048,7 @@
           <p>Each study is created to draw you closer to God, strengthen your faith, and help you carry His Word into your everyday life.</p>
           <p>Come as you are, and grow with a community that seeks hope, healing, and wholehearted living through Jesus.</p>
           <div class="home-cta-row">
-            <button class="cta-button" onclick="showHub('faith-rooted')">Join the Current Study</button>
+            <a href="#faith-rooted-hub" class="cta-button" onclick="showHub('faith-rooted'); return false;">Join the Current Study</a>
           </div>
         </div>
       </div>
@@ -6389,42 +6389,55 @@
     }
 
     function showPage(page) {
-      // Hide all sections
+      // Hide all sections that act like separate pages
       document.querySelectorAll('.hero, .pathways, .content-hub').forEach(function(el) {
         el.classList.add('hidden');
       });
 
-      // Show requested page
-      if (page === 'home') {
+      if (page === 'home' || page === 'pathways') {
+        // Use the new home hub as the base for both Home and Faith Pathways
         var home = document.getElementById('home-page');
         if (home) home.classList.remove('hidden');
-      } else if (page === 'pathways') {
-        var pathways = document.getElementById('pathways-section');
-        if (pathways) pathways.classList.remove('hidden');
+
+        if (page === 'pathways') {
+          // Scroll to the Faith Pathways grid on the home hub
+          var target = document.getElementById('home-faith-pathways');
+          if (target && target.scrollIntoView) {
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          } else {
+            scrollToTopSmooth();
+          }
+          currentPage = 'pathways';
+        } else {
+          // Regular home view
+          scrollToTopSmooth();
+          currentPage = 'home';
+        }
+
       } else if (page === 'about') {
         var about = document.getElementById('about-page');
         if (about) about.classList.remove('hidden');
+        currentPage = 'about';
+        scrollToTopSmooth();
+
       } else if (page === 'resources') {
         var resources = document.getElementById('resources-page');
         if (resources) resources.classList.remove('hidden');
-      }
+        currentPage = 'resources';
+        scrollToTopSmooth();
 
-      currentPage = page;
-
-      // Scroll behavior
-      if (page === 'pathways') {
-        var target = document.getElementById('pathways-section');
-        if (target && target.scrollIntoView) {
-          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        } else {
-          scrollToTopSmooth();
-        }
       } else {
+        // Fallback – default to home if something unexpected is passed
+        var homeFallback = document.getElementById('home-page');
+        if (homeFallback) homeFallback.classList.remove('hidden');
+        currentPage = 'home';
         scrollToTopSmooth();
       }
 
       updateBackButtons();
-    }function showHub(hubId) {
+    }
+
+function showHub(hubId) {
       // Hide all main sections and hubs
       document.querySelectorAll('.hero, .pathways, .content-hub').forEach(function(el) {
         el.classList.add('hidden');
