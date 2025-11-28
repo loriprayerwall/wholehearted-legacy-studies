@@ -628,6 +628,40 @@
     .hidden {
       display: none;
     }
+
+    /* Floating Back to Home / Back to Top buttons */
+    .whl-floating-btn {
+      position: fixed;
+      z-index: 9999;
+      padding: 0.6rem 1.2rem;
+      border-radius: 999px;
+      border: none;
+      background: #8b7355;
+      color: #ffffff;
+      font-family: 'Georgia', 'Times New Roman', serif;
+      font-size: 0.9rem;
+      font-weight: 600;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.18);
+      cursor: pointer;
+      transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .whl-floating-btn:hover {
+      background: #6d5a43;
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.28);
+    }
+
+    #back-to-home-btn {
+      bottom: 1.25rem;
+      left: 1.25rem;
+    }
+
+    #back-to-top-btn {
+      bottom: 1.25rem;
+      right: 1.25rem;
+    }
+
   
     nav#main-nav, footer { display: none !important; }
 
@@ -892,7 +926,24 @@
   <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
   <script src="https://cdn.tailwindcss.com" type="text/javascript"></script>
  </head>
- <body><!-- Navigation -->
+ <body>
+  <!-- Global floating navigation buttons -->
+  <button
+    id="back-to-home-btn"
+    class="whl-floating-btn hidden"
+    onclick="showPage('home');"
+  >
+    ← Back to Home
+  </button>
+
+  <button
+    id="back-to-top-btn"
+    class="whl-floating-btn hidden"
+    onclick="scrollToTopSmooth();"
+  >
+    ↑ Back to Top
+  </button>
+  <!-- Navigation -->
   <nav id="main-nav">
    <div class="nav-container">
     <div class="logo" id="siteTitle">
@@ -6305,48 +6356,96 @@
       // Would continue with all 66 books - simplified
     };
 
+    
+    // --- Navigation helpers for hubs + floating buttons ---
+    function scrollToTopSmooth() {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function updateBackButtons() {
+      var homeBtn = document.getElementById('back-to-home-btn');
+      var topBtn = document.getElementById('back-to-top-btn');
+
+      // Show or hide "Back to Home" depending on where we are
+      if (homeBtn) {
+        if (currentPage === 'home') {
+          homeBtn.classList.add('hidden');
+        } else {
+          homeBtn.classList.remove('hidden');
+        }
+      }
+
+      // Show "Back to Top" only after scrolling down a bit
+      if (topBtn) {
+        if (window.scrollY > 200) {
+          topBtn.classList.remove('hidden');
+        } else {
+          topBtn.classList.add('hidden');
+        }
+      }
+    }
+
     function showPage(page) {
-      // Hide all sections
-      document.querySelectorAll('.hero, .pathways, .content-hub').forEach(el => {
+      // Hide everything first
+      document.querySelectorAll('.hero, .pathways, .content-hub').forEach(function(el) {
         el.classList.add('hidden');
       });
-      
+
       // Show requested page
       if (page === 'home') {
-        // Show the new home hub page
+        // New home hub page
         var home = document.getElementById('home-page');
         if (home) home.classList.remove('hidden');
       } else if (page === 'pathways') {
-        // Show the main Faith Pathways level-2 hub
+        // Level-2 Faith Pathways hub
         var pathways = document.getElementById('pathways-section');
         if (pathways) pathways.classList.remove('hidden');
       }
-      
+
       currentPage = page;
-      window.scrollTo(0, 0);
+      scrollToTopSmooth();
+      updateBackButtons();
     }
 
     function showHub(hubId) {
-      // Hide all sections
-      document.querySelectorAll('.hero, .pathways, .content-hub').forEach(el => {
+      // Hide all high-level sections and hubs
+      document.querySelectorAll('.hero, .pathways, .content-hub').forEach(function(el) {
         el.classList.add('hidden');
       });
-      
-      // Show requested hub
-      document.getElementById(hubId + '-hub').classList.remove('hidden');
-      window.scrollTo(0, 0);
+
+      // Show the requested hub (e.g., "saviors-call-hub")
+      var hub = document.getElementById(hubId + '-hub');
+      if (hub) hub.classList.remove('hidden');
+
+      currentPage = hubId;
+      scrollToTopSmooth();
+      updateBackButtons();
     }
 
     function showSubpage(pageId) {
-      // Hide all content sections
-      document.querySelectorAll('.content-hub').forEach(el => {
+      // Hide all hubs / content pages
+      document.querySelectorAll('.content-hub').forEach(function(el) {
         el.classList.add('hidden');
       });
-      
-      // Show requested subpage
-      document.getElementById(pageId + '-page').classList.remove('hidden');
-      window.scrollTo(0, 0);
+
+      // Show the requested content page (e.g., "what-is-gospel-page")
+      var page = document.getElementById(pageId + '-page');
+      if (page) page.classList.remove('hidden');
+
+      currentPage = pageId;
+      scrollToTopSmooth();
+      updateBackButtons();
     }
+
+    // Ensure we start on the home hub and set button visibility
+    document.addEventListener('DOMContentLoaded', function () {
+      showPage('home');
+      updateBackButtons();
+    });
+
+    // Update Back to Top visibility while scrolling
+    window.addEventListener('scroll', updateBackButtons);
+
 
     function nextBook() {
       if (currentBook < 66) {
