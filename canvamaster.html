@@ -628,7 +628,6 @@
     .hidden {
       display: none;
     }
-
     /* Floating Back to Home / Back to Top buttons */
     .whl-floating-btn {
       position: fixed;
@@ -638,7 +637,7 @@
       border: none;
       background: #8b7355;
       color: #ffffff;
-      font-family: 'Georgia', 'Times New Roman', serif;
+      font-family: Georgia, "Times New Roman", serif;
       font-size: 0.9rem;
       font-weight: 600;
       box-shadow: 0 4px 14px rgba(0,0,0,0.18);
@@ -943,7 +942,7 @@
   >
     ↑ Back to Top
   </button>
-  <!-- Navigation -->
+<!-- Navigation -->
   <nav id="main-nav">
    <div class="nav-container">
     <div class="logo" id="siteTitle">
@@ -6357,7 +6356,6 @@
     };
 
     
-    // --- Navigation helpers for hubs + floating buttons ---
     function scrollToTopSmooth() {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
@@ -6386,20 +6384,24 @@
     }
 
     function showPage(page) {
-      // Hide everything first
+      // Hide all main sections
       document.querySelectorAll('.hero, .pathways, .content-hub').forEach(function(el) {
         el.classList.add('hidden');
       });
 
       // Show requested page
       if (page === 'home') {
-        // New home hub page
+        // Home hub page
         var home = document.getElementById('home-page');
         if (home) home.classList.remove('hidden');
       } else if (page === 'pathways') {
-        // Level-2 Faith Pathways hub
+        // Faith Pathways level-2 hub
         var pathways = document.getElementById('pathways-section');
         if (pathways) pathways.classList.remove('hidden');
+      } else {
+        // Fallback for any other simple section (e.g., "about", "resources")
+        var section = document.getElementById(page + '-section');
+        if (section) section.classList.remove('hidden');
       }
 
       currentPage = page;
@@ -6408,7 +6410,7 @@
     }
 
     function showHub(hubId) {
-      // Hide all high-level sections and hubs
+      // Hide all main sections and hubs
       document.querySelectorAll('.hero, .pathways, .content-hub').forEach(function(el) {
         el.classList.add('hidden');
       });
@@ -6437,17 +6439,14 @@
       updateBackButtons();
     }
 
-    // Ensure we start on the home hub and set button visibility
+    // Ensure the home hub is visible and buttons are in the right state on load
     document.addEventListener('DOMContentLoaded', function () {
       showPage('home');
-      updateBackButtons();
     });
 
     // Update Back to Top visibility while scrolling
     window.addEventListener('scroll', updateBackButtons);
-
-
-    function nextBook() {
+function nextBook() {
       if (currentBook < 66) {
         currentBook++;
         updateBookDisplay();
