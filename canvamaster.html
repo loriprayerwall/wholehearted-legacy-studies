@@ -645,6 +645,205 @@
   }
 }
 
+
+
+    /* --- WHOLEHEARTED LEGACY HOME PAGE --- */
+    .home-page-wrapper {
+      padding: 3rem 1.5rem 4rem;
+      background: #f9f7f4;
+    }
+
+    .home-page-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .home-hero {
+      background: linear-gradient(135deg, #f3e5d8 0%, #d4c5b9 40%, #8b7355 100%);
+      border-radius: 18px;
+      padding: 3rem 2.5rem;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+      display: grid;
+      grid-template-columns: minmax(0, 3fr) minmax(0, 2.5fr);
+      gap: 2.5rem;
+      align-items: center;
+      margin-bottom: 3rem;
+      color: #fffdf8;
+    }
+
+    .home-hero-copy h1 {
+      font-size: 2.4rem;
+      margin-bottom: 1rem;
+      line-height: 1.3;
+    }
+
+    .home-hero-copy p {
+      margin-bottom: 1rem;
+      font-size: 1.05rem;
+    }
+
+    .home-tagline {
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-size: 0.85rem;
+      margin-bottom: 0.35rem;
+      opacity: 0.9;
+    }
+
+    .home-hero-image img {
+      width: 100%;
+      border-radius: 16px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.18);
+      object-fit: cover;
+      max-height: 360px;
+    }
+
+    .home-section {
+      margin-bottom: 3rem;
+    }
+
+    .home-section-header {
+      margin-bottom: 1.5rem;
+    }
+
+    .home-section-header h2 {
+      font-size: 1.9rem;
+      color: #8b7355;
+      margin-bottom: 0.5rem;
+    }
+
+    .home-section-header p {
+      color: #5c5042;
+      max-width: 720px;
+    }
+
+    .home-pathways-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.75rem;
+    }
+
+    .home-pathway-card {
+      background: #ffffff;
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 6px 22px rgba(0,0,0,0.08);
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+
+    .home-pathway-image img {
+      width: 100%;
+      height: 170px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .home-pathway-body {
+      padding: 1.5rem 1.6rem 1.7rem;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .home-pathway-body h3 {
+      font-size: 1.3rem;
+      color: #8b7355;
+      margin-bottom: 0.5rem;
+    }
+
+    .home-pathway-body p {
+      color: #6b5b4e;
+      font-size: 0.98rem;
+      margin-bottom: 1.25rem;
+      flex: 1;
+    }
+
+    .home-card {
+      background: #ffffff;
+      border-radius: 14px;
+      padding: 2rem;
+      box-shadow: 0 6px 22px rgba(0,0,0,0.08);
+      margin-bottom: 1.75rem;
+    }
+
+    .home-card h3 {
+      font-size: 1.5rem;
+      color: #8b7355;
+      margin-bottom: 0.75rem;
+    }
+
+    .home-card p {
+      color: #5c5042;
+      margin-bottom: 0.75rem;
+    }
+
+    .home-card img {
+      width: 100%;
+      border-radius: 14px;
+      margin-bottom: 1.25rem;
+      object-fit: cover;
+    }
+
+    .home-card-footer {
+      margin-top: 1rem;
+    }
+
+    .home-cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      align-items: center;
+      margin-top: 1.5rem;
+    }
+
+    .home-note {
+      font-size: 0.9rem;
+      color: #7a6a59;
+    }
+
+    .form-placeholder {
+      margin-top: 1rem;
+      padding: 1.25rem;
+      border-radius: 10px;
+      border: 1px dashed rgba(139,115,85,0.4);
+      background: #fdfaf6;
+      font-size: 0.9rem;
+      color: #7a6a59;
+      text-align: center;
+    }
+
+    .home-verse {
+      margin-top: 1.75rem;
+      font-style: italic;
+      color: #6b5b4e;
+      text-align: center;
+    }
+
+    .home-verse span {
+      display: block;
+      margin-top: 0.35rem;
+      font-weight: bold;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      font-size: 0.85rem;
+      color: #8b7355;
+    }
+
+    @media (max-width: 900px) {
+      .home-hero {
+        grid-template-columns: 1fr;
+        padding: 2.4rem 1.8rem;
+      }
+      .home-hero-image img {
+        max-height: 260px;
+      }
+      .home-hero-copy h1 {
+        font-size: 2rem;
+      }
+    }
+
 </style>
   <style>@view-transition { navigation: auto; }</style>
   <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
@@ -663,12 +862,158 @@
      <li><a onclick="showPage('resources')">Resources</a></li>
     </ul>
    </div>
-  </nav><!-- Hero Section -->
-  <section class="hero" id="home-section">
+  </nav>
+  <!-- WHOLEHEARTED LEGACY — HOME PAGE -->
+  <section class="content-hub" id="home-page">
+   <div class="home-page-wrapper">
+    <div class="home-page-inner">
+     <div class="home-hero">
+      <div class="home-hero-copy">
+       <div class="home-tagline">Wholehearted Legacy</div>
+       <h1>Walking Closer with Jesus—One Step, One Verse, One Act of Faith at a Time</h1>
+       <p>Wholehearted Legacy exists to help believers walk closer with Jesus—one step, one verse, one act of faith at a time.</p>
+       <p>Born from a journey of loss and healing, we share the hope of Christ in every season. Remembering AJ and walking alongside Isabella and Caleb as they grow in faith, our family invites you to join us in seeking light in the darkness—trusting that God turns pain into purpose and every story into a legacy of love.</p>
+       <div class="home-cta-row">
+        <button class="cta-button" onclick="window.location.href='https://loriprayerwall.github.io/wholehearted-legacy-studies/canvamaster.html'">
+         Start Your Journey of Faith
+        </button>
+        <div class="home-note">Begin exploring studies, tools, and Christ-centered encouragement.</div>
+       </div>
+      </div>
+      <div class="home-hero-image">
+       <img src="https://www.wholeheartedlegacy.org/s/about-whl.png" alt="Wholehearted Legacy family and faith image">
+      </div>
+     </div>
+     <!-- Start Your Journey Section -->
+     <section class="home-section">
+      <div class="home-section-header">
+       <h2>Start Your Journey of Faith</h2>
+       <p>Walking with Jesus is a lifelong journey. Whether you&apos;re seeking comfort in seasons of loss, strength for your faith walk, or encouragement to keep trusting God&apos;s promises, you&apos;re not alone.</p>
+      </div>
+      <div class="home-card">
+       <p>Wholehearted Legacy was created to help you grow closer to Christ through three paths of grace-filled discipleship:</p>
+       <ul>
+        <li><strong>Walking in the Word</strong> – Scripture studies and devotionals that keep your heart anchored in God&apos;s truth.</li>
+        <li><strong>Walking Together</strong> – Community, stories, and shared testimony that remind you you&apos;re not alone.</li>
+        <li><strong>Walking as a Family</strong> – Resources for kids and families, building a legacy of faith from generation to generation.</li>
+       </ul>
+      </div>
+     </section>
+     <!-- Faith Pathways Cards -->
+     <section class="home-section">
+      <div class="home-section-header">
+       <h2>Faith Pathways</h2>
+       <p>Explore the pathways that lead you deeper into God&apos;s Word, whether you&apos;re studying on your own, with a group, or alongside your family.</p>
+      </div>
+      <div class="home-pathways-grid">
+       <div class="home-pathway-card">
+        <div class="home-pathway-image">
+         <img src="https://www.wholeheartedlegacy.org/s/1.jpg" alt="Open Bible with journal and coffee">
+        </div>
+        <div class="home-pathway-body">
+         <h3>Footsteps in Faith</h3>
+         <p>Walk through Scripture one step at a time with guided studies, gentle reflections, and tools to help you stay rooted in God&apos;s promises.</p>
+         <div class="home-card-footer">
+          <button class="cta-button" onclick="window.location.href='https://loriprayerwall.github.io/wholehearted-legacy-studies/canvamaster.html'">
+           Visit Footsteps in Faith
+          </button>
+         </div>
+        </div>
+       </div>
+       <div class="home-pathway-card">
+        <div class="home-pathway-image">
+         <img src="https://www.wholeheartedlegacy.org/s/2.jpg" alt="Bible study materials on a cozy table">
+        </div>
+        <div class="home-pathway-body">
+         <h3>Wholehearted Study Library</h3>
+         <p>Browse current and upcoming studies, seasonal journeys, and printable tools crafted to help you dig deeper into God&apos;s Word.</p>
+         <div class="home-card-footer">
+          <button class="cta-button" onclick="window.location.href='https://loriprayerwall.github.io/wholehearted-legacy-studies/canvamaster.html'">
+           Explore Study Library
+          </button>
+         </div>
+        </div>
+       </div>
+       <div class="home-pathway-card">
+        <div class="home-pathway-image">
+         <img src="https://www.wholeheartedlegacy.org/s/3.jpg" alt="Parent and child reading the Bible together">
+        </div>
+        <div class="home-pathway-body">
+         <h3>Faith for Little Hearts</h3>
+         <p>Discover kid-friendly studies, memory verses, and activities that help little hearts fall in love with Jesus and His Word.</p>
+         <div class="home-card-footer">
+          <button class="cta-button" onclick="window.location.href='https://loriprayerwall.github.io/wholehearted-legacy-studies/canvamaster.html'">
+           Start with Kids Resources
+          </button>
+         </div>
+        </div>
+       </div>
+      </div>
+     </section>
+     <!-- Join Current Study -->
+     <section class="home-section">
+      <div class="home-card">
+       <h3>🌿 Join Our Current Study</h3>
+       <p>Step into a space of peace, purpose, and reflection as we walk through Scripture together—one chapter, one Psalm, one prayer at a time. Each study is created to draw you closer to God, strengthen your faith, and help you carry His Word into your everyday life.</p>
+       <p>Come as you are, and grow with a community that seeks hope, healing, and wholehearted living through Jesus.</p>
+       <div class="home-cta-row">
+        <button class="cta-button" onclick="window.location.href='https://loriprayerwall.github.io/wholehearted-legacy-studies/canvamaster.html'">
+         Join the Current Study
+        </button>
+       </div>
+      </div>
+     </section>
+     <!-- Our Story -->
+     <section class="home-section">
+      <div class="home-card">
+       <img src="https://www.wholeheartedlegacy.org/s/5.jpg" alt="Family walking together in nature">
+       <h3>Our Story</h3>
+       <p>Wholehearted Legacy was born from both deep joy and deep sorrow—from celebrating God&apos;s goodness and walking through the heartbreak of losing AJ. As we remember him and walk alongside Isabella and Caleb in their own journeys of faith, we cling to the hope that in Christ, love is never lost and every tear is seen.</p>
+       <p>Our prayer is that as you read, study, and pray with us, you will sense that same hope: the gentle, steady presence of Jesus in every season.</p>
+       <div class="home-card-footer">
+        <button class="cta-button" onclick="window.location.href='https://www.wholeheartedlegacy.org/our-story'">
+         Read Our Story
+        </button>
+       </div>
+      </div>
+     </section>
+     <!-- Stay Connected -->
+     <section class="home-section">
+      <div class="home-card">
+       <h3>🌿 Stay Connected</h3>
+       <p>Receive devotionals, reflections, and encouragement straight to your inbox. Join our Wholehearted Legacy community—where AJ&apos;s light continues to inspire hope and healing.</p>
+       <div class="form-placeholder">
+        <!-- INSERT SUBSCRIBE FORM IN SQUARESPACE -->
+        <p>Subscribe form goes here when embedded on Squarespace.</p>
+       </div>
+      </div>
+     </section>
+     <!-- Contact Us -->
+     <section class="home-section">
+      <div class="home-card">
+       <h3>Contact Us</h3>
+       <p><strong>Need prayer or encouragement? We&apos;re here to walk with you.</strong></p>
+       <p>Whether you&apos;re seeking prayer, encouragement, or simply wish to share your story, your message is important to us. Please fill out the form below, and we&apos;ll respond with love and care as we walk together in faith, hope, and healing through Christ.</p>
+       <div class="form-placeholder">
+        <!-- INSERT CONTACT FORM IN SQUARESPACE -->
+        <p>Contact form goes here when embedded on Squarespace.</p>
+       </div>
+       <div class="home-verse">
+        &ldquo;Let all your things be done with charity.&rdquo;
+        <span>1 Corinthians 16:14 (KJV)</span>
+       </div>
+      </div>
+     </section>
+    </div>
+   </div>
+  </section>
+
+<!-- Hero Section -->
+  <section class="hero hidden" id="home-section">
    <h1 id="heroTitle">Walking Closer with Jesus</h1>
    <p id="heroSubtitle">One step, one verse, one act of faith at a time</p><button class="cta-button" onclick="showPage('pathways')">Explore Faith Pathways</button>
   </section><!-- Main Pathways Section -->
-  <section class="pathways" id="pathways-section">
+  <section class="pathways hidden" id="pathways-section">
    <h2>Faith Pathways</h2>
    <div class="pathways-grid">
     <div class="pathway-card" onclick="showHub('faith-rooted')">
@@ -680,21 +1025,21 @@
     </div>
     <div class="pathway-card" onclick="showHub('little-hearts')">
      <div class="pathway-icon">
-      
+      ❤️
      </div>
      <h3>Faith for Little Hearts</h3>
      <p>Nurture young faith with age-appropriate Bible studies, character lessons, and a journey through all 66 books</p>
     </div>
     <div class="pathway-card" onclick="showHub('hope-light')">
      <div class="pathway-icon">
-      💡
+      🙏
      </div>
      <h3>Hope: Light in the Darkness</h3>
      <p>Find comfort and hope in difficult times with devotionals, God's promises, and stories of healing</p>
     </div>
     <div class="pathway-card" onclick="showHub('healing-hearts')">
      <div class="pathway-icon">
-      ❤️
+      🕊
      </div>
      <h3>Healing Hearts</h3>
      <p>A community space for prayer, sharing stories, and finding support on your healing journey</p>
