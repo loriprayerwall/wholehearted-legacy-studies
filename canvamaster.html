@@ -6474,7 +6474,8 @@ function showHub(hubId) {
       updateBackButtons();
     }
 
-    // Deep link helper: open a specific hub based on URL hash (e.g. #saviors-call)
+    
+    // Helper: open a specific hub based on URL hash (e.g., #saviors-call)
     function deepLinkToHubFromHash() {
       var hash = window.location.hash;
       if (!hash) return false;
@@ -6487,7 +6488,7 @@ function showHub(hubId) {
         "faith-rooted": "faith-rooted",       // Faith Rooted in God's Word hub
         "hope": "hope-light",                 // Hope: Light in the Darkness hub
         "healing": "healing-hearts",          // Healing Hearts hub
-        "current-studies": "faith-rooted"     // Current Bible Studies lives in Faith Rooted hub
+        "current-studies": "faith-rooted"     // Current Bible Studies lives inside Faith Rooted hub
       };
 
       var hubId = hubMap[key];
@@ -6495,10 +6496,10 @@ function showHub(hubId) {
         return false;
       }
 
-      // Show the requested hub
+      // Show the requested hub (Level 3)
       showHub(hubId);
 
-      // If we're going to Current Bible Studies, scroll to that heading
+      // If we're going to Current Bible Studies, scroll to that heading within Faith Rooted
       if (key === "current-studies") {
         var headings = document.querySelectorAll("#faith-rooted-hub h2, #faith-rooted-hub h3, #faith-rooted-hub h4");
         for (var i = 0; i < headings.length; i++) {
@@ -6515,10 +6516,10 @@ function showHub(hubId) {
       return true;
     }
 
-    // Init    // Initialize view and button states once DOM is ready
+    // Initialize view and button states once DOM is ready
     document.addEventListener('DOMContentLoaded', function() {
       if (!deepLinkToHubFromHash()) {
-        // If there is no hash (or it doesn't map to a hub), fall back to the normal home/Level 2 view
+        // If there is no hash (or it doesn't match a hub), fall back to the normal home/Level 2 view
         showPage('home');
       }
       updateBackButtons();
@@ -6531,6 +6532,7 @@ function showHub(hubId) {
 
     // Update Back to Top button when scrolling
     window.addEventListener('scroll', updateBackButtons);
+
 
 function nextBook() {
       if (currentBook < 66) {
