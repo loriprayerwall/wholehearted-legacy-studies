@@ -6474,10 +6474,59 @@ function showHub(hubId) {
       updateBackButtons();
     }
 
-    // Initialize view and button states once DOM is ready
+    // Deep link helper: open a specific hub based on URL hash (e.g. #saviors-call)
+    function deepLinkToHubFromHash() {
+      var hash = window.location.hash;
+      if (!hash) return false;
+
+      var key = hash.substring(1); // remove '#'
+
+      // Map hash keys to hub IDs used by showHub()
+      var hubMap = {
+        "saviors-call": "saviors-call",       // A Savior's Call hub
+        "faith-rooted": "faith-rooted",       // Faith Rooted in God's Word hub
+        "hope": "hope-light",                 // Hope: Light in the Darkness hub
+        "healing": "healing-hearts",          // Healing Hearts hub
+        "current-studies": "faith-rooted"     // Current Bible Studies lives in Faith Rooted hub
+      };
+
+      var hubId = hubMap[key];
+      if (!hubId || typeof showHub !== 'function') {
+        return false;
+      }
+
+      // Show the requested hub
+      showHub(hubId);
+
+      // If we're going to Current Bible Studies, scroll to that heading
+      if (key === "current-studies") {
+        var headings = document.querySelectorAll("#faith-rooted-hub h2, #faith-rooted-hub h3, #faith-rooted-hub h4");
+        for (var i = 0; i < headings.length; i++) {
+          var txt = headings[i].textContent.trim();
+          if (txt.indexOf("Current Bible Studies") === 0) {
+            if (headings[i].scrollIntoView) {
+              headings[i].scrollIntoView({ behavior: "smooth", block: "start" });
+            }
+            break;
+          }
+        }
+      }
+
+      return true;
+    }
+
+    // Init    // Initialize view and button states once DOM is ready
     document.addEventListener('DOMContentLoaded', function() {
-      showPage('home');
+      if (!deepLinkToHubFromHash()) {
+        // If there is no hash (or it doesn't map to a hub), fall back to the normal home/Level 2 view
+        showPage('home');
+      }
       updateBackButtons();
+    });
+
+    // If the hash changes while staying on this page, update the visible hub
+    window.addEventListener('hashchange', function() {
+      deepLinkToHubFromHash();
     });
 
     // Update Back to Top button when scrolling
