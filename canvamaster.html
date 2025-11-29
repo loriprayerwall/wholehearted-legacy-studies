@@ -6680,43 +6680,61 @@ function nextBook() {
       });
     }
   </script>
-  <!-- 🌿 Deep links from Home: scroll to the right section when a hash is present -->
+ <!-- 🌿 Deep links from the Home page: open the correct hub based on #hash -->
 <script>
 (function() {
   var hash = window.location.hash;
   if (!hash) return;
 
-  var key = hash.substring(1); // remove "#"
+  // remove the "#"
+  var key = hash.substring(1);
 
-  // Map hash names to the heading text on this page
-  var targetMap = {
-    "saviors-call": "A Savior's Call",
-    "faith-rooted": "Faith Rooted in God's Word",
-    "hope": "Hope: Light in the Darkness",
-    "healing": "Healing Hearts",
-    "current-studies": "Current Bible Studies"
+  // Map the hash to the hub IDs your JS already uses
+  var hubMap = {
+    "saviors-call": "saviors-call",       // A Savior's Call hub
+    "faith-rooted": "faith-rooted",       // Faith Rooted in God's Word hub
+    "hope": "hope-light",                 // Hope: Light in the Darkness hub
+    "healing": "healing-hearts",          // Healing Hearts hub
+    "current-studies": "faith-rooted"     // Current Studies lives inside Faith Rooted
   };
 
-  var targetText = targetMap[key];
-  if (!targetText) return;
+  var hubId = hubMap[key];
+  if (!hubId) return;
 
-  function scrollToHeading() {
-    var headings = document.querySelectorAll("h1, h2, h3, h4, h5, h6");
-    for (var i = 0; i < headings.length; i++) {
-      var text = headings[i].textContent.trim();
-      if (text.indexOf(targetText) === 0) {
-        headings[i].scrollIntoView({ behavior: "smooth", block: "start" });
-        break;
+  function activateFromHash() {
+    // 1) Use your existing showHub to unhide the section
+    if (typeof showHub === "function") {
+      showHub(hubId);
+    }
+
+    // 2) If we’re going to "current-studies", scroll to that heading
+    if (key === "current-studies") {
+      var headings = document.querySelectorAll("h2, h3, h4");
+      for (var i = 0; i < headings.length; i++) {
+        if (headings[i].textContent.trim().indexOf("Current Bible Studies") === 0) {
+          headings[i].scrollIntoView({ behavior: "smooth", block: "start" });
+          break;
+        }
+      }
+    } else {
+      // For other hubs, scroll to the hub container if it exists
+      var hubSection = document.getElementById(hubId + "-hub");
+      if (hubSection && hubSection.scrollIntoView) {
+        hubSection.scrollIntoView({ behavior: "smooth", block: "start" });
+      } else {
+        window.scrollTo({ top: 0, behavior: "smooth" });
       }
     }
   }
 
   if (document.readyState === "complete" || document.readyState === "interactive") {
-    setTimeout(scrollToHeading, 100);
+    setTimeout(activateFromHash, 100);
   } else {
-    window.addEventListener("load", scrollToHeading);
+    window.addEventListener("load", activateFromHash);
   }
 })();
 </script>
+
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document; ...
  <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9a3ee07355e2ebe5',t:'MTc2NDA0OTkxMy4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
