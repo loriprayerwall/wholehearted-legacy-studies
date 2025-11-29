@@ -1048,7 +1048,7 @@
           <p>Each study is created to draw you closer to God, strengthen your faith, and help you carry His Word into your everyday life.</p>
           <p>Come as you are, and grow with a community that seeks hope, healing, and wholehearted living through Jesus.</p>
           <div class="home-cta-row">
-            <button type="button" class="cta-button" onclick="showHub('current-studies')">Join the Current Study</button>
+            <button type="button" class="cta-button" onclick="goToCurrentStudies()">Join the Current Study</button>
           </div>
         </div>
       </div>
@@ -6393,31 +6393,26 @@
       }
     }
 
-    function showPage(page) {
+    
+function showPage(page) {
       // Hide all sections that act like separate pages
       document.querySelectorAll('.hero, .pathways, .content-hub').forEach(function(el) {
         el.classList.add('hidden');
       });
 
-      if (page === 'home' || page === 'pathways') {
-        // Use the new home hub as the base for both Home and Faith Pathways
+      if (page === 'home') {
+        // Show the main Home hub
         var home = document.getElementById('home-page');
         if (home) home.classList.remove('hidden');
+        currentPage = 'home';
+        scrollToTopSmooth();
 
-        if (page === 'pathways') {
-          // Scroll to the Faith Pathways grid on the home hub
-          var target = document.getElementById('home-faith-pathways');
-          if (target && target.scrollIntoView) {
-            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-          } else {
-            scrollToTopSmooth();
-          }
-          currentPage = 'pathways';
-        } else {
-          // Regular home view
-          scrollToTopSmooth();
-          currentPage = 'home';
-        }
+      } else if (page === 'pathways') {
+        // Show the Faith Pathways Level 2 hub
+        var pathways = document.getElementById('pathways-section');
+        if (pathways) pathways.classList.remove('hidden');
+        currentPage = 'pathways';
+        scrollToTopSmooth();
 
       } else if (page === 'about') {
         var about = document.getElementById('about-page');
@@ -6482,6 +6477,15 @@ function showHub(hubId) {
 
       var key = hash.substring(1); // remove '#'
 
+      // Special case: allow deep links to the Level 2 Faith Pathways hub
+      if (key === "pathways") {
+        if (typeof showPage === 'function') {
+          showPage('pathways');
+          return true;
+        }
+        return false;
+      }
+
       // Map hash keys to hub IDs used by showHub()
       var hubMap = {
         "saviors-call": "saviors-call",       // A Savior's Call hub
@@ -6513,7 +6517,26 @@ function showHub(hubId) {
         }
       }
 
+
       return true;
+    }
+
+    // Direct-access helper for "Join Our Current Study" buttons on the home page
+    function goToCurrentStudies() {
+      // Show the Faith Rooted hub
+      showHub('faith-rooted');
+
+      // Scroll to the "Current Bible Studies" heading inside Faith Rooted
+      var headings = document.querySelectorAll("#faith-rooted-hub h2, #faith-rooted-hub h3, #faith-rooted-hub h4");
+      for (var i = 0; i < headings.length; i++) {
+        var txt = headings[i].textContent.trim();
+        if (txt.indexOf("Current Bible Studies") === 0) {
+          if (headings[i].scrollIntoView) {
+            headings[i].scrollIntoView({ behavior: "smooth", block: "start" });
+          }
+          break;
+        }
+      }
     }
 
     // Initialize view and button states once DOM is ready
