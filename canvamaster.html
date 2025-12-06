@@ -893,6 +893,25 @@
 }
 
 
+    /* Override feature card layout in the 3-card "Stay Connected" row so cards behave like standard tiles */
+    @media (min-width: 900px) {
+      #home-next-steps .home-feature-card {
+        display: flex;
+        flex-direction: column;
+      }
+
+      #home-next-steps .home-feature-image {
+        height: auto;
+      }
+
+      #home-next-steps .home-feature-image img {
+        width: 100%;
+        height: 190px;
+        object-fit: cover;
+      }
+    }
+
+
 
     .home-card-footer {
       margin-top: 1rem;
