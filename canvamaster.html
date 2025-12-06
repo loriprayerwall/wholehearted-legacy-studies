@@ -6491,14 +6491,15 @@
     }
 
     function showPage(page, fromBack) {
-      // Hide all sections that act like separate pages
+      // Hide all sections that act like separate views
       document.querySelectorAll('.hero, .pathways, .content-hub').forEach(function(el) {
         el.classList.add('hidden');
       });
 
       if (page === 'home') {
-        // Show home content hub
+        var hero = document.querySelector('.hero');
         var home = document.getElementById('home-page');
+        if (hero) hero.classList.remove('hidden');
         if (home) home.classList.remove('hidden');
       } else if (page === 'pathways') {
         var pathways = document.querySelector('.pathways');
@@ -6511,8 +6512,10 @@
         if (resources) resources.classList.remove('hidden');
       } else {
         // Unknown page: default to home
-        var fallback = document.getElementById('home-page');
-        if (fallback) fallback.classList.remove('hidden');
+        var fallbackHero = document.querySelector('.hero');
+        var fallbackHome = document.getElementById('home-page');
+        if (fallbackHero) fallbackHero.classList.remove('hidden');
+        if (fallbackHome) fallbackHome.classList.remove('hidden');
         page = 'home';
       }
 
@@ -6529,8 +6532,8 @@
     }
 
     function showHub(hubId, fromBack) {
-      // Hide all content-hub sections first
-      document.querySelectorAll('.content-hub').forEach(function(el) {
+      // Hide all major sections
+      document.querySelectorAll('.hero, .pathways, .content-hub').forEach(function(el) {
         el.classList.add('hidden');
       });
 
@@ -6551,8 +6554,8 @@
     }
 
     function showSubpage(pageId, fromBack) {
-      // Hide all content pages
-      document.querySelectorAll('.content-page').forEach(function(el) {
+      // Hide all major sections
+      document.querySelectorAll('.hero, .pathways, .content-hub').forEach(function(el) {
         el.classList.add('hidden');
       });
 
@@ -6573,11 +6576,7 @@
     }
 
 
-ckButtons();
-    }
-
-    
-    // Helper: open a specific hub based on URL hash (e.g., #saviors-call)
+// Helper: open a specific hub based on URL hash (e.g., #saviors-call)
     function deepLinkToHubFromHash() {
       var hash = window.location.hash;
       if (!hash) return false;
