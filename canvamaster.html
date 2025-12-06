@@ -859,6 +859,21 @@
       margin-bottom: 1rem;
     }
 
+    .home-feature-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.75rem;
+      align-items: stretch;
+    }
+
+    @media (min-width: 900px) {
+      .home-feature-grid .home-feature-card {
+        margin-bottom: 0;
+      }
+    }
+
+
+
 @media (min-width: 900px) {
   .home-feature-card {
     display: grid;
@@ -1086,71 +1101,76 @@
       </div>
      </section>
      <!-- Join Current Study / Stay Connected / Contact (3-card grid) -->
-      <section class="home-section" id="home-next-steps">
-        <div class="home-section-header">
-          <h2>Stay Connected on the Journey</h2>
-          <p>Move from exploring to engaging through Bible study, gentle email encouragement, and a place to share prayer requests.</p>
-        </div>
-        <div class="home-pathways-grid">
-          <!-- Join Current Study -->
-          <div class="home-pathway-card">
-            <div class="home-pathway-image">
-              <img src="https://www.wholeheartedlegacy.org/s/3.png" alt="Believers walking together in Bible study">
-            </div>
-            <div class="home-pathway-body">
-              <h3>🌿 Join Our Current Study</h3>
-              <p>Step into a space of peace, purpose, and reflection as we walk through Scripture together—one chapter, one Psalm, one prayer at a time.</p>
-              <p>Each study is created to draw you closer to God, strengthen your faith, and help you carry His Word into your everyday life.</p>
-              <div class="home-card-footer">
-                <button type="button" class="cta-button" onclick="goToCurrentStudies()">Join the Current Study</button>
-              </div>
-            </div>
+    <section class="home-section" id="home-next-steps">
+      <div class="home-section-header">
+        <h2>Stay Connected on the Journey</h2>
+        <p>Move from exploring to engaging through Bible study, gentle email encouragement, and a place to share prayer requests.</p>
+      </div>
+      <div class="home-feature-grid">
+        <!-- Join Current Study -->
+        <div class="home-feature-card">
+          <div class="home-feature-image">
+            <img src="https://www.wholeheartedlegacy.org/s/3.png" alt="Believers walking together in Bible study">
           </div>
-
-          <!-- Stay Connected -->
-          <div class="home-pathway-card">
-            <div class="home-pathway-image">
-              <img src="https://www.wholeheartedlegacy.org/s/the-legacy.png" alt="Silhouettes walking into a soft glowing horizon">
-            </div>
-            <div class="home-pathway-body">
-              <h3>🌿 Stay Connected</h3>
-              <p>Receive devotionals, reflections, and encouragement straight to your inbox as we continue AJ's legacy of hope and healing.</p>
-              <div class="home-card-footer">
-                <a
-                  href="https://www.wholeheartedlegacy.org/subscribe"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="cta-button"
-                >
-                  Join the Email List
-                </a>
-              </div>
-            </div>
-          </div>
-
-          <!-- Contact Us -->
-          <div class="home-pathway-card">
-            <div class="home-pathway-image">
-              <img src="https://www.wholeheartedlegacy.org/s/connect.png" alt="Soft floral artwork inviting connection and prayer">
-            </div>
-            <div class="home-pathway-body">
-              <h3>Contact Us</h3>
-              <p><strong>Need prayer or encouragement? We're here to walk with you.</strong></p>
-              <p>Share a prayer request, a praise report, or your story, and we'll respond with love and care as we walk together in faith, hope, and healing through Christ.</p>
-              <div class="home-card-footer">
-                <a
-                  href="https://www.wholeheartedlegacy.org/contact-1"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="cta-button"
-                >
-                  Open Prayer &amp; Contact Form
-                </a>
-              </div>
+          <div class="home-feature-body">
+            <h3>🌿 Join Our Current Study</h3>
+            <p>Step into a space of peace, purpose, and reflection as we walk through Scripture together&mdash;one chapter, one Psalm, one prayer at a time.</p>
+            <p>Each study is created to draw you closer to God, strengthen your faith, and help you carry His Word into your everyday life.</p>
+            <p>Come as you are, and grow with a community that seeks hope, healing, and wholehearted living through Jesus.</p>
+            <div class="home-cta-row">
+              <button type="button" class="cta-button" onclick="goToCurrentStudies()">Join the Current Study</button>
             </div>
           </div>
         </div>
-      </section>
+
+        <!-- Stay Connected -->
+        <div class="home-feature-card">
+          <div class="home-feature-image">
+            <img src="https://www.wholeheartedlegacy.org/s/the-legacy.png" alt="Silhouettes walking into a soft glowing horizon">
+          </div>
+          <div class="home-feature-body">
+            <h3>🌿 Stay Connected</h3>
+            <p>Receive devotionals, reflections, and encouragement straight to your inbox as we continue AJ&apos;s legacy of hope and healing.</p>
+            <div class="form-placeholder">
+              <p>Use the button below to join our email list through the Wholehearted Legacy website.</p>
+              <a
+                href="https://www.wholeheartedlegacy.org/subscribe"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="cta-button"
+                style="margin-top: 0.85rem; display: inline-block;"
+              >
+                Join the Email List
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Contact Us -->
+        <div class="home-feature-card">
+          <div class="home-feature-image">
+            <img src="https://www.wholeheartedlegacy.org/s/connect.png" alt="Soft floral artwork inviting connection and prayer">
+          </div>
+          <div class="home-feature-body">
+            <h3>Contact Us</h3>
+            <p><strong>Need prayer or encouragement? We&apos;re here to walk with you.</strong></p>
+            <p>Share a prayer request, a praise report, or your story, and we&apos;ll respond with love and care as we walk together in faith, hope, and healing through Christ.</p>
+            <div class="form-placeholder">
+              <p>Use the button below to share a prayer request or message through the Wholehearted Legacy website.</p>
+              <a
+                href="https://www.wholeheartedlegacy.org/contact-1"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="cta-button"
+                style="margin-top: 0.85rem; display: inline-block;"
+              >
+                Open Prayer &amp; Contact Form
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
 
 
@@ -6429,7 +6449,11 @@
         verseRef: "Genesis 1:1",
         verseLink: "https://www.bible.com/bible/111/GEN.1.1.NIV"
       }
-      // Would continue with all 66 books -// --- Navigation helpers for main pages and hubs ---
+      // Would continue with all 66 books - simplified
+    };
+
+    
+    // --- Navigation helpers for main pages and hubs ---
     function scrollToTopSmooth() {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
