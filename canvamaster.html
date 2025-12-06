@@ -6396,8 +6396,6 @@
 
     let config = { ...defaultConfig };
     let currentPage = 'home';
-      let pageHistory = [];
-
     let currentBook = 1;
     let currentKidsBook = 1;
 
@@ -6440,9 +6438,9 @@
       var homeBtn = document.getElementById('back-to-home-btn');
       var topBtn = document.getElementById('back-to-top-btn');
 
-      // Back button is visible only when there is somewhere to go back to
+      // Back to Home visible only when not on home
       if (homeBtn) {
-        if (!pageHistory || pageHistory.length === 0) {
+        if (currentPage === 'home') {
           homeBtn.classList.add('hidden');
         } else {
           homeBtn.classList.remove('hidden');
@@ -6451,7 +6449,7 @@
 
       // Back to Top visible after scrolling a bit
       if (topBtn) {
-        if (window.scrollY > 300) {
+        if (window.scrollY > 200) {
           topBtn.classList.remove('hidden');
         } else {
           topBtn.classList.add('hidden');
@@ -6459,80 +6457,57 @@
       }
     }
 
-    // Called when the floating back button is clicked
     function goBackOrHome() {
-      if (pageHistory && pageHistory.length > 0) {
-        var target = pageHistory.pop();
-
-        // Main top-level pages
-        if (target === 'home' || target === 'pathways' || target === 'about' || target === 'resources') {
-          showPage(target, true);
-        } else {
-          // Try hubs first (e.g., 'faith-rooted-hub'), then content pages (e.g., 'saviors-call-page')
-          var hubEl = document.getElementById(target + '-hub');
-          var pageEl = document.getElementById(target + '-page');
-
-          if (hubEl) {
-            showHub(target, true);
-          } else if (pageEl) {
-            showSubpage(target, true);
-          } else {
-            // Safe fallback back to home
-            pageHistory = [];
-            showPage('home', true);
-          }
-        }
-      } else {
-        // No history: send to home
-        showPage('home', true);
-      }
-
+      // Always return to the main Home page within this study
+      showPage('home');
       scrollToTopSmooth();
     }
 
-    function showPage(page, fromBack) {
-      // Hide all sections that act like separate views
+function showPage(page) {
+      // Hide all sections that act like separate pages
       document.querySelectorAll('.hero, .pathways, .content-hub').forEach(function(el) {
         el.classList.add('hidden');
       });
 
       if (page === 'home') {
-        var hero = document.querySelector('.hero');
+        // Show the main Home hub
         var home = document.getElementById('home-page');
-        if (hero) hero.classList.remove('hidden');
         if (home) home.classList.remove('hidden');
+        currentPage = 'home';
+        scrollToTopSmooth();
+
       } else if (page === 'pathways') {
-        var pathways = document.querySelector('.pathways');
+        // Show the Faith Pathways Level 2 hub
+        var pathways = document.getElementById('pathways-section');
         if (pathways) pathways.classList.remove('hidden');
+        currentPage = 'pathways';
+        scrollToTopSmooth();
+
       } else if (page === 'about') {
         var about = document.getElementById('about-page');
         if (about) about.classList.remove('hidden');
+        currentPage = 'about';
+        scrollToTopSmooth();
+
       } else if (page === 'resources') {
         var resources = document.getElementById('resources-page');
         if (resources) resources.classList.remove('hidden');
+        currentPage = 'resources';
+        scrollToTopSmooth();
+
       } else {
-        // Unknown page: default to home
-        var fallbackHero = document.querySelector('.hero');
-        var fallbackHome = document.getElementById('home-page');
-        if (fallbackHero) fallbackHero.classList.remove('hidden');
-        if (fallbackHome) fallbackHome.classList.remove('hidden');
-        page = 'home';
+        // Fallback – default to home if something unexpected is passed
+        var homeFallback = document.getElementById('home-page');
+        if (homeFallback) homeFallback.classList.remove('hidden');
+        currentPage = 'home';
+        scrollToTopSmooth();
       }
 
-      // Only push into history when this is a forward navigation
-      if (!fromBack) {
-        if (currentPage && currentPage !== page) {
-          pageHistory.push(currentPage);
-        }
-      }
-      currentPage = page;
-
-      scrollToTopSmooth();
       updateBackButtons();
     }
 
-    function showHub(hubId, fromBack) {
-      // Hide all major sections
+function showHub(hubId) {
+      // Hide all main sections and hubs
       document.querySelectorAll('.hero, .pathways, .content-hub').forEach(function(el) {
         el.classList.add('hidden');
       });
@@ -6542,20 +6517,14 @@
         hub.classList.remove('hidden');
       }
 
-      if (!fromBack) {
-        if (currentPage && currentPage !== hubId) {
-          pageHistory.push(currentPage);
-        }
-      }
       currentPage = hubId;
-
       scrollToTopSmooth();
       updateBackButtons();
     }
 
-    function showSubpage(pageId, fromBack) {
-      // Hide all major sections
-      document.querySelectorAll('.hero, .pathways, .content-hub').forEach(function(el) {
+    function showSubpage(pageId) {
+      // Hide all hubs/content pages
+      document.querySelectorAll('.content-hub').forEach(function(el) {
         el.classList.add('hidden');
       });
 
@@ -6564,19 +6533,13 @@
         pageEl.classList.remove('hidden');
       }
 
-      if (!fromBack) {
-        if (currentPage && currentPage !== pageId) {
-          pageHistory.push(currentPage);
-        }
-      }
       currentPage = pageId;
-
       scrollToTopSmooth();
       updateBackButtons();
     }
 
-
-// Helper: open a specific hub based on URL hash (e.g., #saviors-call)
+    
+    // Helper: open a specific hub based on URL hash (e.g., #saviors-call)
     function deepLinkToHubFromHash() {
       var hash = window.location.hash;
       if (!hash) return false;
@@ -6915,6 +6878,6 @@ function nextBook() {
 })();
 </script>
 
-
-</body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document; ...
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9a3ee07355e2ebe5',t:'MTc2NDA0OTkxMy4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
