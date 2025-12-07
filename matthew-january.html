@@ -105,6 +105,45 @@ body {
   margin-bottom: 10px;
 }
 
+
+/* Footer navigation buttons */
+.nav-footer {
+  max-width: 900px;
+  margin: 30px auto 10px;
+  padding: 0 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+}
+
+.nav-btn {
+  display: inline-block;
+  padding: 10px 22px;
+  border-radius: 999px;
+  border: 1px solid #c9a46b;
+  background: #fdfcf9;
+  color: #3e2a1f;
+  text-decoration: none;
+  font-family: Georgia, serif;
+  font-size: 0.98rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+  transition: background 0.2s ease, color 0.2s ease,
+              box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.nav-btn:hover {
+  background: #e9ddcf;
+  transform: translateY(-1px);
+  box-shadow: 0 5px 16px rgba(0,0,0,0.12);
+}
+
+.nav-btn.secondary {
+  background: #f7efe5;
+}
+
 /* MODAL — EXACT STYLE */
 .modal-overlay {
   display: none;
@@ -412,6 +451,18 @@ body {
       <div>Pause, reflect, and prepare for February</div>
     </div>
   </div>
+</div>
+
+
+<div class="nav-footer">
+  <a class="nav-btn"
+     href="https://loriprayerwall.github.io/wholehearted-legacy-studies/canvamaster#current-studies">
+    ← Back to Current Studies
+  </a>
+  <a class="nav-btn secondary"
+     href="https://loriprayerwall.github.io/wholehearted-legacy-studies/canvamaster">
+    ← Back to Home
+  </a>
 </div>
 
 <!-- MODAL OVERLAY -->
