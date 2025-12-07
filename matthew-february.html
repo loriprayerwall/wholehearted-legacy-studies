@@ -213,6 +213,31 @@ body {
   .day-grid { grid-template-columns: 1fr; }
   .modal-box { margin: 25px; padding: 25px; }
 }
+
+/* Footer nav buttons (Back to Current Studies / Back to Home) */
+.nav-footer {
+  text-align: center;
+  margin: 10px auto 40px;
+}
+.nav-footer a {
+  display: inline-block;
+  margin: 6px 8px;
+  padding: 10px 22px;
+  border-radius: 999px;
+  border: 1px solid #c9a46b;
+  text-decoration: none;
+  color: #3e2a1f;
+  background: #fdfcf9;
+  font-size: 15px;
+  letter-spacing: 0.3px;
+  transition: 0.25s ease;
+}
+.nav-footer a:hover {
+  background: #f3e3cf;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.18);
+  transform: translateY(-2px);
+}
+
 </style>
 </head>
 <body>
@@ -397,7 +422,17 @@ body {
       <div class="day-ref">Matthew 28:20 (KJV)</div>
       <div>Lo, I am with you always</div>
     </div>
+  
+  <!-- FOOTER NAV BUTTONS -->
+  <div class="nav-footer">
+    <a href="https://loriprayerwall.github.io/wholehearted-legacy-studies/canvamaster#current-studies">
+      ← Back to Current Studies
+    </a>
+    <a href="https://loriprayerwall.github.io/wholehearted-legacy-studies/canvamaster">
+      ← Back to Home
+    </a>
   </div>
+
 </div>
 
 <!-- MODAL OVERLAY -->
