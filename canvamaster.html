@@ -6658,6 +6658,16 @@ function showHub(hubId) {
         return false;
       }
 
+
+      // Deep link: Faith for Little Hearts – 66-Books of the Bible Carousel
+      if (key === "fflh-66-books") {
+        if (typeof showSubpage === "function") {
+          showSubpage("kids-66-books");
+          return true;
+        }
+        return false;
+      }
+
 // Map hash keys to hub IDs used by showHub()
       var hubMap = {
         "saviors-call": "saviors-call",       // A Savior's Call hub
