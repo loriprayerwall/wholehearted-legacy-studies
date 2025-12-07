@@ -1049,7 +1049,7 @@
        <div class="home-tagline">About Wholehearted Legacy</div>
        <h1>Faith · Hope · Healing through Christ</h1>
        <p>Wholehearted Legacy was born from both deep joy and deep sorrow—from celebrating God's goodness and walking through the heartbreak of losing AJ.</p>
-       <p>As we remember him and walk alongside Isabella and Caleb in their own journeys of faith, we anchor ourselves to the hope that in Christ, love is never lost and every tear is seen.</p>
+       <p>As we remember him and walk alongside Isabella and Caleb in their own journeys of faith, we cling to the hope that in Christ, love is never lost and every tear is seen.</p>
        <p>Our prayer is that as you read, study, and pray with us, you will sense that same hope: the gentle, steady presence of Jesus in every season.</p>
        <div class="home-cta-row">
         <button type="button" class="cta-button" onclick="window.location.href='https://www.wholeheartedlegacy.org/our-story'">
@@ -1132,7 +1132,7 @@
             <img src="https://www.wholeheartedlegacy.org/s/3.png" alt="Believers walking together in Bible study">
           </div>
           <div class="home-feature-body">
-            <h3>Join Our Current Study</h3>
+            <h3>🌿 Join Our Current Study</h3>
             <p>Step into a space of peace, purpose, and reflection as we walk through Scripture together&mdash;one chapter, one Psalm, one prayer at a time.</p>
             <p>Each study is created to draw you closer to God, strengthen your faith, and help you carry His Word into your everyday life.</p>
             <p>Come as you are, and grow with a community that seeks hope, healing, and wholehearted living through Jesus.</p>
@@ -1148,7 +1148,7 @@
             <img src="https://www.wholeheartedlegacy.org/s/the-legacy.png" alt="Silhouettes walking into a soft glowing horizon">
           </div>
           <div class="home-feature-body">
-            <h3>Stay Connected</h3>
+            <h3>🌿 Stay Connected</h3>
             <p>Receive devotionals, reflections, and encouragement straight to your inbox as we continue AJ&apos;s legacy of hope and healing.</p>
             <div class="form-placeholder">
               <p>Use the button below to join our email list through the Wholehearted Legacy website.</p>
@@ -1572,7 +1572,7 @@
         <li>Week 9–12: Paul's letters (start with Ephesians)</li>
        </ul>
        <a 
-        href="https://loriprayerwall.github.io/wholehearted-legacy-studies/templates/new_believer_reading_plan.pdf" 
+        href="PDF_LINK_GOES_HERE" 
         target="_blank" 
         rel="noopener noreferrer" 
         class="cta-button" 
@@ -6593,6 +6593,15 @@ function showHub(hubId) {
       if (key === "pathways") {
         if (typeof showPage === 'function') {
           showPage('pathways');
+          return true;
+        }
+        return false;
+      }
+
+      // New: deep link directly to the Weekly Devotions page
+      if (key === "weekly-devotions") {
+        if (typeof showSubpage === "function") {
+          showSubpage("weekly-devotions");
           return true;
         }
         return false;
