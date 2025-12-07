@@ -6669,6 +6669,16 @@ function showHub(hubId) {
         return false;
       }
 
+
+      // New: deep link directly to the Stories of Hope page
+      if (key === "stories-of-hope" || key === "stories-hope") {
+        if (typeof showSubpage === "function") {
+          showSubpage("stories-hope");
+          return true;
+        }
+        return false;
+      }
+
 // Map hash keys to hub IDs used by showHub()
       var hubMap = {
         "saviors-call": "saviors-call",       // A Savior's Call hub
