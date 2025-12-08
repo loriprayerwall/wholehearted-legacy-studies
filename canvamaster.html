@@ -1879,7 +1879,7 @@
       <div class="subpage-icon">
        🌟
       </div>
-      <a id="seasonal-studies"></a> 
+      <a id="seasonal-studies"></a>
       <h3>Seasonal Studies</h3>
       <p>Special studies for Advent, Lent, Easter, and more</p>
      </div>
@@ -6642,7 +6642,17 @@ function showHub(hubId) {
       }
 
       
-      // Deep link directly to the Heroes of the Bible page
+      
+      // New: deep link directly to the Seasonal Studies page
+      if (key === "seasonal-studies") {
+        if (typeof showSubpage === "function") {
+          showSubpage("seasonal-studies");
+          return true;
+        }
+        return false;
+      }
+
+// Deep link directly to the Heroes of the Bible page
       if (key === "heroes-bible") {
         if (typeof showSubpage === "function") {
           showSubpage("heroes-bible");
