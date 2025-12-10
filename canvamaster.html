@@ -3824,7 +3824,7 @@
 </div>
 </main>
 </div><script>
-    const defaultConfig = {
+    const notebookDefaultConfig = {
       background_color: "#f8f7f4",
       surface_color: "#ffffff",
       text_color: "#2c2c2c",
@@ -3836,7 +3836,7 @@
       font_size: 16
     };
 
-    let currentConfig = { ...defaultConfig };
+    let currentConfig = { ...notebookDefaultConfig };
     let currentFilter = 'all';
     let currentEntryType = '';
     let allEntries = [];
@@ -4514,15 +4514,15 @@
     };
 
     // Initialize Element SDK
-    async function onConfigChange(config) {
-      currentConfig = config;
-      const backgroundColor = config.background_color || defaultConfig.background_color;
-      const surfaceColor = config.surface_color || defaultConfig.surface_color;
-      const textColor = config.text_color || defaultConfig.text_color;
-      const primaryColor = config.primary_color || defaultConfig.primary_color;
-      const secondaryColor = config.secondary_color || defaultConfig.secondary_color;
-      const fontFamily = config.font_family || defaultConfig.font_family;
-      const fontSize = config.font_size || defaultConfig.font_size;
+    async function onConfigChange(notebookConfig) {
+      currentConfig = notebookConfig;
+      const backgroundColor = notebookConfig.background_color || notebookDefaultConfig.background_color;
+      const surfaceColor = notebookConfig.surface_color || notebookDefaultConfig.surface_color;
+      const textColor = notebookConfig.text_color || notebookDefaultConfig.text_color;
+      const primaryColor = notebookConfig.primary_color || notebookDefaultConfig.primary_color;
+      const secondaryColor = notebookConfig.secondary_color || notebookDefaultConfig.secondary_color;
+      const fontFamily = notebookConfig.font_family || notebookDefaultConfig.font_family;
+      const fontSize = notebookConfig.font_size || notebookDefaultConfig.font_size;
       
       document.body.style.backgroundColor = backgroundColor;
       document.body.style.color = textColor;
@@ -4534,11 +4534,11 @@
       header.style.color = textColor;
       header.style.borderBottom = `1px solid ${secondaryColor}`;
       
-      document.getElementById('notebook-title').textContent = config.notebook_title || defaultConfig.notebook_title;
+      document.getElementById('notebook-title').textContent = notebookConfig.notebook_title || notebookDefaultConfig.notebook_title;
       document.getElementById('notebook-title').style.fontSize = `${fontSize * 2}px`;
       document.getElementById('notebook-title').style.color = textColor;
       
-      document.getElementById('welcome-message').textContent = config.welcome_message || defaultConfig.welcome_message;
+      document.getElementById('welcome-message').textContent = notebookConfig.welcome_message || notebookDefaultConfig.welcome_message;
       document.getElementById('welcome-message').style.fontSize = `${fontSize * 0.9}px`;
       document.getElementById('welcome-message').style.color = textColor;
       document.getElementById('welcome-message').style.opacity = '0.7';
@@ -4679,65 +4679,65 @@
 
     if (window.elementSdk) {
       window.elementSdk.init({
-        defaultConfig,
+        notebookDefaultConfig,
         onConfigChange,
-        mapToCapabilities: (config) => ({
+        mapToCapabilities: (notebookConfig) => ({
           recolorables: [
             {
-              get: () => config.background_color || defaultConfig.background_color,
+              get: () => notebookConfig.background_color || notebookDefaultConfig.background_color,
               set: (value) => {
-                config.background_color = value;
+                notebookConfig.background_color = value;
                 window.elementSdk.setConfig({ background_color: value });
               }
             },
             {
-              get: () => config.surface_color || defaultConfig.surface_color,
+              get: () => notebookConfig.surface_color || notebookDefaultConfig.surface_color,
               set: (value) => {
-                config.surface_color = value;
+                notebookConfig.surface_color = value;
                 window.elementSdk.setConfig({ surface_color: value });
               }
             },
             {
-              get: () => config.text_color || defaultConfig.text_color,
+              get: () => notebookConfig.text_color || notebookDefaultConfig.text_color,
               set: (value) => {
-                config.text_color = value;
+                notebookConfig.text_color = value;
                 window.elementSdk.setConfig({ text_color: value });
               }
             },
             {
-              get: () => config.primary_color || defaultConfig.primary_color,
+              get: () => notebookConfig.primary_color || notebookDefaultConfig.primary_color,
               set: (value) => {
-                config.primary_color = value;
+                notebookConfig.primary_color = value;
                 window.elementSdk.setConfig({ primary_color: value });
               }
             },
             {
-              get: () => config.secondary_color || defaultConfig.secondary_color,
+              get: () => notebookConfig.secondary_color || notebookDefaultConfig.secondary_color,
               set: (value) => {
-                config.secondary_color = value;
+                notebookConfig.secondary_color = value;
                 window.elementSdk.setConfig({ secondary_color: value });
               }
             }
           ],
           borderables: [],
           fontEditable: {
-            get: () => config.font_family || defaultConfig.font_family,
+            get: () => notebookConfig.font_family || notebookDefaultConfig.font_family,
             set: (value) => {
-              config.font_family = value;
+              notebookConfig.font_family = value;
               window.elementSdk.setConfig({ font_family: value });
             }
           },
           fontSizeable: {
-            get: () => config.font_size || defaultConfig.font_size,
+            get: () => notebookConfig.font_size || notebookDefaultConfig.font_size,
             set: (value) => {
-              config.font_size = value;
+              notebookConfig.font_size = value;
               window.elementSdk.setConfig({ font_size: value });
             }
           }
         }),
-        mapToEditPanelValues: (config) => new Map([
-          ["notebook_title", config.notebook_title || defaultConfig.notebook_title],
-          ["welcome_message", config.welcome_message || defaultConfig.welcome_message]
+        mapToEditPanelValues: (notebookConfig) => new Map([
+          ["notebook_title", notebookConfig.notebook_title || notebookDefaultConfig.notebook_title],
+          ["welcome_message", notebookConfig.welcome_message || notebookDefaultConfig.welcome_message]
         ])
       });
     }
@@ -4790,7 +4790,7 @@
         character: 'Character Study'
       };
 
-      let text = `${currentConfig.notebook_title || defaultConfig.notebook_title}\n`;
+      let text = `${currentConfig.notebook_title || notebookDefaultConfig.notebook_title}\n`;
       text += `${'='.repeat(50)}\n\n`;
 
       studyEntries.forEach((entry, index) => {
@@ -4875,7 +4875,7 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>${currentConfig.notebook_title || defaultConfig.notebook_title}</title>
+  <title>${currentConfig.notebook_title || notebookDefaultConfig.notebook_title}</title>
   <style>
     body { font-family: Georgia, serif; max-width: 800px; margin: 40px auto; padding: 20px; line-height: 1.6; }
     h1 { color: #8b6f47; border-bottom: 3px solid #8b6f47; padding-bottom: 10px; }
@@ -4890,7 +4890,7 @@
   </style>
 </head>
 <body>
-  <h1>${currentConfig.notebook_title || defaultConfig.notebook_title}</h1>
+  <h1>${currentConfig.notebook_title || notebookDefaultConfig.notebook_title}</h1>
 `;
 
       studyEntries.forEach((entry) => {
@@ -5078,11 +5078,11 @@
       }
 
       // Render stats
-      const config = window.elementSdk ? window.elementSdk.config : defaultConfig;
-      const backgroundColor = config.surface_color || defaultConfig.surface_color;
-      const textColor = config.text_color || defaultConfig.text_color;
-      const primaryColor = config.primary_color || defaultConfig.primary_color;
-      const fontSize = config.font_size || defaultConfig.font_size;
+      const notebookConfig = window.elementSdk ? window.elementSdk.notebookConfig : notebookDefaultConfig;
+      const backgroundColor = notebookConfig.surface_color || notebookDefaultConfig.surface_color;
+      const textColor = notebookConfig.text_color || notebookDefaultConfig.text_color;
+      const primaryColor = notebookConfig.primary_color || notebookDefaultConfig.primary_color;
+      const fontSize = notebookConfig.font_size || notebookDefaultConfig.font_size;
 
       const statsContainer = document.getElementById('reading-stats');
       statsContainer.innerHTML = `
@@ -5137,7 +5137,7 @@
             </div>
             <button class="delete-reading-btn px-3 py-1 rounded font-medium transition-colors" 
                     data-entry-id="${entry.__backendId}"
-                    style="background-color: ${config.secondary_color || defaultConfig.secondary_color}; color: ${backgroundColor}; font-size: ${fontSize * 0.85}px;">
+                    style="background-color: ${notebookConfig.secondary_color || notebookDefaultConfig.secondary_color}; color: ${backgroundColor}; font-size: ${fontSize * 0.85}px;">
               Delete
             </button>
           </div>
@@ -5217,8 +5217,8 @@
         currentFilter = tab.dataset.filter;
         document.querySelectorAll('.filter-tab').forEach(t => {
           const isActive = t.dataset.filter === currentFilter;
-          t.style.backgroundColor = isActive ? currentConfig.primary_color || defaultConfig.primary_color : currentConfig.surface_color || defaultConfig.surface_color;
-          t.style.color = isActive ? currentConfig.surface_color || defaultConfig.surface_color : currentConfig.text_color || defaultConfig.text_color;
+          t.style.backgroundColor = isActive ? currentConfig.primary_color || notebookDefaultConfig.primary_color : currentConfig.surface_color || notebookDefaultConfig.surface_color;
+          t.style.color = isActive ? currentConfig.surface_color || notebookDefaultConfig.surface_color : currentConfig.text_color || notebookDefaultConfig.text_color;
         });
         renderEntries();
       });
@@ -5313,8 +5313,8 @@
       // Update nav tabs
       document.querySelectorAll('.nav-tab').forEach(tab => {
         const isActive = tab.dataset.view === view;
-        tab.style.backgroundColor = isActive ? currentConfig.primary_color || defaultConfig.primary_color : currentConfig.surface_color || defaultConfig.surface_color;
-        tab.style.color = isActive ? currentConfig.surface_color || defaultConfig.surface_color : currentConfig.text_color || defaultConfig.text_color;
+        tab.style.backgroundColor = isActive ? currentConfig.primary_color || notebookDefaultConfig.primary_color : currentConfig.surface_color || notebookDefaultConfig.surface_color;
+        tab.style.color = isActive ? currentConfig.surface_color || notebookDefaultConfig.surface_color : currentConfig.text_color || notebookDefaultConfig.text_color;
       });
       
       // Show/hide views
@@ -5346,11 +5346,11 @@
     }
 
     function updateTestamentTabs() {
-      const config = window.elementSdk ? window.elementSdk.config : defaultConfig;
-      const primaryColor = config.primary_color || defaultConfig.primary_color;
-      const surfaceColor = config.surface_color || defaultConfig.surface_color;
-      const textColor = config.text_color || defaultConfig.text_color;
-      const fontSize = config.font_size || defaultConfig.font_size;
+      const notebookConfig = window.elementSdk ? window.elementSdk.notebookConfig : notebookDefaultConfig;
+      const primaryColor = notebookConfig.primary_color || notebookDefaultConfig.primary_color;
+      const surfaceColor = notebookConfig.surface_color || notebookDefaultConfig.surface_color;
+      const textColor = notebookConfig.text_color || notebookDefaultConfig.text_color;
+      const fontSize = notebookConfig.font_size || notebookDefaultConfig.font_size;
       
       document.querySelectorAll('.testament-tab').forEach(tab => {
         const isActive = tab.dataset.testament === currentTestament;
@@ -5370,12 +5370,12 @@
       const grid = document.getElementById('books-grid');
       const books = bibleBooks[currentTestament];
       
-      const config = window.elementSdk ? window.elementSdk.config : defaultConfig;
-      const backgroundColor = config.surface_color || defaultConfig.surface_color;
-      const textColor = config.text_color || defaultConfig.text_color;
-      const primaryColor = config.primary_color || defaultConfig.primary_color;
-      const secondaryColor = config.secondary_color || defaultConfig.secondary_color;
-      const fontSize = config.font_size || defaultConfig.font_size;
+      const notebookConfig = window.elementSdk ? window.elementSdk.notebookConfig : notebookDefaultConfig;
+      const backgroundColor = notebookConfig.surface_color || notebookDefaultConfig.surface_color;
+      const textColor = notebookConfig.text_color || notebookDefaultConfig.text_color;
+      const primaryColor = notebookConfig.primary_color || notebookDefaultConfig.primary_color;
+      const secondaryColor = notebookConfig.secondary_color || notebookDefaultConfig.secondary_color;
+      const fontSize = notebookConfig.font_size || notebookDefaultConfig.font_size;
       
       grid.innerHTML = books.map(book => {
         const bookEntries = allEntries.filter(e => e.book_name === book.name && e.type !== 'reading');
@@ -5417,12 +5417,12 @@
       
       currentBook = book;
       
-      const config = window.elementSdk ? window.elementSdk.config : defaultConfig;
-      const backgroundColor = config.surface_color || defaultConfig.surface_color;
-      const textColor = config.text_color || defaultConfig.text_color;
-      const primaryColor = config.primary_color || defaultConfig.primary_color;
-      const secondaryColor = config.secondary_color || defaultConfig.secondary_color;
-      const fontSize = config.font_size || defaultConfig.font_size;
+      const notebookConfig = window.elementSdk ? window.elementSdk.notebookConfig : notebookDefaultConfig;
+      const backgroundColor = notebookConfig.surface_color || notebookDefaultConfig.surface_color;
+      const textColor = notebookConfig.text_color || notebookDefaultConfig.text_color;
+      const primaryColor = notebookConfig.primary_color || notebookDefaultConfig.primary_color;
+      const secondaryColor = notebookConfig.secondary_color || notebookDefaultConfig.secondary_color;
+      const fontSize = notebookConfig.font_size || notebookDefaultConfig.font_size;
       
       const backBtn = document.getElementById('back-to-books');
       backBtn.style.backgroundColor = secondaryColor;
@@ -5650,12 +5650,12 @@
         day: 'numeric' 
       });
       
-      const config = window.elementSdk ? window.elementSdk.config : defaultConfig;
-      const backgroundColor = config.surface_color || defaultConfig.surface_color;
-      const textColor = config.text_color || defaultConfig.text_color;
-      const primaryColor = config.primary_color || defaultConfig.primary_color;
-      const secondaryColor = config.secondary_color || defaultConfig.secondary_color;
-      const fontSize = config.font_size || defaultConfig.font_size;
+      const notebookConfig = window.elementSdk ? window.elementSdk.notebookConfig : notebookDefaultConfig;
+      const backgroundColor = notebookConfig.surface_color || notebookDefaultConfig.surface_color;
+      const textColor = notebookConfig.text_color || notebookDefaultConfig.text_color;
+      const primaryColor = notebookConfig.primary_color || notebookDefaultConfig.primary_color;
+      const secondaryColor = notebookConfig.secondary_color || notebookDefaultConfig.secondary_color;
+      const fontSize = notebookConfig.font_size || notebookDefaultConfig.font_size;
       
       element.style.backgroundColor = backgroundColor;
       element.style.color = textColor;
@@ -5767,10 +5767,10 @@
 
     function showToast(message) {
       const toast = document.createElement('div');
-      const config = window.elementSdk ? window.elementSdk.config : defaultConfig;
-      const primaryColor = config.primary_color || defaultConfig.primary_color;
-      const surfaceColor = config.surface_color || defaultConfig.surface_color;
-      const fontSize = config.font_size || defaultConfig.font_size;
+      const notebookConfig = window.elementSdk ? window.elementSdk.notebookConfig : notebookDefaultConfig;
+      const primaryColor = notebookConfig.primary_color || notebookDefaultConfig.primary_color;
+      const surfaceColor = notebookConfig.surface_color || notebookDefaultConfig.surface_color;
+      const fontSize = notebookConfig.font_size || notebookDefaultConfig.font_size;
       
       toast.textContent = message;
       toast.style.position = 'fixed';
@@ -5792,7 +5792,7 @@
       }, 3000);
     }
 
-    onConfigChange(defaultConfig);
+    onConfigChange(notebookDefaultConfig);
     switchView('entries');
   </script><script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9aba987ef70658f1',t:'MTc2NTM0NzIwMC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></div></div>
 </div>
@@ -9709,7 +9709,7 @@ function openKidsMatthewStudy() {
 }
 </script><script>
 
-    const defaultConfig = {
+    const notebookDefaultConfig = {
       background_color: "#f8f7f4",
       surface_color: "#ffffff",
       text_color: "#2c2c2c",
@@ -9721,7 +9721,7 @@ function openKidsMatthewStudy() {
       font_size: 16
     };
 
-    let currentConfig = { ...defaultConfig };
+    let currentConfig = { ...notebookDefaultConfig };
     let currentFilter = 'all';
     let currentEntryType = '';
     let allEntries = [];
@@ -10399,15 +10399,15 @@ function openKidsMatthewStudy() {
     };
 
     // Initialize Element SDK
-    async function onConfigChange(config) {
-      currentConfig = config;
-      const backgroundColor = config.background_color || defaultConfig.background_color;
-      const surfaceColor = config.surface_color || defaultConfig.surface_color;
-      const textColor = config.text_color || defaultConfig.text_color;
-      const primaryColor = config.primary_color || defaultConfig.primary_color;
-      const secondaryColor = config.secondary_color || defaultConfig.secondary_color;
-      const fontFamily = config.font_family || defaultConfig.font_family;
-      const fontSize = config.font_size || defaultConfig.font_size;
+    async function onConfigChange(notebookConfig) {
+      currentConfig = notebookConfig;
+      const backgroundColor = notebookConfig.background_color || notebookDefaultConfig.background_color;
+      const surfaceColor = notebookConfig.surface_color || notebookDefaultConfig.surface_color;
+      const textColor = notebookConfig.text_color || notebookDefaultConfig.text_color;
+      const primaryColor = notebookConfig.primary_color || notebookDefaultConfig.primary_color;
+      const secondaryColor = notebookConfig.secondary_color || notebookDefaultConfig.secondary_color;
+      const fontFamily = notebookConfig.font_family || notebookDefaultConfig.font_family;
+      const fontSize = notebookConfig.font_size || notebookDefaultConfig.font_size;
       
       document.body.style.backgroundColor = backgroundColor;
       document.body.style.color = textColor;
@@ -10419,11 +10419,11 @@ function openKidsMatthewStudy() {
       header.style.color = textColor;
       header.style.borderBottom = `1px solid ${secondaryColor}`;
       
-      document.getElementById('notebook-title').textContent = config.notebook_title || defaultConfig.notebook_title;
+      document.getElementById('notebook-title').textContent = notebookConfig.notebook_title || notebookDefaultConfig.notebook_title;
       document.getElementById('notebook-title').style.fontSize = `${fontSize * 2}px`;
       document.getElementById('notebook-title').style.color = textColor;
       
-      document.getElementById('welcome-message').textContent = config.welcome_message || defaultConfig.welcome_message;
+      document.getElementById('welcome-message').textContent = notebookConfig.welcome_message || notebookDefaultConfig.welcome_message;
       document.getElementById('welcome-message').style.fontSize = `${fontSize * 0.9}px`;
       document.getElementById('welcome-message').style.color = textColor;
       document.getElementById('welcome-message').style.opacity = '0.7';
@@ -10564,65 +10564,65 @@ function openKidsMatthewStudy() {
 
     if (window.elementSdk) {
       window.elementSdk.init({
-        defaultConfig,
+        notebookDefaultConfig,
         onConfigChange,
-        mapToCapabilities: (config) => ({
+        mapToCapabilities: (notebookConfig) => ({
           recolorables: [
             {
-              get: () => config.background_color || defaultConfig.background_color,
+              get: () => notebookConfig.background_color || notebookDefaultConfig.background_color,
               set: (value) => {
-                config.background_color = value;
+                notebookConfig.background_color = value;
                 window.elementSdk.setConfig({ background_color: value });
               }
             },
             {
-              get: () => config.surface_color || defaultConfig.surface_color,
+              get: () => notebookConfig.surface_color || notebookDefaultConfig.surface_color,
               set: (value) => {
-                config.surface_color = value;
+                notebookConfig.surface_color = value;
                 window.elementSdk.setConfig({ surface_color: value });
               }
             },
             {
-              get: () => config.text_color || defaultConfig.text_color,
+              get: () => notebookConfig.text_color || notebookDefaultConfig.text_color,
               set: (value) => {
-                config.text_color = value;
+                notebookConfig.text_color = value;
                 window.elementSdk.setConfig({ text_color: value });
               }
             },
             {
-              get: () => config.primary_color || defaultConfig.primary_color,
+              get: () => notebookConfig.primary_color || notebookDefaultConfig.primary_color,
               set: (value) => {
-                config.primary_color = value;
+                notebookConfig.primary_color = value;
                 window.elementSdk.setConfig({ primary_color: value });
               }
             },
             {
-              get: () => config.secondary_color || defaultConfig.secondary_color,
+              get: () => notebookConfig.secondary_color || notebookDefaultConfig.secondary_color,
               set: (value) => {
-                config.secondary_color = value;
+                notebookConfig.secondary_color = value;
                 window.elementSdk.setConfig({ secondary_color: value });
               }
             }
           ],
           borderables: [],
           fontEditable: {
-            get: () => config.font_family || defaultConfig.font_family,
+            get: () => notebookConfig.font_family || notebookDefaultConfig.font_family,
             set: (value) => {
-              config.font_family = value;
+              notebookConfig.font_family = value;
               window.elementSdk.setConfig({ font_family: value });
             }
           },
           fontSizeable: {
-            get: () => config.font_size || defaultConfig.font_size,
+            get: () => notebookConfig.font_size || notebookDefaultConfig.font_size,
             set: (value) => {
-              config.font_size = value;
+              notebookConfig.font_size = value;
               window.elementSdk.setConfig({ font_size: value });
             }
           }
         }),
-        mapToEditPanelValues: (config) => new Map([
-          ["notebook_title", config.notebook_title || defaultConfig.notebook_title],
-          ["welcome_message", config.welcome_message || defaultConfig.welcome_message]
+        mapToEditPanelValues: (notebookConfig) => new Map([
+          ["notebook_title", notebookConfig.notebook_title || notebookDefaultConfig.notebook_title],
+          ["welcome_message", notebookConfig.welcome_message || notebookDefaultConfig.welcome_message]
         ])
       });
     }
@@ -10675,7 +10675,7 @@ function openKidsMatthewStudy() {
         character: 'Character Study'
       };
 
-      let text = `${currentConfig.notebook_title || defaultConfig.notebook_title}\n`;
+      let text = `${currentConfig.notebook_title || notebookDefaultConfig.notebook_title}\n`;
       text += `${'='.repeat(50)}\n\n`;
 
       studyEntries.forEach((entry, index) => {
@@ -10760,7 +10760,7 @@ function openKidsMatthewStudy() {
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>${currentConfig.notebook_title || defaultConfig.notebook_title}</title>
+  <title>${currentConfig.notebook_title || notebookDefaultConfig.notebook_title}</title>
   <style>
     body { font-family: Georgia, serif; max-width: 800px; margin: 40px auto; padding: 20px; line-height: 1.6; }
     h1 { color: #8b6f47; border-bottom: 3px solid #8b6f47; padding-bottom: 10px; }
@@ -10775,7 +10775,7 @@ function openKidsMatthewStudy() {
   </style>
 </head>
 <body>
-  <h1>${currentConfig.notebook_title || defaultConfig.notebook_title}</h1>
+  <h1>${currentConfig.notebook_title || notebookDefaultConfig.notebook_title}</h1>
 `;
 
       studyEntries.forEach((entry) => {
@@ -10963,11 +10963,11 @@ function openKidsMatthewStudy() {
       }
 
       // Render stats
-      const config = window.elementSdk ? window.elementSdk.config : defaultConfig;
-      const backgroundColor = config.surface_color || defaultConfig.surface_color;
-      const textColor = config.text_color || defaultConfig.text_color;
-      const primaryColor = config.primary_color || defaultConfig.primary_color;
-      const fontSize = config.font_size || defaultConfig.font_size;
+      const notebookConfig = window.elementSdk ? window.elementSdk.notebookConfig : notebookDefaultConfig;
+      const backgroundColor = notebookConfig.surface_color || notebookDefaultConfig.surface_color;
+      const textColor = notebookConfig.text_color || notebookDefaultConfig.text_color;
+      const primaryColor = notebookConfig.primary_color || notebookDefaultConfig.primary_color;
+      const fontSize = notebookConfig.font_size || notebookDefaultConfig.font_size;
 
       const statsContainer = document.getElementById('reading-stats');
       statsContainer.innerHTML = `
@@ -11022,7 +11022,7 @@ function openKidsMatthewStudy() {
             </div>
             <button class="delete-reading-btn px-3 py-1 rounded font-medium transition-colors" 
                     data-entry-id="${entry.__backendId}"
-                    style="background-color: ${config.secondary_color || defaultConfig.secondary_color}; color: ${backgroundColor}; font-size: ${fontSize * 0.85}px;">
+                    style="background-color: ${notebookConfig.secondary_color || notebookDefaultConfig.secondary_color}; color: ${backgroundColor}; font-size: ${fontSize * 0.85}px;">
               Delete
             </button>
           </div>
@@ -11102,8 +11102,8 @@ function openKidsMatthewStudy() {
         currentFilter = tab.dataset.filter;
         document.querySelectorAll('.filter-tab').forEach(t => {
           const isActive = t.dataset.filter === currentFilter;
-          t.style.backgroundColor = isActive ? currentConfig.primary_color || defaultConfig.primary_color : currentConfig.surface_color || defaultConfig.surface_color;
-          t.style.color = isActive ? currentConfig.surface_color || defaultConfig.surface_color : currentConfig.text_color || defaultConfig.text_color;
+          t.style.backgroundColor = isActive ? currentConfig.primary_color || notebookDefaultConfig.primary_color : currentConfig.surface_color || notebookDefaultConfig.surface_color;
+          t.style.color = isActive ? currentConfig.surface_color || notebookDefaultConfig.surface_color : currentConfig.text_color || notebookDefaultConfig.text_color;
         });
         renderEntries();
       });
@@ -11198,8 +11198,8 @@ function openKidsMatthewStudy() {
       // Update nav tabs
       document.querySelectorAll('.nav-tab').forEach(tab => {
         const isActive = tab.dataset.view === view;
-        tab.style.backgroundColor = isActive ? currentConfig.primary_color || defaultConfig.primary_color : currentConfig.surface_color || defaultConfig.surface_color;
-        tab.style.color = isActive ? currentConfig.surface_color || defaultConfig.surface_color : currentConfig.text_color || defaultConfig.text_color;
+        tab.style.backgroundColor = isActive ? currentConfig.primary_color || notebookDefaultConfig.primary_color : currentConfig.surface_color || notebookDefaultConfig.surface_color;
+        tab.style.color = isActive ? currentConfig.surface_color || notebookDefaultConfig.surface_color : currentConfig.text_color || notebookDefaultConfig.text_color;
       });
       
       // Show/hide views
@@ -11231,11 +11231,11 @@ function openKidsMatthewStudy() {
     }
 
     function updateTestamentTabs() {
-      const config = window.elementSdk ? window.elementSdk.config : defaultConfig;
-      const primaryColor = config.primary_color || defaultConfig.primary_color;
-      const surfaceColor = config.surface_color || defaultConfig.surface_color;
-      const textColor = config.text_color || defaultConfig.text_color;
-      const fontSize = config.font_size || defaultConfig.font_size;
+      const notebookConfig = window.elementSdk ? window.elementSdk.notebookConfig : notebookDefaultConfig;
+      const primaryColor = notebookConfig.primary_color || notebookDefaultConfig.primary_color;
+      const surfaceColor = notebookConfig.surface_color || notebookDefaultConfig.surface_color;
+      const textColor = notebookConfig.text_color || notebookDefaultConfig.text_color;
+      const fontSize = notebookConfig.font_size || notebookDefaultConfig.font_size;
       
       document.querySelectorAll('.testament-tab').forEach(tab => {
         const isActive = tab.dataset.testament === currentTestament;
@@ -11255,12 +11255,12 @@ function openKidsMatthewStudy() {
       const grid = document.getElementById('books-grid');
       const books = bibleBooks[currentTestament];
       
-      const config = window.elementSdk ? window.elementSdk.config : defaultConfig;
-      const backgroundColor = config.surface_color || defaultConfig.surface_color;
-      const textColor = config.text_color || defaultConfig.text_color;
-      const primaryColor = config.primary_color || defaultConfig.primary_color;
-      const secondaryColor = config.secondary_color || defaultConfig.secondary_color;
-      const fontSize = config.font_size || defaultConfig.font_size;
+      const notebookConfig = window.elementSdk ? window.elementSdk.notebookConfig : notebookDefaultConfig;
+      const backgroundColor = notebookConfig.surface_color || notebookDefaultConfig.surface_color;
+      const textColor = notebookConfig.text_color || notebookDefaultConfig.text_color;
+      const primaryColor = notebookConfig.primary_color || notebookDefaultConfig.primary_color;
+      const secondaryColor = notebookConfig.secondary_color || notebookDefaultConfig.secondary_color;
+      const fontSize = notebookConfig.font_size || notebookDefaultConfig.font_size;
       
       grid.innerHTML = books.map(book => {
         const bookEntries = allEntries.filter(e => e.book_name === book.name && e.type !== 'reading');
@@ -11302,12 +11302,12 @@ function openKidsMatthewStudy() {
       
       currentBook = book;
       
-      const config = window.elementSdk ? window.elementSdk.config : defaultConfig;
-      const backgroundColor = config.surface_color || defaultConfig.surface_color;
-      const textColor = config.text_color || defaultConfig.text_color;
-      const primaryColor = config.primary_color || defaultConfig.primary_color;
-      const secondaryColor = config.secondary_color || defaultConfig.secondary_color;
-      const fontSize = config.font_size || defaultConfig.font_size;
+      const notebookConfig = window.elementSdk ? window.elementSdk.notebookConfig : notebookDefaultConfig;
+      const backgroundColor = notebookConfig.surface_color || notebookDefaultConfig.surface_color;
+      const textColor = notebookConfig.text_color || notebookDefaultConfig.text_color;
+      const primaryColor = notebookConfig.primary_color || notebookDefaultConfig.primary_color;
+      const secondaryColor = notebookConfig.secondary_color || notebookDefaultConfig.secondary_color;
+      const fontSize = notebookConfig.font_size || notebookDefaultConfig.font_size;
       
       const backBtn = document.getElementById('back-to-books');
       backBtn.style.backgroundColor = secondaryColor;
@@ -11535,12 +11535,12 @@ function openKidsMatthewStudy() {
         day: 'numeric' 
       });
       
-      const config = window.elementSdk ? window.elementSdk.config : defaultConfig;
-      const backgroundColor = config.surface_color || defaultConfig.surface_color;
-      const textColor = config.text_color || defaultConfig.text_color;
-      const primaryColor = config.primary_color || defaultConfig.primary_color;
-      const secondaryColor = config.secondary_color || defaultConfig.secondary_color;
-      const fontSize = config.font_size || defaultConfig.font_size;
+      const notebookConfig = window.elementSdk ? window.elementSdk.notebookConfig : notebookDefaultConfig;
+      const backgroundColor = notebookConfig.surface_color || notebookDefaultConfig.surface_color;
+      const textColor = notebookConfig.text_color || notebookDefaultConfig.text_color;
+      const primaryColor = notebookConfig.primary_color || notebookDefaultConfig.primary_color;
+      const secondaryColor = notebookConfig.secondary_color || notebookDefaultConfig.secondary_color;
+      const fontSize = notebookConfig.font_size || notebookDefaultConfig.font_size;
       
       element.style.backgroundColor = backgroundColor;
       element.style.color = textColor;
