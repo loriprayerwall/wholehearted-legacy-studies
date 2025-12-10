@@ -3836,7 +3836,620 @@
 <p style="margin-top:0.75rem;">You can print pages for church, family devotions, or quiet time. Pair each coloring page with a short Bible story and prayer.</p>
 </div>
 </div>
-</section><!-- Kids 66 Books Carousel Page -->
+<section class="whl-kids-matthew-section hidden" id="kids-matthew-study-section">
+<style>
+    .whl-kids-matthew-section {
+      background: #F7F2EA;
+      padding: 60px 20px;
+      font-family: Georgia, "Times New Roman", serif;
+      color: #3F2E1E;
+    }
+
+    .whl-kids-matthew-inner {
+      max-width: 1000px;
+      margin: 0 auto;
+      background: #FFFDF8;
+      border-radius: 18px;
+      padding: 40px 26px 50px;
+      box-shadow: 0 18px 40px rgba(63, 46, 30, 0.12);
+      border: 1px solid #E2D2BF;
+    }
+
+    .whl-kids-matthew-label {
+      display: inline-block;
+      font-size: 0.85rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #8C6A3E;
+      background: #F4E4CF;
+      padding: 6px 14px;
+      border-radius: 999px;
+      margin-bottom: 12px;
+    }
+
+    .whl-kids-matthew-title {
+      font-family: "Playfair Display", Georgia, "Times New Roman", serif;
+      font-size: 2.2rem;
+      margin: 4px 0 12px;
+    }
+
+    .whl-kids-matthew-subtitle {
+      font-size: 1.05rem;
+      line-height: 1.6;
+      color: #5A4330;
+      margin-bottom: 28px;
+    }
+
+    .whl-kids-matthew-note {
+      font-size: 0.98rem;
+      color: #7B6145;
+      background: #FBF3E7;
+      border-left: 4px solid #C3A27A;
+      padding: 10px 14px;
+      border-radius: 10px;
+      margin-bottom: 28px;
+    }
+
+    .kids-week-grid-title {
+      font-size: 1.1rem;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #8C6A3E;
+      margin-bottom: 16px;
+    }
+
+    .kids-week-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 18px;
+      margin-bottom: 26px;
+    }
+
+    .kids-week-card {
+      background: #FFF9F3;
+      border-radius: 14px;
+      padding: 18px 16px 20px;
+      border: 1px solid #E3D5C4;
+      cursor: pointer;
+      transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+      position: relative;
+    }
+
+    .kids-week-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 25px rgba(63, 46, 30, 0.16);
+      border-color: #C3A27A;
+    }
+
+    .kids-week-tag {
+      display: inline-block;
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      background: #F1E3D1;
+      color: #7B5730;
+      padding: 4px 10px;
+      border-radius: 999px;
+      margin-bottom: 6px;
+    }
+
+    .kids-week-heading {
+      font-weight: bold;
+      font-size: 1.05rem;
+      margin-bottom: 4px;
+      color: #3F2E1E;
+    }
+
+    .kids-week-scripture {
+      font-size: 0.9rem;
+      color: #7A5B3A;
+      margin-bottom: 6px;
+    }
+
+    .kids-week-memory {
+      font-size: 0.9rem;
+      color: #5A4330;
+      font-style: italic;
+      margin-bottom: 10px;
+    }
+
+    .kids-week-open {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.9rem;
+      color: #8C5A2F;
+      font-weight: 600;
+      margin-top: 6px;
+    }
+
+    .kids-week-open span {
+      font-size: 1.1rem;
+    }
+
+    /* Detail panel */
+    .kids-week-details-wrapper {
+      margin-top: 16px;
+      border-radius: 14px;
+      background: #FFF9F3;
+      border: 1px dashed #D6C4AE;
+      padding: 18px 18px 14px;
+      display: none;
+    }
+
+    .kids-week-details-wrapper.is-active {
+      display: block;
+    }
+
+    .kids-week-details-title {
+      font-weight: bold;
+      font-size: 1.1rem;
+      margin-bottom: 6px;
+      color: #3F2E1E;
+    }
+
+    .kids-week-details-memory {
+      background: #F5E4D4;
+      border-radius: 10px;
+      padding: 10px 12px;
+      font-size: 0.9rem;
+      margin: 8px 0 14px;
+      border-left: 4px solid #C3A27A;
+    }
+
+    .kids-week-details-memory span {
+      font-weight: 600;
+    }
+
+    .kids-week-section-label {
+      font-weight: 600;
+      font-size: 0.95rem;
+      margin-top: 8px;
+      margin-bottom: 4px;
+      color: #7B5730;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .kids-week-devotional {
+      font-size: 0.96rem;
+      line-height: 1.65;
+      color: #4B3625;
+      margin-bottom: 6px;
+    }
+
+    .kids-week-questions {
+      padding-left: 18px;
+      font-size: 0.94rem;
+      line-height: 1.7;
+      color: #4B3625;
+    }
+
+    .kids-week-try {
+      font-size: 0.94rem;
+      line-height: 1.65;
+      color: #4B3625;
+      background: #F8EFE2;
+      border-radius: 10px;
+      padding: 9px 11px;
+      margin-top: 4px;
+    }
+
+    .kids-week-prayer {
+      font-size: 0.94rem;
+      line-height: 1.65;
+      color: #4B3625;
+      margin-top: 4px;
+      font-style: italic;
+    }
+
+    .kids-week-footer-note {
+      margin-top: 22px;
+      font-size: 0.9rem;
+      color: #7B6145;
+    }
+
+    @media (max-width: 640px) {
+      .whl-kids-matthew-inner {
+        padding: 32px 18px 40px;
+      }
+      .whl-kids-matthew-title {
+        font-size: 1.9rem;
+      }
+      .kids-week-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+<div class="whl-kids-matthew-inner">
+<div class="whl-kids-matthew-header">
+<div class="whl-kids-matthew-label">Kids Bible Study</div>
+<h2 class="whl-kids-matthew-title">Matthew — 8-Week Journey for Kids</h2>
+<p class="whl-kids-matthew-subtitle">
+        Walk through the Gospel of Matthew together as a family. Each week matches the grown-up study
+        but uses kid-friendly language, simple memory verses, and heart-level questions you can talk about
+        at the table, bedtime, or in the car.
+      </p>
+<p class="whl-kids-matthew-note">
+        Tip: Use one week at a time. Read the Bible passages in your favorite children’s Bible or KJV,
+        then use the devotional, questions, and “Try This” ideas to help the truth sink into little hearts.
+      </p>
+</div>
+<div class="kids-week-grid-title">8-Week Kids Journey Through Matthew</div>
+<!-- Week Cards -->
+<div class="kids-week-grid" id="kidsMatthewWeekGrid">
+<!-- Week 1 -->
+<div class="kids-week-card" data-week-target="kids-week-1">
+<div class="kids-week-tag">Week 1</div>
+<div class="kids-week-heading">Jesus Came For Us</div>
+<div class="kids-week-scripture">Reading: Matthew 1–4</div>
+<div class="kids-week-memory">Memory Verse: “Follow me…” (Matthew 4:19)</div>
+<div class="kids-week-open">
+<span>➤</span> Open Week 1
+        </div>
+</div>
+<!-- Week 2 -->
+<div class="kids-week-card" data-week-target="kids-week-2">
+<div class="kids-week-tag">Week 2</div>
+<div class="kids-week-heading">Living God’s Way</div>
+<div class="kids-week-scripture">Reading: Matthew 5–7</div>
+<div class="kids-week-memory">Memory Verse: “Blessed are the pure in heart…” (Matthew 5:8)</div>
+<div class="kids-week-open">
+<span>➤</span> Open Week 2
+        </div>
+</div>
+<!-- Week 3 -->
+<div class="kids-week-card" data-week-target="kids-week-3">
+<div class="kids-week-tag">Week 3</div>
+<div class="kids-week-heading">Jesus Cares About Hurting People</div>
+<div class="kids-week-scripture">Reading: Matthew 8–9</div>
+<div class="kids-week-memory">Memory Verse: “He was moved with compassion…” (Matthew 9:36)</div>
+<div class="kids-week-open">
+<span>➤</span> Open Week 3
+        </div>
+</div>
+<!-- Week 4 -->
+<div class="kids-week-card" data-week-target="kids-week-4">
+<div class="kids-week-tag">Week 4</div>
+<div class="kids-week-heading">Jesus Sends Us Too</div>
+<div class="kids-week-scripture">Reading: Matthew 10–13</div>
+<div class="kids-week-memory">Memory Verse: “Freely ye have received, freely give.” (Matthew 10:8)</div>
+<div class="kids-week-open">
+<span>➤</span> Open Week 4
+        </div>
+</div>
+<!-- Week 5 -->
+<div class="kids-week-card" data-week-target="kids-week-5">
+<div class="kids-week-tag">Week 5</div>
+<div class="kids-week-heading">Jesus Is With Us in the Storm</div>
+<div class="kids-week-scripture">Reading: Matthew 14–18</div>
+<div class="kids-week-memory">Memory Verse: “Be of good cheer; it is I; be not afraid.” (Matthew 14:27)</div>
+<div class="kids-week-open">
+<span>➤</span> Open Week 5
+        </div>
+</div>
+<!-- Week 6 -->
+<div class="kids-week-card" data-week-target="kids-week-6">
+<div class="kids-week-tag">Week 6</div>
+<div class="kids-week-heading">The Greatest Is the Servant</div>
+<div class="kids-week-scripture">Reading: Matthew 19–23</div>
+<div class="kids-week-memory">Memory Verse: “He that is greatest among you shall be your servant.” (Matthew 23:11)</div>
+<div class="kids-week-open">
+<span>➤</span> Open Week 6
+        </div>
+</div>
+<!-- Week 7 -->
+<div class="kids-week-card" data-week-target="kids-week-7">
+<div class="kids-week-tag">Week 7</div>
+<div class="kids-week-heading">Be Ready for Jesus</div>
+<div class="kids-week-scripture">Reading: Matthew 24–25</div>
+<div class="kids-week-memory">Memory Verse: “Watch therefore…” (Matthew 24:42)</div>
+<div class="kids-week-open">
+<span>➤</span> Open Week 7
+        </div>
+</div>
+<!-- Week 8 -->
+<div class="kids-week-card" data-week-target="kids-week-8">
+<div class="kids-week-tag">Week 8</div>
+<div class="kids-week-heading">The Cross and the Empty Tomb</div>
+<div class="kids-week-scripture">Reading: Matthew 26–28</div>
+<div class="kids-week-memory">Memory Verse: “Lo, I am with you alway…” (Matthew 28:20)</div>
+<div class="kids-week-open">
+<span>➤</span> Open Week 8
+        </div>
+</div>
+</div>
+<!-- Week Details Panels -->
+<!-- Week 1 Details -->
+<div class="kids-week-details-wrapper" id="kids-week-1">
+<div class="kids-week-details-title">Week 1 · Jesus Came For Us</div>
+<div class="kids-week-details-memory">
+<span>Reading:</span> Matthew 1–4<br/>
+<span>Memory Verse:</span> “And he saith unto them, Follow me…” (Matthew 4:19)
+      </div>
+<div class="kids-week-section-label">Devotional</div>
+<p class="kids-week-devotional">
+        Jesus didn’t just pop into the world by surprise. God planned His coming a long time before
+        He was born. Matthew 1 shows Jesus’ family line. Some of the people in His family made big
+        mistakes, but God still used them. That means God can use our families too, even when we are
+        not perfect.<br/><br/>
+        In Matthew 3–4, Jesus grows up, is baptized, and begins His ministry. He calls His first
+        helpers, the disciples, and says, “Follow Me.” He is still saying that to us today. When we
+        follow Jesus, He walks with us in our everyday life—at home, at school, and even when we play.
+      </p>
+<div class="kids-week-section-label">Talk About It</div>
+<ul class="kids-week-questions">
+<li>How do you feel knowing Jesus had a family with imperfect people, just like yours?</li>
+<li>What do you think it means to “follow Jesus” as a kid?</li>
+<li>If Jesus spent the day with you, what do you think He would do with you?</li>
+</ul>
+<div class="kids-week-section-label">Try This</div>
+<p class="kids-week-try">
+        Draw a picture of you holding Jesus’ hand doing something you do every day—like going to school,
+        helping at home, or playing. Hang it where you will see it and remember that Jesus is with you.
+      </p>
+<div class="kids-week-section-label">Prayer</div>
+<p class="kids-week-prayer">
+        “Jesus, thank You for coming to earth and inviting me to follow You. Help me remember You are
+        with me in my normal, everyday life. Show me one way I can follow You today. Amen.”
+      </p>
+</div>
+<!-- Week 2 Details -->
+<div class="kids-week-details-wrapper" id="kids-week-2">
+<div class="kids-week-details-title">Week 2 · Living God’s Way</div>
+<div class="kids-week-details-memory">
+<span>Reading:</span> Matthew 5–7<br/>
+<span>Memory Verse:</span> “Blessed are the pure in heart: for they shall see God.” (Matthew 5:8)
+      </div>
+<div class="kids-week-section-label">Devotional</div>
+<p class="kids-week-devotional">
+        Jesus’ Sermon on the Mount is like a big talk about how life works in God’s kingdom. He tells us
+        that God cares about what is happening in our hearts, not just what we do on the outside. He talks
+        about forgiving others, loving enemies, giving secretly, praying, and not worrying.<br/><br/>
+        Some of these things are hard to do. The good news is that Jesus does not ask us to do them alone.
+        When we belong to Him, He changes our hearts little by little, helping us to live in a way that
+        looks more and more like Him.
+      </p>
+<div class="kids-week-section-label">Talk About It</div>
+<ul class="kids-week-questions">
+<li>Which part of Jesus’ teaching feels hardest for you (forgiving, not worrying, loving enemies, etc.)?</li>
+<li>What is one way you can show a “kingdom heart” at home this week?</li>
+<li>How do you think Jesus feels when He sees you trying to live His way?</li>
+</ul>
+<div class="kids-week-section-label">Try This</div>
+<p class="kids-week-try">
+        Choose one person you can secretly bless this week. You might help them, share something, or pray for
+        them. Let it be a quiet gift between you and Jesus.
+      </p>
+<div class="kids-week-section-label">Prayer</div>
+<p class="kids-week-prayer">
+        “Lord Jesus, thank You for teaching me how to live God’s way. Please help my heart to be kind,
+        forgiving, and full of love. Show me one choice I can make this week that brings You joy. Amen.”
+      </p>
+</div>
+<!-- Week 3 Details -->
+<div class="kids-week-details-wrapper" id="kids-week-3">
+<div class="kids-week-details-title">Week 3 · Jesus Cares About Hurting People</div>
+<div class="kids-week-details-memory">
+<span>Reading:</span> Matthew 8–9<br/>
+<span>Memory Verse:</span> “…he was moved with compassion on them…” (Matthew 9:36)
+      </div>
+<div class="kids-week-section-label">Devotional</div>
+<p class="kids-week-devotional">
+        In Matthew 8–9, Jesus heals people who are sick, calms a scary storm, and helps people who feel
+        hopeless. He does not run away from people who are hurting—He moves toward them with love. The Bible
+        says He was “moved with compassion,” which means His heart was full of care and kindness for them.<br/><br/>
+        Sometimes we may think God is tired of our worries or tears, but these stories show that Jesus cares
+        deeply about our pain. He also cares about the people around us who feel lonely, sad, or afraid.
+      </p>
+<div class="kids-week-section-label">Talk About It</div>
+<ul class="kids-week-questions">
+<li>Which miracle in Matthew 8–9 is your favorite, and why?</li>
+<li>When you feel scared or sad, what do you usually do? Do you talk to Jesus about it?</li>
+<li>Who is one person you know who might be hurting and needs kindness this week?</li>
+</ul>
+<div class="kids-week-section-label">Try This</div>
+<p class="kids-week-try">
+        Write the name of someone who is hurting on a small paper heart and tape it where you will see it.
+        Each day, stop and ask Jesus to help that person and to show them His love.
+      </p>
+<div class="kids-week-section-label">Prayer</div>
+<p class="kids-week-prayer">
+        “Jesus, thank You that You care about people who are hurting. Help me remember that You care about
+        my feelings too. Show me someone I can be kind to this week, and give me a gentle heart like Yours. Amen.”
+      </p>
+</div>
+<!-- Week 4 Details -->
+<div class="kids-week-details-wrapper" id="kids-week-4">
+<div class="kids-week-details-title">Week 4 · Jesus Sends Us Too</div>
+<div class="kids-week-details-memory">
+<span>Reading:</span> Matthew 10–13<br/>
+<span>Memory Verse:</span> “Freely ye have received, freely give.” (Matthew 10:8)
+      </div>
+<div class="kids-week-section-label">Devotional</div>
+<p class="kids-week-devotional">
+        After the disciples watched Jesus love and help people, He sent them out to share His message with others.
+        He told them that some people would listen and some would not, but He would be with them. They were not
+        going in their own power—they were going in His.<br/><br/>
+        You might not go on a big trip, but Jesus still sends you into your school, your neighborhood, your sports
+        team, and your family with His love. You are not too young for God to use in His work.
+      </p>
+<div class="kids-week-section-label">Talk About It</div>
+<ul class="kids-week-questions">
+<li>Where do you think Jesus is sending you right now (school, team, friend group, neighborhood)?</li>
+<li>What is something you have “freely received” from God (forgiveness, love, help, comfort)?</li>
+<li>How can you “freely give” that to someone else this week?</li>
+</ul>
+<div class="kids-week-section-label">Try This</div>
+<p class="kids-week-try">
+        Make a simple “mission list” of three people you want to pray for and show kindness to this week.
+        Put it where you will see it each morning and ask Jesus to help you love them well.
+      </p>
+<div class="kids-week-section-label">Prayer</div>
+<p class="kids-week-prayer">
+        “Jesus, thank You for trusting kids too. Please show me how to share Your love where I already am.
+        Give me courage to speak kindly and to help others in Your name. Amen.”
+      </p>
+</div>
+<!-- Week 5 Details -->
+<div class="kids-week-details-wrapper" id="kids-week-5">
+<div class="kids-week-details-title">Week 5 · Jesus Is With Us in the Storm</div>
+<div class="kids-week-details-memory">
+<span>Reading:</span> Matthew 14–18<br/>
+<span>Memory Verse:</span> “Be of good cheer; it is I; be not afraid.” (Matthew 14:27)
+      </div>
+<div class="kids-week-section-label">Devotional</div>
+<p class="kids-week-devotional">
+        Peter stepped out of the boat and walked on the water toward Jesus. When he looked at the wind and
+        waves, he became afraid and started to sink. Jesus did not give up on him. He reached out His hand
+        and caught Peter.<br/><br/>
+        Our “storms” might be things like feeling nervous about school, worried about a test, or sad about
+        something at home. Jesus does not promise that we will never have storms, but He promises to be with
+        us in them and to hold us when we feel like we are sinking.
+      </p>
+<div class="kids-week-section-label">Talk About It</div>
+<ul class="kids-week-questions">
+<li>What is something in your life right now that feels like a “storm”?</li>
+<li>What do you think it means to “keep your eyes on Jesus” when you are worried?</li>
+<li>How can our family remind each other that Jesus is with us when life feels hard?</li>
+</ul>
+<div class="kids-week-section-label">Try This</div>
+<p class="kids-week-try">
+        Draw a little boat on a sticky note and write, “Jesus is with me.” Put it somewhere you will see it
+        when you feel nervous—by your bed, on your desk, or in your Bible.
+      </p>
+<div class="kids-week-section-label">Prayer</div>
+<p class="kids-week-prayer">
+        “Jesus, sometimes life feels big and scary. Thank You that You are bigger than any storm. Help me
+        remember that You are with me and that I can call out to You anytime. Amen.”
+      </p>
+</div>
+<!-- Week 6 Details -->
+<div class="kids-week-details-wrapper" id="kids-week-6">
+<div class="kids-week-details-title">Week 6 · The Greatest Is the Servant</div>
+<div class="kids-week-details-memory">
+<span>Reading:</span> Matthew 19–23<br/>
+<span>Memory Verse:</span> “But he that is greatest among you shall be your servant.” (Matthew 23:11)
+      </div>
+<div class="kids-week-section-label">Devotional</div>
+<p class="kids-week-devotional">
+        In God’s kingdom, the “greatest” person is not the one who is loudest or bossiest, but the one who
+        serves others. Jesus talks to rich people, to His followers, and to religious leaders and reminds
+        them that God cares more about a humble heart than about fancy appearances.<br/><br/>
+        Jesus is the King of kings, yet He washed His disciples’ feet, welcomed children, and cared for people
+        others ignored. That is the kind of greatness He invites us into—serving instead of just wanting
+        to be first.
+      </p>
+<div class="kids-week-section-label">Talk About It</div>
+<ul class="kids-week-questions">
+<li>What do kids sometimes brag about (being the best, fastest, smartest, etc.)?</li>
+<li>What does Jesus say real greatness looks like?</li>
+<li>How can you quietly serve someone at home, church, or school this week?</li>
+</ul>
+<div class="kids-week-section-label">Try This</div>
+<p class="kids-week-try">
+        Choose one chore or act of help you can do without being asked and without needing praise. Do it as
+        a quiet gift of love to Jesus.
+      </p>
+<div class="kids-week-section-label">Prayer</div>
+<p class="kids-week-prayer">
+        “Jesus, thank You for showing me a different kind of greatness. Help me want to serve instead of
+        just wanting to be first. Show me one way I can serve someone this week. Amen.”
+      </p>
+</div>
+<!-- Week 7 Details -->
+<div class="kids-week-details-wrapper" id="kids-week-7">
+<div class="kids-week-details-title">Week 7 · Be Ready for Jesus</div>
+<div class="kids-week-details-memory">
+<span>Reading:</span> Matthew 24–25<br/>
+<span>Memory Verse:</span> “Watch therefore: for ye know not what hour your Lord doth come.” (Matthew 24:42)
+      </div>
+<div class="kids-week-section-label">Devotional</div>
+<p class="kids-week-devotional">
+        Jesus talks about a time when He will come back. He does not tell us the exact day. Instead, He tells
+        stories about being ready—like keeping lamps filled with oil and being faithful with what we have
+        been given.<br/><br/>
+        Being “ready” doesn’t mean being perfect. It means trusting Jesus, obeying Him, loving others, and
+        living like He really is our King today, not just “someday.”
+      </p>
+<div class="kids-week-section-label">Talk About It</div>
+<ul class="kids-week-questions">
+<li>How do you feel when you think about Jesus coming back someday?</li>
+<li>What do you think it looks like for a kid to be “ready” for Jesus?</li>
+<li>What is one thing you want Jesus to find you doing when He comes (loving, serving, praying, etc.)?</li>
+</ul>
+<div class="kids-week-section-label">Try This</div>
+<p class="kids-week-try">
+        Pick a time each day this week to say, “Jesus, I’m Yours today.” You could whisper it when you wake up
+        or before you go to sleep.
+      </p>
+<div class="kids-week-section-label">Prayer</div>
+<p class="kids-week-prayer">
+        “Lord Jesus, thank You that You are coming again. Help me not to be afraid, but to be excited and ready.
+        Teach me to live in a way that shows I belong to You. Amen.”
+      </p>
+</div>
+<!-- Week 8 Details -->
+<div class="kids-week-details-wrapper" id="kids-week-8">
+<div class="kids-week-details-title">Week 8 · The Cross and the Empty Tomb</div>
+<div class="kids-week-details-memory">
+<span>Reading:</span> Matthew 26–28<br/>
+<span>Memory Verse:</span> “Lo, I am with you alway, even unto the end of the world.” (Matthew 28:20)
+      </div>
+<div class="kids-week-section-label">Devotional</div>
+<p class="kids-week-devotional">
+        These chapters show Jesus being betrayed, arrested, and nailed to a cross. It is a heavy and sad part of
+        the story—but it is not the end. On the third day, Jesus rises from the grave!<br/><br/>
+        Because He died and rose again, our sins can be forgiven and we can live with Him forever. Then Jesus sends
+        His followers to share this good news with the world and promises to be with us always.
+      </p>
+<div class="kids-week-section-label">Talk About It</div>
+<ul class="kids-week-questions">
+<li>What part of the cross and resurrection story stands out to you the most?</li>
+<li>Why is the empty tomb such good news for us?</li>
+<li>Who is one person you can pray for to know Jesus?</li>
+</ul>
+<div class="kids-week-section-label">Try This</div>
+<p class="kids-week-try">
+        Create a simple “Good News” picture or card and give it to someone. You might draw a cross, an empty tomb,
+        or write the words “Jesus is alive!”
+      </p>
+<div class="kids-week-section-label">Prayer</div>
+<p class="kids-week-prayer">
+        “Risen Jesus, thank You for dying for my sins and rising again. Thank You that You are alive and with me
+        always. Help me share Your good news with others in my words and actions. Amen.”
+      </p>
+</div>
+<p class="kids-week-footer-note">
+      You can walk through this kids’ Matthew journey at the same time as the adult study, so the whole family
+      is learning from the same chapters together.
+    </p>
+</div>
+<script>
+    (function() {
+      const cards = document.querySelectorAll('.kids-week-card');
+      const panels = document.querySelectorAll('.kids-week-details-wrapper');
+
+      function openWeek(targetId) {
+        panels.forEach(p => {
+          if (p.id === targetId) {
+            p.classList.toggle('is-active');
+          } else {
+            p.classList.remove('is-active');
+          }
+        });
+      }
+
+      cards.forEach(card => {
+        card.addEventListener('click', function() {
+          const targetId = this.getAttribute('data-week-target');
+          openWeek(targetId);
+        });
+      });
+    })();
+  </script>
+</section></section><!-- Kids 66 Books Carousel Page -->
 <section class="content-hub hidden" id="kids-66-books-page">
 <div class="hub-container"><button class="back-button" onclick="showHub('little-hearts')">← Back to Little Hearts</button>
 <div class="content-page">
@@ -6120,7 +6733,6 @@
 <div class="content-page">
 <h2>Kids &amp; Family Resources</h2>
 <p>Teach children the Bible in fun, engaging, and age-appropriate ways. These resources help families worship together and pass faith to the next generation.</p>
-<h3> Family Devotion Guides</h3>
 <h3>🎨 Kids' Activity Resources</h3>
 <div class="devotional-grid">
 <div class="study-card">
@@ -6149,7 +6761,6 @@
 </ul>
 <a class="cta-button" href="https://sundayschool.store/products/112-bible-verses-coloring-pages-for-kids" rel="noopener noreferrer" target="_blank">Browse Memory Verse Cards</a></div>
 </div>
-<h3>🎭 Teaching Tools by Age Group</h3>
 <h3> Family Worship Resources</h3>
 <div class="verse-box">
 <h4>Creating a Family Worship Routine</h4>
@@ -6163,7 +6774,35 @@
 <li><strong>Focus on relationship:</strong> It's about connecting with God and each other</li>
 </ul>
 </div>
-<div class="study-card"><div class="study-header"><div><h4>Kids Bibles &amp; Books</h4><p>A simple starting list of trusted children’s Bibles and storybooks to help your family fall in love with God’s Word.</p></div></div><p>These recommendations focus on child-friendly language, strong biblical accuracy, and engaging illustrations:</p><div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.25rem;margin-top:0.75rem;"><div><h4>Kids Bibles</h4><ul><li>NIrV Adventure Bible – Easy-to-read language with maps, notes, and kid-friendly explanations.</li><li>The Jesus Storybook Bible – Shows how every story whispers the name of Jesus.</li><li>The Beginner’s Bible – Great for little ones with shorter stories and bright pictures.</li></ul></div><div><h4>Devotionals &amp; Storybooks</h4><ul><li>Indescribable (Louie Giglio) – Science + faith devotions that wow kids with God’s creativity.</li><li>How Great Is Our God – Follow-up devotional with even more daily readings.</li><li>Any simple 'First Devotional' that lets your child read a short verse, a paragraph, and a prayer.</li></ul></div></div><p>Tip: Start with one Bible per child and one family devotional you read together a few times each week. Slow, steady rhythms matter more than having every resource on the shelf.</p></div><h3>Kids Bibles &amp; Books</h3><h3>🌙 Bedtime Bible Stories</h3>
+<h3>Kids Bibles &amp; Books</h3><div class="study-card">
+<div class="study-header">
+<div>
+<h4>Kids Bibles &amp; Books</h4>
+<p>A simple starting list of trusted children’s Bibles, storybooks, and devotionals to help your family fall in love with God’s Word.</p>
+</div>
+</div>
+<p>These recommendations focus on child-friendly language, strong biblical accuracy, and engaging illustrations:</p>
+<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.25rem;margin-top:0.75rem;">
+<div>
+<h4>Kids Bibles &amp; Apps</h4>
+<ul>
+<li><a href="https://www.bible.com/kids" rel="noopener" target="_blank">Bible App for Kids (YouVersion)</a> — Interactive stories with animations &amp; activities.</li>
+<li><a href="https://www.amazon.com/dp/031075013X" rel="noopener" target="_blank">The Beginner’s Bible</a> — Classic children’s Bible with bright illustrations.</li>
+<li><a href="https://www.amazon.com/dp/0310708257" rel="noopener" target="_blank">The Jesus Storybook Bible</a> — Shows how every story whispers the name of Jesus.</li>
+<li><a href="https://www.amazon.com/dp/1680524070" rel="noopener" target="_blank">365 Bible Stories &amp; Prayers</a> — Gentle rhythm to read &amp; pray together.</li>
+</ul>
+</div>
+<div>
+<h4>Devotionals &amp; Study Helps</h4>
+<ul>
+<li><a href="https://www.indescribablekids.com/books" rel="noopener" target="_blank">Indescribable (Louie Giglio)</a> — Science + faith devotions that wow kids with God’s creativity.</li>
+<li><a href="https://www.passionresources.com/products/how-great-is-our-god-100-indescribable-devotions-about-god-and-science-louie-giglio" rel="noopener" target="_blank">How Great Is Our God</a> — Follow-up devotional with even more daily readings.</li>
+<li><a href="https://bibleproject.com/videos/" rel="noopener" target="_blank">BibleProject Videos</a> — Short animated overviews that help kids and families understand Scripture together.</li>
+</ul>
+</div>
+</div>
+<p>Tip: Start with one Bible per child and one family devotional you read together a few times each week. Slow, steady rhythms matter more than having every resource on the shelf.</p>
+</div><h3>🌙 Bedtime Bible Stories</h3>
 <div class="verse-box">
 <h4>Building a Bedtime Bible Routine</h4>
 <p>End each day grounding children in God's truth with a simple bedtime routine:</p>
@@ -6854,620 +7493,7 @@ function toggleStudyDetails(id, btn) {
 }
 </script>
 &lt;!-- Kids Matthew Bible Study Block --&gt;
-<section class="whl-kids-matthew-section hidden" id="kids-matthew-study-section">
-<style>
-    .whl-kids-matthew-section {
-      background: #F7F2EA;
-      padding: 60px 20px;
-      font-family: Georgia, "Times New Roman", serif;
-      color: #3F2E1E;
-    }
-
-    .whl-kids-matthew-inner {
-      max-width: 1000px;
-      margin: 0 auto;
-      background: #FFFDF8;
-      border-radius: 18px;
-      padding: 40px 26px 50px;
-      box-shadow: 0 18px 40px rgba(63, 46, 30, 0.12);
-      border: 1px solid #E2D2BF;
-    }
-
-    .whl-kids-matthew-label {
-      display: inline-block;
-      font-size: 0.85rem;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: #8C6A3E;
-      background: #F4E4CF;
-      padding: 6px 14px;
-      border-radius: 999px;
-      margin-bottom: 12px;
-    }
-
-    .whl-kids-matthew-title {
-      font-family: "Playfair Display", Georgia, "Times New Roman", serif;
-      font-size: 2.2rem;
-      margin: 4px 0 12px;
-    }
-
-    .whl-kids-matthew-subtitle {
-      font-size: 1.05rem;
-      line-height: 1.6;
-      color: #5A4330;
-      margin-bottom: 28px;
-    }
-
-    .whl-kids-matthew-note {
-      font-size: 0.98rem;
-      color: #7B6145;
-      background: #FBF3E7;
-      border-left: 4px solid #C3A27A;
-      padding: 10px 14px;
-      border-radius: 10px;
-      margin-bottom: 28px;
-    }
-
-    .kids-week-grid-title {
-      font-size: 1.1rem;
-      font-weight: bold;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: #8C6A3E;
-      margin-bottom: 16px;
-    }
-
-    .kids-week-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-      gap: 18px;
-      margin-bottom: 26px;
-    }
-
-    .kids-week-card {
-      background: #FFF9F3;
-      border-radius: 14px;
-      padding: 18px 16px 20px;
-      border: 1px solid #E3D5C4;
-      cursor: pointer;
-      transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
-      position: relative;
-    }
-
-    .kids-week-card:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 10px 25px rgba(63, 46, 30, 0.16);
-      border-color: #C3A27A;
-    }
-
-    .kids-week-tag {
-      display: inline-block;
-      font-size: 0.72rem;
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      background: #F1E3D1;
-      color: #7B5730;
-      padding: 4px 10px;
-      border-radius: 999px;
-      margin-bottom: 6px;
-    }
-
-    .kids-week-heading {
-      font-weight: bold;
-      font-size: 1.05rem;
-      margin-bottom: 4px;
-      color: #3F2E1E;
-    }
-
-    .kids-week-scripture {
-      font-size: 0.9rem;
-      color: #7A5B3A;
-      margin-bottom: 6px;
-    }
-
-    .kids-week-memory {
-      font-size: 0.9rem;
-      color: #5A4330;
-      font-style: italic;
-      margin-bottom: 10px;
-    }
-
-    .kids-week-open {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 0.9rem;
-      color: #8C5A2F;
-      font-weight: 600;
-      margin-top: 6px;
-    }
-
-    .kids-week-open span {
-      font-size: 1.1rem;
-    }
-
-    /* Detail panel */
-    .kids-week-details-wrapper {
-      margin-top: 16px;
-      border-radius: 14px;
-      background: #FFF9F3;
-      border: 1px dashed #D6C4AE;
-      padding: 18px 18px 14px;
-      display: none;
-    }
-
-    .kids-week-details-wrapper.is-active {
-      display: block;
-    }
-
-    .kids-week-details-title {
-      font-weight: bold;
-      font-size: 1.1rem;
-      margin-bottom: 6px;
-      color: #3F2E1E;
-    }
-
-    .kids-week-details-memory {
-      background: #F5E4D4;
-      border-radius: 10px;
-      padding: 10px 12px;
-      font-size: 0.9rem;
-      margin: 8px 0 14px;
-      border-left: 4px solid #C3A27A;
-    }
-
-    .kids-week-details-memory span {
-      font-weight: 600;
-    }
-
-    .kids-week-section-label {
-      font-weight: 600;
-      font-size: 0.95rem;
-      margin-top: 8px;
-      margin-bottom: 4px;
-      color: #7B5730;
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-    }
-
-    .kids-week-devotional {
-      font-size: 0.96rem;
-      line-height: 1.65;
-      color: #4B3625;
-      margin-bottom: 6px;
-    }
-
-    .kids-week-questions {
-      padding-left: 18px;
-      font-size: 0.94rem;
-      line-height: 1.7;
-      color: #4B3625;
-    }
-
-    .kids-week-try {
-      font-size: 0.94rem;
-      line-height: 1.65;
-      color: #4B3625;
-      background: #F8EFE2;
-      border-radius: 10px;
-      padding: 9px 11px;
-      margin-top: 4px;
-    }
-
-    .kids-week-prayer {
-      font-size: 0.94rem;
-      line-height: 1.65;
-      color: #4B3625;
-      margin-top: 4px;
-      font-style: italic;
-    }
-
-    .kids-week-footer-note {
-      margin-top: 22px;
-      font-size: 0.9rem;
-      color: #7B6145;
-    }
-
-    @media (max-width: 640px) {
-      .whl-kids-matthew-inner {
-        padding: 32px 18px 40px;
-      }
-      .whl-kids-matthew-title {
-        font-size: 1.9rem;
-      }
-      .kids-week-grid {
-        grid-template-columns: 1fr;
-      }
-    }
-  </style>
-<div class="whl-kids-matthew-inner">
-<div class="whl-kids-matthew-header">
-<div class="whl-kids-matthew-label">Kids Bible Study</div>
-<h2 class="whl-kids-matthew-title">Matthew — 8-Week Journey for Kids</h2>
-<p class="whl-kids-matthew-subtitle">
-        Walk through the Gospel of Matthew together as a family. Each week matches the grown-up study
-        but uses kid-friendly language, simple memory verses, and heart-level questions you can talk about
-        at the table, bedtime, or in the car.
-      </p>
-<p class="whl-kids-matthew-note">
-        Tip: Use one week at a time. Read the Bible passages in your favorite children’s Bible or KJV,
-        then use the devotional, questions, and “Try This” ideas to help the truth sink into little hearts.
-      </p>
-</div>
-<div class="kids-week-grid-title">8-Week Kids Journey Through Matthew</div>
-<!-- Week Cards -->
-<div class="kids-week-grid" id="kidsMatthewWeekGrid">
-<!-- Week 1 -->
-<div class="kids-week-card" data-week-target="kids-week-1">
-<div class="kids-week-tag">Week 1</div>
-<div class="kids-week-heading">Jesus Came For Us</div>
-<div class="kids-week-scripture">Reading: Matthew 1–4</div>
-<div class="kids-week-memory">Memory Verse: “Follow me…” (Matthew 4:19)</div>
-<div class="kids-week-open">
-<span>➤</span> Open Week 1
-        </div>
-</div>
-<!-- Week 2 -->
-<div class="kids-week-card" data-week-target="kids-week-2">
-<div class="kids-week-tag">Week 2</div>
-<div class="kids-week-heading">Living God’s Way</div>
-<div class="kids-week-scripture">Reading: Matthew 5–7</div>
-<div class="kids-week-memory">Memory Verse: “Blessed are the pure in heart…” (Matthew 5:8)</div>
-<div class="kids-week-open">
-<span>➤</span> Open Week 2
-        </div>
-</div>
-<!-- Week 3 -->
-<div class="kids-week-card" data-week-target="kids-week-3">
-<div class="kids-week-tag">Week 3</div>
-<div class="kids-week-heading">Jesus Cares About Hurting People</div>
-<div class="kids-week-scripture">Reading: Matthew 8–9</div>
-<div class="kids-week-memory">Memory Verse: “He was moved with compassion…” (Matthew 9:36)</div>
-<div class="kids-week-open">
-<span>➤</span> Open Week 3
-        </div>
-</div>
-<!-- Week 4 -->
-<div class="kids-week-card" data-week-target="kids-week-4">
-<div class="kids-week-tag">Week 4</div>
-<div class="kids-week-heading">Jesus Sends Us Too</div>
-<div class="kids-week-scripture">Reading: Matthew 10–13</div>
-<div class="kids-week-memory">Memory Verse: “Freely ye have received, freely give.” (Matthew 10:8)</div>
-<div class="kids-week-open">
-<span>➤</span> Open Week 4
-        </div>
-</div>
-<!-- Week 5 -->
-<div class="kids-week-card" data-week-target="kids-week-5">
-<div class="kids-week-tag">Week 5</div>
-<div class="kids-week-heading">Jesus Is With Us in the Storm</div>
-<div class="kids-week-scripture">Reading: Matthew 14–18</div>
-<div class="kids-week-memory">Memory Verse: “Be of good cheer; it is I; be not afraid.” (Matthew 14:27)</div>
-<div class="kids-week-open">
-<span>➤</span> Open Week 5
-        </div>
-</div>
-<!-- Week 6 -->
-<div class="kids-week-card" data-week-target="kids-week-6">
-<div class="kids-week-tag">Week 6</div>
-<div class="kids-week-heading">The Greatest Is the Servant</div>
-<div class="kids-week-scripture">Reading: Matthew 19–23</div>
-<div class="kids-week-memory">Memory Verse: “He that is greatest among you shall be your servant.” (Matthew 23:11)</div>
-<div class="kids-week-open">
-<span>➤</span> Open Week 6
-        </div>
-</div>
-<!-- Week 7 -->
-<div class="kids-week-card" data-week-target="kids-week-7">
-<div class="kids-week-tag">Week 7</div>
-<div class="kids-week-heading">Be Ready for Jesus</div>
-<div class="kids-week-scripture">Reading: Matthew 24–25</div>
-<div class="kids-week-memory">Memory Verse: “Watch therefore…” (Matthew 24:42)</div>
-<div class="kids-week-open">
-<span>➤</span> Open Week 7
-        </div>
-</div>
-<!-- Week 8 -->
-<div class="kids-week-card" data-week-target="kids-week-8">
-<div class="kids-week-tag">Week 8</div>
-<div class="kids-week-heading">The Cross and the Empty Tomb</div>
-<div class="kids-week-scripture">Reading: Matthew 26–28</div>
-<div class="kids-week-memory">Memory Verse: “Lo, I am with you alway…” (Matthew 28:20)</div>
-<div class="kids-week-open">
-<span>➤</span> Open Week 8
-        </div>
-</div>
-</div>
-<!-- Week Details Panels -->
-<!-- Week 1 Details -->
-<div class="kids-week-details-wrapper" id="kids-week-1">
-<div class="kids-week-details-title">Week 1 · Jesus Came For Us</div>
-<div class="kids-week-details-memory">
-<span>Reading:</span> Matthew 1–4<br/>
-<span>Memory Verse:</span> “And he saith unto them, Follow me…” (Matthew 4:19)
-      </div>
-<div class="kids-week-section-label">Devotional</div>
-<p class="kids-week-devotional">
-        Jesus didn’t just pop into the world by surprise. God planned His coming a long time before
-        He was born. Matthew 1 shows Jesus’ family line. Some of the people in His family made big
-        mistakes, but God still used them. That means God can use our families too, even when we are
-        not perfect.<br/><br/>
-        In Matthew 3–4, Jesus grows up, is baptized, and begins His ministry. He calls His first
-        helpers, the disciples, and says, “Follow Me.” He is still saying that to us today. When we
-        follow Jesus, He walks with us in our everyday life—at home, at school, and even when we play.
-      </p>
-<div class="kids-week-section-label">Talk About It</div>
-<ul class="kids-week-questions">
-<li>How do you feel knowing Jesus had a family with imperfect people, just like yours?</li>
-<li>What do you think it means to “follow Jesus” as a kid?</li>
-<li>If Jesus spent the day with you, what do you think He would do with you?</li>
-</ul>
-<div class="kids-week-section-label">Try This</div>
-<p class="kids-week-try">
-        Draw a picture of you holding Jesus’ hand doing something you do every day—like going to school,
-        helping at home, or playing. Hang it where you will see it and remember that Jesus is with you.
-      </p>
-<div class="kids-week-section-label">Prayer</div>
-<p class="kids-week-prayer">
-        “Jesus, thank You for coming to earth and inviting me to follow You. Help me remember You are
-        with me in my normal, everyday life. Show me one way I can follow You today. Amen.”
-      </p>
-</div>
-<!-- Week 2 Details -->
-<div class="kids-week-details-wrapper" id="kids-week-2">
-<div class="kids-week-details-title">Week 2 · Living God’s Way</div>
-<div class="kids-week-details-memory">
-<span>Reading:</span> Matthew 5–7<br/>
-<span>Memory Verse:</span> “Blessed are the pure in heart: for they shall see God.” (Matthew 5:8)
-      </div>
-<div class="kids-week-section-label">Devotional</div>
-<p class="kids-week-devotional">
-        Jesus’ Sermon on the Mount is like a big talk about how life works in God’s kingdom. He tells us
-        that God cares about what is happening in our hearts, not just what we do on the outside. He talks
-        about forgiving others, loving enemies, giving secretly, praying, and not worrying.<br/><br/>
-        Some of these things are hard to do. The good news is that Jesus does not ask us to do them alone.
-        When we belong to Him, He changes our hearts little by little, helping us to live in a way that
-        looks more and more like Him.
-      </p>
-<div class="kids-week-section-label">Talk About It</div>
-<ul class="kids-week-questions">
-<li>Which part of Jesus’ teaching feels hardest for you (forgiving, not worrying, loving enemies, etc.)?</li>
-<li>What is one way you can show a “kingdom heart” at home this week?</li>
-<li>How do you think Jesus feels when He sees you trying to live His way?</li>
-</ul>
-<div class="kids-week-section-label">Try This</div>
-<p class="kids-week-try">
-        Choose one person you can secretly bless this week. You might help them, share something, or pray for
-        them. Let it be a quiet gift between you and Jesus.
-      </p>
-<div class="kids-week-section-label">Prayer</div>
-<p class="kids-week-prayer">
-        “Lord Jesus, thank You for teaching me how to live God’s way. Please help my heart to be kind,
-        forgiving, and full of love. Show me one choice I can make this week that brings You joy. Amen.”
-      </p>
-</div>
-<!-- Week 3 Details -->
-<div class="kids-week-details-wrapper" id="kids-week-3">
-<div class="kids-week-details-title">Week 3 · Jesus Cares About Hurting People</div>
-<div class="kids-week-details-memory">
-<span>Reading:</span> Matthew 8–9<br/>
-<span>Memory Verse:</span> “…he was moved with compassion on them…” (Matthew 9:36)
-      </div>
-<div class="kids-week-section-label">Devotional</div>
-<p class="kids-week-devotional">
-        In Matthew 8–9, Jesus heals people who are sick, calms a scary storm, and helps people who feel
-        hopeless. He does not run away from people who are hurting—He moves toward them with love. The Bible
-        says He was “moved with compassion,” which means His heart was full of care and kindness for them.<br/><br/>
-        Sometimes we may think God is tired of our worries or tears, but these stories show that Jesus cares
-        deeply about our pain. He also cares about the people around us who feel lonely, sad, or afraid.
-      </p>
-<div class="kids-week-section-label">Talk About It</div>
-<ul class="kids-week-questions">
-<li>Which miracle in Matthew 8–9 is your favorite, and why?</li>
-<li>When you feel scared or sad, what do you usually do? Do you talk to Jesus about it?</li>
-<li>Who is one person you know who might be hurting and needs kindness this week?</li>
-</ul>
-<div class="kids-week-section-label">Try This</div>
-<p class="kids-week-try">
-        Write the name of someone who is hurting on a small paper heart and tape it where you will see it.
-        Each day, stop and ask Jesus to help that person and to show them His love.
-      </p>
-<div class="kids-week-section-label">Prayer</div>
-<p class="kids-week-prayer">
-        “Jesus, thank You that You care about people who are hurting. Help me remember that You care about
-        my feelings too. Show me someone I can be kind to this week, and give me a gentle heart like Yours. Amen.”
-      </p>
-</div>
-<!-- Week 4 Details -->
-<div class="kids-week-details-wrapper" id="kids-week-4">
-<div class="kids-week-details-title">Week 4 · Jesus Sends Us Too</div>
-<div class="kids-week-details-memory">
-<span>Reading:</span> Matthew 10–13<br/>
-<span>Memory Verse:</span> “Freely ye have received, freely give.” (Matthew 10:8)
-      </div>
-<div class="kids-week-section-label">Devotional</div>
-<p class="kids-week-devotional">
-        After the disciples watched Jesus love and help people, He sent them out to share His message with others.
-        He told them that some people would listen and some would not, but He would be with them. They were not
-        going in their own power—they were going in His.<br/><br/>
-        You might not go on a big trip, but Jesus still sends you into your school, your neighborhood, your sports
-        team, and your family with His love. You are not too young for God to use in His work.
-      </p>
-<div class="kids-week-section-label">Talk About It</div>
-<ul class="kids-week-questions">
-<li>Where do you think Jesus is sending you right now (school, team, friend group, neighborhood)?</li>
-<li>What is something you have “freely received” from God (forgiveness, love, help, comfort)?</li>
-<li>How can you “freely give” that to someone else this week?</li>
-</ul>
-<div class="kids-week-section-label">Try This</div>
-<p class="kids-week-try">
-        Make a simple “mission list” of three people you want to pray for and show kindness to this week.
-        Put it where you will see it each morning and ask Jesus to help you love them well.
-      </p>
-<div class="kids-week-section-label">Prayer</div>
-<p class="kids-week-prayer">
-        “Jesus, thank You for trusting kids too. Please show me how to share Your love where I already am.
-        Give me courage to speak kindly and to help others in Your name. Amen.”
-      </p>
-</div>
-<!-- Week 5 Details -->
-<div class="kids-week-details-wrapper" id="kids-week-5">
-<div class="kids-week-details-title">Week 5 · Jesus Is With Us in the Storm</div>
-<div class="kids-week-details-memory">
-<span>Reading:</span> Matthew 14–18<br/>
-<span>Memory Verse:</span> “Be of good cheer; it is I; be not afraid.” (Matthew 14:27)
-      </div>
-<div class="kids-week-section-label">Devotional</div>
-<p class="kids-week-devotional">
-        Peter stepped out of the boat and walked on the water toward Jesus. When he looked at the wind and
-        waves, he became afraid and started to sink. Jesus did not give up on him. He reached out His hand
-        and caught Peter.<br/><br/>
-        Our “storms” might be things like feeling nervous about school, worried about a test, or sad about
-        something at home. Jesus does not promise that we will never have storms, but He promises to be with
-        us in them and to hold us when we feel like we are sinking.
-      </p>
-<div class="kids-week-section-label">Talk About It</div>
-<ul class="kids-week-questions">
-<li>What is something in your life right now that feels like a “storm”?</li>
-<li>What do you think it means to “keep your eyes on Jesus” when you are worried?</li>
-<li>How can our family remind each other that Jesus is with us when life feels hard?</li>
-</ul>
-<div class="kids-week-section-label">Try This</div>
-<p class="kids-week-try">
-        Draw a little boat on a sticky note and write, “Jesus is with me.” Put it somewhere you will see it
-        when you feel nervous—by your bed, on your desk, or in your Bible.
-      </p>
-<div class="kids-week-section-label">Prayer</div>
-<p class="kids-week-prayer">
-        “Jesus, sometimes life feels big and scary. Thank You that You are bigger than any storm. Help me
-        remember that You are with me and that I can call out to You anytime. Amen.”
-      </p>
-</div>
-<!-- Week 6 Details -->
-<div class="kids-week-details-wrapper" id="kids-week-6">
-<div class="kids-week-details-title">Week 6 · The Greatest Is the Servant</div>
-<div class="kids-week-details-memory">
-<span>Reading:</span> Matthew 19–23<br/>
-<span>Memory Verse:</span> “But he that is greatest among you shall be your servant.” (Matthew 23:11)
-      </div>
-<div class="kids-week-section-label">Devotional</div>
-<p class="kids-week-devotional">
-        In God’s kingdom, the “greatest” person is not the one who is loudest or bossiest, but the one who
-        serves others. Jesus talks to rich people, to His followers, and to religious leaders and reminds
-        them that God cares more about a humble heart than about fancy appearances.<br/><br/>
-        Jesus is the King of kings, yet He washed His disciples’ feet, welcomed children, and cared for people
-        others ignored. That is the kind of greatness He invites us into—serving instead of just wanting
-        to be first.
-      </p>
-<div class="kids-week-section-label">Talk About It</div>
-<ul class="kids-week-questions">
-<li>What do kids sometimes brag about (being the best, fastest, smartest, etc.)?</li>
-<li>What does Jesus say real greatness looks like?</li>
-<li>How can you quietly serve someone at home, church, or school this week?</li>
-</ul>
-<div class="kids-week-section-label">Try This</div>
-<p class="kids-week-try">
-        Choose one chore or act of help you can do without being asked and without needing praise. Do it as
-        a quiet gift of love to Jesus.
-      </p>
-<div class="kids-week-section-label">Prayer</div>
-<p class="kids-week-prayer">
-        “Jesus, thank You for showing me a different kind of greatness. Help me want to serve instead of
-        just wanting to be first. Show me one way I can serve someone this week. Amen.”
-      </p>
-</div>
-<!-- Week 7 Details -->
-<div class="kids-week-details-wrapper" id="kids-week-7">
-<div class="kids-week-details-title">Week 7 · Be Ready for Jesus</div>
-<div class="kids-week-details-memory">
-<span>Reading:</span> Matthew 24–25<br/>
-<span>Memory Verse:</span> “Watch therefore: for ye know not what hour your Lord doth come.” (Matthew 24:42)
-      </div>
-<div class="kids-week-section-label">Devotional</div>
-<p class="kids-week-devotional">
-        Jesus talks about a time when He will come back. He does not tell us the exact day. Instead, He tells
-        stories about being ready—like keeping lamps filled with oil and being faithful with what we have
-        been given.<br/><br/>
-        Being “ready” doesn’t mean being perfect. It means trusting Jesus, obeying Him, loving others, and
-        living like He really is our King today, not just “someday.”
-      </p>
-<div class="kids-week-section-label">Talk About It</div>
-<ul class="kids-week-questions">
-<li>How do you feel when you think about Jesus coming back someday?</li>
-<li>What do you think it looks like for a kid to be “ready” for Jesus?</li>
-<li>What is one thing you want Jesus to find you doing when He comes (loving, serving, praying, etc.)?</li>
-</ul>
-<div class="kids-week-section-label">Try This</div>
-<p class="kids-week-try">
-        Pick a time each day this week to say, “Jesus, I’m Yours today.” You could whisper it when you wake up
-        or before you go to sleep.
-      </p>
-<div class="kids-week-section-label">Prayer</div>
-<p class="kids-week-prayer">
-        “Lord Jesus, thank You that You are coming again. Help me not to be afraid, but to be excited and ready.
-        Teach me to live in a way that shows I belong to You. Amen.”
-      </p>
-</div>
-<!-- Week 8 Details -->
-<div class="kids-week-details-wrapper" id="kids-week-8">
-<div class="kids-week-details-title">Week 8 · The Cross and the Empty Tomb</div>
-<div class="kids-week-details-memory">
-<span>Reading:</span> Matthew 26–28<br/>
-<span>Memory Verse:</span> “Lo, I am with you alway, even unto the end of the world.” (Matthew 28:20)
-      </div>
-<div class="kids-week-section-label">Devotional</div>
-<p class="kids-week-devotional">
-        These chapters show Jesus being betrayed, arrested, and nailed to a cross. It is a heavy and sad part of
-        the story—but it is not the end. On the third day, Jesus rises from the grave!<br/><br/>
-        Because He died and rose again, our sins can be forgiven and we can live with Him forever. Then Jesus sends
-        His followers to share this good news with the world and promises to be with us always.
-      </p>
-<div class="kids-week-section-label">Talk About It</div>
-<ul class="kids-week-questions">
-<li>What part of the cross and resurrection story stands out to you the most?</li>
-<li>Why is the empty tomb such good news for us?</li>
-<li>Who is one person you can pray for to know Jesus?</li>
-</ul>
-<div class="kids-week-section-label">Try This</div>
-<p class="kids-week-try">
-        Create a simple “Good News” picture or card and give it to someone. You might draw a cross, an empty tomb,
-        or write the words “Jesus is alive!”
-      </p>
-<div class="kids-week-section-label">Prayer</div>
-<p class="kids-week-prayer">
-        “Risen Jesus, thank You for dying for my sins and rising again. Thank You that You are alive and with me
-        always. Help me share Your good news with others in my words and actions. Amen.”
-      </p>
-</div>
-<p class="kids-week-footer-note">
-      You can walk through this kids’ Matthew journey at the same time as the adult study, so the whole family
-      is learning from the same chapters together.
-    </p>
-</div>
-<div style="margin-top:2.5rem;text-align:center;"><button class="cta-button" onclick="showHub('little-hearts-hub')" type="button">⬅ Back to Faith for Little Hearts</button></div><script>
-    (function() {
-      const cards = document.querySelectorAll('.kids-week-card');
-      const panels = document.querySelectorAll('.kids-week-details-wrapper');
-
-      function openWeek(targetId) {
-        panels.forEach(p => {
-          if (p.id === targetId) {
-            p.classList.toggle('is-active');
-          } else {
-            p.classList.remove('is-active');
-          }
-        });
-      }
-
-      cards.forEach(card => {
-        card.addEventListener('click', function() {
-          const targetId = this.getAttribute('data-week-target');
-          openWeek(targetId);
-        });
-      });
-    })();
-  </script>
-</section><script>
+<script>
 function openKidsMatthewStudy() {
   var section = document.getElementById('kids-matthew-study-section');
   if (!section) return;
