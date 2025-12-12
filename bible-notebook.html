@@ -19,10 +19,11 @@
   </style>
 </head>
 <body>
-  <div style="max-width:1200px; margin:0 auto;">
-    <button onclick="window.location.href='https://www.wholeheartedlegacy.org/new-home'" style="margin-bottom:1.5rem; padding:0.6rem 1.2rem; border-radius:999px; border:none; background:#8b7355; color:#fff; font-weight:600; cursor:pointer;">
-      ← Back to Wholehearted Legacy
-    </button>
+ <button onclick="window.top.location.href='https://www.wholeheartedlegacy.org/'"
+        style="margin-bottom:1.5rem; padding:10px 16px; border-radius:10px; border:0;
+               background:#7b4e30; color:#fff; font-weight:700; cursor:pointer;">
+  🏡 Back to Home
+</button>
     <div id="bible-notebook-wrapper" style="margin-top:2rem;"><div class="h-full w-full overflow-auto" id="app"><!-- Header -->
 <header class="sticky top-0 z-10 shadow-sm no-print">
 <div class="max-w-6xl mx-auto px-4 py-6">
@@ -171,21 +172,22 @@
 <p class="opacity-70">Start your Bible study journey by creating your first entry</p>
 </div>
 </main>
-</div><script>
-    
-  </div>
-  <script>
-const notebookDefaultConfig = {
-      background_color: "#f8f7f4",
-      surface_color: "#ffffff",
-      text_color: "#2c2c2c",
-      primary_color: "#8b6f47",
-      secondary_color: "#a89080",
-      notebook_title: "Bible Study Notebook",
-      welcome_message: "Seek first the kingdom of God and His righteousness",
-      font_family: "Georgia",
-      font_size: 16
-    };
+      </div>
+    </div>
+
+    <script>
+      const notebookDefaultConfig = {
+        background_color: "#f8f7f4",
+        surface_color: "#ffffff",
+        text_color: "#2c2c2c",
+        primary_color: "#8b6f47",
+        secondary_color: "#a89080",
+        notebook_title: "Bible Study Notebook",
+        welcome_message: "Seek first the kingdom of God and His righteousness",
+        font_family: "Georgia",
+        font_size: 16
+      };
+      // …keep the rest of your script exactly as it already is…
 
     let notebookCurrentConfig = { ...notebookDefaultConfig };
     let currentFilter = 'all';
