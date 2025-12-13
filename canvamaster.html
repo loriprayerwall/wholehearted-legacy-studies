@@ -1015,6 +1015,36 @@
 <script src="https://cdn.tailwindcss.com" type="text/javascript"></script>
 </head>
 <body>
+<!-- 🌿 WHL OFFICIAL SITE BANNER (shows only on GitHub mirror) -->
+<div id="whl-official-banner" style="display:none; position:sticky; top:0; z-index:99999; background:#FCF7EF; border-bottom:1px solid rgba(63,46,30,0.15); padding:10px 14px; font-family:Georgia, 'Times New Roman', serif;">
+  <div style="max-width:1100px; margin:0 auto; display:flex; gap:12px; align-items:center; justify-content:space-between; flex-wrap:wrap;">
+    <div style="color:#3F2E1E; font-size:0.95rem; line-height:1.4;">
+      You’re viewing our GitHub mirror. For the best experience, continue on <strong>WholeheartedLegacy.org</strong>.
+    </div>
+    <button type="button" class="cta-button" style="padding:10px 14px; font-size:0.95rem;"
+      onclick="(function(){var dest='https://www.wholeheartedlegacy.org/new-home' + (window.location.hash||''); window.top.location.href=dest;})()">
+      Continue on WholeheartedLegacy.org →
+    </button>
+  </div>
+</div>
+<script>
+  (function () {
+    try {
+      var onGithub = /github\.io$/i.test(window.location.hostname);
+
+      // If this page is embedded inside Squarespace (iframe), don't show the GitHub banner.
+      // (Prevents the banner from appearing inside your WHL site.)
+      var inIframe = false;
+      try { inIframe = (window.self !== window.top); } catch (e) { inIframe = true; }
+
+      if (onGithub && !inIframe) {
+        var b = document.getElementById('whl-official-banner');
+        if (b) b.style.display = 'block';
+      }
+    } catch (e) {}
+  })();
+</script>
+
 <!-- Global floating navigation buttons -->
 <button class="whl-floating-btn hidden" id="back-to-home-btn" onclick="goBackOrHome();">
     ← Back
@@ -7162,7 +7192,8 @@ function showHub(hubId) {
 // Map hash keys to hub IDs used by showHub()
       var hubMap = {
         "saviors-call": "saviors-call",       // A Savior's Call hub
-        "faith-rooted": "faith-rooted",       // Faith Rooted in God's Word hub
+        "faith-rooted": "faith-rooted",
+    "faith-for-little-hearts": "little-hearts", // Faith for Little Hearts hub       // Faith Rooted in God's Word hub
         "hope": "hope-light",                 // Hope: Light in the Darkness hub
         "healing": "healing-hearts",          // Healing Hearts hub
         "faith-for-little-hearts": "little-hearts", // Faith for Little Hearts hub (Squarespace deep link)
