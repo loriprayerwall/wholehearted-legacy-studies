@@ -113,6 +113,10 @@ body {
   backdrop-filter: blur(4px);
   z-index: 999;
   overflow-y: auto; /* Mobile: allow scrolling */
+
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
+  touch-action: pan-y;
 }
 .modal-box {
   background: #fdfcf9;
@@ -125,6 +129,9 @@ body {
   animation: fadeIn 0.35s ease-out;
   max-height: 80vh;  /* Mobile: keep within viewport */
   overflow-y: auto;  /* Mobile: scroll inside modal */
+
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
 }
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(15px); }
@@ -207,6 +214,88 @@ body {
 .youversion-link:hover {
   background: #b58f5d;
 }
+/* WEEKLY DEVOTIONS STRIP */
+.weekly-devotions {
+  background: rgba(253, 252, 249, 0.96);
+  border-radius: 14px;
+  padding: 24px 22px 26px;
+  box-shadow: 0 6px 22px rgba(0,0,0,0.22);
+  margin-bottom: 38px;
+}
+.weekly-title {
+  font-size: 22px;
+  margin: 0 0 6px 0;
+  color: #3e2a1f;
+  font-weight: bold;
+}
+.weekly-intro {
+  margin: 0 0 18px 0;
+  font-size: 15px;
+  color: #6a4c3a;
+}
+.weekly-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+.weekly-card {
+  background: #fdf5ea;
+  border: 2px solid #c9a46b;
+  border-radius: 12px;
+  padding: 14px 14px 16px;
+  cursor: pointer;
+  transition: 0.25s ease;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.16);
+}
+.weekly-card:hover {
+  background: #f7ebdd;
+  transform: translateY(-3px);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.24);
+}
+.weekly-week {
+  font-weight: bold;
+  font-size: 16px;
+  margin-bottom: 4px;
+  color: #3e2a1f;
+}
+.weekly-range {
+  font-size: 14px;
+  color: #6a4c3a;
+  margin-bottom: 4px;
+}
+.weekly-tagline {
+  font-size: 14px;
+  color: #3e2a1f;
+}
+
+/* Weekly Devotion tag inside modal */
+.weekly-pill {
+  display: inline-block;
+  padding: 4px 10px;
+  margin-bottom: 10px;
+  border-radius: 999px;
+  background: #f3e1c5;
+  color: #5a3b26;
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+.modal-weekly-title {
+  margin-top: 4px;
+}
+.modal-weekly-reading {
+  margin-top: 6px;
+  margin-bottom: 12px;
+}
+
+/* Mobile: weekly grid single column */
+@media (max-width: 768px) {
+  .weekly-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 
 /* Mobile */
 @media (max-width: 768px) {
@@ -214,28 +303,16 @@ body {
   .modal-box { margin: 25px; padding: 25px; }
 }
 
-/* Footer nav buttons (Back to Current Studies / Back to Home) */
-.nav-footer {
-  text-align: center;
-  margin: 10px auto 40px;
-}
-.nav-footer a {
-  display: inline-block;
-  margin: 6px 8px;
-  padding: 10px 22px;
-  border-radius: 999px;
-  border: 1px solid #c9a46b;
-  text-decoration: none;
-  color: #3e2a1f;
-  background: #fdfcf9;
-  font-size: 15px;
-  letter-spacing: 0.3px;
-  transition: 0.25s ease;
-}
-.nav-footer a:hover {
-  background: #f3e3cf;
-  box-shadow: 0 4px 14px rgba(0,0,0,0.18);
-  transform: translateY(-2px);
+/* Mobile modal fix (prevents background scroll + ensures modal scrolls fully) */
+@media (max-width: 768px) {
+  .modal-overlay{
+    padding: 18px 14px calc(18px + env(safe-area-inset-bottom));
+  }
+  .modal-box{
+    margin: 0 auto;
+    width: 100%;
+    max-height: calc(100dvh - 36px);
+  }
 }
 
 </style>
@@ -251,6 +328,37 @@ body {
     </div>
     <div class="progress-text" id="progressText">0 of 28 days completed</div>
   </div>
+
+  <!-- WEEKLY DEVOTIONS -->
+  <section class="weekly-devotions">
+    <h2 class="weekly-title">Weekly Devotions for February</h2>
+    <p class="weekly-intro">
+      Once each week, pause with these reflections to see the bigger picture of what God is doing as you walk with Jesus to the cross and the empty tomb.
+    </p>
+    <div class="weekly-grid">
+      <div class="weekly-card" onclick="openWeekly(5)">
+        <div class="weekly-week">Week 5</div>
+        <div class="weekly-range">Matthew 14–18</div>
+        <div class="weekly-tagline">Faith in the Storm</div>
+      </div>
+      <div class="weekly-card" onclick="openWeekly(6)">
+        <div class="weekly-week">Week 6</div>
+        <div class="weekly-range">Matthew 19–23</div>
+        <div class="weekly-tagline">The Upside-Down Kingdom</div>
+      </div>
+      <div class="weekly-card" onclick="openWeekly(7)">
+        <div class="weekly-week">Week 7</div>
+        <div class="weekly-range">Matthew 24–25</div>
+        <div class="weekly-tagline">Watching &amp; Ready</div>
+      </div>
+      <div class="weekly-card" onclick="openWeekly(8)">
+        <div class="weekly-week">Week 8</div>
+        <div class="weekly-range">Matthew 26–28</div>
+        <div class="weekly-tagline">From Cross to Commission</div>
+      </div>
+    </div>
+  </section>
+
 
   <!-- DAY GRID -->
   <div class="day-grid">
@@ -422,17 +530,7 @@ body {
       <div class="day-ref">Matthew 28:20 (KJV)</div>
       <div>Lo, I am with you always</div>
     </div>
-  
-  <!-- FOOTER NAV BUTTONS -->
-  <div class="nav-footer">
-    <a href="https://loriprayerwall.github.io/wholehearted-legacy-studies/canvamaster#current-studies">
-      ← Back to Current Studies
-    </a>
-    <a href="https://loriprayerwall.github.io/wholehearted-legacy-studies/canvamaster">
-      ← Back to Home
-    </a>
   </div>
-
 </div>
 
 <!-- MODAL OVERLAY -->
@@ -479,7 +577,240 @@ const studyDays = {
 28:{title:"Day 28 — Matthew 28:20 (Final Day)",link:"https://www.bible.com/bible/1/MAT.28.KJV",verse:"“Lo, I am with you alway…” — Matthew 28:20",context:"Jesus ends Matthew’s Gospel with a promise — His presence will go with us everywhere, always.",theme:"Jesus’ final words are His forever promise: You are never alone.",prayer:"Lord, thank You for Your constant presence. Help me walk in Your peace and confidence.",reflection:["Where do you most need Jesus’ presence right now?","How does this final promise strengthen your faith?","How can you cultivate daily awareness of His presence?"],deeper:"Matthew begins with “Emmanuel — God with us,” and ends with “I am with you alway.” The whole Gospel is presence."}
 }; // END STUDY DAYS OBJECT
 
+
+// WEEKLY DEVOTIONS OBJECT
+const weeklyDevotions = {
+  1: {
+    title: "Week 1 • The King Has Come",
+    reading: "Matthew 1–4",
+    keyVerse: "And he saith unto them, Follow me, and I will make you fishers of men. — Matthew 4:19 (KJV)",
+    body: [
+      "Matthew begins with a long list of names, but it is really a story of God’s faithfulness. Through imperfect families and broken stories, God brings Jesus into the world at exactly the right time.",
+      "When we read that His name is Emmanuel, God with us, we are hearing more than a Christmas phrase. We are hearing a promise: God has stepped into real history, real families, real mess. He does not stand at a distance from our pain.",
+      "In these first chapters, people respond to Jesus in very different ways—Herod resists Him, the wise men seek Him, John the Baptist points to Him. Then Jesus walks along an ordinary shoreline and calls ordinary people to follow Him.",
+      "This week, as you read Matthew 1–4, remember that the same Jesus who stepped into their world has stepped into yours. He meets you in ordinary days, in complicated stories, and simply says, Follow Me."
+    ],
+    reflections: [
+      "What part of your story feels too messy or complicated for God to redeem? How does Jesus’ family line encourage you?",
+      "Where do you see yourself in the responses of Herod, the wise men, and John the Baptist?",
+      "If Jesus walked into your everyday life this week and said, “Follow Me here,” what specific place or habit comes to mind?"
+    ],
+    prayerLines: [
+      "Jesus,",
+      "Thank You for stepping into real history and real families—and into my story too.",
+      "When I feel overlooked or too broken, remind me that You are Emmanuel, God with me.",
+      "Show me where You are already walking beside me in my ordinary days, and give me courage to follow You there.",
+      "Let this Matthew journey be more than a reading plan; let it become a deeper walk with You.",
+      "Amen."
+    ]
+  },
+  2: {
+    title: "Week 2 • The Heart of the Kingdom",
+    reading: "Matthew 5–7",
+    keyVerse: "Blessed are the pure in heart: for they shall see God. — Matthew 5:8 (KJV)",
+    body: [
+      "In the Sermon on the Mount, Jesus opens the front door of His kingdom. He does not simply give rules; He describes the kind of heart that grows in people who walk closely with Him.",
+      "If we read these chapters as a checklist, we will either become proud or discouraged. Jesus is not handing us a performance chart. He is inviting us into a life that only His Spirit can produce in us—a life marked by humility, mercy, purity, forgiveness, secret prayer, and trust.",
+      "The good news is that Jesus fulfilled this righteousness perfectly on our behalf. We do not obey to earn His love; we respond because we are already loved.",
+      "This week, instead of asking, Am I doing everything perfectly?, ask, Lord, what are You showing me about my heart? Where are You inviting me to let Your kingdom shape me from the inside out?"
+    ],
+    reflections: [
+      "Which part of Matthew 5–7 is tugging on your heart the most right now, and why?",
+      "Where do you most feel the gap between what Jesus describes and how you actually live?",
+      "What is one quiet, hidden way you can seek first the kingdom this week—in prayer, forgiveness, generosity, or trust?"
+    ],
+    prayerLines: [
+      "Lord Jesus,",
+      "Thank You for showing me the heart of Your kingdom.",
+      "I confess that my heart does not naturally love, forgive, or trust the way You describe.",
+      "By Your Spirit, change me from the inside out. Teach me to seek first the kingdom of God and His righteousness.",
+      "Shape my thoughts, motives, and desires as I sit with Your words this week.",
+      "Amen."
+    ]
+  },
+  3: {
+    title: "Week 3 • Miracles of Mercy",
+    reading: "Matthew 8–9",
+    keyVerse: "But when he saw the multitudes, he was moved with compassion on them. — Matthew 9:36 (KJV)",
+    body: [
+      "In Matthew 8–9, the pace of the story quickens. Jesus is healing lepers, calming storms, freeing the oppressed, raising a girl, and giving sight to the blind. Power flows from Him, but it is always guided by compassion.",
+      "When we are hurting or ashamed, we may imagine God is tired of us. These chapters gently correct that lie. Jesus does not move away from weakness; He moves toward it. He touches the untouchable and listens to desperate cries for help.",
+      "The disciples panic in the storm, but Jesus speaks and the wind and waves obey. Crowds press around Him, and instead of being annoyed, He sees sheep without a shepherd.",
+      "This week, let these miracles remind you that Jesus still moves toward brokenness with mercy. Your needs, fears, and hidden wounds are seen by Him."
+    ],
+    reflections: [
+      "Which story in Matthew 8–9 feels closest to your life right now, and why?",
+      "Where have you quietly assumed that Jesus is disappointed or frustrated with your weakness?",
+      "How might your prayers change if you truly believed Jesus was moving toward you with compassion this week?"
+    ],
+    prayerLines: [
+      "Compassionate Savior,",
+      "Thank You that You see my needs and are moved with mercy, not disgust.",
+      "I bring my fears, hurts, and hidden places to You today.",
+      "Calm the storms in my heart and heal what is broken.",
+      "Help me also to be a person of compassion toward those who are weary and scattered around me.",
+      "Amen."
+    ]
+  },
+  4: {
+    title: "Week 4 • Sent and Surrendered",
+    reading: "Matthew 10–13",
+    keyVerse: "Freely ye have received, freely give. — Matthew 10:8 (KJV)",
+    body: [
+      "By Matthew 10, the disciples have watched Jesus teach, heal, and show the kingdom. Then He turns to them and says, in effect, Your turn. He sends them out with authority, instructions, and honest warnings.",
+      "Following Jesus is not only about being comforted; it is also about being sent. Some will welcome the message, others will resist it, and still others will be confused. Jesus prepares His followers for all of these responses.",
+      "You have freely received forgiveness, mercy, and hope. Somewhere in your world is someone who needs what you carry. Being sent does not always mean going far away; it often means being faithful right where you already are.",
+      "This week, ask the Lord to show you how your everyday places can become mission fields—your home, workplace, church, and neighborhood."
+    ],
+    reflections: [
+      "What emotions do you feel when you think about being sent by Jesus—fear, excitement, reluctance, or something else?",
+      "Where has following Jesus felt costly for you, and how has He met you there?",
+      "Who is one person you can intentionally pray for, encourage, or serve in Jesus’ name this week?"
+    ],
+    prayerLines: [
+      "Lord Jesus,",
+      "Thank You for inviting me to join You in what You are doing in the world.",
+      "When I feel afraid or inadequate, remind me that You go with me and give me what I need.",
+      "Open my eyes to see the people around me who need Your hope and love.",
+      "Make me willing to be sent, even in small, everyday ways.",
+      "Amen."
+    ]
+  },
+  5: {
+    title: "Week 5 • Faith in the Storm",
+    reading: "Matthew 14–18",
+    keyVerse: "But straightway Jesus spake unto them, saying, Be of good cheer; it is I; be not afraid. — Matthew 14:27 (KJV)",
+    body: [
+      "These chapters hold both mountaintop moments and very human weakness. Jesus feeds thousands, walks on water, heals, and reveals His glory on the mount of transfiguration. Yet the disciples are also afraid, confused, and sometimes arguing about greatness.",
+      "Peter steps out of the boat in bold faith and then sinks when he sees the wind. The disciples fail to cast out a demon and are gently corrected. Jesus keeps leading and teaching them, even when they stumble.",
+      "Your story is likely the same mixture of courage and fear, trust and questions. The comfort here is that Jesus does not give up on His disciples. He reaches out, lifts them up, and keeps shaping their faith.",
+      "This week, bring your storms and stumblings honestly to Jesus. Let His hand, not your performance, be your anchor."
+    ],
+    reflections: [
+      "Where do you most relate to Peter—stepping out in faith, sinking in fear, or being pulled back up by Jesus?",
+      "What current “storm” makes it difficult to keep your eyes on Jesus?",
+      "How might childlike humility, as Jesus describes in Matthew 18, change the way you see yourself and others?"
+    ],
+    prayerLines: [
+      "Jesus,",
+      "Thank You that You are Lord over the wind, the waves, and my anxious heart.",
+      "When I start to sink in fear, remind me to cry out to You instead of trying to fix everything on my own.",
+      "Grow in me a humble, childlike trust that relies on Your strength, not mine.",
+      "Meet me in my storms this week and steady my faith.",
+      "Amen."
+    ]
+  },
+  6: {
+    title: "Week 6 • The Upside-Down Kingdom",
+    reading: "Matthew 19–23",
+    keyVerse: "But he that is greatest among you shall be your servant. — Matthew 23:11 (KJV)",
+    body: [
+      "In these chapters, Jesus confronts both the rich young ruler and the religious leaders. He overturns our usual ideas of power, success, and greatness.",
+      "The rich young ruler walks away sorrowful because he cannot imagine letting go of his wealth. The Pharisees use religion to impress others while ignoring justice and mercy. Jesus keeps saying that in His kingdom, the last are first and the humble are honored.",
+      "This upside-down way of living pushes against our natural desires to be seen, to be in control, or to stay comfortable. Yet Jesus assures us that whatever we release for His sake is never truly lost.",
+      "This week, invite the Holy Spirit to gently put His finger on anything you are clinging to more tightly than Jesus. Ask Him to teach you the joy of quiet, hidden service."
+    ],
+    reflections: [
+      "What feels hardest for you to surrender fully to Jesus right now?",
+      "How do Jesus’ words about serving challenge the way you normally think about leadership or success?",
+      "What is one unseen act of service you could offer this week purely as worship to Him?"
+    ],
+    prayerLines: [
+      "King Jesus,",
+      "Your kingdom is not about status or applause, but about humble love.",
+      "Show me where I am holding onto my own way instead of Yours.",
+      "Teach me to serve others as You have served me, even when no one else notices.",
+      "Let my life quietly reflect the beauty of Your upside-down kingdom.",
+      "Amen."
+    ]
+  },
+  7: {
+    title: "Week 7 • Watching and Ready",
+    reading: "Matthew 24–25",
+    keyVerse: "Watch therefore: for ye know not what hour your Lord doth come. — Matthew 24:42 (KJV)",
+    body: [
+      "Matthew 24–25 can feel heavy, but they are filled with hope. Jesus speaks honestly about hard things—shaking, deception, and trouble—and then lifts our eyes to His sure return.",
+      "His call is not to guess dates, but to live ready: to keep oil in our lamps, to be faithful with what He has entrusted to us, and to see Him in “the least of these.”",
+      "For weary hearts, these chapters are a reminder that this world is not the end of the story. The King will come, justice will be done, and every act of love done in His name matters.",
+      "This week, let your hope in His return shape the way you live today—with alertness, faithfulness, and compassion."
+    ],
+    reflections: [
+      "How do you honestly feel when you think about Jesus returning—afraid, excited, uncertain, hopeful?",
+      "What might it look like for you to keep “oil in your lamp” in this season of life?",
+      "Who is one “least of these” person you can notice and serve intentionally this week?"
+    ],
+    prayerLines: [
+      "Lord Jesus,",
+      "Thank You that history is in Your hands and that You are surely coming again.",
+      "Guard my heart from fear, distraction, and spiritual sleepiness.",
+      "Help me to be faithful with what You have given me and to see Your face in those who are hurting or overlooked.",
+      "Teach me to live every day with steady hope and ready love.",
+      "Amen."
+    ]
+  },
+  8: {
+    title: "Week 8 • From Cross to Commission",
+    reading: "Matthew 26–28",
+    keyVerse: "And Jesus came and spake unto them, saying, All power is given unto me in heaven and in earth. — Matthew 28:18 (KJV)",
+    body: [
+      "In the final chapters of Matthew, we walk with Jesus into Gethsemane, to the cross, and to the empty tomb. We see betrayal and heartbreak, but also victory and commissioning.",
+      "Jesus willingly drinks the cup of suffering for us. He is mocked, crucified, buried—and then gloriously raised. The One who was rejected now stands as risen Lord with all authority in heaven and on earth.",
+      "From that place of authority, He sends His followers out to make disciples of all nations, promising that He will be with them always.",
+      "This week, let the cross assure you that your sins are truly forgiven, and let the resurrection remind you that no situation is beyond His power to redeem. Then listen for how He may be calling you to live as a sent one in your corner of the world."
+    ],
+    reflections: [
+      "Which scene in Matthew 26–28 speaks most deeply to you right now, and why?",
+      "Where do you most need to remember that the cross has paid your debt in full?",
+      "What is one practical way you can live out the Great Commission in your everyday life?"
+    ],
+    prayerLines: [
+      "Risen Savior,",
+      "Thank You for the cross where You bore my sin and for the empty tomb that declares death is defeated.",
+      "Write these truths deep into my heart as I finish this Matthew journey.",
+      "Show me how to live as one who is forgiven, loved, and sent.",
+      "Give me courage to obey Your commission and rest in Your promise to be with me always.",
+      "Amen."
+    ]
+  }
+};
+
+
+
 let currentDay = null;
+
+
+/* Open Weekly Devotion in Modal */
+function openWeekly(week) {
+  const data = weeklyDevotions[week];
+  if (!data) return;
+
+  const bodyHtml = data.body.map(p => `<p>${p}</p>`).join("");
+  const reflectionHtml = data.reflections.map(r => `<li>${r}</li>`).join("");
+  const prayerHtml = data.prayerLines.join("<br>");
+
+  const htmlContent = `
+    <div class="weekly-pill">Weekly Devotion</div>
+    <h2 class="modal-weekly-title">${data.title}</h2>
+    <p class="modal-weekly-reading"><strong>Weekly Reading:</strong> ${data.reading}</p>
+    <div class="verse-box">${data.keyVerse}</div>
+    ${bodyHtml}
+    <div class="section-title">Reflection Questions</div>
+    <ul>
+      ${reflectionHtml}
+    </ul>
+    <div class="section-title">Closing Prayer</div>
+    <p>${prayerHtml}</p>
+  `;
+
+  document.getElementById("modalContent").innerHTML = htmlContent;
+  document.getElementById("modalOverlay").style.display = "block";
+
+  // Lock background scroll (mobile)
+  document.body.style.overflow = "hidden";
+  // Start at top each time
+  const mb = document.getElementById("modalBox");
+  if (mb) mb.scrollTop = 0;
+}
 
 /* Open Modal */
 function openModal(day) {
