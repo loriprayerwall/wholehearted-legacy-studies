@@ -1015,32 +1015,6 @@
 <script src="https://cdn.tailwindcss.com" type="text/javascript"></script>
 </head>
 <body>
-
-<!-- ✅ WHL RETURN BANNER (shows only when page is viewed off wholeheartedlegacy.org) -->
-<div id="whl-return-banner" style="display:none; position:sticky; top:0; z-index:9999; background:rgba(247,242,234,0.98); border-bottom:1px solid rgba(63,46,30,0.12); padding:10px 14px; text-align:center; font-family:Georgia,serif;">
-  <a id="whl-return-link" href="https://www.wholeheartedlegacy.org/" target="_top" rel="noopener"
-     style="display:inline-block; padding:10px 14px; border-radius:999px; background:#3F2E1E; color:#FCF7EF; text-decoration:none; font-weight:bold;">
-    ⟵ Return to Wholehearted Legacy
-  </a>
-</div>
-<script>
-(function () {
-  try {
-    var host = (window.location && window.location.hostname) ? window.location.hostname : "";
-    var isWHL = /wholeheartedlegacy\.org$/i.test(host);
-    if (!isWHL) {
-      // Keep the user inside the Squarespace site, preserving the current hash (deep link)
-      var base = "https://www.wholeheartedlegacy.org/wholehearted-legacy/new-home";
-      var link = document.getElementById("whl-return-link");
-      if (link) link.href = base + (window.location.hash || "");
-      var banner = document.getElementById("whl-return-banner");
-      if (banner) banner.style.display = "block";
-    }
-  } catch (e) {}
-})();
-</script>
-
-
 <!-- Global floating navigation buttons -->
 <button class="whl-floating-btn hidden" id="back-to-home-btn" onclick="goBackOrHome();">
     ← Back
