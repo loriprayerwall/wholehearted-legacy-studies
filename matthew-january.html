@@ -114,6 +114,10 @@ body {
   backdrop-filter: blur(4px);
   z-index: 999;
   overflow-y: auto; /* Mobile: allow scrolling */
+
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
+  touch-action: pan-y;
 }
 .modal-box {
   background: #fdfcf9;
@@ -126,6 +130,9 @@ body {
   animation: fadeIn 0.35s ease-out;
   max-height: 80vh; /* Mobile: keep within viewport */
   overflow-y: auto; /* Mobile: scroll inside modal */
+
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
 }
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(15px); }
@@ -288,6 +295,19 @@ body {
 @media (max-width: 768px) {
   .weekly-grid {
     grid-template-columns: 1fr;
+  }
+}
+
+
+/* Mobile modal fix (prevents background scroll + ensures modal scrolls fully) */
+@media (max-width: 768px) {
+  .modal-overlay{
+    padding: 18px 14px calc(18px + env(safe-area-inset-bottom));
+  }
+  .modal-box{
+    margin: 0 auto;
+    width: 100%;
+    max-height: calc(100dvh - 36px);
   }
 }
 
@@ -815,6 +835,12 @@ function openWeekly(week) {
 
   document.getElementById("modalContent").innerHTML = htmlContent;
   document.getElementById("modalOverlay").style.display = "block";
+
+  // Lock background scroll (mobile)
+  document.body.style.overflow = "hidden";
+  // Start at top each time
+  const mb = document.getElementById("modalBox");
+  if (mb) mb.scrollTop = 0;
 }
 
 /* Open Modal */
