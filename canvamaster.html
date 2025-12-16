@@ -1013,6 +1013,112 @@
     </style>
 <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
 <script src="https://cdn.tailwindcss.com" type="text/javascript"></script>
+
+<!-- WHL — Daily Verse styles (scoped) -->
+<style id="whl-daily-verse-styles">
+@keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+.whl-dv .fade-in {
+      animation: fadeIn 0.6s ease-out;
+    }
+    
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+.whl-dv .pulse {
+      animation: pulse 2s ease-in-out infinite;
+    }
+.whl-dv .tab-button {
+      padding: 8px 16px;
+      border: none;
+      background: transparent;
+      cursor: pointer;
+      border-bottom: 3px solid transparent;
+      transition: all 0.3s ease;
+      font-weight: 500;
+    }
+.whl-dv .tab-button.active {
+      border-bottom-color: currentColor;
+    }
+.whl-dv .tab-content {
+      display: none;
+    }
+.whl-dv .tab-content.active {
+      display: block;
+    }
+.whl-dv .favorite-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 24px;
+      transition: transform 0.2s ease;
+      padding: 4px 8px;
+    }
+.whl-dv .favorite-btn:hover {
+      transform: scale(1.2);
+    }
+.whl-dv .journal-entry {
+      padding: 16px;
+      margin-bottom: 12px;
+      border-radius: 8px;
+      border-left: 4px solid;
+    }
+.whl-dv .delete-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      opacity: 0.6;
+      transition: opacity 0.2s;
+      padding: 4px 8px;
+      font-size: 18px;
+    }
+.whl-dv .delete-btn:hover {
+      opacity: 1;
+    }
+.whl-dv .streak-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-weight: 600;
+      font-size: 14px;
+    }
+.whl-dv .reflection-prompt {
+      padding: 16px;
+      border-radius: 8px;
+      margin: 16px 0;
+      border-left: 4px solid;
+      font-style: italic;
+    }
+.whl-dv textarea {
+      width: 100%;
+      padding: 12px;
+      border-radius: 8px;
+      border: 2px solid;
+      font-family: inherit;
+      font-size: 14px;
+      min-height: 100px;
+      resize: vertical;
+    }
+.whl-dv .save-btn {
+      padding: 10px 24px;
+      border: none;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin-top: 12px;
+    }
+.whl-dv .save-btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+</style>
+
 </head>
 <body>
 <!-- 🌿 WHL OFFICIAL SITE BANNER (shows only on GitHub mirror) -->
@@ -1087,6 +1193,1164 @@
 </div>
 </div>
 </div>
+
+<!-- WHOLEHEARTED LEGACY — DAILY VERSE & PRAYER (CANVA) -->
+<section class="home-section whl-daily-verse-section">
+  <div class="home-section-header" style="text-align:center;">
+    <h2>Daily Verse &amp; Prayer</h2>
+    <p style="max-width:720px;margin:0 auto;color:#6A5844;font-style:italic;">
+      A fresh Word of Hope each day — save your favorites, journal your reflections, and keep your streak.
+    </p>
+  </div>
+
+  <div id="whl-daily-verse" class="whl-dv" style="max-width:900px;margin:0 auto;">
+    <div id="whl-daily-verse-app" class="w-full"></div>
+  </div>
+</section>
+
+<script>
+(function() {
+  const root = document.getElementById('whl-daily-verse');
+  if (!root) return;
+
+const defaultConfig = {
+      background_color: "#F5E6D3",
+      card_color: "#FFFFFF",
+      text_color: "#5C4033",
+      accent_color: "#C19A6B",
+      button_color: "#8B7355",
+      card_title: "Daily Word of Hope",
+      hope_message: "May this verse bring peace to your heart today",
+      font_family: "Georgia",
+      font_size: 16
+    };
+
+    const verses = [
+      { day: 1, verse: "The LORD is my shepherd; I shall not want.", reference: "Psalm 23:1", prayer: "Dear Lord, guide me as my shepherd. Help me trust in Your provision and find rest in Your care. Amen." },
+      { day: 2, verse: "Be still, and know that I am God.", reference: "Psalm 46:10", prayer: "Heavenly Father, in the chaos of life, help me be still and remember Your sovereignty. Grant me peace. Amen." },
+      { day: 3, verse: "I can do all things through Christ which strengtheneth me.", reference: "Philippians 4:13", prayer: "Lord Jesus, strengthen me today. Help me face every challenge with Your power working through me. Amen." },
+      { day: 4, verse: "The LORD is my light and my salvation; whom shall I fear?", reference: "Psalm 27:1", prayer: "Dear God, be my light in dark times. Remove fear from my heart and fill me with Your courage. Amen." },
+      { day: 5, verse: "Cast thy burden upon the LORD, and he shall sustain thee.", reference: "Psalm 55:22", prayer: "Lord, I give You my burdens today. Sustain me with Your strength and carry what feels too heavy. Amen." },
+      { day: 6, verse: "For God hath not given us the spirit of fear; but of power, and of love, and of a sound mind.", reference: "2 Timothy 1:7", prayer: "Father, replace my fear with Your power, love, and peace. Renew my mind today. Amen." },
+      { day: 7, verse: "The LORD is nigh unto them that are of a broken heart.", reference: "Psalm 34:18", prayer: "Dear Lord, draw near to my broken heart. Comfort me with Your presence and heal my wounds. Amen." },
+      { day: 8, verse: "Trust in the LORD with all thine heart; and lean not unto thine own understanding.", reference: "Proverbs 3:5", prayer: "God, help me trust You completely, even when I don't understand. Guide my steps today. Amen." },
+      { day: 9, verse: "Peace I leave with you, my peace I give unto you.", reference: "John 14:27", prayer: "Lord Jesus, fill me with Your peace that surpasses understanding. Calm my anxious heart. Amen." },
+      { day: 10, verse: "The LORD will fight for you, and ye shall hold your peace.", reference: "Exodus 14:14", prayer: "Father, fight my battles today. Help me rest in Your power and trust Your deliverance. Amen." },
+      { day: 11, verse: "He healeth the broken in heart, and bindeth up their wounds.", reference: "Psalm 147:3", prayer: "Healer of hearts, bind up my wounds and restore my spirit. Make me whole again. Amen." },
+      { day: 12, verse: "Wait on the LORD: be of good courage, and he shall strengthen thine heart.", reference: "Psalm 27:14", prayer: "Lord, give me courage to wait on Your timing. Strengthen my heart as I trust in You. Amen." },
+      { day: 13, verse: "But they that wait upon the LORD shall renew their strength.", reference: "Isaiah 40:31", prayer: "Father, renew my strength as I wait on You. Help me soar above my circumstances. Amen." },
+      { day: 14, verse: "The LORD is good, a strong hold in the day of trouble.", reference: "Nahum 1:7", prayer: "Lord, be my stronghold today. Protect me in times of trouble and show me Your goodness. Amen." },
+      { day: 15, verse: "Come unto me, all ye that labour and are heavy laden, and I will give you rest.", reference: "Matthew 11:28", prayer: "Jesus, I come to You weary and burdened. Give me rest for my soul today. Amen." },
+      { day: 16, verse: "The name of the LORD is a strong tower: the righteous runneth into it, and is safe.", reference: "Proverbs 18:10", prayer: "Lord, be my refuge and safety. I run to You for protection and peace. Amen." },
+      { day: 17, verse: "Fear thou not; for I am with thee: be not dismayed; for I am thy God.", reference: "Isaiah 41:10", prayer: "Father, remind me of Your presence. Remove dismay and fill me with confidence in You. Amen." },
+      { day: 18, verse: "And we know that all things work together for good to them that love God.", reference: "Romans 8:28", prayer: "Lord, help me trust that You're working everything for my good, even when I can't see it. Amen." },
+      { day: 19, verse: "The LORD will perfect that which concerneth me.", reference: "Psalm 138:8", prayer: "God, complete the good work You've begun in me. Perfect what concerns my heart today. Amen." },
+      { day: 20, verse: "Let not your heart be troubled, neither let it be afraid.", reference: "John 14:27", prayer: "Lord Jesus, take away my troubled heart and replace fear with faith in You. Amen." },
+      { day: 21, verse: "The joy of the LORD is your strength.", reference: "Nehemiah 8:10", prayer: "Father, fill me with Your joy today. Let it be the strength I need to persevere. Amen." },
+      { day: 22, verse: "Thou wilt keep him in perfect peace, whose mind is stayed on thee.", reference: "Isaiah 26:3", prayer: "Lord, help me keep my mind fixed on You. Grant me Your perfect peace today. Amen." },
+      { day: 23, verse: "The LORD is my rock, and my fortress, and my deliverer.", reference: "Psalm 18:2", prayer: "God, be my rock and fortress. Deliver me from trouble and be my solid foundation. Amen." },
+      { day: 24, verse: "For I know the thoughts that I think toward you, saith the LORD, thoughts of peace.", reference: "Jeremiah 29:11", prayer: "Father, thank You for Your good plans for me. Help me trust Your perfect will. Amen." },
+      { day: 25, verse: "In all thy ways acknowledge him, and he shall direct thy paths.", reference: "Proverbs 3:6", prayer: "Lord, I acknowledge You in everything. Direct my steps and guide my decisions today. Amen." },
+      { day: 26, verse: "The LORD shall preserve thee from all evil: he shall preserve thy soul.", reference: "Psalm 121:7", prayer: "Heavenly Father, protect me from evil. Guard my soul and keep me safe in You. Amen." },
+      { day: 27, verse: "Casting all your care upon him; for he careth for you.", reference: "1 Peter 5:7", prayer: "Lord, I cast all my cares on You. Thank You for caring about every detail of my life. Amen." },
+      { day: 28, verse: "The LORD is my strength and my shield; my heart trusted in him.", reference: "Psalm 28:7", prayer: "God, be my strength and shield today. Help my heart trust in You completely. Amen." },
+      { day: 29, verse: "He giveth power to the faint; and to them that have no might he increaseth strength.", reference: "Isaiah 40:29", prayer: "Father, give me power when I'm faint. Increase my strength when I have none left. Amen." },
+      { day: 30, verse: "Weeping may endure for a night, but joy cometh in the morning.", reference: "Psalm 30:5", prayer: "Lord, help me endure this night season. I trust Your joy is coming in the morning. Amen." },
+      { day: 31, verse: "The eternal God is thy refuge, and underneath are the everlasting arms.", reference: "Deuteronomy 33:27", prayer: "Eternal God, be my refuge. Catch me with Your everlasting arms when I fall. Amen." },
+      { day: 32, verse: "I sought the LORD, and he heard me, and delivered me from all my fears.", reference: "Psalm 34:4", prayer: "Lord, I seek You today. Hear my cry and deliver me from every fear. Amen." },
+      { day: 33, verse: "Call upon me in the day of trouble: I will deliver thee.", reference: "Psalm 50:15", prayer: "Father, I call on You in my trouble. Thank You for Your promise to deliver me. Amen." },
+      { day: 34, verse: "My grace is sufficient for thee: for my strength is made perfect in weakness.", reference: "2 Corinthians 12:9", prayer: "Lord, let Your grace be enough for me. Show Your strength through my weakness today. Amen." },
+      { day: 35, verse: "The LORD redeemeth the soul of his servants: and none of them that trust in him shall be desolate.", reference: "Psalm 34:22", prayer: "Redeemer, save my soul. I trust in You and believe You won't leave me desolate. Amen." },
+      { day: 36, verse: "Be careful for nothing; but in every thing by prayer and supplication with thanksgiving let your requests be made known unto God.", reference: "Philippians 4:6", prayer: "Lord, I bring my worries to You in prayer. Help me trust and give thanks in advance. Amen." },
+      { day: 37, verse: "The LORD is gracious, and full of compassion; slow to anger, and of great mercy.", reference: "Psalm 145:8", prayer: "Gracious Father, thank You for Your compassion and mercy toward me. Amen." },
+      { day: 38, verse: "God is our refuge and strength, a very present help in trouble.", reference: "Psalm 46:1", prayer: "God, be my refuge right now. Be my present help in this time of trouble. Amen." },
+      { day: 39, verse: "Thou art my hiding place; thou shalt preserve me from trouble.", reference: "Psalm 32:7", prayer: "Lord, hide me in Your presence. Preserve me from trouble and surround me with peace. Amen." },
+      { day: 40, verse: "The LORD is my helper, and I will not fear what man shall do unto me.", reference: "Hebrews 13:6", prayer: "Father, be my helper today. Remove fear of others and help me trust only You. Amen." },
+      { day: 41, verse: "Blessed be God, even the Father of our Lord Jesus Christ, the Father of mercies, and the God of all comfort.", reference: "2 Corinthians 1:3", prayer: "Father of mercies, comfort me today. Wrap me in Your loving embrace. Amen." },
+      { day: 42, verse: "For the LORD loveth judgment, and forsaketh not his saints; they are preserved for ever.", reference: "Psalm 37:28", prayer: "Lord, thank You for never forsaking me. Preserve me in Your love forever. Amen." },
+      { day: 43, verse: "But the salvation of the righteous is of the LORD: he is their strength in the time of trouble.", reference: "Psalm 37:39", prayer: "God, be my strength in trouble. Save me and be my ever-present help. Amen." },
+      { day: 44, verse: "When thou passest through the waters, I will be with thee.", reference: "Isaiah 43:2", prayer: "Lord, walk with me through deep waters. Never leave me as I face overwhelming times. Amen." },
+      { day: 45, verse: "The LORD will give strength unto his people; the LORD will bless his people with peace.", reference: "Psalm 29:11", prayer: "Father, give me strength and bless me with Your peace today and always. Amen." },
+      { day: 46, verse: "It is of the LORD's mercies that we are not consumed, because his compassions fail not.", reference: "Lamentations 3:22", prayer: "Merciful God, thank You for Your unfailing compassion. Sustain me today. Amen." },
+      { day: 47, verse: "They that sow in tears shall reap in joy.", reference: "Psalm 126:5", prayer: "Lord, turn my tears into joy. Help me trust that this season of sorrow will yield harvest. Amen." },
+      { day: 48, verse: "For with God nothing shall be impossible.", reference: "Luke 1:37", prayer: "God of the impossible, work miracles in my situation. Nothing is too hard for You. Amen." },
+      { day: 49, verse: "The LORD upholdeth all that fall, and raiseth up all those that be bowed down.", reference: "Psalm 145:14", prayer: "Lord, uphold me when I fall. Raise me up when I'm bowed down by life's weight. Amen." },
+      { day: 50, verse: "Behold, I am the LORD, the God of all flesh: is there any thing too hard for me?", reference: "Jeremiah 32:27", prayer: "Almighty God, nothing is too hard for You. Work powerfully in my circumstances. Amen." },
+      { day: 51, verse: "The LORD is good to all: and his tender mercies are over all his works.", reference: "Psalm 145:9", prayer: "Good Lord, extend Your tender mercies to me. Show me Your goodness today. Amen." },
+      { day: 52, verse: "For the LORD God is a sun and shield: the LORD will give grace and glory.", reference: "Psalm 84:11", prayer: "Lord, be my sun and shield. Give me grace for today and glory for tomorrow. Amen." },
+      { day: 53, verse: "Be strong and of a good courage; be not afraid, neither be thou dismayed.", reference: "Joshua 1:9", prayer: "Father, make me strong and courageous. Remove fear and dismay from my heart. Amen." },
+      { day: 54, verse: "And the peace of God, which passeth all understanding, shall keep your hearts and minds.", reference: "Philippians 4:7", prayer: "Lord, guard my heart and mind with Your incomprehensible peace today. Amen." },
+      { day: 55, verse: "For he hath said, I will never leave thee, nor forsake thee.", reference: "Hebrews 13:5", prayer: "Faithful God, thank You for never leaving or forsaking me. I rest in Your presence. Amen." },
+      { day: 56, verse: "The LORD is on my side; I will not fear: what can man do unto me?", reference: "Psalm 118:6", prayer: "Lord, with You on my side, I have nothing to fear. Protect and empower me. Amen." },
+      { day: 57, verse: "Many are the afflictions of the righteous: but the LORD delivereth him out of them all.", reference: "Psalm 34:19", prayer: "Deliverer, rescue me from my afflictions. Bring me through victoriously. Amen." },
+      { day: 58, verse: "Evening, and morning, and at noon, will I pray, and cry aloud: and he shall hear my voice.", reference: "Psalm 55:17", prayer: "Lord, hear my voice throughout this day. I trust You're listening to my prayers. Amen." },
+      { day: 59, verse: "The LORD preserveth the simple: I was brought low, and he helped me.", reference: "Psalm 116:6", prayer: "Father, help me in my lowliness. Preserve me and lift me up in Your time. Amen." },
+      { day: 60, verse: "The eyes of the LORD are upon the righteous, and his ears are open unto their cry.", reference: "Psalm 34:15", prayer: "Lord, thank You for watching over me and hearing my cries. Be near to me. Amen." },
+      { day: 61, verse: "The LORD also will be a refuge for the oppressed, a refuge in times of trouble.", reference: "Psalm 9:9", prayer: "God, be my refuge from oppression. Shelter me in times of trouble today. Amen." },
+      { day: 62, verse: "Thou hast been a shelter for me, and a strong tower from the enemy.", reference: "Psalm 61:3", prayer: "Lord, be my shelter and strong tower. Protect me from every attack of the enemy. Amen." },
+      { day: 63, verse: "The LORD openeth the eyes of the blind: the LORD raiseth them that are bowed down.", reference: "Psalm 146:8", prayer: "Father, open my eyes to see Your truth. Raise me up from discouragement. Amen." },
+      { day: 64, verse: "But thou, O LORD, art a shield for me; my glory, and the lifter up of mine head.", reference: "Psalm 3:3", prayer: "Lord, shield me today. Lift up my head and restore my hope and dignity. Amen." },
+      { day: 65, verse: "Though I walk in the midst of trouble, thou wilt revive me.", reference: "Psalm 138:7", prayer: "Reviving God, bring life to my weary soul. Sustain me through this trouble. Amen." },
+      { day: 66, verse: "The LORD is thy keeper: the LORD is thy shade upon thy right hand.", reference: "Psalm 121:5", prayer: "Keeper of my soul, shade me from harm. Protect me on every side today. Amen." },
+      { day: 67, verse: "My flesh and my heart faileth: but God is the strength of my heart, and my portion for ever.", reference: "Psalm 73:26", prayer: "Lord, when I'm weak, be the strength of my heart. You are all I need. Amen." },
+      { day: 68, verse: "But the LORD is faithful, who shall stablish you, and keep you from evil.", reference: "2 Thessalonians 3:3", prayer: "Faithful Lord, establish me in Your truth and keep me from evil today. Amen." },
+      { day: 69, verse: "The righteous cry, and the LORD heareth, and delivereth them out of all their troubles.", reference: "Psalm 34:17", prayer: "Lord, hear my cry and deliver me from all my troubles. I trust in You. Amen." },
+      { day: 70, verse: "Blessed is the man that trusteth in the LORD, and whose hope the LORD is.", reference: "Jeremiah 17:7", prayer: "Father, I place my trust and hope in You alone. Bless me as I rely on You. Amen." },
+      { day: 71, verse: "The LORD is good unto them that wait for him, to the soul that seeketh him.", reference: "Lamentations 3:25", prayer: "Good Lord, I wait for You and seek You. Show me Your goodness today. Amen." },
+      { day: 72, verse: "And the LORD, he it is that doth go before thee; he will be with thee.", reference: "Deuteronomy 31:8", prayer: "Lord, go before me today. Walk with me and never leave me alone. Amen." },
+      { day: 73, verse: "Be not afraid of sudden fear, neither of the desolation of the wicked, when it cometh. For the LORD shall be thy confidence.", reference: "Proverbs 3:25-26", prayer: "Father, be my confidence. Protect me from sudden fear and wicked plans. Amen." },
+      { day: 74, verse: "For the LORD knoweth the way of the righteous: but the way of the ungodly shall perish.", reference: "Psalm 1:6", prayer: "Lord, You know my way. Guide me on the path of righteousness today. Amen." },
+      { day: 75, verse: "The LORD recompense thy work, and a full reward be given thee.", reference: "Ruth 2:12", prayer: "Lord, reward my faithfulness. Let my work be meaningful and blessed by You. Amen." },
+      { day: 76, verse: "The LORD is merciful and gracious, slow to anger, and plenteous in mercy.", reference: "Psalm 103:8", prayer: "Merciful Father, extend Your grace to me. Thank You for Your abundant mercy. Amen." },
+      { day: 77, verse: "What time I am afraid, I will trust in thee.", reference: "Psalm 56:3", prayer: "Lord, when fear grips me, help me choose trust. Be my courage today. Amen." },
+      { day: 78, verse: "He that dwelleth in the secret place of the most High shall abide under the shadow of the Almighty.", reference: "Psalm 91:1", prayer: "Most High God, let me dwell in Your presence. Cover me with Your protection. Amen." },
+      { day: 79, verse: "The LORD will command his lovingkindness in the daytime, and in the night his song shall be with me.", reference: "Psalm 42:8", prayer: "Lord, fill my days with Your lovingkindness and my nights with songs of hope. Amen." },
+      { day: 80, verse: "But thou, O LORD, art a God full of compassion, and gracious.", reference: "Psalm 86:15", prayer: "Compassionate God, show me Your grace. Meet me with Your tender mercies. Amen." },
+      { day: 81, verse: "For the mountains shall depart, and the hills be removed; but my kindness shall not depart from thee.", reference: "Isaiah 54:10", prayer: "Lord, even when everything shakes, Your kindness remains. Thank You for unchanging love. Amen." },
+      { day: 82, verse: "The LORD thy God in the midst of thee is mighty; he will save.", reference: "Zephaniah 3:17", prayer: "Mighty God, You are with me. Save me from my troubles and rejoice over me. Amen." },
+      { day: 83, verse: "Because he hath set his love upon me, therefore will I deliver him.", reference: "Psalm 91:14", prayer: "Father, I set my love on You. Deliver me and protect me as You've promised. Amen." },
+      { day: 84, verse: "The LORD shall fight for you, and ye shall hold your peace.", reference: "Exodus 14:14", prayer: "Warrior God, fight my battles. Help me rest in peace as You work on my behalf. Amen." },
+      { day: 85, verse: "The LORD is nigh unto all them that call upon him, to all that call upon him in truth.", reference: "Psalm 145:18", prayer: "Lord, I call upon You in truth. Draw near to me and hear my prayer. Amen." },
+      { day: 86, verse: "For the LORD loveth the righteous.", reference: "Psalm 146:8", prayer: "Father, thank You for Your love. Help me walk in righteousness before You. Amen." },
+      { day: 87, verse: "Blessed are the poor in spirit: for theirs is the kingdom of heaven.", reference: "Matthew 5:3", prayer: "Lord, in my spiritual poverty, I find Your kingdom. Fill my emptiness with Your presence. Amen." },
+      { day: 88, verse: "Blessed are they that mourn: for they shall be comforted.", reference: "Matthew 5:4", prayer: "Comforter, meet me in my mourning. Bring healing and hope to my grieving heart. Amen." },
+      { day: 89, verse: "Blessed are the meek: for they shall inherit the earth.", reference: "Matthew 5:5", prayer: "Lord, teach me meekness. Help me trust Your promises and timing. Amen." },
+      { day: 90, verse: "Blessed are they which do hunger and thirst after righteousness: for they shall be filled.", reference: "Matthew 5:6", prayer: "Father, I hunger for You. Fill me with Your righteousness and satisfy my soul. Amen." },
+      { day: 91, verse: "Blessed are the merciful: for they shall obtain mercy.", reference: "Matthew 5:7", prayer: "Merciful God, help me show mercy to others. Pour Your mercy on me today. Amen." },
+      { day: 92, verse: "Blessed are the pure in heart: for they shall see God.", reference: "Matthew 5:8", prayer: "Lord, purify my heart. Help me see You clearly in my life today. Amen." },
+      { day: 93, verse: "Blessed are the peacemakers: for they shall be called the children of God.", reference: "Matthew 5:9", prayer: "Prince of Peace, make me a peacemaker. Let Your peace flow through me to others. Amen." },
+      { day: 94, verse: "Ask, and it shall be given you; seek, and ye shall find; knock, and it shall be opened unto you.", reference: "Matthew 7:7", prayer: "Lord, I ask, seek, and knock. Open doors and answer my prayers according to Your will. Amen." },
+      { day: 95, verse: "For every one that asketh receiveth; and he that seeketh findeth.", reference: "Matthew 7:8", prayer: "Father, I come asking and seeking. Help me receive what I need from You today. Amen." },
+      { day: 96, verse: "If ye then, being evil, know how to give good gifts unto your children, how much more shall your Father which is in heaven give good things to them that ask him?", reference: "Matthew 7:11", prayer: "Heavenly Father, I trust You give good gifts. Bless me with what I need today. Amen." },
+      { day: 97, verse: "Lo, I am with you alway, even unto the end of the world.", reference: "Matthew 28:20", prayer: "Ever-present Lord, thank You for being with me always. I'm never alone. Amen." },
+      { day: 98, verse: "With men this is impossible; but with God all things are possible.", reference: "Matthew 19:26", prayer: "God of possibilities, do the impossible in my life. Nothing is too hard for You. Amen." },
+      { day: 99, verse: "If thou canst believe, all things are possible to him that believeth.", reference: "Mark 9:23", prayer: "Lord, I believe. Help my unbelief and work miracles in my situation. Amen." },
+      { day: 100, verse: "Therefore I say unto you, What things soever ye desire, when ye pray, believe that ye receive them, and ye shall have them.", reference: "Mark 11:24", prayer: "Father, I pray in faith, believing You hear and answer. Thank You in advance. Amen." },
+      { day: 101, verse: "The Spirit of the Lord is upon me, because he hath anointed me to preach the gospel to the poor; he hath sent me to heal the brokenhearted.", reference: "Luke 4:18", prayer: "Lord, heal my broken heart. Bring good news to my poor spirit today. Amen." },
+      { day: 102, verse: "For with God nothing shall be impossible.", reference: "Luke 1:37", prayer: "Almighty God, I believe nothing is impossible with You. Work wonders in my life. Amen." },
+      { day: 103, verse: "Fear not, little flock; for it is your Father's good pleasure to give you the kingdom.", reference: "Luke 12:32", prayer: "Father, remove my fear. Thank You for Your pleasure in blessing me. Amen." },
+      { day: 104, verse: "For God so loved the world, that he gave his only begotten Son.", reference: "John 3:16", prayer: "Loving Father, thank You for Your immeasurable love shown through Jesus. Amen." },
+      { day: 105, verse: "He that believeth on me, as the scripture hath said, out of his belly shall flow rivers of living water.", reference: "John 7:38", prayer: "Lord, let living water flow from within me. Refresh my dry and weary soul. Amen." },
+      { day: 106, verse: "I am come that they might have life, and that they might have it more abundantly.", reference: "John 10:10", prayer: "Jesus, give me abundant life. Fill me with Your fullness and joy today. Amen." },
+      { day: 107, verse: "I will not leave you comfortless: I will come to you.", reference: "John 14:18", prayer: "Comforter, come to me. Fill my loneliness with Your presence and peace. Amen." },
+      { day: 108, verse: "These things I have spoken unto you, that in me ye might have peace.", reference: "John 16:33", prayer: "Prince of Peace, give me Your peace that overcomes all tribulation. Amen." },
+      { day: 109, verse: "That they all may be one; as thou, Father, art in me, and I in thee.", reference: "John 17:21", prayer: "Lord, unite me with You. Let me experience oneness with Your heart. Amen." },
+      { day: 110, verse: "And hope maketh not ashamed; because the love of God is shed abroad in our hearts.", reference: "Romans 5:5", prayer: "Father, fill my heart with Your love. Give me hope that never disappoints. Amen." },
+      { day: 111, verse: "For I reckon that the sufferings of this present time are not worthy to be compared with the glory which shall be revealed in us.", reference: "Romans 8:18", prayer: "Lord, help me endure present suffering. I trust in the coming glory. Amen." },
+      { day: 112, verse: "The Spirit itself maketh intercession for us with groanings which cannot be uttered.", reference: "Romans 8:26", prayer: "Holy Spirit, intercede for me when I cannot find words. Pray through me today. Amen." },
+      { day: 113, verse: "Who shall separate us from the love of Christ?", reference: "Romans 8:35", prayer: "Jesus, nothing can separate me from Your love. I rest secure in Your embrace. Amen." },
+      { day: 114, verse: "Nay, in all these things we are more than conquerors through him that loved us.", reference: "Romans 8:37", prayer: "Lord, make me more than a conqueror. Give me victory through Your love. Amen." },
+      { day: 115, verse: "For I am persuaded, that neither death, nor life, nor angels, nor principalities, nor powers, nor things present, nor things to come, Nor height, nor depth, nor any other creature, shall be able to separate us from the love of God.", reference: "Romans 8:38-39", prayer: "Unchanging God, I rest in Your inseparable love. Nothing can take me from You. Amen." },
+      { day: 116, verse: "Now the God of hope fill you with all joy and peace in believing.", reference: "Romans 15:13", prayer: "God of hope, fill me with joy and peace. Strengthen my faith today. Amen." },
+      { day: 117, verse: "But God hath chosen the foolish things of the world to confound the wise.", reference: "1 Corinthians 1:27", prayer: "Lord, use me despite my weakness. Show Your power through my limitations. Amen." },
+      { day: 118, verse: "But as it is written, Eye hath not seen, nor ear heard, neither have entered into the heart of man, the things which God hath prepared for them that love him.", reference: "1 Corinthians 2:9", prayer: "Father, I trust in what You've prepared. Open my eyes to Your wonderful plans. Amen." },
+      { day: 119, verse: "There hath no temptation taken you but such as is common to man: but God is faithful.", reference: "1 Corinthians 10:13", prayer: "Faithful God, help me resist temptation. Provide a way of escape today. Amen." },
+      { day: 120, verse: "And now abideth faith, hope, charity, these three; but the greatest of these is charity.", reference: "1 Corinthians 13:13", prayer: "Lord, increase faith, hope, and love in me. Help me love as You love. Amen." },
+      { day: 121, verse: "Therefore if any man be in Christ, he is a new creature: old things are passed away.", reference: "2 Corinthians 5:17", prayer: "Creator God, make me new. Let old hurts and habits pass away in Christ. Amen." },
+      { day: 122, verse: "And he said unto me, My grace is sufficient for thee.", reference: "2 Corinthians 12:9", prayer: "Lord, let Your grace be enough. Show Your strength in my weakness today. Amen." },
+      { day: 123, verse: "I am crucified with Christ: nevertheless I live; yet not I, but Christ liveth in me.", reference: "Galatians 2:20", prayer: "Jesus, live through me. Let my life reflect Your presence and power. Amen." },
+      { day: 124, verse: "But the fruit of the Spirit is love, joy, peace, longsuffering, gentleness, goodness, faith.", reference: "Galatians 5:22", prayer: "Holy Spirit, produce Your fruit in me. Transform my character to reflect Christ. Amen." },
+      { day: 125, verse: "Bear ye one another's burdens, and so fulfil the law of Christ.", reference: "Galatians 6:2", prayer: "Lord, help me bear others' burdens. Bring people to help carry mine as well. Amen." },
+      { day: 126, verse: "Blessed be the God and Father of our Lord Jesus Christ, who hath blessed us with all spiritual blessings.", reference: "Ephesians 1:3", prayer: "Blessed Father, thank You for every spiritual blessing. Help me walk in them. Amen." },
+      { day: 127, verse: "Now unto him that is able to do exceeding abundantly above all that we ask or think.", reference: "Ephesians 3:20", prayer: "Abundant God, do more than I can imagine. Exceed my expectations today. Amen." },
+      { day: 128, verse: "And be ye kind one to another, tenderhearted, forgiving one another.", reference: "Ephesians 4:32", prayer: "Lord, make me kind and tenderhearted. Help me forgive as You've forgiven me. Amen." },
+      { day: 129, verse: "Be careful for nothing; but in every thing by prayer and supplication with thanksgiving.", reference: "Philippians 4:6", prayer: "Father, I give You my worries. Help me pray with thanksgiving instead of anxiety. Amen." },
+      { day: 130, verse: "But my God shall supply all your need according to his riches in glory by Christ Jesus.", reference: "Philippians 4:19", prayer: "Provider God, supply all my needs. I trust in Your abundant riches. Amen." },
+      { day: 131, verse: "For it is God which worketh in you both to will and to do of his good pleasure.", reference: "Philippians 2:13", prayer: "Lord, work in me. Give me desire and ability to do Your will today. Amen." },
+      { day: 132, verse: "And let the peace of God rule in your hearts.", reference: "Colossians 3:15", prayer: "Prince of Peace, let Your peace rule my heart. Settle every anxious thought. Amen." },
+      { day: 133, verse: "For God hath not appointed us to wrath, but to obtain salvation by our Lord Jesus Christ.", reference: "1 Thessalonians 5:9", prayer: "Savior, thank You for salvation. Deliver me from wrath and bring me to safety. Amen." },
+      { day: 134, verse: "Faithful is he that calleth you, who also will do it.", reference: "1 Thessalonians 5:24", prayer: "Faithful God, You will complete what You began. I trust Your promises. Amen." },
+      { day: 135, verse: "For God hath not given us the spirit of fear; but of power, and of love, and of a sound mind.", reference: "2 Timothy 1:7", prayer: "Lord, replace fear with power, love, and clarity. Renew my mind today. Amen." },
+      { day: 136, verse: "All scripture is given by inspiration of God, and is profitable for doctrine, for reproof, for correction, for instruction in righteousness.", reference: "2 Timothy 3:16", prayer: "Father, teach me through Your Word. Correct and instruct me in righteousness. Amen." },
+      { day: 137, verse: "Looking unto Jesus the author and finisher of our faith.", reference: "Hebrews 12:2", prayer: "Jesus, You began my faith and will complete it. Help me keep my eyes on You. Amen." },
+      { day: 138, verse: "Let us therefore come boldly unto the throne of grace, that we may obtain mercy.", reference: "Hebrews 4:16", prayer: "Lord, I come boldly to Your throne. Grant me mercy and grace for today. Amen." },
+      { day: 139, verse: "For we have not an high priest which cannot be touched with the feeling of our infirmities.", reference: "Hebrews 4:15", prayer: "Compassionate Jesus, You understand my struggles. Help me in my weakness. Amen." },
+      { day: 140, verse: "Jesus Christ the same yesterday, and to day, and for ever.", reference: "Hebrews 13:8", prayer: "Unchanging Christ, thank You for Your constancy. Be my stability today. Amen." },
+      { day: 141, verse: "If any of you lack wisdom, let him ask of God, that giveth to all men liberally.", reference: "James 1:5", prayer: "Wise Father, I need Your wisdom. Guide my decisions and thoughts today. Amen." },
+      { day: 142, verse: "Blessed is the man that endureth temptation: for when he is tried, he shall receive the crown of life.", reference: "James 1:12", prayer: "Lord, help me endure temptation. Strengthen me for the crown ahead. Amen." },
+      { day: 143, verse: "Draw nigh to God, and he will draw nigh to you.", reference: "James 4:8", prayer: "Father, I draw near to You. Meet me and fill me with Your presence. Amen." },
+      { day: 144, verse: "Humble yourselves in the sight of the Lord, and he shall lift you up.", reference: "James 4:10", prayer: "Lord, I humble myself before You. Lift me up in Your perfect timing. Amen." },
+      { day: 145, verse: "The effectual fervent prayer of a righteous man availeth much.", reference: "James 5:16", prayer: "Father, hear my fervent prayers. Let them be effective and powerful. Amen." },
+      { day: 146, verse: "Casting all your care upon him; for he careth for you.", reference: "1 Peter 5:7", prayer: "Caring God, I cast every burden on You. Thank You for Your tender care. Amen." },
+      { day: 147, verse: "But the God of all grace, who hath called us unto his eternal glory by Christ Jesus, after that ye have suffered a while, make you perfect.", reference: "1 Peter 5:10", prayer: "God of grace, perfect me through suffering. Bring me to Your eternal glory. Amen." },
+      { day: 148, verse: "For the eyes of the Lord are over the righteous, and his ears are open unto their prayers.", reference: "1 Peter 3:12", prayer: "Lord, thank You for watching over me and hearing my prayers today. Amen." },
+      { day: 149, verse: "The Lord is not slack concerning his promise, as some men count slackness; but is longsuffering to us-ward.", reference: "2 Peter 3:9", prayer: "Patient Lord, thank You for Your longsuffering. Help me trust Your timing. Amen." },
+      { day: 150, verse: "But if we walk in the light, as he is in the light, we have fellowship one with another.", reference: "1 John 1:7", prayer: "Lord of light, help me walk in Your light. Keep me in fellowship with You. Amen." },
+      { day: 151, verse: "If we confess our sins, he is faithful and just to forgive us our sins.", reference: "1 John 1:9", prayer: "Forgiving God, I confess my sins. Thank You for faithful forgiveness. Amen." },
+      { day: 152, verse: "Beloved, now are we the sons of God, and it doth not yet appear what we shall be.", reference: "1 John 3:2", prayer: "Father, thank You for making me Your child. I trust in what I'll become. Amen." },
+      { day: 153, verse: "Herein is love, not that we loved God, but that he loved us.", reference: "1 John 4:10", prayer: "Loving Father, thank You for loving me first. Help me love You in return. Amen." },
+      { day: 154, verse: "There is no fear in love; but perfect love casteth out fear.", reference: "1 John 4:18", prayer: "Perfect Love, cast out all fear from my heart. Fill me with confidence. Amen." },
+      { day: 155, verse: "And this is the confidence that we have in him, that, if we ask any thing according to his will, he heareth us.", reference: "1 John 5:14", prayer: "Lord, I ask according to Your will. I trust You hear and answer me. Amen." },
+      { day: 156, verse: "Fear not; I am the first and the last.", reference: "Revelation 1:17", prayer: "Eternal God, You are first and last. I need not fear with You beside me. Amen." },
+      { day: 157, verse: "Behold, I stand at the door, and knock: if any man hear my voice, and open the door, I will come in.", reference: "Revelation 3:20", prayer: "Jesus, I open my heart's door. Come in and fellowship with me today. Amen." },
+      { day: 158, verse: "And God shall wipe away all tears from their eyes.", reference: "Revelation 21:4", prayer: "Comforting God, I look forward to the day You wipe every tear away. Amen." },
+      { day: 159, verse: "He that overcometh shall inherit all things; and I will be his God.", reference: "Revelation 21:7", prayer: "Lord, help me overcome. I trust in the inheritance You've promised. Amen." },
+      { day: 160, verse: "Surely goodness and mercy shall follow me all the days of my life.", reference: "Psalm 23:6", prayer: "Shepherd God, let Your goodness and mercy follow me always. Amen." },
+      { day: 161, verse: "He maketh me to lie down in green pastures: he leadeth me beside the still waters.", reference: "Psalm 23:2", prayer: "Good Shepherd, lead me to rest and peace. Restore my weary soul today. Amen." },
+      { day: 162, verse: "He restoreth my soul: he leadeth me in the paths of righteousness.", reference: "Psalm 23:3", prayer: "Restorer, renew my soul. Guide me in paths of righteousness for Your name's sake. Amen." },
+      { day: 163, verse: "Yea, though I walk through the valley of the shadow of death, I will fear no evil.", reference: "Psalm 23:4", prayer: "Lord, walk with me through dark valleys. Your presence removes all fear. Amen." },
+      { day: 164, verse: "Thou preparest a table before me in the presence of mine enemies.", reference: "Psalm 23:5", prayer: "Provider, prepare blessing for me even in adversity. Honor me before my enemies. Amen." },
+      { day: 165, verse: "My cup runneth over.", reference: "Psalm 23:5", prayer: "Generous God, fill my life to overflowing. Let abundance pour from Your hand. Amen." },
+      { day: 166, verse: "The LORD is the strength of my life; of whom shall I be afraid?", reference: "Psalm 27:1", prayer: "Strong Lord, be my strength today. Remove all fear from my heart. Amen." },
+      { day: 167, verse: "When the wicked, even mine enemies and my foes, came upon me to eat up my flesh, they stumbled and fell.", reference: "Psalm 27:2", prayer: "Defender, fight against those who oppose me. Let my enemies stumble. Amen." },
+      { day: 168, verse: "Though an host should encamp against me, my heart shall not fear.", reference: "Psalm 27:3", prayer: "Lord, even when surrounded, I will not fear. You are my confidence. Amen." },
+      { day: 169, verse: "One thing have I desired of the LORD, that will I seek after; that I may dwell in the house of the LORD.", reference: "Psalm 27:4", prayer: "Father, my greatest desire is to dwell with You. Draw me into Your presence. Amen." },
+      { day: 170, verse: "For in the time of trouble he shall hide me in his pavilion.", reference: "Psalm 27:5", prayer: "Hiding Place, shelter me in trouble. Conceal me in Your secret place. Amen." },
+      { day: 171, verse: "Hear, O LORD, when I cry with my voice: have mercy also upon me, and answer me.", reference: "Psalm 27:7", prayer: "Merciful Lord, hear my cry and have mercy on me. Answer my prayers. Amen." },
+      { day: 172, verse: "When thou saidst, Seek ye my face; my heart said unto thee, Thy face, LORD, will I seek.", reference: "Psalm 27:8", prayer: "Lord, I seek Your face. Reveal Yourself to me in powerful ways today. Amen." },
+      { day: 173, verse: "I had fainted, unless I had believed to see the goodness of the LORD in the land of the living.", reference: "Psalm 27:13", prayer: "Lord, I believe I will see Your goodness. Strengthen my faith today. Amen." },
+      { day: 174, verse: "Unto thee will I cry, O LORD my rock; be not silent to me.", reference: "Psalm 28:1", prayer: "Rock of Ages, hear my cry. Don't be silent when I call to You. Amen." },
+      { day: 175, verse: "Blessed be the LORD, because he hath heard the voice of my supplications.", reference: "Psalm 28:6", prayer: "Blessed Lord, thank You for hearing my prayers. I praise You for listening. Amen." },
+      { day: 176, verse: "The voice of the LORD is powerful; the voice of the LORD is full of majesty.", reference: "Psalm 29:4", prayer: "Majestic God, speak Your powerful word into my situation today. Amen." },
+      { day: 177, verse: "For his anger endureth but a moment; in his favour is life.", reference: "Psalm 30:5", prayer: "Gracious Father, thank You that Your anger is brief but Your favor is life. Amen." },
+      { day: 178, verse: "Thou hast turned for me my mourning into dancing.", reference: "Psalm 30:11", prayer: "God of joy, turn my mourning into dancing. Replace sorrow with celebration. Amen." },
+      { day: 179, verse: "In thee, O LORD, do I put my trust; let me never be ashamed.", reference: "Psalm 31:1", prayer: "Trustworthy Lord, I place my trust in You. Never let me be disappointed. Amen." },
+      { day: 180, verse: "Pull me out of the net that they have laid privily for me: for thou art my strength.", reference: "Psalm 31:4", prayer: "Deliverer, rescue me from hidden traps. Be my strength and salvation. Amen." },
+      { day: 181, verse: "Into thine hand I commit my spirit: thou hast redeemed me, O LORD God of truth.", reference: "Psalm 31:5", prayer: "God of truth, I commit my spirit to You. Redeem every part of my life. Amen." },
+      { day: 182, verse: "I will be glad and rejoice in thy mercy: for thou hast considered my trouble.", reference: "Psalm 31:7", prayer: "Merciful God, You see my trouble. I rejoice in Your mercy today. Amen." },
+      { day: 183, verse: "But I trusted in thee, O LORD: I said, Thou art my God.", reference: "Psalm 31:14", prayer: "My God, I trust in You alone. You are Lord of my life today and always. Amen." },
+      { day: 184, verse: "My times are in thy hand.", reference: "Psalm 31:15", prayer: "Sovereign Lord, my times are in Your hands. I trust Your perfect timing. Amen." },
+      { day: 185, verse: "O how great is thy goodness, which thou hast laid up for them that fear thee!", reference: "Psalm 31:19", prayer: "Good God, reveal Your great goodness to me. Bless me abundantly. Amen." },
+      { day: 186, verse: "Be of good courage, and he shall strengthen your heart, all ye that hope in the LORD.", reference: "Psalm 31:24", prayer: "Lord, give me courage. Strengthen my heart as I hope in You. Amen." },
+      { day: 187, verse: "Blessed is he whose transgression is forgiven, whose sin is covered.", reference: "Psalm 32:1", prayer: "Forgiving Father, thank You for covering my sins. I am blessed by Your grace. Amen." },
+      { day: 188, verse: "I acknowledged my sin unto thee, and mine iniquity have I not hid.", reference: "Psalm 32:5", prayer: "Lord, I acknowledge my sins to You. Thank You for forgiving my iniquity. Amen." },
+      { day: 189, verse: "Thou art my hiding place; thou shalt preserve me from trouble.", reference: "Psalm 32:7", prayer: "Hiding Place, preserve me from trouble. Surround me with songs of deliverance. Amen." },
+      { day: 190, verse: "I will instruct thee and teach thee in the way which thou shalt go.", reference: "Psalm 32:8", prayer: "Teacher, instruct me in Your ways. Guide my path with Your wisdom. Amen." },
+      { day: 191, verse: "Many sorrows shall be to the wicked: but he that trusteth in the LORD, mercy shall compass him about.", reference: "Psalm 32:10", prayer: "Merciful Lord, surround me with Your mercy. I trust in You alone. Amen." },
+      { day: 192, verse: "The earth is full of the goodness of the LORD.", reference: "Psalm 33:5", prayer: "Lord, open my eyes to see Your goodness all around me today. Amen." },
+      { day: 193, verse: "Behold, the eye of the LORD is upon them that fear him, upon them that hope in his mercy.", reference: "Psalm 33:18", prayer: "Watchful God, Your eye is upon me. I hope in Your mercy today. Amen." },
+      { day: 194, verse: "Our soul waiteth for the LORD: he is our help and our shield.", reference: "Psalm 33:20", prayer: "Helper and Shield, I wait for You. Protect and assist me today. Amen." },
+      { day: 195, verse: "This poor man cried, and the LORD heard him, and saved him out of all his troubles.", reference: "Psalm 34:6", prayer: "Savior, hear my cry. Deliver me from all my troubles today. Amen." },
+      { day: 196, verse: "The angel of the LORD encampeth round about them that fear him, and delivereth them.", reference: "Psalm 34:7", prayer: "Lord, send Your angels to camp around me. Deliver me from danger. Amen." },
+      { day: 197, verse: "O taste and see that the LORD is good: blessed is the man that trusteth in him.", reference: "Psalm 34:8", prayer: "Good Lord, let me taste Your goodness. Bless me as I trust in You. Amen." },
+      { day: 198, verse: "The LORD is nigh unto them that are of a broken heart; and saveth such as be of a contrite spirit.", reference: "Psalm 34:18", prayer: "Near One, come close to my broken heart. Save me with Your healing touch. Amen." },
+      { day: 199, verse: "The LORD redeemeth the soul of his servants.", reference: "Psalm 34:22", prayer: "Redeemer, redeem my soul. I am Your servant; save me completely. Amen." },
+      { day: 200, verse: "Plead my cause, O LORD, with them that strive with me: fight against them that fight against me.", reference: "Psalm 35:1", prayer: "Advocate, plead my cause. Fight for me against those who oppose me. Amen." },
+      { day: 201, verse: "Let them be confounded and put to shame that seek after my soul.", reference: "Psalm 35:4", prayer: "Defender, confound those who seek to harm me. Protect me from enemies. Amen." },
+      { day: 202, verse: "And my soul shall be joyful in the LORD: it shall rejoice in his salvation.", reference: "Psalm 35:9", prayer: "Joyful Savior, fill my soul with joy. Let me rejoice in Your salvation. Amen." },
+      { day: 203, verse: "Let the LORD be magnified, which hath pleasure in the prosperity of his servant.", reference: "Psalm 35:27", prayer: "Magnified Lord, prosper me according to Your pleasure. I praise You. Amen." },
+      { day: 204, verse: "How excellent is thy lovingkindness, O God!", reference: "Psalm 36:7", prayer: "Loving God, Your lovingkindness is excellent. Pour it out on me today. Amen." },
+      { day: 205, verse: "For with thee is the fountain of life: in thy light shall we see light.", reference: "Psalm 36:9", prayer: "Fountain of Life, refresh me. Let me see clearly in Your light today. Amen." },
+      { day: 206, verse: "Fret not thyself because of evildoers.", reference: "Psalm 37:1", prayer: "Lord, help me not fret about evil. Keep my heart peaceful and trusting. Amen." },
+      { day: 207, verse: "Trust in the LORD, and do good; so shalt thou dwell in the land, and verily thou shalt be fed.", reference: "Psalm 37:3", prayer: "Provider, I trust in You. Feed me and let me dwell securely. Amen." },
+      { day: 208, verse: "Delight thyself also in the LORD; and he shall give thee the desires of thine heart.", reference: "Psalm 37:4", prayer: "Lord, You are my delight. Fulfill the desires You've placed in my heart. Amen." },
+      { day: 209, verse: "Commit thy way unto the LORD; trust also in him; and he shall bring it to pass.", reference: "Psalm 37:5", prayer: "Faithful God, I commit my way to You. Bring Your purposes to pass. Amen." },
+      { day: 210, verse: "Rest in the LORD, and wait patiently for him.", reference: "Psalm 37:7", prayer: "Lord, I rest in You. Give me patience as I wait for Your perfect timing. Amen." },
+      { day: 211, verse: "Cease from anger, and forsake wrath: fret not thyself in any wise to do evil.", reference: "Psalm 37:8", prayer: "Prince of Peace, remove anger from me. Keep me from fretting or doing wrong. Amen." },
+      { day: 212, verse: "For evildoers shall be cut off: but those that wait upon the LORD, they shall inherit the earth.", reference: "Psalm 37:9", prayer: "Just God, I wait upon You. Let me inherit the blessings You promise. Amen." },
+      { day: 213, verse: "But the meek shall inherit the earth; and shall delight themselves in the abundance of peace.", reference: "Psalm 37:11", prayer: "Lord, teach me meekness. Let me delight in Your abundant peace. Amen." },
+      { day: 214, verse: "The steps of a good man are ordered by the LORD: and he delighteth in his way.", reference: "Psalm 37:23", prayer: "Director, order my steps. Help me walk in ways that delight You. Amen." },
+      { day: 215, verse: "Though he fall, he shall not be utterly cast down: for the LORD upholdeth him with his hand.", reference: "Psalm 37:24", prayer: "Upholder, when I fall, lift me up. Hold me with Your mighty hand. Amen." },
+      { day: 216, verse: "I have been young, and now am old; yet have I not seen the righteous forsaken.", reference: "Psalm 37:25", prayer: "Faithful One, You never forsake the righteous. I trust in Your provision. Amen." },
+      { day: 217, verse: "The LORD loveth judgment, and forsaketh not his saints.", reference: "Psalm 37:28", prayer: "Just Lord, You never forsake Your saints. Preserve me forever in Your love. Amen." },
+      { day: 218, verse: "Wait on the LORD, and keep his way, and he shall exalt thee.", reference: "Psalm 37:34", prayer: "Lord, I wait on You and keep Your ways. Exalt me in Your time. Amen." },
+      { day: 219, verse: "Mark the perfect man, and behold the upright: for the end of that man is peace.", reference: "Psalm 37:37", prayer: "God of Peace, make me upright. Let my end be peace in You. Amen." },
+      { day: 220, verse: "But the salvation of the righteous is of the LORD: he is their strength in the time of trouble.", reference: "Psalm 37:39", prayer: "Savior, be my salvation and strength. Deliver me in times of trouble. Amen." },
+      { day: 221, verse: "And the LORD shall help them, and deliver them: he shall deliver them from the wicked, and save them, because they trust in him.", reference: "Psalm 37:40", prayer: "Helper, deliver me from wickedness. Save me because I trust in You. Amen." },
+      { day: 222, verse: "Make me to hear joy and gladness; that the bones which thou hast broken may rejoice.", reference: "Psalm 51:8", prayer: "Healer, restore joy and gladness to me. Let broken places rejoice again. Amen." },
+      { day: 223, verse: "Create in me a clean heart, O God; and renew a right spirit within me.", reference: "Psalm 51:10", prayer: "Creator, make my heart clean. Renew my spirit and make me whole. Amen." },
+      { day: 224, verse: "Restore unto me the joy of thy salvation; and uphold me with thy free spirit.", reference: "Psalm 51:12", prayer: "Restorer, bring back my joy in You. Uphold me with Your willing spirit. Amen." },
+      { day: 225, verse: "Cast thy burden upon the LORD, and he shall sustain thee: he shall never suffer the righteous to be moved.", reference: "Psalm 55:22", prayer: "Sustainer, I cast my burdens on You. Keep me steady and unmoved. Amen." },
+      { day: 226, verse: "When I cry unto thee, then shall mine enemies turn back: this I know; for God is for me.", reference: "Psalm 56:9", prayer: "Defender, You are for me. Turn back my enemies when I cry to You. Amen." },
+      { day: 227, verse: "In God I will praise his word, in God I have put my trust; I will not fear.", reference: "Psalm 56:4", prayer: "Trustworthy God, I praise Your word. Remove all fear from my heart. Amen." },
+      { day: 228, verse: "Be merciful unto me, O God, be merciful unto me: for my soul trusteth in thee.", reference: "Psalm 57:1", prayer: "Merciful Father, my soul trusts in You. Show me Your mercy today. Amen." },
+      { day: 229, verse: "My heart is fixed, O God, my heart is fixed: I will sing and give praise.", reference: "Psalm 57:7", prayer: "Faithful Lord, fix my heart on You. I will sing Your praises today. Amen." },
+      { day: 230, verse: "Awake up, my glory; awake, psaltery and harp: I myself will awake early.", reference: "Psalm 57:8", prayer: "Morning God, I wake early to praise You. Awaken my spirit to worship. Amen." },
+      { day: 231, verse: "For thy mercy is great unto the heavens, and thy truth unto the clouds.", reference: "Psalm 57:10", prayer: "Truthful One, Your mercy reaches the heavens. I rest in Your faithful truth. Amen." },
+      { day: 232, verse: "Deliver me from mine enemies, O my God: defend me from them that rise up against me.", reference: "Psalm 59:1", prayer: "Defender, deliver me from enemies. Protect me from those who oppose me. Amen." },
+      { day: 233, verse: "But I will sing of thy power; yea, I will sing aloud of thy mercy in the morning.", reference: "Psalm 59:16", prayer: "Powerful God, I sing of Your power and mercy. Fill my morning with praise. Amen." },
+      { day: 234, verse: "For thou hast been a shelter for me, and a strong tower from the enemy.", reference: "Psalm 61:3", prayer: "Strong Tower, be my shelter. Protect me from every enemy today. Amen." },
+      { day: 235, verse: "I will abide in thy tabernacle for ever: I will trust in the covert of thy wings.", reference: "Psalm 61:4", prayer: "Sheltering God, hide me under Your wings. Let me abide in You forever. Amen." },
+      { day: 236, verse: "He only is my rock and my salvation; he is my defence; I shall not be moved.", reference: "Psalm 62:6", prayer: "Rock of Salvation, be my defense. Keep me unmoved in every storm. Amen." },
+      { day: 237, verse: "Trust in him at all times; ye people, pour out your heart before him: God is a refuge for us.", reference: "Psalm 62:8", prayer: "Refuge, I pour out my heart to You. I trust You at all times. Amen." },
+      { day: 238, verse: "Because thy lovingkindness is better than life, my lips shall praise thee.", reference: "Psalm 63:3", prayer: "Kind Lord, Your lovingkindness exceeds life itself. I praise You today. Amen." },
+      { day: 239, verse: "My soul shall be satisfied as with marrow and fatness; and my mouth shall praise thee with joyful lips.", reference: "Psalm 63:5", prayer: "Satisfier, fill my soul completely. Let joyful praise flow from my lips. Amen." },
+      { day: 240, verse: "Because thou hast been my help, therefore in the shadow of thy wings will I rejoice.", reference: "Psalm 63:7", prayer: "Helper, I rejoice in Your shadow. Thank You for always helping me. Amen." },
+      { day: 241, verse: "Blessed be God, which hath not turned away my prayer, nor his mercy from me.", reference: "Psalm 66:20", prayer: "Merciful God, thank You for hearing my prayers. Your mercy endures forever. Amen." },
+      { day: 242, verse: "God be merciful unto us, and bless us; and cause his face to shine upon us.", reference: "Psalm 67:1", prayer: "Shining One, be merciful and bless me. Let Your face shine on me today. Amen." },
+      { day: 243, verse: "Blessed be the Lord, who daily loadeth us with benefits, even the God of our salvation.", reference: "Psalm 68:19", prayer: "Generous God, thank You for daily benefits. Load me with Your blessings. Amen." },
+      { day: 244, verse: "But I am poor and needy: make haste unto me, O God: thou art my help and my deliverer.", reference: "Psalm 70:5", prayer: "Helper, come quickly to me. You are my deliverer; rescue me today. Amen." },
+      { day: 245, verse: "In thee, O LORD, do I put my trust: let me never be put to confusion.", reference: "Psalm 71:1", prayer: "Lord of Order, I trust in You. Keep me from confusion and shame. Amen." },
+      { day: 246, verse: "Be thou my strong habitation, whereunto I may continually resort.", reference: "Psalm 71:3", prayer: "Strong Habitation, be my refuge. Let me continually find safety in You. Amen." },
+      { day: 247, verse: "For thou art my hope, O Lord GOD: thou art my trust from my youth.", reference: "Psalm 71:5", prayer: "God of Hope, You've been my trust since youth. Continue to be my hope. Amen." },
+      { day: 248, verse: "My mouth shall shew forth thy righteousness and thy salvation all the day.", reference: "Psalm 71:15", prayer: "Righteous Savior, let my mouth speak of Your salvation all day long. Amen." },
+      { day: 249, verse: "Now also when I am old and greyheaded, O God, forsake me not.", reference: "Psalm 71:18", prayer: "Faithful God, never forsake me. Be with me through every season of life. Amen." },
+      { day: 250, verse: "Thou, which hast shewed me great and sore troubles, shalt quicken me again.", reference: "Psalm 71:20", prayer: "Reviver, bring me back to life. Lift me from the depths once more. Amen." },
+      { day: 251, verse: "For he shall deliver the needy when he crieth; the poor also, and him that hath no helper.", reference: "Psalm 72:12", prayer: "Deliverer of the needy, I cry to You. Help me when I have no other helper. Amen." },
+      { day: 252, verse: "He shall redeem their soul from deceit and violence: and precious shall their blood be in his sight.", reference: "Psalm 72:14", prayer: "Redeemer, save me from violence and deceit. I am precious in Your sight. Amen." },
+      { day: 253, verse: "Nevertheless I am continually with thee: thou hast holden me by my right hand.", reference: "Psalm 73:23", prayer: "Ever-present God, thank You for holding my hand continually. Amen." },
+      { day: 254, verse: "Thou shalt guide me with thy counsel, and afterward receive me to glory.", reference: "Psalm 73:24", prayer: "Wise Counselor, guide me with Your wisdom. Lead me to eternal glory. Amen." },
+      { day: 255, verse: "Whom have I in heaven but thee? and there is none upon earth that I desire beside thee.", reference: "Psalm 73:25", prayer: "Lord, You are all I desire. In heaven and earth, You are enough. Amen." },
+      { day: 256, verse: "But it is good for me to draw near to God: I have put my trust in the Lord GOD.", reference: "Psalm 73:28", prayer: "Near God, it is good to draw close to You. I trust in You completely. Amen." },
+      { day: 257, verse: "Arise, O God, plead thine own cause.", reference: "Psalm 74:22", prayer: "Mighty God, arise and defend Your cause. Fight on behalf of Your people. Amen." },
+      { day: 258, verse: "Unto thee, O God, do we give thanks, unto thee do we give thanks: for that thy name is near thy wondrous works declare.", reference: "Psalm 75:1", prayer: "Wonderful God, I give thanks to You. Your name is near and Your works amazing. Amen." },
+      { day: 259, verse: "In the day of my trouble I sought the Lord: my sore ran in the night, and ceased not.", reference: "Psalm 77:2", prayer: "Ever-present Lord, I seek You in trouble. Comfort me in the night. Amen." },
+      { day: 260, verse: "I will remember the works of the LORD: surely I will remember thy wonders of old.", reference: "Psalm 77:11", prayer: "Wonderful God, help me remember Your past faithfulness in present trials. Amen." },
+      { day: 261, verse: "Thy way, O God, is in the sanctuary: who is so great a God as our God?", reference: "Psalm 77:13", prayer: "Great God, show me Your holy ways. There is none as great as You. Amen." },
+      { day: 262, verse: "The voice of thy thunder was in the heaven: the lightnings lightened the world: the earth trembled and shook.", reference: "Psalm 77:18", prayer: "Powerful God, demonstrate Your mighty power. Shake my circumstances today. Amen." },
+      { day: 263, verse: "Turn us again, O God, and cause thy face to shine; and we shall be saved.", reference: "Psalm 80:3", prayer: "Saving God, turn to me. Let Your face shine on me for salvation. Amen." },
+      { day: 264, verse: "Restore us, O God of hosts, and cause thy face to shine; and we shall be saved.", reference: "Psalm 80:7", prayer: "Restoring God, bring me back to life. Shine Your face upon me. Amen." },
+      { day: 265, verse: "For a day in thy courts is better than a thousand. I had rather be a doorkeeper in the house of my God.", reference: "Psalm 84:10", prayer: "Lord, one day with You is better than anything else. Draw me near. Amen." },
+      { day: 266, verse: "For the LORD God is a sun and shield: the LORD will give grace and glory: no good thing will he withhold from them that walk uprightly.", reference: "Psalm 84:11", prayer: "Sun and Shield, give me grace and glory. Withhold no good thing from me. Amen." },
+      { day: 267, verse: "Blessed is the man whose strength is in thee; in whose heart are the ways of them.", reference: "Psalm 84:5", prayer: "Strength-Giver, let my strength be in You alone. Direct my heart's ways. Amen." },
+      { day: 268, verse: "LORD, thou hast been favourable unto thy land: thou hast brought back the captivity of Jacob.", reference: "Psalm 85:1", prayer: "Favorable Lord, be gracious to me. Bring me back from captivity. Amen." },
+      { day: 269, verse: "Thou hast forgiven the iniquity of thy people, thou hast covered all their sin.", reference: "Psalm 85:2", prayer: "Forgiving Father, cover my sins. Thank You for complete forgiveness. Amen." },
+      { day: 270, verse: "Wilt thou not revive us again: that thy people may rejoice in thee?", reference: "Psalm 85:6", prayer: "Reviver, bring revival to my life. Let me rejoice in You once more. Amen." },
+      { day: 271, verse: "Shew us thy mercy, O LORD, and grant us thy salvation.", reference: "Psalm 85:7", prayer: "Merciful Savior, show me Your mercy. Grant me Your salvation today. Amen." },
+      { day: 272, verse: "Mercy and truth are met together; righteousness and peace have kissed each other.", reference: "Psalm 85:10", prayer: "God of Truth and Mercy, let righteousness and peace meet in my life. Amen." },
+      { day: 273, verse: "Yea, the LORD shall give that which is good; and our land shall yield her increase.", reference: "Psalm 85:12", prayer: "Good Giver, give me what is good. Let my life yield increase for You. Amen." },
+      { day: 274, verse: "Bow down thine ear, O LORD, hear me: for I am poor and needy.", reference: "Psalm 86:1", prayer: "Listening Lord, hear me. I am poor and needy; come to my aid. Amen." },
+      { day: 275, verse: "Preserve my soul; for I am holy: O thou my God, save thy servant that trusteth in thee.", reference: "Psalm 86:2", prayer: "Preserver, save my soul. I trust in You completely; rescue me. Amen." },
+      { day: 276, verse: "Be merciful unto me, O Lord: for I cry unto thee daily.", reference: "Psalm 86:3", prayer: "Merciful Lord, I cry to You daily. Hear me and show me mercy. Amen." },
+      { day: 277, verse: "Rejoice the soul of thy servant: for unto thee, O Lord, do I lift up my soul.", reference: "Psalm 86:4", prayer: "Joy-Giver, rejoice my soul. I lift my whole being up to You. Amen." },
+      { day: 278, verse: "For thou, Lord, art good, and ready to forgive; and plenteous in mercy unto all them that call upon thee.", reference: "Psalm 86:5", prayer: "Forgiving Lord, You're ready to forgive. Show plenteous mercy to me. Amen." },
+      { day: 279, verse: "Give ear, O LORD, unto my prayer; and attend to the voice of my supplications.", reference: "Psalm 86:6", prayer: "Attentive God, hear my prayer. Listen to my voice calling out to You. Amen." },
+      { day: 280, verse: "In the day of my trouble I will call upon thee: for thou wilt answer me.", reference: "Psalm 86:7", prayer: "Answering God, I call on You in trouble. Thank You for hearing me. Amen." },
+      { day: 281, verse: "Among the gods there is none like unto thee, O Lord; neither are there any works like unto thy works.", reference: "Psalm 86:8", prayer: "Incomparable God, there is none like You. Your works are matchless. Amen." },
+      { day: 282, verse: "All nations whom thou hast made shall come and worship before thee, O Lord; and shall glorify thy name.", reference: "Psalm 86:9", prayer: "Glorious Lord, I worship You. Let Your name be glorified in all the earth. Amen." },
+      { day: 283, verse: "For thou art great, and doest wondrous things: thou art God alone.", reference: "Psalm 86:10", prayer: "Great God, You alone do wondrous things. Show me Your greatness today. Amen." },
+      { day: 284, verse: "Teach me thy way, O LORD; I will walk in thy truth: unite my heart to fear thy name.", reference: "Psalm 86:11", prayer: "Teacher, show me Your way. Unite my divided heart to fear You alone. Amen." },
+      { day: 285, verse: "I will praise thee, O Lord my God, with all my heart: and I will glorify thy name for evermore.", reference: "Psalm 86:12", prayer: "Praiseworthy God, I praise You with all my heart. I glorify Your name forever. Amen." },
+      { day: 286, verse: "For great is thy mercy toward me: and thou hast delivered my soul from the lowest hell.", reference: "Psalm 86:13", prayer: "Merciful Deliverer, Your mercy is great. You've saved me from the depths. Amen." },
+      { day: 287, verse: "But thou, O Lord, art a God full of compassion, and gracious, longsuffering, and plenteous in mercy and truth.", reference: "Psalm 86:15", prayer: "Compassionate God, You are full of grace. Pour out Your mercy and truth on me. Amen." },
+      { day: 288, verse: "O turn unto me, and have mercy upon me; give thy strength unto thy servant.", reference: "Psalm 86:16", prayer: "Strong God, turn to me with mercy. Give Your strength to Your servant. Amen." },
+      { day: 289, verse: "Shew me a token for good; that they which hate me may see it, and be ashamed.", reference: "Psalm 86:17", prayer: "Vindicating God, show a sign of Your goodness. Let my enemies see You help me. Amen." },
+      { day: 290, verse: "His foundation is in the holy mountains.", reference: "Psalm 87:1", prayer: "Foundation, establish me on Your holy ground. Make me unmovable today. Amen." },
+      { day: 291, verse: "O LORD God of my salvation, I have cried day and night before thee.", reference: "Psalm 88:1", prayer: "God of Salvation, I cry to You day and night. Hear my constant prayer. Amen." },
+      { day: 292, verse: "I will sing of the mercies of the LORD for ever: with my mouth will I make known thy faithfulness to all generations.", reference: "Psalm 89:1", prayer: "Faithful God, I sing of Your mercies forever. Your faithfulness never ends. Amen." },
+      { day: 293, verse: "Mercy shall be built up for ever: thy faithfulness shalt thou establish in the very heavens.", reference: "Psalm 89:2", prayer: "Established Lord, build up Your mercy in my life. Your faithfulness is sure. Amen." },
+      { day: 294, verse: "The heavens shall praise thy wonders, O LORD: thy faithfulness also in the congregation of the saints.", reference: "Psalm 89:5", prayer: "Wonderful God, even heaven praises You. I join in praising Your faithfulness. Amen." },
+      { day: 295, verse: "LORD God of hosts, who is a strong LORD like unto thee? or to thy faithfulness round about thee?", reference: "Psalm 89:8", prayer: "Strong Lord, Your faithfulness surrounds me. There is none as mighty as You. Amen." },
+      { day: 296, verse: "Blessed is the people that know the joyful sound: they shall walk, O LORD, in the light of thy countenance.", reference: "Psalm 89:15", prayer: "Joyful God, let me walk in the light of Your presence. Bless me with joy. Amen." },
+      { day: 297, verse: "In thy name shall they rejoice all the day: and in thy righteousness shall they be exalted.", reference: "Psalm 89:16", prayer: "Righteous Lord, I rejoice in Your name all day. Exalt me in Your righteousness. Amen." },
+      { day: 298, verse: "For thou art the glory of their strength: and in thy favour our horn shall be exalted.", reference: "Psalm 89:17", prayer: "Glorious Strength, You are my glory. Exalt me through Your favor today. Amen." },
+      { day: 299, verse: "My mercy will I keep for him for evermore, and my covenant shall stand fast with him.", reference: "Psalm 89:28", prayer: "Covenant God, keep Your mercy with me forever. Stand fast in Your promises. Amen." },
+      { day: 300, verse: "LORD, thou hast been our dwelling place in all generations.", reference: "Psalm 90:1", prayer: "Dwelling Place, You've been our home forever. Shelter me in Your presence. Amen." },
+      { day: 301, verse: "Before the mountains were brought forth, or ever thou hadst formed the earth and the world, even from everlasting to everlasting, thou art God.", reference: "Psalm 90:2", prayer: "Eternal God, You existed before all creation. You are God forever. Amen." },
+      { day: 302, verse: "So teach us to number our days, that we may apply our hearts unto wisdom.", reference: "Psalm 90:12", prayer: "Wise Teacher, help me number my days. Give me wisdom for each moment. Amen." },
+      { day: 303, verse: "Return, O LORD, how long? and let it repent thee concerning thy servants.", reference: "Psalm 90:13", prayer: "Returning Lord, come back to me. Have compassion on Your servant. Amen." },
+      { day: 304, verse: "O satisfy us early with thy mercy; that we may rejoice and be glad all our days.", reference: "Psalm 90:14", prayer: "Satisfying God, fill me early with mercy. Let me rejoice all my days. Amen." },
+      { day: 305, verse: "Make us glad according to the days wherein thou hast afflicted us, and the years wherein we have seen evil.", reference: "Psalm 90:15", prayer: "Restoring God, make me glad equal to my affliction. Turn years of sorrow to joy. Amen." },
+      { day: 306, verse: "And let the beauty of the LORD our God be upon us: and establish thou the work of our hands upon us.", reference: "Psalm 90:17", prayer: "Beautiful Lord, let Your beauty rest on me. Establish the work of my hands. Amen." },
+      { day: 307, verse: "He that dwelleth in the secret place of the most High shall abide under the shadow of the Almighty.", reference: "Psalm 91:1", prayer: "Almighty God, let me dwell in Your secret place. Hide me under Your shadow. Amen." },
+      { day: 308, verse: "I will say of the LORD, He is my refuge and my fortress: my God; in him will I trust.", reference: "Psalm 91:2", prayer: "Fortress God, You are my refuge. I declare my complete trust in You. Amen." },
+      { day: 309, verse: "Surely he shall deliver thee from the snare of the fowler, and from the noisome pestilence.", reference: "Psalm 91:3", prayer: "Deliverer, save me from every trap and destructive plague. Protect me. Amen." },
+      { day: 310, verse: "He shall cover thee with his feathers, and under his wings shalt thou trust.", reference: "Psalm 91:4", prayer: "Covering God, shelter me under Your wings. Let me find safety there. Amen." },
+      { day: 311, verse: "Thou shalt not be afraid for the terror by night; nor for the arrow that flieth by day.", reference: "Psalm 91:5", prayer: "Fearless Lord, remove fear of night terrors and day dangers. Protect me always. Amen." },
+      { day: 312, verse: "A thousand shall fall at thy side, and ten thousand at thy right hand; but it shall not come nigh thee.", reference: "Psalm 91:7", prayer: "Protector, keep me safe when danger surrounds me. Let no harm come near. Amen." },
+      { day: 313, verse: "There shall no evil befall thee, neither shall any plague come nigh thy dwelling.", reference: "Psalm 91:10", prayer: "Guardian, prevent evil from befalling me. Keep plague from my dwelling. Amen." },
+      { day: 314, verse: "For he shall give his angels charge over thee, to keep thee in all thy ways.", reference: "Psalm 91:11", prayer: "Commander of Angels, send Your angels to guard me in all my ways. Amen." },
+      { day: 315, verse: "They shall bear thee up in their hands, lest thou dash thy foot against a stone.", reference: "Psalm 91:12", prayer: "Upholding God, let Your angels carry me. Keep me from stumbling. Amen." },
+      { day: 316, verse: "Because he hath set his love upon me, therefore will I deliver him: I will set him on high, because he hath known my name.", reference: "Psalm 91:14", prayer: "Loving Deliverer, I set my love on You. Deliver and exalt me. Amen." },
+      { day: 317, verse: "He shall call upon me, and I will answer him: I will be with him in trouble; I will deliver him, and honour him.", reference: "Psalm 91:15", prayer: "Answering God, I call on You. Be with me in trouble and honor me. Amen." },
+      { day: 318, verse: "With long life will I satisfy him, and shew him my salvation.", reference: "Psalm 91:16", prayer: "Satisfying Savior, fill my life and show me Your salvation completely. Amen." },
+      { day: 319, verse: "It is a good thing to give thanks unto the LORD, and to sing praises unto thy name, O most High.", reference: "Psalm 92:1", prayer: "Most High God, it is good to give thanks. I praise Your name today. Amen." },
+      { day: 320, verse: "To shew forth thy lovingkindness in the morning, and thy faithfulness every night.", reference: "Psalm 92:2", prayer: "Faithful One, show me Your lovingkindness morning and night continually. Amen." },
+      { day: 321, verse: "For thou, LORD, hast made me glad through thy work: I will triumph in the works of thy hands.", reference: "Psalm 92:4", prayer: "Gladdening God, make me glad through Your work. I triumph in Your creation. Amen." },
+      { day: 322, verse: "O LORD, how great are thy works! and thy thoughts are very deep.", reference: "Psalm 92:5", prayer: "Great God, Your works are magnificent. Your thoughts toward me are deep. Amen." },
+      { day: 323, verse: "The righteous shall flourish like the palm tree: he shall grow like a cedar in Lebanon.", reference: "Psalm 92:12", prayer: "Flourishing God, make me grow strong and tall like a cedar tree. Amen." },
+      { day: 324, verse: "Those that be planted in the house of the LORD shall flourish in the courts of our God.", reference: "Psalm 92:13", prayer: "Planting God, plant me in Your house. Let me flourish in Your presence. Amen." },
+      { day: 325, verse: "They shall still bring forth fruit in old age; they shall be fat and flourishing.", reference: "Psalm 92:14", prayer: "Fruitful God, let me bear fruit even in old age. Keep me flourishing always. Amen." },
+      { day: 326, verse: "The LORD reigneth, he is clothed with majesty; the LORD is clothed with strength.", reference: "Psalm 93:1", prayer: "Majestic King, You reign with strength. I bow before Your majesty today. Amen." },
+      { day: 327, verse: "Thy throne is established of old: thou art from everlasting.", reference: "Psalm 93:2", prayer: "Everlasting Sovereign, Your throne is forever established. I trust Your reign. Amen." },
+      { day: 328, verse: "The LORD on high is mightier than the noise of many waters, yea, than the mighty waves of the sea.", reference: "Psalm 93:4", prayer: "Mighty Lord, You're more powerful than raging seas. Calm my storms. Amen." },
+      { day: 329, verse: "O LORD God, to whom vengeance belongeth; O God, to whom vengeance belongeth, shew thyself.", reference: "Psalm 94:1", prayer: "Just God, vengeance is Yours. Show Yourself and defend Your people. Amen." },
+      { day: 330, verse: "LORD, how long shall the wicked, how long shall the wicked triumph?", reference: "Psalm 94:3", prayer: "Righteous Judge, end the triumph of wickedness. Bring justice in Your time. Amen." },
+      { day: 331, verse: "When I said, My foot slippeth; thy mercy, O LORD, held me up.", reference: "Psalm 94:18", prayer: "Upholding Lord, when I slip, Your mercy holds me. Keep me steady. Amen." },
+      { day: 332, verse: "In the multitude of my thoughts within me thy comforts delight my soul.", reference: "Psalm 94:19", prayer: "Comforting God, delight my soul with Your comfort. Quiet anxious thoughts. Amen." },
+      { day: 333, verse: "But the LORD is my defence; and my God is the rock of my refuge.", reference: "Psalm 94:22", prayer: "Defensive Rock, be my defense and refuge. Protect me from all attacks. Amen." },
+      { day: 334, verse: "O come, let us sing unto the LORD: let us make a joyful noise to the rock of our salvation.", reference: "Psalm 95:1", prayer: "Rock of Salvation, I sing to You joyfully. Receive my praise today. Amen." },
+      { day: 335, verse: "Let us come before his presence with thanksgiving, and make a joyful noise unto him with psalms.", reference: "Psalm 95:2", prayer: "Present One, I come with thanksgiving. Accept my joyful worship. Amen." },
+      { day: 336, verse: "For the LORD is a great God, and a great King above all gods.", reference: "Psalm 95:3", prayer: "Great King, You are above all. I worship You as the one true God. Amen." },
+      { day: 337, verse: "O come, let us worship and bow down: let us kneel before the LORD our maker.", reference: "Psalm 95:6", prayer: "Maker, I bow before You in worship. You created me; I honor You. Amen." },
+      { day: 338, verse: "For he is our God; and we are the people of his pasture, and the sheep of his hand.", reference: "Psalm 95:7", prayer: "Shepherd God, I am Your sheep. Lead me in Your pasture today. Amen." },
+      { day: 339, verse: "O sing unto the LORD a new song: sing unto the LORD, all the earth.", reference: "Psalm 96:1", prayer: "New Song Giver, give me a new song. I sing praises to You today. Amen." },
+      { day: 340, verse: "Sing unto the LORD, bless his name; shew forth his salvation from day to day.", reference: "Psalm 96:2", prayer: "Blessed Name, I bless You and show forth Your salvation daily. Amen." },
+      { day: 341, verse: "Declare his glory among the heathen, his wonders among all people.", reference: "Psalm 96:3", prayer: "Glorious God, help me declare Your wonders to everyone I meet. Amen." },
+      { day: 342, verse: "For the LORD is great, and greatly to be praised: he is to be feared above all gods.", reference: "Psalm 96:4", prayer: "Greatly Praised One, You are great and worthy of all honor and awe. Amen." },
+      { day: 343, verse: "Give unto the LORD the glory due unto his name: bring an offering, and come into his courts.", reference: "Psalm 96:8", prayer: "Glorious Lord, I give You glory. I come into Your courts with worship. Amen." },
+      { day: 344, verse: "O worship the LORD in the beauty of holiness: fear before him, all the earth.", reference: "Psalm 96:9", prayer: "Holy Beauty, I worship You in holiness. Let the earth revere You. Amen." },
+      { day: 345, verse: "Say among the heathen that the LORD reigneth: the world also shall be established that it shall not be moved.", reference: "Psalm 96:10", prayer: "Reigning Lord, establish my world so it cannot be moved. You reign forever. Amen." },
+      { day: 346, verse: "Let the heavens rejoice, and let the earth be glad; let the sea roar, and the fulness thereof.", reference: "Psalm 96:11", prayer: "Rejoicing Creator, let all creation rejoice in You. I join the celebration. Amen." },
+      { day: 347, verse: "The LORD reigneth; let the earth rejoice; let the multitude of isles be glad thereof.", reference: "Psalm 97:1", prayer: "Reigning Lord, let the earth rejoice in Your kingship. I am glad in You. Amen." },
+      { day: 348, verse: "Clouds and darkness are round about him: righteousness and judgment are the habitation of his throne.", reference: "Psalm 97:2", prayer: "Righteous Judge, Your throne is founded on righteousness. I trust Your judgments. Amen." },
+      { day: 349, verse: "The heavens declare his righteousness, and all the people see his glory.", reference: "Psalm 97:6", prayer: "Glorious One, let me see Your glory. Declare Your righteousness to me. Amen." },
+      { day: 350, verse: "Ye that love the LORD, hate evil: he preserveth the souls of his saints.", reference: "Psalm 97:10", prayer: "Preserver, help me hate evil and love You. Preserve my soul from destruction. Amen." },
+      { day: 351, verse: "Light is sown for the righteous, and gladness for the upright in heart.", reference: "Psalm 97:11", prayer: "Light Sower, sow light and gladness in my heart. Make me upright. Amen." },
+      { day: 352, verse: "Rejoice in the LORD, ye righteous; and give thanks at the remembrance of his holiness.", reference: "Psalm 97:12", prayer: "Holy One, I rejoice in You. I give thanks for Your holiness. Amen." },
+      { day: 353, verse: "Make a joyful noise unto the LORD, all the earth: make a loud noise, and rejoice, and sing praise.", reference: "Psalm 98:4", prayer: "Joyful Lord, I make a loud joyful noise to You. Accept my praise. Amen." },
+      { day: 354, verse: "Let the floods clap their hands: let the hills be joyful together.", reference: "Psalm 98:8", prayer: "Creator of Joy, let all creation rejoice. I join in praise to You. Amen." },
+      { day: 355, verse: "Make a joyful noise unto the LORD, all ye lands.", reference: "Psalm 100:1", prayer: "Universal Lord, I join all lands in making joyful noise to You. Amen." },
+      { day: 356, verse: "Serve the LORD with gladness: come before his presence with singing.", reference: "Psalm 100:2", prayer: "Serving Lord, I serve You gladly. I come with singing into Your presence. Amen." },
+      { day: 357, verse: "Know ye that the LORD he is God: it is he that hath made us, and not we ourselves.", reference: "Psalm 100:3", prayer: "Creator God, You made me. I acknowledge You as the one true God. Amen." },
+      { day: 358, verse: "Enter into his gates with thanksgiving, and into his courts with praise.", reference: "Psalm 100:4", prayer: "Worthy One, I enter Your gates with thanksgiving and courts with praise. Amen." },
+      { day: 359, verse: "Be thankful unto him, and bless his name.", reference: "Psalm 100:4", prayer: "Blessed Name, I am thankful and bless Your holy name today. Amen." },
+      { day: 360, verse: "For the LORD is good; his mercy is everlasting; and his truth endureth to all generations.", reference: "Psalm 100:5", prayer: "Everlasting Truth, You are good. Your mercy and truth never end. Amen." },
+      { day: 361, verse: "Bless the LORD, O my soul: and all that is within me, bless his holy name.", reference: "Psalm 103:1", prayer: "Holy Name, with everything in me, I bless You. You are worthy of praise. Amen." },
+      { day: 362, verse: "Bless the LORD, O my soul, and forget not all his benefits.", reference: "Psalm 103:2", prayer: "Benefactor, I remember all Your benefits. I bless You for Your goodness. Amen." },
+      { day: 363, verse: "Who forgiveth all thine iniquities; who healeth all thy diseases.", reference: "Psalm 103:3", prayer: "Healer and Forgiver, forgive my sins and heal my diseases completely. Amen." },
+      { day: 364, verse: "Who redeemeth thy life from destruction; who crowneth thee with lovingkindness and tender mercies.", reference: "Psalm 103:4", prayer: "Redeemer, save my life from destruction. Crown me with Your lovingkindness. Amen." },
+      { day: 365, verse: "Who satisfieth thy mouth with good things; so that thy youth is renewed like the eagle's.", reference: "Psalm 103:5", prayer: "Renewing God, satisfy me with good things. Renew my youth like the eagle. Amen." }
+    ];
+
+    const reflectionPrompts = [
+      "How does this verse speak to your current situation?",
+      "What is God teaching you through this verse today?",
+      "How can you apply this verse to your life this week?",
+      "What emotions does this verse stir in your heart?",
+      "Who in your life needs to hear this message today?",
+      "What step of faith is God calling you to take?",
+      "How does this verse change your perspective?",
+      "What are you grateful for after reading this verse?",
+      "What challenge does this verse present to you?",
+      "How can you share God's truth with others today?"
+    ];
+
+    let allData = [];
+    let currentVerseDay = getDayOfYear();
+    let activeTab = 'verse';
+    let isSaving = false;
+
+    function getDayOfYear() {
+      const now = new Date();
+      const start = new Date(now.getFullYear(), 0, 0);
+      const diff = now - start;
+      const oneDay = 1000 * 60 * 60 * 24;
+      return Math.floor(diff / oneDay);
+    }
+
+    function getTodaysVerse() {
+      const dayOfYear = getDayOfYear();
+      return verses[dayOfYear % verses.length];
+    }
+
+    function getVerseByDay(day) {
+      return verses[(day - 1) % verses.length];
+    }
+
+    function isFavorite(day) {
+      return allData.some(item => item.type === 'favorite' && item.verseDay === day);
+    }
+
+    function getJournalEntries(day) {
+      return allData.filter(item => item.type === 'journal' && item.verseDay === day);
+    }
+
+    function calculateStreak() {
+      const visits = allData.filter(item => item.type === 'visit').sort((a, b) => 
+        new Date(b.lastVisit) - new Date(a.lastVisit)
+      );
+
+      if (visits.length === 0) return 0;
+
+      let streak = 0;
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+
+      for (let i = 0; i < visits.length; i++) {
+        const visitDate = new Date(visits[i].lastVisit);
+        visitDate.setHours(0, 0, 0, 0);
+        
+        const expectedDate = new Date(today);
+        expectedDate.setDate(today.getDate() - i);
+        
+        if (visitDate.getTime() === expectedDate.getTime()) {
+          streak++;
+        } else {
+          break;
+        }
+      }
+
+      return streak;
+    }
+
+    function getRandomPrompt() {
+      return reflectionPrompts[Math.floor(Math.random() * reflectionPrompts.length)];
+    }
+
+    function applyFont(fontFamily, baseFontSize) {
+      const customFont = fontFamily || defaultConfig.font_family;
+      const baseSize = baseFontSize || defaultConfig.font_size;
+      const baseFontStack = 'Georgia, serif';
+
+      const elements = {
+        title: document.getElementById('card-title'),
+        hopeMsg: document.getElementById('hope-message'),
+        verseText: document.getElementById('verse-text'),
+        verseRef: document.getElementById('verse-reference'),
+        prayerText: document.getElementById('prayer-text'),
+        prayerLabel: document.getElementById('prayer-label'),
+        dayIndicator: document.getElementById('day-indicator'),
+        streakText: document.getElementById('streak-text'),
+        tabButtons: root.querySelectorAll('.tab-button'),
+        reflectionPrompt: document.getElementById('reflection-prompt')
+      };
+
+      if (elements.title) {
+        elements.title.style.fontFamily = `${customFont}, ${baseFontStack}`;
+        elements.title.style.fontSize = `${baseSize * 1.75}px`;
+      }
+      if (elements.hopeMsg) {
+        elements.hopeMsg.style.fontFamily = `${customFont}, ${baseFontStack}`;
+        elements.hopeMsg.style.fontSize = `${baseSize * 0.9}px`;
+      }
+      if (elements.verseText) {
+        elements.verseText.style.fontFamily = `${customFont}, ${baseFontStack}`;
+        elements.verseText.style.fontSize = `${baseSize * 1.25}px`;
+      }
+      if (elements.verseRef) {
+        elements.verseRef.style.fontFamily = `${customFont}, ${baseFontStack}`;
+        elements.verseRef.style.fontSize = `${baseSize * 0.95}px`;
+      }
+      if (elements.prayerText) {
+        elements.prayerText.style.fontFamily = `${customFont}, ${baseFontStack}`;
+        elements.prayerText.style.fontSize = `${baseSize}px`;
+      }
+      if (elements.prayerLabel) {
+        elements.prayerLabel.style.fontFamily = `${customFont}, ${baseFontStack}`;
+        elements.prayerLabel.style.fontSize = `${baseSize * 0.85}px`;
+      }
+      if (elements.dayIndicator) {
+        elements.dayIndicator.style.fontFamily = `${customFont}, ${baseFontStack}`;
+        elements.dayIndicator.style.fontSize = `${baseSize * 0.8}px`;
+      }
+      if (elements.streakText) {
+        elements.streakText.style.fontFamily = `${customFont}, ${baseFontStack}`;
+        elements.streakText.style.fontSize = `${baseSize * 0.85}px`;
+      }
+      if (elements.tabButtons) {
+        elements.tabButtons.forEach(btn => {
+          btn.style.fontFamily = `${customFont}, ${baseFontStack}`;
+          btn.style.fontSize = `${baseSize * 0.9}px`;
+        });
+      }
+      if (elements.reflectionPrompt) {
+        elements.reflectionPrompt.style.fontFamily = `${customFont}, ${baseFontStack}`;
+        elements.reflectionPrompt.style.fontSize = `${baseSize * 0.9}px`;
+      }
+    }
+
+    async function onConfigChange(config) {
+      const bgColor = config.background_color || defaultConfig.background_color;
+      const cardColor = config.card_color || defaultConfig.card_color;
+      const textColor = config.text_color || defaultConfig.text_color;
+      const accentColor = config.accent_color || defaultConfig.accent_color;
+      const buttonColor = config.button_color || defaultConfig.button_color;
+      const cardTitle = config.card_title || defaultConfig.card_title;
+      const hopeMessage = config.hope_message || defaultConfig.hope_message;
+
+      const app = document.getElementById('whl-daily-verse-app');
+      if (app) app.style.backgroundColor = bgColor;
+
+      const title = document.getElementById('card-title');
+      if (title) {
+        title.textContent = cardTitle;
+        title.style.color = textColor;
+      }
+
+      const hopeMsg = document.getElementById('hope-message');
+      if (hopeMsg) {
+        hopeMsg.textContent = hopeMessage;
+        hopeMsg.style.color = textColor;
+      }
+
+      const card = document.querySelector('.main-card');
+      if (card) card.style.backgroundColor = cardColor;
+
+      const verseText = document.getElementById('verse-text');
+      const verseRef = document.getElementById('verse-reference');
+      const prayerText = document.getElementById('prayer-text');
+      const prayerLabel = document.getElementById('prayer-label');
+      
+      if (verseText) verseText.style.color = textColor;
+      if (verseRef) verseRef.style.color = accentColor;
+      if (prayerText) prayerText.style.color = textColor;
+      if (prayerLabel) {
+        prayerLabel.style.color = accentColor;
+        prayerLabel.style.borderTopColor = accentColor;
+      }
+
+      const refreshBtn = document.getElementById('refresh-btn');
+      if (refreshBtn) {
+        refreshBtn.style.backgroundColor = buttonColor;
+        refreshBtn.style.color = cardColor;
+      }
+
+      const dayIndicator = document.getElementById('day-indicator');
+      if (dayIndicator) dayIndicator.style.color = accentColor;
+
+      const favoriteBtn = document.getElementById('favorite-btn');
+      if (favoriteBtn) favoriteBtn.style.color = accentColor;
+
+      const streakBadge = document.getElementById('streak-badge');
+      if (streakBadge) {
+        streakBadge.style.backgroundColor = `${accentColor}20`;
+        streakBadge.style.color = accentColor;
+      }
+
+      const tabButtons = root.querySelectorAll('.tab-button');
+      tabButtons.forEach(btn => {
+        btn.style.color = textColor;
+        if (btn.classList.contains('active')) {
+          btn.style.borderBottomColor = accentColor;
+        }
+      });
+
+      const reflectionPrompt = document.getElementById('reflection-prompt');
+      if (reflectionPrompt) {
+        reflectionPrompt.style.backgroundColor = `${accentColor}10`;
+        reflectionPrompt.style.borderLeftColor = accentColor;
+        reflectionPrompt.style.color = textColor;
+      }
+
+      const journalTextarea = document.getElementById('journal-textarea');
+      if (journalTextarea) {
+        journalTextarea.style.borderColor = accentColor;
+        journalTextarea.style.color = textColor;
+      }
+
+      const saveBtn = document.getElementById('save-journal-btn');
+      if (saveBtn) {
+        saveBtn.style.backgroundColor = buttonColor;
+        saveBtn.style.color = cardColor;
+      }
+
+      applyFont(config.font_family, config.font_size);
+    }
+
+    async function recordVisit() {
+      const today = new Date().toISOString().split('T')[0];
+      const existingVisit = allData.find(item => 
+        item.type === 'visit' && item.lastVisit === today
+      );
+
+      if (!existingVisit && allData.length < 999) {
+        const result = await window.dataSdk.create({
+          id: `visit-${Date.now()}`,
+          type: 'visit',
+          verseDay: currentVerseDay,
+          content: '',
+          createdAt: new Date().toISOString(),
+          lastVisit: today
+        });
+
+        if (!result.isOk) {
+          console.error('Failed to record visit');
+        }
+      }
+    }
+
+    async function toggleFavorite() {
+      const existing = allData.find(item => 
+        item.type === 'favorite' && item.verseDay === currentVerseDay
+      );
+
+      if (existing) {
+        const result = await window.dataSdk.delete(existing);
+        if (!result.isOk) {
+          showMessage('Failed to remove favorite', true);
+        }
+      } else {
+        if (allData.length >= 999) {
+          showMessage('Maximum limit of 999 items reached. Please delete some items first.', true);
+          return;
+        }
+
+        const result = await window.dataSdk.create({
+          id: `favorite-${Date.now()}`,
+          type: 'favorite',
+          verseDay: currentVerseDay,
+          content: '',
+          createdAt: new Date().toISOString(),
+          lastVisit: ''
+        });
+
+        if (!result.isOk) {
+          showMessage('Failed to add favorite', true);
+        }
+      }
+    }
+
+    async function saveJournalEntry() {
+      const textarea = document.getElementById('journal-textarea');
+      const content = textarea.value.trim();
+
+      if (!content) {
+        showMessage('Please write something before saving', true);
+        return;
+      }
+
+      if (allData.length >= 999) {
+        showMessage('Maximum limit of 999 items reached. Please delete some items first.', true);
+        return;
+      }
+
+      isSaving = true;
+      updateSaveButton();
+
+      const result = await window.dataSdk.create({
+        id: `journal-${Date.now()}`,
+        type: 'journal',
+        verseDay: currentVerseDay,
+        content: content,
+        createdAt: new Date().toISOString(),
+        lastVisit: ''
+      });
+
+      isSaving = false;
+      updateSaveButton();
+
+      if (result.isOk) {
+        textarea.value = '';
+        showMessage('Journal entry saved!', false);
+      } else {
+        showMessage('Failed to save journal entry', true);
+      }
+    }
+
+    async function deleteJournalEntry(entry) {
+      const result = await window.dataSdk.delete(entry);
+      if (!result.isOk) {
+        showMessage('Failed to delete entry', true);
+      }
+    }
+
+    function showMessage(message, isError) {
+      const existingMessage = document.getElementById('toast-message');
+      if (existingMessage) {
+        existingMessage.remove();
+      }
+
+      const config = window.elementSdk?.config || defaultConfig;
+      const toast = document.createElement('div');
+      toast.id = 'toast-message';
+      toast.textContent = message;
+      toast.style.cssText = `
+        position: fixed;
+        top: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        padding: 12px 24px;
+        border-radius: 8px;
+        background: ${isError ? '#ff4444' : config.button_color || defaultConfig.button_color};
+        color: white;
+        font-family: ${config.font_family || defaultConfig.font_family}, Georgia, serif;
+        font-size: ${(config.font_size || defaultConfig.font_size) * 0.9}px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        z-index: 1000;
+        animation: fadeIn 0.3s ease;
+      `;
+
+      document.body.appendChild(toast);
+
+      setTimeout(() => {
+        toast.style.animation = 'fadeOut 0.3s ease';
+        setTimeout(() => toast.remove(), 300);
+      }, 3000);
+    }
+
+    function updateSaveButton() {
+      const saveBtn = document.getElementById('save-journal-btn');
+      if (saveBtn) {
+        saveBtn.disabled = isSaving;
+        saveBtn.textContent = isSaving ? 'Saving...' : 'Save Reflection';
+      }
+    }
+
+    function switchTab(tabName) {
+      activeTab = tabName;
+
+      root.querySelectorAll('.tab-button').forEach(btn => {
+        btn.classList.remove('active');
+      });
+      root.querySelectorAll('.tab-content').forEach(content => {
+        content.classList.remove('active');
+      });
+
+      const activeButton = document.querySelector(`[data-tab="${tabName}"]`);
+      const activeContent = document.getElementById(`${tabName}-tab`);
+
+      if (activeButton) activeButton.classList.add('active');
+      if (activeContent) activeContent.classList.add('active');
+
+      const config = window.elementSdk?.config || defaultConfig;
+      const accentColor = config.accent_color || defaultConfig.accent_color;
+      
+      if (activeButton) {
+        activeButton.style.borderBottomColor = accentColor;
+      }
+
+      if (tabName === 'journal') {
+        renderJournalTab();
+      } else if (tabName === 'favorites') {
+        renderFavoritesTab();
+      }
+    }
+
+    function renderJournalTab() {
+      const journalTab = document.getElementById('journal-tab');
+      if (!journalTab) return;
+
+      const entries = getJournalEntries(currentVerseDay);
+      const verse = getVerseByDay(currentVerseDay);
+      const config = window.elementSdk?.config || defaultConfig;
+      const textColor = config.text_color || defaultConfig.text_color;
+      const accentColor = config.accent_color || defaultConfig.accent_color;
+      const cardColor = config.card_color || defaultConfig.card_color;
+
+      journalTab.innerHTML = `
+        <div id="reflection-prompt" class="reflection-prompt">
+          ${getRandomPrompt()}
+        </div>
+
+        <textarea id="journal-textarea" placeholder="Write your thoughts and reflections here..."></textarea>
+        
+        <button id="save-journal-btn" class="save-btn">Save Reflection</button>
+
+        <div style="margin-top: 32px;">
+          <h3 style="margin: 0 0 16px 0; font-size: ${(config.font_size || defaultConfig.font_size) * 1.2}px; color: ${textColor};">
+            Your Reflections on Day ${currentVerseDay}
+          </h3>
+          <div id="journal-entries-list"></div>
+        </div>
+      `;
+
+      const saveBtn = document.getElementById('save-journal-btn');
+      saveBtn.addEventListener('click', saveJournalEntry);
+
+      const entriesList = document.getElementById('journal-entries-list');
+      if (entries.length === 0) {
+        entriesList.innerHTML = `<p style="color: ${textColor}; opacity: 0.6; font-style: italic;">No reflections yet. Write your first one above!</p>`;
+      } else {
+        entriesList.innerHTML = entries.map(entry => {
+          const date = new Date(entry.createdAt);
+          return `
+            <div class="journal-entry" style="background: ${cardColor}; border-left-color: ${accentColor}; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+              <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 8px;">
+                <span style="font-size: ${(config.font_size || defaultConfig.font_size) * 0.75}px; color: ${accentColor}; font-weight: 600;">
+                  ${date.toLocaleDateString()} at ${date.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}
+                </span>
+                <button class="delete-btn" data-entry-id="${entry.id}" style="color: ${textColor};">×</button>
+              </div>
+              <p style="margin: 0; line-height: 1.6; color: ${textColor}; white-space: pre-wrap;">${entry.content}</p>
+            </div>
+          `;
+        }).join('');
+
+        root.querySelectorAll('.delete-btn').forEach(btn => {
+          btn.addEventListener('click', () => {
+            const entryId = btn.dataset.entryId;
+            const entry = allData.find(e => e.id === entryId);
+            if (entry) deleteJournalEntry(entry);
+          });
+        });
+      }
+
+      onConfigChange(config);
+    }
+
+    function renderFavoritesTab() {
+      const favoritesTab = document.getElementById('favorites-tab');
+      if (!favoritesTab) return;
+
+      const favorites = allData.filter(item => item.type === 'favorite')
+        .sort((a, b) => a.verseDay - b.verseDay);
+
+      const config = window.elementSdk?.config || defaultConfig;
+      const textColor = config.text_color || defaultConfig.text_color;
+      const accentColor = config.accent_color || defaultConfig.accent_color;
+      const cardColor = config.card_color || defaultConfig.card_color;
+
+      if (favorites.length === 0) {
+        favoritesTab.innerHTML = `
+          <div style="text-align: center; padding: 48px 24px;">
+            <p style="font-size: ${(config.font_size || defaultConfig.font_size) * 1.5}px; margin-bottom: 16px;">⭐</p>
+            <p style="color: ${textColor}; opacity: 0.6; font-style: italic; line-height: 1.6;">
+              You haven't favorited any verses yet.<br>Tap the star button on verses you love!
+            </p>
+          </div>
+        `;
+      } else {
+        favoritesTab.innerHTML = `
+          <h3 style="margin: 0 0 24px 0; font-size: ${(config.font_size || defaultConfig.font_size) * 1.2}px; color: ${textColor};">
+            Your Favorite Verses (${favorites.length})
+          </h3>
+          <div style="display: flex; flex-direction: column; gap: 16px;">
+            ${favorites.map(fav => {
+              const verse = getVerseByDay(fav.verseDay);
+              return `
+                <div class="favorite-item" data-day="${fav.verseDay}" style="padding: 20px; background: ${cardColor}; border-radius: 12px; border-left: 4px solid ${accentColor}; cursor: pointer; transition: transform 0.2s ease, box-shadow 0.2s ease; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
+                  <div style="display: flex; justify-content: between; align-items: start; margin-bottom: 8px;">
+                    <span style="font-size: ${(config.font_size || defaultConfig.font_size) * 0.75}px; color: ${accentColor}; font-weight: 600;">
+                      Day ${verse.day}
+                    </span>
+                  </div>
+                  <p style="margin: 0 0 12px 0; font-style: italic; color: ${textColor}; line-height: 1.6;">
+                    "${verse.verse}"
+                  </p>
+                  <p style="margin: 0; text-align: right; color: ${accentColor}; font-weight: 600; font-size: ${(config.font_size || defaultConfig.font_size) * 0.85}px;">
+                    — ${verse.reference}
+                  </p>
+                </div>
+              `;
+            }).join('')}
+          </div>
+        `;
+
+        root.querySelectorAll('.favorite-item').forEach(item => {
+          item.addEventListener('mouseenter', function() {
+            this.style.transform = 'translateY(-2px)';
+            this.style.boxShadow = '0 4px 16px rgba(0,0,0,0.15)';
+          });
+          item.addEventListener('mouseleave', function() {
+            this.style.transform = 'translateY(0)';
+            this.style.boxShadow = '0 2px 8px rgba(0,0,0,0.1)';
+          });
+          item.addEventListener('click', function() {
+            const day = parseInt(this.dataset.day);
+            currentVerseDay = day;
+            switchTab('verse');
+            updateVerseDisplay();
+          });
+        });
+      }
+    }
+
+    function updateVerseDisplay() {
+      const verse = getVerseByDay(currentVerseDay);
+      const verseText = document.getElementById('verse-text');
+      const verseRef = document.getElementById('verse-reference');
+      const prayerText = document.getElementById('prayer-text');
+      const dayIndicator = document.getElementById('day-indicator');
+      const favoriteBtn = document.getElementById('favorite-btn');
+
+      if (verseText) {
+        verseText.classList.remove('fade-in');
+        setTimeout(() => {
+          verseText.textContent = `"${verse.verse}"`;
+          verseText.classList.add('fade-in');
+        }, 50);
+      }
+
+      if (verseRef) verseRef.textContent = `— ${verse.reference}`;
+      if (prayerText) {
+        prayerText.classList.remove('fade-in');
+        setTimeout(() => {
+          prayerText.textContent = verse.prayer;
+          prayerText.classList.add('fade-in');
+        }, 50);
+      }
+
+      if (dayIndicator) dayIndicator.textContent = `Day ${currentVerseDay} of 365`;
+      if (favoriteBtn) favoriteBtn.textContent = isFavorite(currentVerseDay) ? '⭐' : '☆';
+    }
+
+    function renderApp() {
+      const verse = getTodaysVerse();
+      const config = window.elementSdk?.config || defaultConfig;
+
+      const app = document.getElementById('whl-daily-verse-app');
+      app.innerHTML = `
+        <div class="main-card" style="max-width: 700px; margin: 0 auto; padding: 48px 32px; border-radius: 16px; box-shadow: 0 8px 32px rgba(0,0,0,0.1);">
+          <div style="text-align: center; margin-bottom: 32px;">
+            <h1 id="card-title" style="margin: 0 0 12px 0; font-weight: 600; line-height: 1.2;"></h1>
+            <p id="hope-message" style="margin: 0; opacity: 0.8; font-style: italic;"></p>
+            
+            <div style="display: flex; justify-content: center; align-items: center; gap: 16px; margin-top: 16px; flex-wrap: wrap;">
+              <div id="day-indicator" style="font-size: 14px; font-weight: 500;"></div>
+              <div id="streak-badge" class="streak-badge">
+                <span>🔥</span>
+                <span id="streak-text">0 day streak</span>
+              </div>
+            </div>
+          </div>
+
+          <div style="border-bottom: 2px solid rgba(0,0,0,0.1); margin-bottom: 24px;">
+            <div style="display: flex; justify-content: center; gap: 8px;">
+              <button class="tab-button active" data-tab="verse">Today's Verse</button>
+              <button class="tab-button" data-tab="journal">Journal</button>
+              <button class="tab-button" data-tab="favorites">Favorites</button>
+            </div>
+          </div>
+
+          <div id="verse-tab" class="tab-content active">
+            <div style="display: flex; justify-content: flex-end; margin-bottom: 12px;">
+              <button id="favorite-btn" class="favorite-btn" title="Add to favorites">☆</button>
+            </div>
+
+            <div class="fade-in" style="margin-bottom: 32px; padding: 24px; border-radius: 12px; background: rgba(255,255,255,0.5);">
+              <p id="verse-text" style="margin: 0 0 16px 0; font-style: italic; line-height: 1.8;"></p>
+              <p id="verse-reference" style="margin: 0; text-align: right; font-weight: 600;"></p>
+            </div>
+
+            <div class="fade-in" style="padding: 24px 0; border-top: 2px solid;">
+              <p id="prayer-label" style="margin: 0 0 12px 0; font-weight: 600; text-transform: uppercase; letter-spacing: 1px;"></p>
+              <p id="prayer-text" style="margin: 0; line-height: 1.7;"></p>
+            </div>
+
+            <div style="text-align: center; margin-top: 32px;">
+              <button id="refresh-btn" style="padding: 12px 32px; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 4px 12px rgba(0,0,0,0.15);">
+                View Another Day's Verse
+              </button>
+            </div>
+          </div>
+
+          <div id="journal-tab" class="tab-content"></div>
+          <div id="favorites-tab" class="tab-content"></div>
+        </div>
+      `;
+
+      const verseText = document.getElementById('verse-text');
+      const verseRef = document.getElementById('verse-reference');
+      const prayerText = document.getElementById('prayer-text');
+      const prayerLabel = document.getElementById('prayer-label');
+      const dayIndicator = document.getElementById('day-indicator');
+
+      verseText.textContent = `"${verse.verse}"`;
+      verseRef.textContent = `— ${verse.reference}`;
+      prayerLabel.textContent = "Today's Prayer";
+      prayerText.textContent = verse.prayer;
+      dayIndicator.textContent = `Day ${currentVerseDay} of 365`;
+
+      const favoriteBtn = document.getElementById('favorite-btn');
+      favoriteBtn.textContent = isFavorite(currentVerseDay) ? '⭐' : '☆';
+      favoriteBtn.addEventListener('click', toggleFavorite);
+
+      const refreshBtn = document.getElementById('refresh-btn');
+      refreshBtn.addEventListener('click', () => {
+        const randomDay = Math.floor(Math.random() * 365) + 1;
+        currentVerseDay = randomDay;
+        updateVerseDisplay();
+      });
+
+      refreshBtn.addEventListener('mouseenter', function() {
+        this.style.transform = 'translateY(-2px)';
+        this.style.boxShadow = '0 6px 16px rgba(0,0,0,0.2)';
+      });
+
+      refreshBtn.addEventListener('mouseleave', function() {
+        this.style.transform = 'translateY(0)';
+        this.style.boxShadow = '0 4px 12px rgba(0,0,0,0.15)';
+      });
+
+      root.querySelectorAll('.tab-button').forEach(btn => {
+        btn.addEventListener('click', () => {
+          switchTab(btn.dataset.tab);
+        });
+      });
+
+      updateStreakDisplay();
+      onConfigChange(config);
+      recordVisit();
+    }
+
+    function updateStreakDisplay() {
+      const streak = calculateStreak();
+      const streakText = document.getElementById('streak-text');
+      if (streakText) {
+        streakText.textContent = `${streak} day${streak !== 1 ? 's' : ''} streak`;
+      }
+    }
+
+    const dataHandler = {
+      onDataChanged(data) {
+        allData = data;
+        updateStreakDisplay();
+
+        const favoriteBtn = document.getElementById('favorite-btn');
+        if (favoriteBtn) {
+          favoriteBtn.textContent = isFavorite(currentVerseDay) ? '⭐' : '☆';
+        }
+
+        if (activeTab === 'journal') {
+          renderJournalTab();
+        } else if (activeTab === 'favorites') {
+          renderFavoritesTab();
+        }
+      }
+    };
+
+    async function initializeApp() {
+      if (window.dataSdk) {
+        const initResult = await window.dataSdk.init(dataHandler);
+        if (!initResult.isOk) {
+          console.error("Failed to initialize Data SDK");
+        }
+      }
+
+      if (window.elementSdk) {
+        window.elementSdk.init({
+          defaultConfig,
+          onConfigChange,
+          mapToCapabilities: (config) => ({
+            recolorables: [
+              {
+                get: () => config.background_color || defaultConfig.background_color,
+                set: (value) => {
+                  config.background_color = value;
+                  window.elementSdk.setConfig({ background_color: value });
+                }
+              },
+              {
+                get: () => config.card_color || defaultConfig.card_color,
+                set: (value) => {
+                  config.card_color = value;
+                  window.elementSdk.setConfig({ card_color: value });
+                }
+              },
+              {
+                get: () => config.text_color || defaultConfig.text_color,
+                set: (value) => {
+                  config.text_color = value;
+                  window.elementSdk.setConfig({ text_color: value });
+                }
+              },
+              {
+                get: () => config.accent_color || defaultConfig.accent_color,
+                set: (value) => {
+                  config.accent_color = value;
+                  window.elementSdk.setConfig({ accent_color: value });
+                }
+              },
+              {
+                get: () => config.button_color || defaultConfig.button_color,
+                set: (value) => {
+                  config.button_color = value;
+                  window.elementSdk.setConfig({ button_color: value });
+                }
+              }
+            ],
+            borderables: [],
+            fontEditable: {
+              get: () => config.font_family || defaultConfig.font_family,
+              set: (value) => {
+                config.font_family = value;
+                window.elementSdk.setConfig({ font_family: value });
+              }
+            },
+            fontSizeable: {
+              get: () => config.font_size || defaultConfig.font_size,
+              set: (value) => {
+                config.font_size = value;
+                window.elementSdk.setConfig({ font_size: value });
+              }
+            }
+          }),
+          mapToEditPanelValues: (config) => new Map([
+            ["card_title", config.card_title || defaultConfig.card_title],
+            ["hope_message", config.hope_message || defaultConfig.hope_message]
+          ])
+        });
+      }
+
+      renderApp();
+    }
+
+    initializeApp();
+
+})();
+</script>
+
 <!-- Start Your Journey Section -->
 <section class="home-section">
 <div class="home-section-header">
